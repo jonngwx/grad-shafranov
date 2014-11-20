@@ -124,7 +124,7 @@ For some of these key-value pairs, there may be default values if none is specif
 
 The input file of external currents will be a tab-separated table of radial location, R (meters), vertical coordinate, Z (meters) and I (amps) for each poloidal field coil. The toroidal field current will be entered as a special entry with R = 0 and Z = 0: in an axisymmetric solenoid the toroidal field must die off like 1/radius, so only the total current matters, not the shape of the toroidal field coils.
 
-The input file of external magnetic field measurements will be similar: a tab-separated table of R, Z, and measured $\text{B}_\phi$, $\text{B}_\R$, and $\text{B}_Z$.
+The input file of external magnetic field measurements will be similar: a tab-separated table of R, Z, and measured $\text{B}_\phi$, $\text{B}_R$, and $\text{B}_Z$.
 
 For output, we will an hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $J_\phi$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
 
