@@ -98,9 +98,9 @@ Without going into too much detail, it should be stated that the best MHD equili
 
 In a tokamak experiment, one of the researchers' primary goals is to calculate the flux function $\Psi(R,Z)$ at various times throughout the discharge.  However, in this case, the functional forms of $g(\Psi)$ and $p(\Psi)$ are unknown.  Instead we must rely on a finite number of experimental measurements of $\Psi$ taken near the plasma boundary.  The approximate calculation of the flux function from these experimental measurements is known as Equilibrium Reconstruction.  
 
-Equilibrium reconstruction is a crucial for interpreting the results of experiments. In addition, the reconstructed equilibria are often used as inputs to other codes, such as stability codes or transport codes.  
+Equilibrium reconstruction is crucial for interpreting the results of experiments. In addition, the reconstructed equilibria are often used as inputs to other codes, such as stability codes or transport codes.  
 
-Our program will be able to solve the Grad-Shafranov 1) when $p(\Psi)$ and $g(\Psi)$ are specified, and 2) when only experimental measurements are available.
+Our program will be able to solve the Grad-Shafranov equation 1) when $p(\Psi)$ and $g(\Psi)$ are specified, and 2) when only experimental measurements are available.
 
 \subsection{Algorithm when $p(\Psi)$ and $g(\Psi)$ are specified}
 
@@ -165,14 +165,14 @@ Thus, the algorithm described in Section 1.4 is identical to that described in S
 
 \section{Code Organization}
 
-The program will be written in C++ with the visualization carried out separately using python. The solver would be called from command line, with options to set the parameters of the simulation. Input data, such the locations of external coils, will be contained in textfiles. 
+The program will be written in C++ with the visualization carried out separately using python. The solver would be called from command line, with options to set the parameters of the simulation. Input data, such the locations of external coils, will be contained in text files. 
 \\
 
-Output will be written to  hdf5 files, which will require installation of the hdf5 library. For the solver without flows, the only variables that need to be written are the grid and flux function. All other quantities can be calculated by taking gradients. If the solver is modified to include flows and/or anisotropic pressure, writing additional data structures to the hdf files will not be difficult. \\
+Output will be written to hdf5 files, which will require installation of the hdf5 library.  By default, the output consists of the grid and flux function.  Other quantities, such as the toroidal current density, can be selected in the input file.\\
 
 The following C++ interfaces will be required and should be self-contained
 \begin{itemize}
-\item Elliptic solver - This is used to invert the elliptic operator $\Delta^*$ and solve for $\Psi$, given the source functional in the Grad-Shafranov equation [Eq.~(2)]. This should allow the swapping in of external matrix solvers and the implementation of a multigrid method if time permits. There should be potential for parallelisation here. If there is matching to experimental data, the least-squared calculation of the parameters $\alpha_j$ and $\beta_j$ from Eq.~(8) will be performed here. 
+\item Elliptic solver - This is used to invert the elliptic operator $\Delta^*$ and solve for $\Psi$, given the source functional in the Grad-Shafranov equation [Eq.~(2)]. This should allow the swapping in of external matrix solvers and the implementation of a multigrid method if time permits. There should be potential for parallelization here. If there is matching to experimental data, the least-squared calculation of the parameters $\alpha_j$ and $\beta_j$ from Eq.~(8) will be performed here. 
 \item Boundary condition solver - Used to determine $\Psi$ on the computational boundary given external currents [Equation (4)]. Again this should allow different algorithms to be implemented. There should be potential for parallelization here. 
 \item Grad-Shafranov solver - Given input currents and equations, this will perform the call the elliptic and boundary solvers and perform the iterations until it converges.
 \item Input parsing - To read the source currents and parameters from an input file.
@@ -219,11 +219,11 @@ The text file will contain key-value pairs including
 
 For some of these key-value pairs, there may be default values if none is specified, while for others, the program will terminate with an error message if no key/value is specified.
 
-The input file of external currents will be a tab-separated table of radial location R (meters), vertical coordinate Z (meters) and I (amps) for each poloidal field coil. The toroidal field current will be entered as a special entry with R = 0 and Z = 0: in an axisymmetric solenoid the toroidal field must die off like 1/radius, so only the total current matters, not the shape of the toroidal field coils.
+The input file of external currents will be a tab-separated table of radial location R (meters), vertical coordinate Z (meters) and I (amps) for each poloidal field coil.
 
 The input file of external magnetic field measurements will be similar: a tab-separated table of R, Z, and measured $\Psi$.
 
-For output, we will an hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $J_\phi$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
+Our ouput will be in the hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $J_\phi$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
 
 In order to read the hdf5 files, a python visualizer using matplotlib will be written. It will show contour plots for the tables in the output file and also be able to take slices through the tables at the machine midplane.
 
