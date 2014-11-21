@@ -53,7 +53,7 @@
 \normalfont \normalsize 
 %\textsc{APC 524} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge  MHD Equilibrium Reconstruction Code: \\ Design Document\\ % The assignment title
+\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction), \\ \Large An MHD Equilibrium Reconstruction Code:  Design Document\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -73,13 +73,13 @@
 
 \subsection{MHD equilibrium}
 
-In magnetohydrodynamic (MHD) theory, a plasma equlibrium is described by the equation $\mathbf{\nabla} p = \mathbf{J} \times \mathbf{B}$, where $p$ is the scalar plasma pressure, $\mathbf{J}$ is the current density, and $\mathbf{B}$ is the magnetic field.  We work in cylindrical coordinates $(R, \phi, Z)$, and the plasma is assumed to be axisymmetric, i.e., $\partial / \partial \phi = 0$.
+In magnetohydrodynamic (MHD) theory, a plasma equlibrium is described by the equation $\mathbf{\nabla} p = \mathbf{J} \times \mathbf{B}$, where $p$ is the scalar plasma pressure, $\mathbf{J}$ is the current density, $\mathbf{B} = \mathbf{\nabla} \times \mathbf{A}$ is the magnetic field, and $\mathbf{A}$ is the vector potential for the magnetic field.  We work in cylindrical coordinates $(R, \phi, Z)$, and the plasma is assumed to be axisymmetric, i.e., $\partial / \partial \phi = 0$.
 
 By introducting new functions $\Psi(R,Z) \equiv -R A_{\phi}$ (called the flux function) and $g(R,Z) \equiv R \big(\frac{\partial A_R}{\partial Z} - \frac{\partial A_Z}{\partial R}\big)$, we can rewrite the equilibrium equation in the following form, known as the Grad-Shafranov equation:
 \begin{equation}
 \Delta^{*} \Psi + \mu_0 R^2 \frac{dp}{d\Psi} + g \frac{dg}{d\Psi} = 0,
 \end{equation}
-where $p(\Psi)$ and $g(\Psi)$ are functions of $\Psi(R,Z)$, the quantity that we are trying to solve for.  Thus $p(\Psi)$ and $g(\Psi)$ must be given (along with boundary conditions) for the problem to be fully specified.  Once the equation is solved, any other quantity of interest ($\mathbf{J}$, $\mathbf{B}$, etc.) can be calculated.  
+where $\Delta^{*} \equiv R^2 \mathbf{\nabla} \cdot \frac{1}{R^2} \mathbf{\nabla}$ is called the toroidal elliptic operator. $p(\Psi)$ and $g(\Psi)$ are functions of $\Psi(R,Z)$, the quantity that we are trying to solve for.  Thus $p(\Psi)$ and $g(\Psi)$ must be given (along with boundary conditions) for the problem to be fully specified.  Once the equation is solved, any other quantity of interest ($\mathbf{J}$, $\mathbf{B}$, etc.) can be calculated.  
 
 \begin{figure}
 \centering
@@ -282,4 +282,3 @@ In order to read the hdf5 files, a python visualizer using matplotlib will be wr
 Although the scope of the project we have outlined is rather large, it should be modularized such that each portion of the project can be fully implemented and tested independently - elliptic solver, boundary solver, possible multi-grid, etc. One of our greatest risks may be realizing that we were overly ambitious. In this case, we may decide that implementation of the multi-grid method is not feasible within our time frame. While our performance may be reduced in this case, we would still have produced a fairly substantial MHD equilibrium solver. We could additionally decide that it may be more realistic to implement another elliptic solver, such as an alternative finite difference method, rather than a multi-grid. Additionally, depending on our performance concerns, it may be important to implement parallelization earlier than described in the schedule. 
 
 \end{document}
-
