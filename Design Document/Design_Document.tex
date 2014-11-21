@@ -50,6 +50,7 @@
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
 
 \title{	
+\includegraphics[width=3cm]{Cougar_Nevada}
 \normalfont \normalsize 
 %\textsc{APC 524} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
@@ -165,7 +166,7 @@ Thus, the algorithm described in Section 1.4 is identical to that described in S
 
 \section{Code Organization}
 
-The program will be written in C++ with the visualization carried out separately using python. The solver would be called from command line, with options to set the parameters of the simulation. Input data, such the locations of external coils, will be contained in text files. 
+The program will be written in C++ with the visualization carried out separately using python. The solver would be called from the command line, with options to set the parameters of the simulation. Input data, such the locations of external coils, will be contained in text files. 
 \\
 
 Output will be written to hdf5 files, which will require installation of the hdf5 library.  By default, the output consists of the grid and flux function.  Other quantities, such as the toroidal current density, can be selected in the input file.\\
@@ -174,9 +175,9 @@ The following C++ interfaces will be required and should be self-contained
 \begin{itemize}
 \item Elliptic solver - This is used to invert the elliptic operator $\Delta^*$ and solve for $\Psi$, given the source functional in the Grad-Shafranov equation [Eq.~(2)]. This should allow the swapping in of external matrix solvers and the implementation of a multigrid method if time permits. There should be potential for parallelization here. If there is matching to experimental data, the least-squared calculation of the parameters $\alpha_j$ and $\beta_j$ from Eq.~(8) will be performed here. 
 \item Boundary condition solver - Used to determine $\Psi$ on the computational boundary given external currents [Equation (4)]. Again this should allow different algorithms to be implemented. There should be potential for parallelization here. 
-\item Grad-Shafranov solver - Given input currents and equations, this will perform the call the elliptic and boundary solvers and perform the iterations until it converges.
+\item Grad-Shafranov solver - Given input currents and equations, this will perform the call to the elliptic and boundary solvers and perform the iterations until it converges.
 \item Input parsing - To read the source currents and parameters from an input file.
-\item Output - To write the output to a hdf5 file. Support for other formats could be added eventually.
+\item Output - To write the output to an hdf5 file. Support for other formats could be added eventually.
 \end{itemize}
 
 For the visualization in python, the numpy and matplotlib libraries will be used. Functions to extract the data, subsets of the data and calculation of common plasma parameters will be provided. Only basic visualization such as plotting contours and 1-D cuts will be built in, since users will likely wish to evaluate the data using their own methods based on what they are studying. \\
@@ -209,21 +210,21 @@ The text file will contain key-value pairs including
 \item Initial guess for $J_\phi$
 \item Maximum iterations of outer loop
 \item Maximum iterations of inner loop
-\item error goals for outer loop
-\item error goals for inner loop
+\item Error goals for outer loop
+\item Error goals for inner loop
 \item Name for output file
 \item Whether to output for every $n$
 \item Whether to output for every $m$ (these will be useful in debugging / so a user can watch the solution converge)
-\item Whether to output $J$, $p$ and $q$ as well as $\Psi$ for each cell in the final output.
+\item Whether to output $\mathbf{B}$, $\mathbf{J}$, $p$ and $q$ as well as $\Psi$ for each cell in the final output.
 \end{itemize}
 
 For some of these key-value pairs, there may be default values if none is specified, while for others, the program will terminate with an error message if no key/value is specified.
 
 The input file of external currents will be a tab-separated table of radial location R (meters), vertical coordinate Z (meters) and I (amps) for each poloidal field coil.
 
-The input file of external magnetic field measurements will be similar: a tab-separated table of R, Z, and measured $\Psi$.
+The input file of experimental magnetic field measurements will be similar: a tab-separated table of R, Z, and measured $\Psi$.
 
-Our ouput will be in the hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $J_\phi$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
+Our ouput will be in the hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $\mathbf{B}$, $\mathbf{J}$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
 
 In order to read the hdf5 files, a python visualizer using matplotlib will be written. It will show contour plots for the tables in the output file and also be able to take slices through the tables at the machine midplane.
 
@@ -246,8 +247,8 @@ In order to read the hdf5 files, a python visualizer using matplotlib will be wr
 \textbf{December 5, 2014 - Prototype}
 \begin{itemize}
 \item Implement user interface. 
-\item Implement input with text file. User defines output type in the input (.txt, .vtk, etc.) along with algorithms used, number of iterations, etc. Parameters describing the initial current approximation, $J^0_{\phi}$, are specified along with $p(\Psi)$ and $g(\Psi)$ or experimental measurements of $\Psi$. 
-\item Implement output to a file and/or matplotlib: output is dumped to files and user can implement our plotting modules to generate plots of $\Psi$ and related quantities and convergence data. 
+\item Implement input with text file. User defines output type in the input (.txt, .vtk, etc.) along with algorithms used, number of iterations, etc.  The initial current approximation, $J^0_{\phi}$, is specified along with $p(\Psi)$ and $g(\Psi)$ or experimental measurements of $\Psi$. 
+\item Implement output to a file and/or matplotlib: output is dumped to files and user can implement our plotting modules to generate plots of $\Psi$ as well as related quantities and convergence data. 
 \item Implement main loop with empty function calls. Outline which functions need to be written and what libraries are used. 
 \end{itemize}
 
