@@ -74,9 +74,9 @@
 
 \subsection{MHD equilibrium}
 
-In magnetohydrodynamic (MHD) theory, a plasma equlibrium is described by the equation $\mathbf{\nabla} p = \mathbf{J} \times \mathbf{B}$, where $p$ is the scalar plasma pressure, $\mathbf{J}$ is the current density, $\mathbf{B} = \mathbf{\nabla} \times \mathbf{A}$ is the magnetic field, and $\mathbf{A}$ is the vector potential for the magnetic field.  We work in cylindrical coordinates $(R, \phi, Z)$, and the plasma is assumed to be axisymmetric, i.e., $\partial / \partial \phi = 0$.
+In magnetohydrodynamic (MHD) theory, a plasma equilibrium is described by the equation $\mathbf{\nabla} p = \mathbf{J} \times \mathbf{B}$, where $p$ is the scalar plasma pressure, $\mathbf{J}$ is the current density, $\mathbf{B} = \mathbf{\nabla} \times \mathbf{A}$ is the magnetic field, and $\mathbf{A}$ is the vector potential for the magnetic field.  We work in cylindrical coordinates $(R, \phi, Z)$, and the plasma is assumed to be axisymmetric, i.e., $\partial / \partial \phi = 0$.
 
-By introducting new functions $\Psi(R,Z) \equiv -R A_{\phi}$ (called the flux function) and $g(R,Z) \equiv R \big(\frac{\partial A_R}{\partial Z} - \frac{\partial A_Z}{\partial R}\big)$, we can rewrite the equilibrium equation in the following form, known as the Grad-Shafranov equation:
+By introducing new functions $\Psi(R,Z) \equiv -R A_{\phi}$ (called the flux function) and $g(R,Z) \equiv R \big(\frac{\partial A_R}{\partial Z} - \frac{\partial A_Z}{\partial R}\big)$, we can rewrite the equilibrium equation in the following form, known as the Grad-Shafranov equation:
 \begin{equation}
 \Delta^{*} \Psi + \mu_0 R^2 \frac{dp}{d\Psi} + g \frac{dg}{d\Psi} = 0,
 \end{equation}
@@ -117,7 +117,7 @@ Since the problem is non-linear (the right-hand-side of Eq.~(2) depends on $\Psi
 \begin{equation}
 \Delta^{*}\Psi^{n} = \mu_0 R J_\phi (R, \Psi^{n-1}),
 \end{equation}
-where $n$ denotes the iteration level. At each level, the previous iteration's result for $\Psi$ is plugged into the right-hand-side of Eq.~(3).  This continues until the solution converges.  The linearized finite difference equation can be solved via transform methods or multigrid methods.
+where $n$ denotes the iteration level. At each level, the previous iteration's result for $\Psi$ is plugged into the right-hand-side of Eq.~(3).  This continues until the solution converges.  The linearized finite difference equation can be solved via transform methods or multi-grid methods.
 
 There is an additional nonlinearity relating to the boundary conditions.  Suppose that there are $N_c$ external coils outside of the computational boundary.  The flux function evaluated on the computational boundary $\Psi_b$ is then due to the plasma itself and the external coils:
 \begin{equation}
@@ -131,7 +131,7 @@ U^m &= 0 \quad \mbox{on the boundary}.
 The calculation of the boundary values using Eq.~4 is known as Von Hagenow's method (Lackner, Comp.~Phys. Comm.~12 (1976) 33-44).
 The index $m$ in Eq.~(4) shows that the determination of the boundary condition is also an iterative process.  The $(m-1)$th value of $J_\phi$ is used to calculate $\Psi_b^m$.  
 
-Given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.  This $\Psi$ is then used to calcuate a new set of boundary conditions using Eq.~(4), and the process begins anew.  Ultimately, the process is a double-nested iteration which runs until the outer loop converges.  The process is depicted in Figure 2.
+Given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.  This $\Psi$ is then used to calculate a new set of boundary conditions using Eq.~(4), and the process begins anew.  Ultimately, the process is a double-nested iteration which runs until the outer loop converges.  The process is depicted in Figure 2.
 
 \begin{figure}
 \centering
@@ -156,7 +156,7 @@ We can then write a formula for the computed value of $\Psi$ at the location $(R
 \end{equation}
 The computed values are compared to the measured values, and the minimization of an error function determines the values of $\alpha_j, \beta_j$ at that stage in the algorithm.   
 
-Thus, the algorithm described in Section 1.4 is identical to that described in Section 1.3 (and depicted in Fig.~2), except that each time $\Psi$ is updated in the inner ($n$) loop, we also update the values of $\alpha_j, \beta_j$.  In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the source function, the location of external coils $(R_i^c,Z_i^c)$ and their currents $I_i$, and the location of the exp'l measurements $(R_l,Z_l)$ and their values $\Psi_l^{meas}$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-Z$ plane.  
+Thus, the algorithm described in Section 1.4 is identical to that described in Section 1.3 (and depicted in Fig.~2), except that each time $\Psi$ is updated in the inner ($n$) loop, we also update the values of $\alpha_j, \beta_j$.  In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the source function, the location of external coils $(R_i^c,Z_i^c)$ and their currents $I_i$, and the location of the experimental measurements $(R_l,Z_l)$ and their values $\Psi_l^{meas}$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-Z$ plane.  
 
 
 
@@ -166,28 +166,28 @@ Thus, the algorithm described in Section 1.4 is identical to that described in S
 
 \section{Code Organization}
 
-The program will be written in C++ with the visualization carried out separately using python. The solver would be called from the command line, with options to set the parameters of the simulation. Input data, such the locations of external coils, will be contained in text files. 
+The program will be written in C++ with the visualization carried out separately using Python. The solver would be called from the command line, with options to set the parameters of the simulation. Input data, such as the locations of external coils, will be contained in text files. 
 \\
 
 Output will be written to hdf5 files, which will require installation of the hdf5 library.  By default, the output consists of the grid and flux function.  Other quantities, such as the toroidal current density, can be selected in the input file.\\
 
 The following C++ interfaces will be required and should be self-contained
 \begin{itemize}
-\item Elliptic solver - This is used to invert the elliptic operator $\Delta^*$ and solve for $\Psi$, given the source functional in the Grad-Shafranov equation [Eq.~(2)]. This should allow the swapping in of external matrix solvers and the implementation of a multigrid method if time permits. There should be potential for parallelization here. If there is matching to experimental data, the least-squared calculation of the parameters $\alpha_j$ and $\beta_j$ from Eq.~(8) will be performed here. 
+\item Elliptic solver - This is used to invert the elliptic operator $\Delta^*$ and solve for $\Psi$, given the source functional in the Grad-Shafranov equation [Eq.~(2)]. This should allow the swapping in of external matrix solvers and the implementation of a multi-grid method if time permits. There should be potential for parallelization here. If there is matching to experimental data, the least-squared calculation of the parameters $\alpha_j$ and $\beta_j$ from Eq.~(8) will be performed here. 
 \item Boundary condition solver - Used to determine $\Psi$ on the computational boundary given external currents [Equation (4)]. Again this should allow different algorithms to be implemented. There should be potential for parallelization here. 
 \item Grad-Shafranov solver - Given input currents and equations, this will perform the call to the elliptic and boundary solvers and perform the iterations until it converges.
 \item Input parsing - To read the source currents and parameters from an input file.
 \item Output - To write the output to an hdf5 file. Support for other formats could be added eventually.
 \end{itemize}
 
-For the visualization in python, the numpy and matplotlib libraries will be used. Functions to extract the data, subsets of the data and calculation of common plasma parameters will be provided. Only basic visualization such as plotting contours and 1-D cuts will be built in, since users will likely wish to evaluate the data using their own methods based on what they are studying. \\
+For the visualization in Python, the numpy and matplotlib libraries will be used. Functions to extract the data, subsets of the data and calculation of common plasma parameters will be provided. Only basic visualization such as plotting contours and 1-D cuts will be built in, since users will likely wish to evaluate the data using their own methods based on what they are studying. \\
 
 The current research reconstruction code EFIT solves for approximately 250 equilibria in 20 seconds for the DIII-D tokamak. This should be a performance goal to aim for. \\
 
 External libraries
 \begin{itemize}
-\item HDF5 will be required for I/O. This can be downloaded for free. The python version h5py will be used for visualization.
-\item Eigen or one of the many free BLAS variants can be used for matrix operations if we do not write our own elliptic solver.
+\item HDF5 will be required for I/O. This can be downloaded for free. The Python version h5py will be used for visualization.
+\item Eigen or one of the many free BLAS variants can be used for matrix operations.
 \item MPI will be used for any parallelization we add to the code. 
 \item Matplotlib and numpy will be used for visualization.
 \end{itemize}
@@ -202,19 +202,13 @@ The program will be called from the command line and take as an argument an inpu
 
 The text file will contain key-value pairs including
 \begin{itemize}
-\item Path to a file describing external currents (from coils outside the plasma).
-\item Path to a file describing experimental measurements of $\Psi$ at various points outside the plasma.
+\item Switch controlling initial conditions of solver - either $\Psi_B$, $p(\Psi)$ and $g(\Psi)$, or external coil data are specified. 
+\item Path to a file describing external currents (from coils outside the plasma) and experimental measurements of $\Psi$ at various points outside the plasma.
 \item Path to a file with the $p(\Psi)$ and $g(\Psi)$ functions, when they are specified.
 \item Path to a file with a specified boundary $\Psi$: this will be useful in testing the inner loop.
-\item TRUE/FALSE Switch to control whether the former is used, or a boundary $\Psi$ is generated.
-\item Initial guess for $J_\phi$
-\item Maximum iterations of outer loop
-\item Maximum iterations of inner loop
-\item Error goals for outer loop
-\item Error goals for inner loop
-\item Name for output file
-\item Whether to output for every $n$
-\item Whether to output for every $m$ (these will be useful in debugging / so a user can watch the solution converge)
+\item Initial guess for $J_\phi$. 
+\item Maximum iterations and convergence requirements for inner and outer loops. 
+\item Whether to output for every $n$ or $m$ (these will be useful in debugging / so a user can watch the solution converge)
 \item Whether to output $\mathbf{B}$, $\mathbf{J}$, $p$ and $q$ as well as $\Psi$ for each cell in the final output.
 \end{itemize}
 
@@ -224,9 +218,9 @@ The input file of external currents will be a tab-separated table of radial loca
 
 The input file of experimental magnetic field measurements will be similar: a tab-separated table of R, Z, and measured $\Psi$.
 
-Our ouput will be in the hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $\mathbf{B}$, $\mathbf{J}$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
+Our output will be in the hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $\mathbf{B}$, $\mathbf{J}$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
 
-In order to read the hdf5 files, a python visualizer using matplotlib will be written. It will show contour plots for the tables in the output file and also be able to take slices through the tables at the machine midplane.
+In order to read the hdf5 files, a Python visualizer using matplotlib will be written. It will show contour plots for the tables in the output file and also be able to take slices through the tables at the machine midplane.
 
 %----------------------------------------------------------------------------------------
 %	Section 4
@@ -238,16 +232,16 @@ In order to read the hdf5 files, a python visualizer using matplotlib will be wr
 
 \textbf{November 28, 2014 - Detailed Project Map}
 \begin{itemize}
-\item Illustrate the code organization through a visual map showing the connection between each of our major classes (as in the Clustering example). 
+\item Illustrate the code organization through a visual map showing the connection between each of our major classes. 
 \item Set up documentation browser of project with Doxygen.
-\item Clearly define algorithms used: reconstruction, finite difference solver, etc.
+\item Clearly define algorithms used: basis functions for reconstruction, finite difference solver, boundary condition solver.
 \item Finalize libraries needed.
 \end{itemize}
 
 \textbf{December 5, 2014 - Prototype}
 \begin{itemize}
 \item Implement user interface. 
-\item Implement input with text file. User defines output type in the input (.txt, .vtk, etc.) along with algorithms used, number of iterations, etc.  The initial current approximation, $J^0_{\phi}$, is specified along with $p(\Psi)$ and $g(\Psi)$ or experimental measurements of $\Psi$. 
+\item Implement input with text file. User defines output type along with algorithms used, number of iterations, etc.  The initial current approximation, $J^0_{\phi}$, is specified along with $p(\Psi)$ and $g(\Psi)$ or experimental measurements of $\Psi$. 
 \item Implement output to a file and/or matplotlib: output is dumped to files and user can implement our plotting modules to generate plots of $\Psi$ as well as related quantities and convergence data. 
 \item Implement main loop with empty function calls. Outline which functions need to be written and what libraries are used. 
 \end{itemize}
@@ -256,7 +250,7 @@ In order to read the hdf5 files, a python visualizer using matplotlib will be wr
 \begin{itemize}
 \item Implementation of main loop with testing: comparison with analytic solution, convergence testing, and performance testing. 
 \item Implementation of finite difference method elliptic solver.
-\item Implementation of boundary flux ($\Psi_b$) solver using Green's functions. 
+\item Implementation of boundary flux ($\Psi_b$) solver using Von Hagenow's method. 
 \end{itemize}
 
 \textbf{January 15, 2015 - Final Version}
@@ -268,7 +262,7 @@ In order to read the hdf5 files, a python visualizer using matplotlib will be wr
 
 \subsection{Division of Labor}
 \begin{itemize}
-\item Peter: Boundary condition solver, calculation of $(\alpha_j,\beta_j)$ from exp'l data.
+\item Peter: Boundary condition solver, calculation of $(\alpha_j,\beta_j)$ from experimental data.
 \item Jonathan: Output, Python visualization program.
 \item Elizabeth: Elliptic solver
 \item Jacob: Input, Testing, Grad-Shafranov solver
