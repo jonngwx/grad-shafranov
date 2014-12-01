@@ -1,1 +1,6 @@
 Design\ Document/Design_Document.pdf
+grad.project
+grad.workspace
+.codelite
+*~
+*.o
