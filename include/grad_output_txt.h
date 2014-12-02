@@ -26,7 +26,7 @@ public:
 	 * Writes output to file.
 	 * @param filename name of output file
 	 * */
-	write_output(const char* filename);
+	void write_output(const char* filename);
 	
 };
 
