@@ -7,7 +7,7 @@
  * \file Header file for Field class
  * */
 
-class Field(){
+class Field {
 	public:
 	Field(double R0, double Rend, double z0, double zend, int nr, int nz);
 	~Field();

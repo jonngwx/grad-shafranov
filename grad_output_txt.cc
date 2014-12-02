@@ -2,7 +2,10 @@
 #include "field.h"
 #include <stdio.h>
 
-Grad_Output_Txt::Grad_Output_Txt(Field* f, Field* p, Field* g, const char* outputs) : f(f), p(p), g(g){
+Grad_Output_Txt::Grad_Output_Txt(Field* f0, Field* p0, Field* g0, const char* outputs) {
+	f = f0;
+	p = p0;
+	g = g0;
 	Grad_Output::parse_outputs(outputs);
 }
 
