@@ -9,13 +9,19 @@ Grad_Output_Txt::Grad_Output_Txt(Field* f0, Field* p0, Field* g0, const char* ou
 	Grad_Output::parse_outputs(outputs);
 }
 
+Grad_Output_Txt::~Grad_Output_Txt(){
+}
+
 void Grad_Output_Txt::write_output(const char* filename){
 	FILE * file;
 	file = fopen(filename, "w");
 	const int nr = f->nr;
+	// write the output to a text file
+
 	for (int i = 0; i < nr; i++){
 		fprintf(file,"%15.8f ", f->R[i]);
 	}
 	
-	// write the output to a text file
+	fclose(file);
 }
+
