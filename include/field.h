@@ -19,9 +19,7 @@ class Field {
 	double **f; /** < pointer to field data */
 	double **f_old; /** < pointer to old field data */
 	double dr; /** < grid spacing in radial direction */
-	double dz; /** < grid spacing in vertical direction */
-	
-private:
+	double dz; /** < grid spacing in vertical direction */	
 	/**
 	 * Returns a the value of the ith boundary cell
 	 * TODO: do we really need this?
