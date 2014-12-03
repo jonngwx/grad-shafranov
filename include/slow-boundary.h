@@ -5,12 +5,12 @@
 /* need to include header that defines TsvData */
 
 class SlowBoundary : public Boundary {
-    public:
-        SlowBoundary(int nr, int nz, double dr, double dz, TsvData &cond_data); 
-        ~SlowBoundary();
-        int CalcB(Field &Psi);
-    private:
-        /* to be determined */
+  public:
+    SlowBoundary(int nr, int nz, double dr, double dz, TsvData &cond_data); 
+    ~SlowBoundary();
+    int CalcB(Field &Psi);
+  private:
+    /* to be determined */
 
 };
 
