@@ -10,3 +10,4 @@ tsv_reader_example: tsv_reader_example.cc tsv_reader.cc
 .PHONY: clean
 clean:
 	$(RM) *.o
+	$(RM) tsv_reader_example

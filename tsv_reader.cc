@@ -11,7 +11,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "tsv_reader.h"
+#include "include/tsv_reader.h"
 
 TsvData * NewTsvDataFromFile(const std::string tsv_file_name){
 

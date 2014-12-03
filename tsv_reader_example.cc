@@ -3,7 +3,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
-#include "tsv_reader.h"
+#include "include/tsv_reader.h"
 
 int main (int argc, char * argv[]) {
 
