@@ -11,25 +11,13 @@
 #include <iostream>
 #include <fstream>
 
-struct TsvData {
-  double * r_locations;
-  double * z_locations;
-  double * values;
-  int num_entries;
-};
+#include "tsv_reader.h"
 
-typedef struct TsvData TsvData;
+TsvData * NewTsvDataFromFile(const std::string tsv_file_name){
 
-int main(int argc, char* argv[]) {
-  if (argc != 2) {
-    printf("USAGE: %s <name of file to read>\n", argv[1]);
-    exit(1);
-  }
+  printf("Will try reading from: %s\n", tsv_file_name.c_str());
 
-  const std::string input_file_name = argv[1];
-  printf("Will try reading from: %s\n", input_file_name.c_str());
-
-  std::ifstream filein(input_file_name.c_str());
+  std::ifstream filein(tsv_file_name.c_str());
   std::string line;
 
   if (!filein.is_open()) {
@@ -64,19 +52,15 @@ int main(int argc, char* argv[]) {
   assert (td->r_locations != NULL);
   td->z_locations  = new double[num_tsv_lines];
   assert (td->z_locations != NULL);
-  td->currents = new double[num_tsv_lines];
+  td->values = new double[num_tsv_lines];
   td->num_entries = num_tsv_lines;
   
-  	//To access values
+  //To access values
   for (std::vector<double>::size_type i = 0; i != tsv_table.size(); ++i) {
     td->r_locations[i] = tsv_table[i][0];
     td->z_locations[i] = tsv_table[i][1];
-    td->value[i] = tsv_table[i][2];
+    td->values[i] = tsv_table[i][2];
   }
   
-  for (int i = 0; i < td->num_entries; ++i) {
-    printf("R is %f and Z is %f and I is %f\n", td->r_locations[i], td->z_locations[i], td->currents[i]);
-  }
-  
-  return 0;
+  return td;
 }
