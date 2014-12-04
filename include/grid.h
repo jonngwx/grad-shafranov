@@ -14,6 +14,6 @@ public:
     double dr; /** < grid spacing in radial direction */
     double dz; /** < grid spacing in vertical direction */  
 
-}
+};
 
 #endif

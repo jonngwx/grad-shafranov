@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include "field.h"
+#include "grid.h"
 
 class Grad_Output{
   public:
@@ -12,7 +13,7 @@ class Grad_Output{
 protected:
   Field *f;
   Field *p;
-  Field *g;
+  Grid *g;
   void parse_outputs(const char *outputs);
   // output_list
 };
