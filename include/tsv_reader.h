@@ -19,6 +19,15 @@ struct CoilData : TsvData {
 
 typedef struct CoilData CoilData;
 
+struct PGData : TsvData {
+  double * psis;
+  double * values;
+};
+
+typedef struct PGData PGData;
+
+
+
 TsvData * NewTsvDataFromFile(const std::string tsv_file_name);
 TsvData * NewTsvDataFromFile(const std::string tsv_file_name, const int header_lines);
 void DeleteTsvData(TsvData * td);
@@ -26,5 +35,10 @@ void DeleteTsvData(TsvData * td);
 CoilData * NewCoilDataFromFile(const std::string tsv_file_name);
 CoilData * NewCoilDataFromFile(const std::string tsv_file_name, const int header_lines);
 void DeleteCoilData(CoilData * cd);
+
+PGData * NewPGDataFromFile(const std::string tsv_file_name);
+PGData * NewPGDataFromFile(const std::string tsv_file_name, const int header_lines);
+void DeletePGData(PGData * pgd);
+
 
 #endif

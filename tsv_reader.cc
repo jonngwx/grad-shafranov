@@ -91,6 +91,9 @@ void DeleteTsvData(TsvData * td){
   delete td;
 }
 
+//-------------------------------------------------------
+//functions for the CoilData struct
+
 CoilData *  NewCoilDataFromFile(const std::string tsv_file_name){
   return NewCoilDataFromFile(tsv_file_name, 0);
 }
@@ -111,4 +114,29 @@ CoilData * NewCoilDataFromFile(const std::string tsv_file_name, const int header
 
 void DeleteCoilData(CoilData * cd){
   DeleteTsvData(cd);
+}
+
+//--------------------------------------------------------
+// functions for the PGData struct
+
+PGData *  NewPGDataFromFile(const std::string tsv_file_name){
+  return NewPGDataFromFile(tsv_file_name, 0);
+}
+
+PGData * NewPGDataFromFile(const std::string tsv_file_name, const int header_lines){
+  TsvData * td = NewTsvDataFromFile(tsv_file_name, header_lines);
+  assert(td->num_columns==2);
+  
+  PGData * pgd = new PGData();
+  pgd->data=td->data;
+  pgd->num_columns=td->num_columns;
+  pgd->num_entries=td->num_entries;
+  pgd->psis = pgd->data[0];
+  pgd->values = pgd->data[1];
+
+  return pgd;
+}
+
+void DeletePGData(PGData * pgd){
+  DeleteTsvData(pgd);
 }
