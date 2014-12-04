@@ -13,7 +13,12 @@
 
 #include "include/tsv_reader.h"
 
-TsvData * NewTsvDataFromFile(const std::string tsv_file_name){
+TsvData * NewTsvDataFromFile(const std::string tsv_file_name) {
+  printf("Not skipping any header lines\n");
+  return NewTsvDataFromFile(tsv_file_name, 0);
+}
+
+TsvData * NewTsvDataFromFile(const std::string tsv_file_name, const int header_lines) {
 
   printf("Will try reading from: %s\n", tsv_file_name.c_str());
 
@@ -24,6 +29,12 @@ TsvData * NewTsvDataFromFile(const std::string tsv_file_name){
     perror("Error while opening file");
   }
   std::vector< std::vector<double> > tsv_table;
+  
+  //skip 'header_lines' lines
+  for (int i = 0; i < header_lines; ++i) {
+    std::getline(filein,line);
+  }
+  std::vector<double> doubleVector; 
   while (std::getline(filein, line)) {
     std::istringstream ss(line);
     std::istream_iterator<std::string> begin(ss), end;
@@ -31,7 +42,9 @@ TsvData * NewTsvDataFromFile(const std::string tsv_file_name){
     //putting all the tokens in the vector  
     std::vector<std::string> arrayTokens(begin, end);
 
-    std::vector<double> doubleVector(arrayTokens.size());
+    doubleVector.resize(arrayTokens.size());
+    
+    //convert the vector of strings to a vector of doubles
     std::transform(arrayTokens.begin(), arrayTokens.end(), doubleVector.begin(), [](std::string const& val){ return std::stod(val);});
 
     //Should we now delete the arrayTokens vector?
@@ -43,23 +56,26 @@ TsvData * NewTsvDataFromFile(const std::string tsv_file_name){
     perror("Error while reading file");
   }
   
-  // convert vector of vectors into struct of 3 arrays.
+
+
+  int num_tsv_lines = tsv_table.size();
+  int num_cols = doubleVector.size(); 
+  
   TsvData * td = new TsvData();
   assert (td != NULL);
-  
-  int num_tsv_lines = tsv_table.size();
-  td->r_locations  = new double[num_tsv_lines];
-  assert (td->r_locations != NULL);
-  td->z_locations  = new double[num_tsv_lines];
-  assert (td->z_locations != NULL);
-  td->values = new double[num_tsv_lines];
   td->num_entries = num_tsv_lines;
+  td->num_columns = num_cols;
   
-  //To access values
-  for (std::vector<double>::size_type i = 0; i != tsv_table.size(); ++i) {
-    td->r_locations[i] = tsv_table[i][0];
-    td->z_locations[i] = tsv_table[i][1];
-    td->values[i] = tsv_table[i][2];
+  td->data = new double *[num_cols];
+  for(int i = 0; i < num_cols; ++i) {
+    td->data[i] = new double[num_tsv_lines];
+    assert(td->data[i] != NULL);
+  }
+  
+  for (int i = 0; i < num_cols; ++i) {
+    for (int j = 0; j < num_tsv_lines; ++j){
+      td->data[i][j] = tsv_table[j][i];
+    }
   }
   
   return td;

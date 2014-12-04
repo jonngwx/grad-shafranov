@@ -7,12 +7,11 @@
 
 int main (int argc, char * argv[]) {
 
-  TsvData * td;
   std::string file_name(argv[1]);
-  td = NewTsvDataFromFile(file_name);
+  TsvData * td = NewTsvDataFromFile(file_name);
 
   for (int i = 0; i < td->num_entries; ++i) {
-    printf("R is %f and Z is %f and value is %f\n", td->r_locations[i], td->z_locations[i], td->values[i]);
+    printf("R is %f and Z is %f and value is %f\n", td->data[0][i], td->data[1][i], td->data[2][i]);
   }
   
   return 0;
