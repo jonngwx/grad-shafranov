@@ -9,11 +9,14 @@ int main(int argc, char *argv[]){
     std::string filename = "";
     TsvData coils = NewTsvDataFromFile(filename); // is there an implicit alloc here?
     // make field data
-    Field *Psi = new Field(R0, Rend, z0, zend, nr,nz);
+    int nr,nz;
+    double R0, Rend, z0, zend;
+    Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
+    Field *Psi = new Field(nr,nz);
     //RHS rhs = something
 
     // make solvers
-    // EllipticSolver () = ???
+    EllipticSolver solver = new EllipticSolver();
     Boundary *Psib = new SlowBoundary(nr,nz,Psi->dr, Psi->dz, coils);    
 
     /** determine which output type */
@@ -33,6 +36,7 @@ int main(int argc, char *argv[]){
     grad_output.write_output("whatever");
 
     delete grad_output;
+    delete grid;
     delete Psi;
     delete Psib;
 }
