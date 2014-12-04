@@ -13,7 +13,7 @@ public:
 // Norm of residuals
   double residuals(const Field &Psi, const Field &Psi_next);
 // Calculates coefficients for iteration
-  virtual void coeff(const Grid &GridS) = 0
+  virtual void coeff(const Grid &GridS) = 0;
 // Blend with Psi_ with Psi_prev to iterate
   void iter();
 // Enforce boundary condition for n+

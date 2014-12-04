@@ -24,7 +24,7 @@ void Grad_Output_Txt::write_output(const char* filename){
 		fprintf(file,"%15.8f ", g->R[i]);
 	}
     fprintf(file,"\n");
-    for (int i = 0; i < nr; i++){
+    for (int i = 0; i < nz; i++){
 		fprintf(file,"%15.8f ", g->z[i]);
 	}
     fprintf(file,"\n");
