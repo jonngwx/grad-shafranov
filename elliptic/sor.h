@@ -8,7 +8,7 @@ public:
   SOR(const Field &Psi, double omega_init, int max_iter, double epsilon);
   ~SOR();
 // For first iteration - use Gauss Seidel with blending
-  void SOR_1();
+  void SOR_1(const Field &Psi_n, const Field &Psi_n+);
 // Iterate
   void step(const Field &Psi_n, const Field &Psi_n+);
 // Calculate over-relaxation parameter
