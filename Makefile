@@ -1,13 +1,17 @@
 CXX = clang++
 CXXFLAGS = -g -Wall -std=c++11
+EXAMPLEPROGS = tsv_reader_example coil_data_example
 
 .PHONY: all
-all: tsv_reader_example
+all: $(EXAMPLEPROGS)
 
 tsv_reader_example: tsv_reader_example.cc tsv_reader.cc
-	$(CXX) $(CXXFLAGS) -o $@ $^ 
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+coil_data_example: coil_data_example.cc tsv_reader.cc
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 .PHONY: clean
 clean:
 	$(RM) *.o
-	$(RM) tsv_reader_example
+	$(RM) $(EXAMPLEPROGS)

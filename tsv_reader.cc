@@ -55,7 +55,7 @@ TsvData * NewTsvDataFromFile(const std::string tsv_file_name, const int header_l
   if (filein.bad()) {
     perror("Error while reading file");
   }
-  
+
 
 
   int num_tsv_lines = tsv_table.size();
@@ -79,4 +79,36 @@ TsvData * NewTsvDataFromFile(const std::string tsv_file_name, const int header_l
   }
   
   return td;
+}
+
+void DeleteTsvData(TsvData * td){
+  assert(td != NULL);
+  printf("Deleting a tsv struct\n");
+  for(int i = 0; i < td->num_columns; ++i){
+    assert(td->data[i] != NULL);
+    delete td->data[i];
+  }
+  delete td;
+}
+
+CoilData *  NewCoilDataFromFile(const std::string tsv_file_name){
+  return NewCoilDataFromFile(tsv_file_name, 0);
+}
+
+CoilData * NewCoilDataFromFile(const std::string tsv_file_name, const int header_lines){
+  TsvData * td = NewTsvDataFromFile(tsv_file_name, header_lines);
+  assert(td->num_columns==3);
+  CoilData * cd = new CoilData();
+  cd->data=td->data;
+  cd->num_columns=td->num_columns;
+  cd->num_entries=td->num_entries;
+  cd->r_locs = cd->data[0];
+  cd->z_locs = cd->data[1];
+  cd->currents = cd->data[2];
+
+  return cd;
+}
+
+void DeleteCoilData(CoilData * cd){
+  DeleteTsvData(cd);
 }
