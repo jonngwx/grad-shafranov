@@ -5,3 +5,4 @@ grad.workspace
 *~
 *.o
 tsv_reader_example
+coil_data_example
