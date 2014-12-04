@@ -3,6 +3,7 @@
 #include "field.h"
 #include "grad_output.h"
 #include "tsv_data.h"
+#include "elliptic/sor.h"
 
 int main(int argc, char *argv[]){
     // read inputs TO BE FILLED IN BY JACOB
@@ -13,21 +14,25 @@ int main(int argc, char *argv[]){
     double R0, Rend, z0, zend;
     Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
     Field *Psi = new Field(nr,nz);
+    Field *Psi_prev = new Field(nr,nz);
+    Field *Psi_next = new Field(nr,nz);
     //RHS rhs = something
 
-    // make solvers
-    EllipticSolver solver = new EllipticSolver();
+    // Elliptic solver for inner loop
+    EllipticSolver *solver = new SOR(grid, omega_init, epsilon);
     Boundary *Psib = new SlowBoundary(nr,nz,Psi->dr, Psi->dz, coils);    
 
     /** determine which output type */
     Grad_Output grad_output = new Grad_Output_Txt(Psi,Psi,Psi,"what to write");
     // solve stuff
-    for (int i = 0; i < maxIterM,++i){
+    for (int i = 0; i < maxIterM, ++i){
         Psib->CalcB(Psi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
-        for (int j = 0; j < maxIterN,++j){
-            // Elliptic_solver->solve(Psi)
-            // test convergence
+        
+        solver->init(*Psi);
+        for (int j = 0; j < maxIterN, ++j) {
+            Psi = solver->step();
+            if (solver->norm() < solver->epsilon()) break;
         }
     }
 
@@ -39,4 +44,5 @@ int main(int argc, char *argv[]){
     delete grid;
     delete Psi;
     delete Psib;
+    delete solver;
 }

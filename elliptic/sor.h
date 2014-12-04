@@ -1,19 +1,20 @@
 #ifndef SOR_H
 #define SOR_H
 
-#include sor.h
+#include elliptic-solver.h
 
 class SOR: public EllipticSolver {
 public:
-  SOR(const Field &Psi, double omega_init, int max_iter, double epsilon);
+  SOR(const Grid &GridS, double omega_init, double epsilon);
   ~SOR();
 // For first iteration - use Gauss Seidel with blending
-  void SOR_1(const Field &Psi_n, const Field &Psi_n+);
+  void SOR_1();
 // Iterate
-  void step(const Field &Psi_n, const Field &Psi_n+);
+  void step();
 // Calculate over-relaxation parameter
-  double omega(const Field &Psi_n-, const Field &Psi_n, const Field &Psi_n+);
+  double omega();
 private:
+  Field &Psi_prev_prev_;
   const double omega_init_;
 // Coefficient arrays
   const double **a;
@@ -21,6 +22,7 @@ private:
   const double **c;
   const double **d;
   const double **e;
+  const double **f;
 };
 
 #endif

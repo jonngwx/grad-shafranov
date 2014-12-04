@@ -1,9 +1,8 @@
 #include gauss-seidel.h
 
-GaussSeidel::GaussSeidel(const Field &Psi_n, int max_iter, double epsilon) :
-  nr_(Psi_n.nr),
-  nz_(Psi_n.nz),
-  max_iter_(max_iter),
+GaussSeidel::GaussSeidel(const Grid &GridS, double epsilon) :
+  nr_(GridS.nr),
+  nz_(GridS.nz),
   epsilon_(epsilon) {
     a = new double[nr]();
     b = new double[nr]();
@@ -34,10 +33,25 @@ GaussSeidel::GaussSeidel(const Field &Psi_n, int max_iter, double epsilon) :
   delete [] e;
 }
 
-void coeff(const Field &Psi_n) {
+void coeff(const Grid &GridS) {
   
 }
 
-void GaussSeidel::step(const Field &Psi_n, const Field &Psi_n+){
-    
+void GaussSeidel::step(const Field &Psi, const Field &Psi_next){
+// Save Psi_ to Psi_prev
+  for (int i = 1; i < nr-1; ++i) {
+    for(int j = 1; j < nz-1; ++j) {
+      Psi_prev_.f[i][j] = Psi_.f[i][j];
+    }
+  }
+  
+// Field *J = RHS(Psi_prev_);
+  boundary(Psi_prev_, Psi_);
+
+  for (int i = 0; i < nr_; ++i) {
+    for (int j = 0 ;j < nz_; ++j) {
+      Psi_.f[i][j] = a[i][j]*Psi_prev_.f[i+1][j] + b[i][j]*Psi_.f[i-1][j] + c[i][j]*Psi_prev_.f[i][j+1] + d[i][j]*Psi_.f[i][j-1] + e[i][j]*Psi_prev_[i][j] + f[i][j]*J.f[i][j];
+    }
+  }
+  iter();
 }
