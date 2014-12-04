@@ -6,7 +6,11 @@ class Grid{
 public:
     Grid(double R0, double Rend, double z0, double zend, int nr, int nz);
     ~Grid();
+    int celli(double r, const double *a);
+    int cellj(double z, const double *b);
 	
+    const int R0;
+    const int z0;
     const int nr; /** < number of points in R direction */
     const int nz; /** < number of points in z direction */
     double *R; /** < pointer to array of radial grid points */

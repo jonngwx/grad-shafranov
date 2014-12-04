@@ -9,7 +9,7 @@ GaussSeidel::GaussSeidel(const Grid &GridS, double epsilon) :
     c = new double[nr]();
     d = new double[nr]();
     e = new double[nr]();
-    for(int i = 0; i< nr; ++i) {
+    for(int i = 0; i < nr; ++i) {
       a[i] = new double[nz]();
       b[i] = new double[nz]();
       c[i] = new double[nz]();
@@ -18,7 +18,7 @@ GaussSeidel::GaussSeidel(const Grid &GridS, double epsilon) :
     }
 }
 
-~GaussSeidel::GaussSeidel(){
+GaussSeidel::~GaussSeidel(){
   for (int i = 0; i < nr_; ++i) {
     delete [] a;
     delete [] b;
