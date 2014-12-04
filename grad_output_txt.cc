@@ -2,7 +2,7 @@
 #include "field.h"
 #include <stdio.h>
 
-Grad_Output_Txt::Grad_Output_Txt(Field* f0, Field* p0, Field* g0, const char* outputs) {
+Grad_Output_Txt::Grad_Output_Txt(Field* f0, Grid* g0, Field* p0, const char* outputs) {
 	f = f0;
 	p = p0;
 	g = g0;
@@ -15,11 +15,11 @@ Grad_Output_Txt::~Grad_Output_Txt(){
 void Grad_Output_Txt::write_output(const char* filename){
 	FILE * file;
 	file = fopen(filename, "w");
-	const int nr = f->nr;
+	const int nr = g->nr;
 	// write the output to a text file
 
 	for (int i = 0; i < nr; i++){
-		fprintf(file,"%15.8f ", f->R[i]);
+		fprintf(file,"%15.8f ", g->R[i]);
 	}
 	
 	fclose(file);
