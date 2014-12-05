@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "field.h"
 #include "grad_output.h"
-#include "tsv_data.h"
+#include "tsv_reader.h"
 #include "elliptic/sor.h"
 
 int main(int argc, char *argv[]){
