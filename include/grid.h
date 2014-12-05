@@ -6,8 +6,8 @@ class Grid{
 public:
     Grid(double R0, double Rend, double z0, double zend, int nr, int nz);
     ~Grid();
-    int celli(double r);
-    int cellj(double z);
+    double celli(double r);
+    double cellj(double z);
 	
     const int R0;
     const int z0;
