@@ -19,7 +19,7 @@ public:
    * @param g pointer to field containing g function
    * @param outputs string of comma separated output options
    * */
-  Grad_Output_Txt(Field* f, Grid* g, Field* p, const char* outputs);
+  Grad_Output_Txt(Field* f, Grid* grid, RHSfunc* p, RHSfunc* g, const char* outputs);
   ~Grad_Output_Txt();
 
   /**

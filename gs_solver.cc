@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     Boundary *Psib = new SlowBoundary(nr,nz,Psi->dr, Psi->dz, coils);    
 
     /** determine which output type */
-    Grad_Output grad_output = new Grad_Output_Txt(Psi,Psi,Psi,"what to write");
+    Grad_Output grad_output = new Grad_Output_Txt(Psi,grid,p,g,"this,is,a,test");
     // solve stuff
     for (int m = 0; m < maxIterM, ++m){
         Psib->CalcB(Psi); // PETER this should come after as the initial guess already has a self consistent boundary?

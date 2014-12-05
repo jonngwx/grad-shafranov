@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "field.h"
 #include "grid.h"
+#include "rhs_func.h"
 
 class Grad_Output{
   public:
@@ -12,8 +13,9 @@ class Grad_Output{
   
 protected:
   Field *f;
-  Field *p;
-  Grid *g;
+  RHSfunc *p;
+  RHSfunc *g;
+  Grid *grid;
   void parse_outputs(const char *outputs);
   // output_list
 };
