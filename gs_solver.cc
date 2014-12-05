@@ -6,8 +6,7 @@
 #include "include/rhs_func.h"
 #include "include/grad_output.h"
 #include "include/grad_output_txt.h"
-#include "include/tsv_reader.h"
-//#include "include/sor.h"
+#include "include/sor.h"
 #include "include/slow_boundary.h"
 
 using namespace std;
