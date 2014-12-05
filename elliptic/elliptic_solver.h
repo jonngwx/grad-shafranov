@@ -7,7 +7,7 @@ class EllipticSolver {
 public:
   virtual ~EllipticSolver();
 // Initialize solver with current Psi
-  void init(const Field &Psi);
+  void init(const Field &Psi, const Grid &Grid);
 // Norm with last soluation
   double norm_max(const Field &Psi, const Field &Psi_next);
 // Norm of residuals
@@ -21,6 +21,7 @@ public:
 // Get epsilon
   void epsilon();
 private:
+  Grid &Grid_;
   Field &Psi_;
   Field &Psi_prev_;
   const int nr_;

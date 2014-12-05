@@ -61,7 +61,7 @@ void SOR_1() {
 }
 
 // Iterate with over-relaxation parameter omega
-void step() {
+void step(const Field &jphi) {
   // Save Psi_ to Psi_prev and Psi_prev to Psi_prev_prev
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
@@ -76,7 +76,7 @@ void step() {
   // Iterate over non-boundary region
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
-      Psi_.f[i][j] = omega*(a[i][j]*Psi_prev_.f[i+1][j] + b[i][j]*Psi_.f[i-1][j] + c[i][j]*Psi_prev_.f[i][j+1] + d[i][j]*Psi_.f[i][j-1] + e[i][j]*Psi_prev_[i][j] + f[i][j]*J.f[i][j]);
+      Psi_.f[i][j] = omega*(a[i][j]*Psi_prev_.f[i+1][j] + b[i][j]*Psi_.f[i-1][j] + c[i][j]*Psi_prev_.f[i][j+1] + d[i][j]*Psi_.f[i][j-1] + e[i][j]*Psi_prev_[i][j] + f[i][j]*jphi.f[i][j]);
     }
   }
 }
