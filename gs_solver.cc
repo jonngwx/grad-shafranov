@@ -5,7 +5,7 @@
 #include "tsv_reader.h"
 #include "elliptic/sor.h"
 
-int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g)
+int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g);
 
 int main(int argc, char *argv[]){
     // read inputs TO BE FILLED IN BY JACOB
