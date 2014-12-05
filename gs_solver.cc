@@ -16,7 +16,10 @@ int main(int argc, char *argv[]){
     Field *Psi = new Field(nr,nz);
     Field *Psi_prev = new Field(nr,nz);
     Field *Psi_next = new Field(nr,nz);
-    //RHS rhs = something
+    
+    Field *jphi = new Field(nr,nz);
+    RHSfunc *p = new RHSfunc(pgtype, pdata);
+    RHSfunc *g = new RHSfunc(pgtype, gdata);
 
     // Elliptic solver for inner loop
     EllipticSolver *solver = new SOR(grid, omega_init, epsilon);
@@ -25,12 +28,13 @@ int main(int argc, char *argv[]){
     /** determine which output type */
     Grad_Output grad_output = new Grad_Output_Txt(Psi,Psi,Psi,"what to write");
     // solve stuff
-    for (int i = 0; i < maxIterM, ++i){
+    for (int m = 0; m < maxIterM, ++m){
         Psib->CalcB(Psi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
         
         solver->init(*Psi);
-        for (int j = 0; j < maxIterN, ++j) {
+        for (int n = 0; n < maxIterN, ++n) {
+            calc_jphi(*grid, *jphi, *Psi, *p, *g);
             Psi = solver->step();
             if (solver->norm() < solver->epsilon()) break;
         }
@@ -45,4 +49,11 @@ int main(int argc, char *argv[]){
     delete Psi;
     delete Psib;
     delete solver;
+}
+
+int calc_jphi(Grid *grid, Field *jphi, Field *Psi, RHSfunc *p, RHSfunc *g){
+
+  //eventually this'll update the jphi field
+
+  return 0;
 }
