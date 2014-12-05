@@ -1,31 +1,42 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "field.h"
-#include "grad_output.h"
-#include "tsv_reader.h"
+#include <string>
+#include "include/grid.h"
+#include "include/field.h"
+#include "include/rhs_func.h"
+#include "include/grad_output.h"
+#include "include/tsv_reader.h"
 #include "elliptic/sor.h"
-#include "slow_boundary.h"
+#include "include/slow_boundary.h"
+
+using namespace std;
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g);
 
 int main(int argc, char *argv[]){
-    // read inputs TO BE FILLED IN BY JACOB
-    std::string filename = "";
-    TsvData coils = NewTsvDataFromFile(filename); // is there an implicit alloc here?
-    // make field data
-    int nr,nz;
-    double R0, Rend, z0, zend;
+    // JACOB, I'm going to manually set some constants right now so we can test everything else  :)
+    int nr = 11;
+    int nz = 11;
+    double R0 = 5.0;
+    double Rend = 10.0;
+    double z0 = -3.0;
+    double zend = 3.0;
+    
+    PGData *pgd = NewPGDataFromFile("pg_data.tsv",1)
+    CoilData *cd = NewCoilDataFromFile("coil_data.tsv",1)
+    string pgtype = "array";
+    
     Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
     Field *psi = new Field(nr,nz);
     Field *psi_prev = new Field(nr,nz);
     Field *psi_next = new Field(nr,nz);
-    
     Field *jphi = new Field(nr,nz);
-    RHSfunc *p = new RHSfunc(pgtype, pdata);
-    RHSfunc *g = new RHSfunc(pgtype, gdata);
+    
+    RHSfunc *p = new RHSfunc(pgtype, pgd);
+    RHSfunc *g = new RHSfunc(pgtype, pgd);
 
     // Elliptic solver for inner loop
-    EllipticSolver *solver = new SOR(grid, omega_init, epsilon);
+//    EllipticSolver *solver = new SOR(grid, omega_init, epsilon);
     Boundary *psib = new SlowBoundary(*grid, *cd);    
 
     /** determine which output type */
