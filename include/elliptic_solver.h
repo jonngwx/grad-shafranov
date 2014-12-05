@@ -1,7 +1,6 @@
 #ifndef ELLIPTIC_SOLVER_H
 #define ELLIPTIC_SOLVER_H
 
-#include "elliptic_solver.h"
 #include "field.h"
 #include "grid.h"
 

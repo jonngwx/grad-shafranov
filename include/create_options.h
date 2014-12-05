@@ -1,6 +1,8 @@
 #ifndef CREATE_OPTIONS_H_
 #define CREATE_OPTIONS_H_
 
+#include <iostream>
+#include <iterator>
 #include <boost/program_options.hpp>
 namespace po = boost::program_options;
 
