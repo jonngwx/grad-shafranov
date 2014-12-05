@@ -16,6 +16,19 @@ using namespace std;
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g);
 
 int main(int argc, char *argv[]){
+
+  po::options_description visible_options("Allowed options");
+  po::variables_map vm;
+  int return_value = CreateOptions(argc, argv, visible_options, vm);
+  if( return_value != 0 ) {
+    exit(return_value);
+  }
+
+  if (vm.count("help")) {
+    std::cout << visible_options << "\n";
+    return 0;
+  }
+
     // JACOB, I'm going to manually set some constants right now so we can test everything else  :)
     int nr = 11;
     int nz = 11;
