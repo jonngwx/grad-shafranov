@@ -38,6 +38,13 @@ int main(int argc, char *argv[]){
     RHSfunc *p = new RHSfunc(pgtype, pgd);
     RHSfunc *g = new RHSfunc(pgtype, pgd);
 
+    for (int i = 0; i < grid->nr_; ++i) {
+      for (int j = 0; j < grid->nz_; ++j) {
+        psi->f_[i][j] = i*j;
+      }
+    }
+
+
     // Elliptic solver for inner loop
 //    EllipticSolver *solver = new SOR(grid, omega_init, epsilon);
     Boundary *psib = new SlowBoundary(*grid, *cd);    
