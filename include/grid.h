@@ -9,14 +9,16 @@ public:
     double celli(double r);
     double cellj(double z);
 	
-    const int R0;
-    const int z0;
-    const int nr; /** < number of points in R direction */
-    const int nz; /** < number of points in z direction */
-    double *R; /** < pointer to array of radial grid points */
-    double *z; /** < pointer to array of vertical grid points */
-    double dr; /** < grid spacing in radial direction */
-    double dz; /** < grid spacing in vertical direction */  
+    const double R0_;
+    const double Rend_;
+    const double z0_;
+    const double zend_;
+    const int nr_; /** < number of points in R direction */
+    const int nz_; /** < number of points in z direction */
+    double *R_; /** < pointer to array of radial grid points */
+    double *z_; /** < pointer to array of vertical grid points */
+    double dr_; /** < grid spacing in radial direction */
+    double dz_; /** < grid spacing in vertical direction */  
 
 };
 
