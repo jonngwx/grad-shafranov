@@ -10,7 +10,7 @@ public:
 // For first iteration - use Gauss Seidel with blending
   void SOR_1();
 // Iterate
-  void step();
+  void step(const Field &jphi);
 // Calculate over-relaxation parameter
   double omega();
 private:

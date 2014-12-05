@@ -6,7 +6,7 @@
 class GaussSeidel : public EllipticSolver {
 public:
   GaussSeidel(const Grid &GridS, double epsilon);
-  void step(const Field &Psi, const Field &Psi_next);
+  void step(const Field &jphi);
   ~GaussSeidel();
 private:
   // Coefficient arrays

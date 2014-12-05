@@ -34,16 +34,16 @@ int main(int argc, char *argv[]){
         psib->CalcB(*jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
         
-        solver->init(*psi);
+        solver->init(psi);
         for (int n = 0; n < maxIterN, ++n) {
             if (n != 0) calc_jphi(*grid, *jphi, *psi, *p, *g);
-            psi = solver->step();
+            psi = solver->step(*jphi);
             if (solver->norm() < solver->epsilon()) break;
         }
     }
 
     // output stuff
-
+    
     grad_output.write_output("whatever");
 
     delete grad_output;
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
     delete solver;
 }
 
-int calc_jphi(Grid *grid, Field *jphi, Field *psi, RHSfunc *p, RHSfunc *g){
+int calc_jphi(const Grid &grid, const Field &jphi, const Field &psi, const RHSfunc &p, const RHSfunc &g){
 
   //eventually this'll update the jphi field
 
