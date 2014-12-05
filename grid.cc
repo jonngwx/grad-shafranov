@@ -14,11 +14,13 @@ Grid::~Grid(){
 }
 
 // Given r returns i coordinate of containing grid cell
-int Grid::celli(double r) {
+// returned as double so user can get position in cell
+double Grid::celli(double r) {
     return (int) (r - R0)*(1.0/dr);
 }
 
 // Given z returns j coordinate of containing grid cell
-int Grid::cellj(double z) {
+// returned as double so user can get position in cell
+double Grid::cellj(double z) {
     return (int) (z - z0)*(1.0/dz);
 }
