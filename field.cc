@@ -1,17 +1,17 @@
 #include "field.h"
 
-Field::Field(int nr, int nz) : nr(nr), nz(nz) {
-	f = new double*[nr];
-	for (int i = 0; i < nr; ++i){
-		f[i] = new double[nz]();
+Field::Field(int nr, int nz) : nr_(nr), nz_(nz) {
+	f_ = new double*[nr_];
+	for (int i = 0; i < nr_; ++i){
+		f_[i] = new double[nz_]();
 	}
 }
 
 Field::~Field(){
-	for (int i = 0; i < nr; ++i){
-		delete [] f[i];
+	for (int i = 0; i < nr_; ++i){
+		delete [] f_[i];
 	}
-	delete [] f;
+	delete [] f_;
 }
 
 
