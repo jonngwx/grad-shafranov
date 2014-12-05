@@ -20,7 +20,6 @@ void Grad_Output_Txt::write_output(const char* filename){
 	const int nr = grid->nr;
     const int nz = grid->nz;
 	// write the output to a text file
-
 	for (int i = 0; i < nr; i++){
 		fprintf(file,"%15.8f ", grid->R[i]);
 	}

@@ -15,12 +15,12 @@
  */
 void Grad_Output::parse_outputs(const char *out){
     int len = strlen(out);
-    char *outputs;
+    char outputs[len];
     strcpy(outputs,out);
     printf("%s",outputs);
     char *tok = NULL;
     tok = strtok(outputs, ",");
-	while (tok){
+    while (tok){
         printf("output is %s\n", tok);
         tok = strtok(NULL,",");
     }
