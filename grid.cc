@@ -14,13 +14,11 @@ Grid::~Grid(){
 }
 
 // Given r returns i coordinate of containing grid cell
-int Grid::celli(double r, const double *a) {
-    *a = (r - R0)*(1.0/dr);
-    return (int) (*a);
+int Grid::celli(double r) {
+    return (int) (r - R0)*(1.0/dr);
 }
 
 // Given z returns j coordinate of containing grid cell
-int Grid::cellj(double z, const double *b) {
-    *b = (z - z0)*(1.0/dz);
-    return (int) (*b);
+int Grid::cellj(double z) {
+    return (int) (z - z0)*(1.0/dz);
 }
