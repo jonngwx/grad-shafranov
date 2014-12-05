@@ -27,14 +27,16 @@ int main(int argc, char *argv[]){
 
     /** determine which output type */
     Grad_Output grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+
     // solve stuff
     for (int m = 0; m < maxIterM, ++m){
-        psib->CalcB(psi); // PETER this should come after as the initial guess already has a self consistent boundary?
+        calc_jphi(*grid, *jphi, *psi, *p, *g);
+        psib->CalcB(*jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
         
         solver->init(*psi);
         for (int n = 0; n < maxIterN, ++n) {
-            calc_jphi(*grid, *jphi, *psi, *p, *g);
+            if (n != 0) calc_jphi(*grid, *jphi, *psi, *p, *g);
             psi = solver->step();
             if (solver->norm() < solver->epsilon()) break;
         }
