@@ -2,12 +2,12 @@
 #include "util.h"
 
 Grid::Grid(double R0, double Rend, double z0, double zend, int nr, int nz)
-   : nr_(R0),
-     nz_(Rend) {
+   : nr_(nr),
+     nz_(nz) {
     
     R_ = new double[nr_]();
     z_ = new double[nz_]();	
-    dr_ = (Rend - R0)/(nr - 1.);
+    dr_ = (Rend - R0)/(nr - 1.0);
     dz_ = (zend - z0)/(nz - 1.0);
     // FIXME make the grid
     linspace(R0,Rend,nr,R_);
