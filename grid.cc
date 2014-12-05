@@ -1,12 +1,12 @@
 #include "grid.h"
 
 Grid::Grid(double R0, double Rend, double z0, double zend, int nr, int nz)
-   : nr_(nr),
-     nz_(nz),
+   : R0_(R0),
+     Rend_(Rend),
      z0_(z0),
      zend_(zend),
-     R0_(R0),
-     Rend_(Rend) {
+     nr_(R0),
+     nz_(Rend) {
     
     R_ = new double[nr_]();
     z_ = new double[nz_]();	
