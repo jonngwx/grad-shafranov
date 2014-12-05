@@ -13,7 +13,7 @@ RHSfunc::~RHSfunc()
 
 double RHSfunc::eval(double var) {
 
-  return 3; //for now, lol 
+  return (3+var); //for now, lol 
 }
 
 double RHSfunc::eval_prime(double var) {
