@@ -5,6 +5,8 @@
 #include "tsv_reader.h"
 #include "elliptic/sor.h"
 
+int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g)
+
 int main(int argc, char *argv[]){
     // read inputs TO BE FILLED IN BY JACOB
     std::string filename = "";
@@ -51,11 +53,16 @@ int main(int argc, char *argv[]){
     delete psi;
     delete psib;
     delete solver;
+    delete jphi;
 }
 
-int calc_jphi(const Grid &grid, const Field &jphi, const Field &psi, const RHSfunc &p, const RHSfunc &g){
+int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g){
 
-  //eventually this'll update the jphi field
+  for (int i = 0; i < grid.nr_; ++i) {
+      for (int j = 0; j < grid.nz_; ++j)  {
+          jphi.f_[i][j] = p.eval(psi.f_[i][j]) + g.eval_prime(psi.f_[i][j]); // not the right formula, but you get the idea
+      }
+  }  
 
   return 0;
 }
