@@ -1,20 +1,13 @@
-CXX = clang++
+CXX = g++
 CXXFLAGS = -g -Wall -std=c++11
-EXAMPLEPROGS = tsv_reader_example coil_data_example pg_data_example
+PROGS = gs_solver
 
 .PHONY: all
-all: $(EXAMPLEPROGS)
+all: $(PROGS)
 
-tsv_reader_example: tsv_reader_example.cc tsv_reader.cc
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-coil_data_example: coil_data_example.cc tsv_reader.cc
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-pg_data_example: pg_data_example.cc tsv_reader.cc
-	$(CXX) $(CXXFLAGS) -o $@ $^
+gs_solver: gs_solver.cc tsv_reader.cc rhs_func.cc grid.cc field.cc slow_boundary.cc grad_output.cc grad_output_txt.cc
+	$(CXX) $(CXXFLAGS) -o $@ $^ -Iinclude
 
 .PHONY: clean
 clean:
 	$(RM) *.o
-	$(RM) $(EXAMPLEPROGS)

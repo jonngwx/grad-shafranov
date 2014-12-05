@@ -1,4 +1,4 @@
-#include "field.h"
+#include "include/field.h"
 
 Field::Field(int nr, int nz) : nr_(nr), nz_(nz) {
 	f_ = new double*[nr_];

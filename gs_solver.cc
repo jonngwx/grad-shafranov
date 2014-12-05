@@ -5,8 +5,9 @@
 #include "include/field.h"
 #include "include/rhs_func.h"
 #include "include/grad_output.h"
+#include "include/grad_output_txt.h"
 #include "include/tsv_reader.h"
-#include "elliptic/sor.h"
+//#include "include/sor.h"
 #include "include/slow_boundary.h"
 
 using namespace std;
@@ -21,9 +22,11 @@ int main(int argc, char *argv[]){
     double Rend = 10.0;
     double z0 = -3.0;
     double zend = 3.0;
-    
-    PGData *pgd = NewPGDataFromFile("pg_data.tsv",1)
-    CoilData *cd = NewCoilDataFromFile("coil_data.tsv",1)
+    int maxIterM = 100;
+    int maxIterN = 100;   
+ 
+    PGData *pgd = NewPGDataFromFile("pg_data.tsv",1);
+    CoilData *cd = NewCoilDataFromFile("coil_data.tsv",1);
     string pgtype = "array";
     
     Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
@@ -40,31 +43,31 @@ int main(int argc, char *argv[]){
     Boundary *psib = new SlowBoundary(*grid, *cd);    
 
     /** determine which output type */
-    Grad_Output grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+    Grad_Output *grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
 
     // solve stuff
-    for (int m = 0; m < maxIterM, ++m){
+    for (int m = 0; m < maxIterM; ++m){
         calc_jphi(*grid, *jphi, *psi, *p, *g);
         psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
         
-        solver->init(psi);
-        for (int n = 0; n < maxIterN, ++n) {
+//        solver->init(psi);
+        for (int n = 0; n < maxIterN; ++n) {
             if (n != 0) calc_jphi(*grid, *jphi, *psi, *p, *g);
-            psi = solver->step(*jphi);
-            if (solver->norm() < solver->epsilon()) break;
+//            psi = solver->step(*jphi);
+//            if (solver->norm() < solver->epsilon()) break;
         }
     }
 
     // output stuff
     
-    grad_output.write_output("whatever");
+    grad_output->write_output("whatever");
 
     delete grad_output;
     delete grid;
     delete psi;
     delete psib;
-    delete solver;
+//    delete solver;
     delete jphi;
 }
 

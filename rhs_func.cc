@@ -1,6 +1,6 @@
-#include "rhs_func.h"
+#include "include/rhs_func.h"
 #include <string>
-#include "tsv_reader.h"
+#include "include/tsv_reader.h"
 using namespace std;
 
 RHSfunc::RHSfunc(string pgtype, PGData *data)

@@ -1,5 +1,5 @@
-#include "grid.h"
-#include "util.h"
+#include "include/grid.h"
+#include "include/util.h"
 
 Grid::Grid(double R0, double Rend, double z0, double zend, int nr, int nz)
    : nr_(nr),
