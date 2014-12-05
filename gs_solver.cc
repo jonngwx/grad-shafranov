@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
 
     // Elliptic solver for inner loop
     EllipticSolver *solver = new SOR(grid, omega_init, epsilon);
-    Boundary *psib = new SlowBoundary(nr,nz, psi->dr, psi->dz, coils);    
+    Boundary *psib = new SlowBoundary(nr,nz, psi->dr_, psi->dz_, coils);    
 
     /** determine which output type */
     Grad_Output grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");

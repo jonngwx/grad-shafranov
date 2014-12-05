@@ -21,11 +21,11 @@ void Grad_Output_Txt::write_output(const char* filename){
     const int nz = grid->nz;
 	// write the output to a text file
 	for (int i = 0; i < nr; i++){
-		fprintf(file,"%15.8f ", grid->R[i]);
+		fprintf(file,"%15.8f ", grid->R_[i]);
 	}
     fprintf(file,"\n");
     for (int i = 0; i < nz; i++){
-		fprintf(file,"%15.8f ", grid->z[i]);
+		fprintf(file,"%15.8f ", grid->z_[i]);
 	}
     fprintf(file,"\n");
     for (int i = 0; i < nr; i++){

@@ -7,12 +7,8 @@ public:
     Grid(double R0, double Rend, double z0, double zend, int nr, int nz);
     ~Grid();
     double celli(double r);
-    double cellj(double z);
+    double cellj(double z_);
 	
-    const double R0_;
-    const double Rend_;
-    const double z0_;
-    const double zend_;
     const int nr_; /** < number of points in R direction */
     const int nz_; /** < number of points in z direction */
     double *R_; /** < pointer to array of radial grid points */
