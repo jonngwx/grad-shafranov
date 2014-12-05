@@ -1,7 +1,9 @@
 #ifndef ELLIPTIC_SOLVER_H
 #define ELLIPTIC_SOLVER_H
 
-#include elliptic-solver.h
+#include "elliptic-solver.h"
+#include "field.h"
+#include "grid.h"
 
 class EllipticSolver {
 public:

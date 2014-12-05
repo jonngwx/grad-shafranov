@@ -1,4 +1,7 @@
-#include gauss-seidel.h
+#include "gauss-seidel.h"
+#include "field.h"
+#include "grid.h"
+
 
 GaussSeidel::GaussSeidel(const Grid &GridS, double epsilon) :
   nr_(GridS.nr),

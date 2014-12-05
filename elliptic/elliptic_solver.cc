@@ -1,5 +1,7 @@
-#include elliptic-solver.h
+#include "elliptic-solver.h"
 #include <math.h>
+#include "field.h"
+
 
 // Initialize solver with current Psi
 void init(const Field &Psi) {

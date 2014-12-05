@@ -1,7 +1,9 @@
 #ifndef SOR_H
 #define SOR_H
 
-#include elliptic-solver.h
+#include "elliptic-solver.h"
+#include "field.h"
+#include "grid.h"
 
 class SOR: public EllipticSolver {
 public:

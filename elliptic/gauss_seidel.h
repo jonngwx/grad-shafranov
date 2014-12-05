@@ -1,7 +1,9 @@
 #ifndef GAUSS_SEIDEL_H
 #define GAUSS_SEIDEL_H
 
-#include elliptic-solver.h
+#include "elliptic-solver.h"
+#include "field.h"
+#include "grid.h"
 
 class GaussSeidel : public EllipticSolver {
 public:

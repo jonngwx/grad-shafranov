@@ -1,5 +1,7 @@
 #ifndef CRITICAL_H
 #define CRITICAL_H
+#include "field.h"
+#include "grid.h"
 
 class Critical {
 public:

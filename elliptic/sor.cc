@@ -1,4 +1,6 @@
-#include sor.h
+#include "sor.h"
+#include "grid.h"
+#include "field.h"
 #include <math.h>
 
 SOR::SOR(const Grid &GridS, double omega_init, double epsilon) :
