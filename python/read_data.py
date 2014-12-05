@@ -1,9 +1,35 @@
 import numpy as np
-import h5py
+import io
+import field
+#import h5py
 
 def read_hdf5(filename):
     return 0
 
 
 def read_text(filename):
-    return 0
+    """ format assumed to be R\n,z\n, array\n, array\n"""
+    f = io.open(filename,'r')
+    s = f.readline()
+    R = np.fromstring(s, sep=' ')
+    s = f.readline()
+    z = np.fromstring(s, sep=' ')
+    x = R.shape[0]
+    y = z.shape[0]
+    fields = field.Field(x,y)
+    fields.R = R
+    fields.z = z
+ #   print x
+ #   print y
+    for i in xrange(x):
+        s = f.readline()
+        fields.psi[i,::] = np.fromstring(s, sep = ' ')
+    for i in xrange(x):
+        s = f.readline()
+        fields.p[i,::] = np.fromstring(s, sep = ' ')
+    f.close()
+#    print R
+#    print z
+#    print psi
+#    print p
+    return fields
