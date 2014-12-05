@@ -25,13 +25,13 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("pgtype", po::value<std::string>(), "p and p specification type")
       ("g-filename", po::value<std::string>(), "g file name")
       ("p-filename", po::value<std::string>(), "p file name")
-      ("max-iter-n,N", po::value<int>()->default_value(10), 
+      ("max-iter-N,N", po::value<int>()->default_value(10), 
             "maximum inner iterations")
-      ("error-tol-N,eN", po::value<double>()->default_value(1e-6),
+      ("error-tol-N,eN", po::value<double>()->default_value(1e-5),
             "error tolerance inner loop")
-      ("max-iter-m,M", po::value<int>()->default_value(10),
+      ("max-iter-M,M", po::value<int>()->default_value(10),
             "maximum outer iterations")
-      ("error-tol-M,eM", po::value<double>()->default_value(1e-6),
+      ("error-tol-M,eM", po::value<double>()->default_value(1e-5),
             "error tolerance outer loop")
       ("output-type", po::value<std::string>()->default_value("tsv"), "tsv or hdf5")
       ("output name", po::value<std::string>()->default_value("cougar.out"), "prefix for output filename")

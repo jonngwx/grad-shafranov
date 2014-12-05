@@ -29,6 +29,11 @@ int main(int argc, char *argv[]){
     std::cout << visible_options << "\n";
     return 0;
   }
+  
+  if (vm.count("version")) {
+      std::cout << "Grad Shafranov solver, version alpha\n";
+      return 0;
+  }
 
     // JACOB, I'm going to manually set some constants right now so we can test everything else  :)
     int nr = 11;
@@ -37,8 +42,8 @@ int main(int argc, char *argv[]){
     double Rend = 10.0;
     double z0 = -3.0;
     double zend = 3.0;
-    int maxIterM = 100;
-    int maxIterN = 100;   
+    int maxIterM = vm["max-iter-M"].as<int>();
+    int maxIterN = 10;
  
     PGData *pgd = NewPGDataFromFile("pg_data.tsv",1);
     CoilData *cd = NewCoilDataFromFile("coil_data.tsv",1);
