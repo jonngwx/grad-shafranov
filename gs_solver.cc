@@ -10,6 +10,8 @@
 //#include "include/sor.h"
 #include "include/slow_boundary.h"
 
+#include "include/create_options.h"
+
 using namespace std;
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g);

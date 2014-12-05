@@ -22,10 +22,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("coil-data-name,c", 
            po::value< std::string>()->default_value("coil_data.tsv"), 
            "coil data file name")
-      ("magnetic-data-name,m",
-           po::value< std::string>()->default_value("magnetic_data.tsv"),
-           "magnetic data file name")
-      ("pgtype", po::value<std::string>, "p and p specification type")
+      ("pgtype", po::value<std::string>(), "p and p specification type")
       ("g-filename", po::value<std::string>(), "g file name")
       ("p-filename", po::value<std::string>(), "p file name")
       ("max-iter-n,N", po::value<int>()->default_value(10), 
