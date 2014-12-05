@@ -8,7 +8,7 @@
 #include "include/grad_output_txt.h"
 #include "include/sor.h"
 #include "include/slow_boundary.h"
-
+#include "include/tsv_reader.h"
 #include "include/create_options.h"
 
 using namespace std;
