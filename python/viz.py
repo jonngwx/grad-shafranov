@@ -5,10 +5,17 @@ import sys
 import read_data
 
 def plot(filename,format):
-    if format == "txt":
-        F = read_data.read_text(filename)
-    else:
-        1+1
+    try:
+        if format == "txt":
+            F = read_data.read_text(filename)
+        elif format == "h5":
+            F = read_data.read_hdf5(filename)
+        else:
+            print "Invalid format\n"
+            return None
+    except IOError:
+        print "Invalid filename\n"
+        return None
     plt.figure(1)
     plt.subplot(2,1,1)
     plt.pcolormesh(F.R,F.z,np.transpose(F.psi))
