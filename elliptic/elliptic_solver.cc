@@ -13,8 +13,8 @@ double EllipticSolver::norm_max(const Field &Psi, const Field &Psi_prev) {
   double max = 0;
   for (int i = 0; i < nr_; ++i) {
     for (int j = 0 ;j < nz_; ++j) {
-      if (abs(Psi.f[i][j] - Psi_prev.f[i][j]) > max)
-        max = abs(Psi.f[i][j] - Psi_prev.f[i][j]);
+      if (abs(Psi.f_[i][j] - Psi_prev.f_[i][j]) > max)
+        max = abs(Psi.f_[i][j] - Psi_prev.f_[i][j]);
     }
   }
   return max;
@@ -31,7 +31,7 @@ void EllipticSolver::iter() {
   
   for (int i = 0; i < nr_; ++i) {
     for (int j = 0 ;j < nz_; ++j) {
-      Psi_.f[i][j] = alpha*Psi_.f[i][j] + (1-alpha)*Psi_prev.f[i][j];
+      Psi_.f_[i][j] = alpha*Psi_.f_[i][j] + (1-alpha)*Psif_prev.f[i][j];
     }
   }
 }
@@ -39,12 +39,12 @@ void EllipticSolver::iter() {
 // Enforce boundary condition
 void EllipticSolver::boundary(const Field &Psi, const Field &Psi_next) {
   for (int i = 0; i < nr_; ++i) {
-    Psi_next.f[i][0] = Psi.f[i][0];
-    Psi_next.f[i][nz-1] = Psi.f[i][nz-1];
+    Psi_next.f_[i][0] = Psi.f_[i][0];
+    Psi_next.f_[i][nz-1] = Psi.f_[i][nz-1];
   }
   for (int i = 0; i < nz_; ++i) {
-    Psi_next.f[0][i] = Psi.f[i][0];
-    Psi_next.f[nr-1][i] = Psi.f[nr-1][0];
+    Psi_next.f_[0][i] = Psi.f_[i][0];
+    Psi_next.f_[nr-1][i] = Psi.f_[nr-1][0];
   }
 }
 

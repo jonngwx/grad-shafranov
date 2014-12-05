@@ -4,8 +4,8 @@
 #include <math.h>
 
 SOR::SOR(const Grid &GridS, double omega_init, double epsilon) :
-  nr_(GridS.nr),
-  nz_(GridS.nz),
+  nr_(GridS.nr_),
+  nz_(GridS.nz_),
   omega_init_(omega_init),
   max_iter_(max_iter),
   epsilon_(epsilon),
@@ -56,7 +56,7 @@ void SOR_1() {
   // Iterate over non-boundary region
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
-      Psi_.f[i][j] = a[i][j]*Psi_prev_.f[i+1][j] + b[i][j]*Psi_[i-1][j] + c[i][j]*Psi_.f[i][j+1] + d[i][j]*Psi_[i][j-1] - e[i][j]*J.f[i][j];
+      Psi_.f_[i][j] = a[i][j]*Psi_prev_.f_[i+1][j] + b[i][j]*Psi_[i-1][j] + c[i][j]*Psi_.f_[i][j+1] + d[i][j]*Psi_[i][j-1] - e[i][j]*J.f_[i][j];
     }
   }
   iter();
@@ -67,8 +67,8 @@ void step(const Field &jphi) {
   // Save Psi_ to Psi_prev and Psi_prev to Psi_prev_prev
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
-      Psi_prev_prev_.f[i][j] = Psi_prev_.f[i][j];
-      Psi_prev_.f[i][j] = Psi_.f[i][j];
+      Psi_prev_prev_.f_[i][j] = Psi_prev_.f_[i][j];
+      Psi_prev_.f_[i][j] = Psi_.f_[i][j];
     }
   }
   // Enforce boundary condition on Psi_
@@ -78,7 +78,7 @@ void step(const Field &jphi) {
   // Iterate over non-boundary region
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
-      Psi_.f[i][j] = omega*(a[i][j]*Psi_prev_.f[i+1][j] + b[i][j]*Psi_.f[i-1][j] + c[i][j]*Psi_prev_.f[i][j+1] + d[i][j]*Psi_.f[i][j-1] + e[i][j]*Psi_prev_[i][j] + f[i][j]*jphi.f[i][j]);
+      Psi_.f_[i][j] = omega*(a[i][j]*Psi_prev_.f_[i+1][j] + b[i][j]*Psi_.f_[i-1][j] + c[i][j]*Psi_prev_.f_[i][j+1] + d[i][j]*Psi_.f_[i][j-1] + e[i][j]*Psi_prev_[i][j] + f_[i][j]*jphi.f_[i][j]);
     }
   }
 }

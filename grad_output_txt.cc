@@ -17,8 +17,8 @@ Grad_Output_Txt::~Grad_Output_Txt(){
 void Grad_Output_Txt::write_output(const char* filename){
 	FILE * file;
 	file = fopen(filename, "w");
-	const int nr = grid->nr;
-    const int nz = grid->nz;
+	const int nr = grid->nr_;
+    const int nz = grid->nz_;
 	// write the output to a text file
 	for (int i = 0; i < nr; i++){
 		fprintf(file,"%15.8f ", grid->R_[i]);
@@ -30,14 +30,14 @@ void Grad_Output_Txt::write_output(const char* filename){
     fprintf(file,"\n");
     for (int i = 0; i < nr; i++){
         for (int j = 0; j < nz; j++){
-            fprintf(file,"%15.8f ", f->f[i][j]);
+            fprintf(file,"%15.8f ", f->f_[i][j]);
         }
         fprintf(file,"\n");
     }
     
     for (int i = 0; i < nr; i++){
         for (int j = 0; j < nz; j++){
-            fprintf(file,"%15.8f ", g->eval(f->f[i][j]));
+            fprintf(file,"%15.8f ", g->eval(f->f_[i][j]));
         }
         fprintf(file,"\n");
     }

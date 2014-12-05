@@ -8,16 +8,16 @@ Critical::Critical(const Grid &GridS, const Field &Psi, int max_iter, double eps
   Grid_(GridS),
   max_iter(max_iter),
   epsilon(epsilon) {
-    alpha = new double[Grid_.nr];
-    beta = new double[Grid_.nr];
-    for(int i = 0; i < Grid_.nr; ++i) {
-      alpha[i] = new double[Grid_.nz];
-      beta[i] = new double[Grid_.nz];
+    alpha = new double[Grid_.nr_];
+    beta = new double[Grid_.nr_];
+    for(int i = 0; i < Grid_.nr_; ++i) {
+      alpha[i] = new double[Grid_.nz_];
+      beta[i] = new double[Grid_.nz_];
     }
 }
 
 void Critical::~Critical() {
-  for (int i = 0; i < Grid_.nr; ++i) {
+  for (int i = 0; i < Grid_.nr_; ++i) {
     delete [] alpha[i];
     delete [] beta[i];
   }
@@ -34,7 +34,7 @@ void Critical::interpolate() {
   double c1, c2, c3, c4, c5, c6, , c7, c8, d1, d2, d3, d4, d5, w_r1, w_r2, w_z1, w_z2, e1, e2, e3, e4;
   double **r = Grid_.r;
   double **z = Grid_.z;
-  double **Psi = Psi_.f;
+  double **Psi = Psi_.f_;
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
       // C[i-1][j]
