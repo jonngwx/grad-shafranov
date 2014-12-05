@@ -4,6 +4,7 @@
 #include "grad_output.h"
 #include "tsv_reader.h"
 #include "elliptic/sor.h"
+#include "slow_boundary.h"
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g);
 
@@ -25,7 +26,7 @@ int main(int argc, char *argv[]){
 
     // Elliptic solver for inner loop
     EllipticSolver *solver = new SOR(grid, omega_init, epsilon);
-    Boundary *psib = new SlowBoundary(nr,nz, psi->dr_, psi->dz_, coils);    
+    Boundary *psib = new SlowBoundary(*grid, *cd);    
 
     /** determine which output type */
     Grad_Output grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
@@ -33,7 +34,7 @@ int main(int argc, char *argv[]){
     // solve stuff
     for (int m = 0; m < maxIterM, ++m){
         calc_jphi(*grid, *jphi, *psi, *p, *g);
-        psib->CalcB(*jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
+        psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
         
         solver->init(psi);
