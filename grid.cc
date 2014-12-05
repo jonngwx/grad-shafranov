@@ -1,18 +1,17 @@
 #include "grid.h"
+#include "util.h"
 
 Grid::Grid(double R0, double Rend, double z0, double zend, int nr, int nz)
-   : R0_(R0),
-     Rend_(Rend),
-     z0_(z0),
-     zend_(zend),
-     nr_(R0),
+   : nr_(R0),
      nz_(Rend) {
     
     R_ = new double[nr_]();
     z_ = new double[nz_]();	
-    dr_ = (Rend_ - R0_)/(nr_ - 1);
-    dz_ = (zend_ - z0_)/(nz_ - 1);
+    dr_ = (Rend - R0)/(nr - 1.);
+    dz_ = (zend - z0)/(nz - 1.0);
     // FIXME make the grid
+    linspace(R0,Rend,nr,R_);
+    linspace(z0,zend,nz,z_);
 }
 
 Grid::~Grid(){
@@ -23,11 +22,11 @@ Grid::~Grid(){
 // Given r returns i coordinate of containing grid cell
 // returned as double so user can get position in cell
 double Grid::celli(double r) {
-    return (r - R0_)*(1.0/dr_);
+    return (r - R_[0])*(1.0/dr_);
 }
 
 // Given z returns j coordinate of containing grid cell
 // returned as double so user can get position in cell
 double Grid::cellj(double z) {
-    return (z - z0_)*(1.0/dz_);
+    return (z - z_[0])*(1.0/dz_);
 }
