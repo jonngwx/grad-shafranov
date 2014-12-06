@@ -111,7 +111,8 @@ int main(int argc, char *argv[]){
     delete psib;
 //    delete solver;
     delete jphi;
-    DeletePGData(pgd);
+    DeletePGData(pd);
+    DeletePGData(gd);
     DeleteCoilData(cd);
 }
 
