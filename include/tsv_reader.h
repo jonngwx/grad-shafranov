@@ -3,15 +3,15 @@
 
 #include <string>
 
-struct TsvData {
+struct Table {
   double ** data;
   int num_columns;
   int num_entries;
 };
 
-typedef struct TsvData TsvData;
+typedef struct Table Table;
 
-struct CoilData : TsvData {
+struct CoilData : Table {
   double * r_locs;
   double * z_locs;
   double * currents;
@@ -19,7 +19,7 @@ struct CoilData : TsvData {
 
 typedef struct CoilData CoilData;
 
-struct PGData : TsvData {
+struct PGData : Table {
   double * psis;
   double * values;
 };
@@ -28,9 +28,9 @@ typedef struct PGData PGData;
 
 
 
-TsvData * NewTsvDataFromFile(const std::string tsv_file_name);
-TsvData * NewTsvDataFromFile(const std::string tsv_file_name, const int header_lines);
-void DeleteTsvData(TsvData * td);
+Table * NewTableFromFile(const std::string tsv_file_name);
+Table * NewTableFromFile(const std::string tsv_file_name, const int header_lines);
+void DeleteTable(Table * td);
 
 CoilData * NewCoilDataFromFile(const std::string tsv_file_name);
 CoilData * NewCoilDataFromFile(const std::string tsv_file_name, const int header_lines);

@@ -8,11 +8,11 @@
 int main (int argc, char * argv[]) {
 
   std::string file_name(argv[1]);
-  TsvData * td = NewTsvDataFromFile(file_name, 1);
+  Table * td = NewTableFromFile(file_name, 1);
 
   for (int i = 0; i < td->num_entries; ++i) {
     printf("R is %f and Z is %f and value is %f\n", td->data[0][i], td->data[1][i], td->data[2][i]);
   }
-  DeleteTsvData(td);  
+  DeleteTable(td);  
   return 0;
 }
