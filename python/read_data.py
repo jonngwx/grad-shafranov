@@ -24,9 +24,11 @@ def read_text(filename):
     for i in xrange(x):
         s = f.readline()
         fields.psi[i,::] = np.fromstring(s, sep = ' ')
+    fields.psi = np.transpose(fields.psi)
     for i in xrange(x):
         s = f.readline()
         fields.p[i,::] = np.fromstring(s, sep = ' ')
+    fields.p = np.transpose(fields.p)
     f.close()
 #    print R
 #    print z

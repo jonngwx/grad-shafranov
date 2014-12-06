@@ -13,12 +13,12 @@
 
 #include "include/tsv_reader.h"
 
-TsvData * NewTsvDataFromFile(const std::string tsv_file_name) {
+Table * NewTableFromFile(const std::string tsv_file_name) {
   printf("Not skipping any header lines\n");
-  return NewTsvDataFromFile(tsv_file_name, 0);
+  return NewTableFromFile(tsv_file_name, 0);
 }
 
-TsvData * NewTsvDataFromFile(const std::string tsv_file_name, const int header_lines) {
+Table * NewTableFromFile(const std::string tsv_file_name, const int header_lines) {
 
   printf("Will try reading from: %s\n", tsv_file_name.c_str());
 
@@ -61,7 +61,7 @@ TsvData * NewTsvDataFromFile(const std::string tsv_file_name, const int header_l
   int num_tsv_lines = tsv_table.size();
   int num_cols = doubleVector.size(); 
   
-  TsvData * td = new TsvData();
+  Table * td = new Table();
   assert (td != NULL);
   td->num_entries = num_tsv_lines;
   td->num_columns = num_cols;
@@ -81,7 +81,7 @@ TsvData * NewTsvDataFromFile(const std::string tsv_file_name, const int header_l
   return td;
 }
 
-void DeleteTsvData(TsvData * td){
+void DeleteTable(Table * td){
   assert(td != NULL);
   printf("Deleting a tsv struct\n");
   for(int i = 0; i < td->num_columns; ++i){
@@ -99,7 +99,7 @@ CoilData *  NewCoilDataFromFile(const std::string tsv_file_name){
 }
 
 CoilData * NewCoilDataFromFile(const std::string tsv_file_name, const int header_lines){
-  TsvData * td = NewTsvDataFromFile(tsv_file_name, header_lines);
+  Table * td = NewTableFromFile(tsv_file_name, header_lines);
   assert(td->num_columns==3);
   CoilData * cd = new CoilData();
   cd->data=td->data;
@@ -113,7 +113,7 @@ CoilData * NewCoilDataFromFile(const std::string tsv_file_name, const int header
 }
 
 void DeleteCoilData(CoilData * cd){
-  DeleteTsvData(cd);
+  DeleteTable(cd);
 }
 
 //--------------------------------------------------------
@@ -124,7 +124,7 @@ PGData *  NewPGDataFromFile(const std::string tsv_file_name){
 }
 
 PGData * NewPGDataFromFile(const std::string tsv_file_name, const int header_lines){
-  TsvData * td = NewTsvDataFromFile(tsv_file_name, header_lines);
+  Table * td = NewTableFromFile(tsv_file_name, header_lines);
   assert(td->num_columns==2);
   
   PGData * pgd = new PGData();
@@ -138,5 +138,5 @@ PGData * NewPGDataFromFile(const std::string tsv_file_name, const int header_lin
 }
 
 void DeletePGData(PGData * pgd){
-  DeleteTsvData(pgd);
+  DeleteTable(pgd);
 }

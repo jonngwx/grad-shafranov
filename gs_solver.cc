@@ -105,17 +105,23 @@ int main(int argc, char *argv[]){
     }
 
     // output stuff
-    
-    grad_output->write_output(vm["output-name"].as<string>().c_str());
+    std::string full_output_name = vm["output-name"].as<string>()+".txt";
+    grad_output->write_output(full_output_name.c_str());
 
     delete grad_output;
     delete grid;
     delete psi;
     delete psib;
+<<<<<<< HEAD
     delete solver;
     delete psi;
     delete psi_prev;
     delete psi_prev_prev;
+=======
+    delete psi_prev;
+    delete psi_next;
+//    delete solver;
+>>>>>>> e9624d6729be3b8289e58d2a45853af0623e0310
     delete jphi;
     DeletePGData(pd);
     DeletePGData(gd);
@@ -123,10 +129,10 @@ int main(int argc, char *argv[]){
 }
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g){
-
+  const double mu0 = 0.0000012566370614; // in SI units
   for (int i = 0; i < grid.nr_; ++i) {
       for (int j = 0; j < grid.nz_; ++j)  {
-          jphi.f_[i][j] = p.eval(psi.f_[i][j]) + g.eval_prime(psi.f_[i][j]); // not the right formula, but you get the idea
+          jphi.f_[i][j] = -grid.R_[i]*p.eval(psi.f_[i][j]) - g.eval(psi.f_[i][j])*g.eval_prime(psi.f_[i][j]/(mu0*grid.R_[i]));
       }
   }  
 
