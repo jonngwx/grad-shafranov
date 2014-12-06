@@ -19,7 +19,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
   // config file
   po::options_description config("Configuration");
   config.add_options()
-      ("coil-data-name,c", 
+      ("coil-data-name,C", 
            po::value< std::string>()->default_value("coil_data.tsv"), 
            "coil data file name")
       ("pgtype", po::value<std::string>(), "p and g specification type")
