@@ -35,7 +35,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
             "maximum inner iterations")
       ("error-tol-N", po::value<double>()->default_value(1.0e-4),
             "error tolerance inner loop")
-      ("max-iter-M,M", po::value<int>()->default_value(10),
+      ("max-iter-M,M", po::value<int>()->default_value(0),
             "maximum outer iterations")
       ("error-tol-M", po::value<double>()->default_value(1.0e-4),
             "error tolerance outer loop")

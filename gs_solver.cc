@@ -90,12 +90,12 @@ int main(int argc, char *argv[]){
   /** determine which output type */
   Grad_Output *grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
 
-    // solve stuff
-    solver->coeff();
-    for (int m = 0; m < maxIterM; ++m){
-        calc_jphi(*grid, *jphi, *psi, *p, *g);
-        psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
-        // test convergence
+  // solve stuff
+  solver->coeff();
+  for (int m = 0; m < maxIterM; ++m){
+    calc_jphi(*grid, *jphi, *psi, *p, *g);
+    psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
+    // test convergence
         
         // Iterate once through elliptic solver
         for (int n = 0; n < 1; ++n) {
@@ -106,7 +106,7 @@ int main(int argc, char *argv[]){
             }
             if (solver->norm() < solver->epsilon()) break;
         }
-    }
+  }
 
   // output stuff
   std::string full_output_name = vm["output-name"].as<string>()+".txt";
