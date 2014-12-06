@@ -97,10 +97,13 @@ int main(int argc, char *argv[]){
         psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
         
-        for (int n = 0; n < maxIterN; ++n) {
+        // Iterate once through elliptic solver
+        for (int n = 0; n < 1; ++n) {
             if (n == 0) solver->SOR_1(*jphi);
-            calc_jphi(*grid, *jphi, *psi, *p, *g);
-            solver->step(*jphi);
+            else {
+              solver->step(*jphi);
+              calc_jphi(*grid, *jphi, *psi, *p, *g);
+            }
             if (solver->norm() < solver->epsilon()) break;
         }
     }
