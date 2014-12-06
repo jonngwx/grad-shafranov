@@ -24,7 +24,7 @@ def plot(filename,format):
     plt.ylabel('z')
     plt.colorbar()
     plt.subplot(2,1,2)
-    plt.pcolormesh(F.R,F.z,np.F.p)
+    plt.pcolormesh(F.R,F.z,F.p)
     plt.title('p')
     plt.xlabel('$R$')
     plt.ylabel('z')

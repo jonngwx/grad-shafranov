@@ -6,6 +6,7 @@
 #include "include/rhs_func.h"
 #include "include/grad_output.h"
 #include "include/grad_output_txt.h"
+//#include "grad_output_hdf.h"
 #include "include/sor.h"
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
@@ -115,6 +116,7 @@ int main(int argc, char *argv[]){
     delete psi_prev;
     delete psi_prev_prev;
     delete jphi;
+    
     DeletePGData(pd);
     DeletePGData(gd);
     DeleteCoilData(cd);
