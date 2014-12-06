@@ -89,4 +89,3 @@ double omega() {
   return 2/(1 + sqrt(1 - delta));
 }
 
-#endif

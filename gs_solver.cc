@@ -6,8 +6,8 @@
 #include "include/rhs_func.h"
 #include "include/grad_output.h"
 #include "include/grad_output_txt.h"
-##include "grad_output_hdf.h"
-//#include "include/sor.h"
+//#include "grad_output_hdf.h"
+#include "include/sor.h"
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
 #include "include/create_options.h"
@@ -67,8 +67,8 @@ int main(int argc, char *argv[]){
 
     Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
     Field *psi = new Field(nr,nz);
-    Field *psi_prev = new Field(nr,nz); 
-    Field *psi_next = new Field(nr,nz);
+    Field *psi_prev = new Field(nr,nz);
+    Field *psi_prev_prev = new Field(nr,nz);
     Field *jphi = new Field(nr,nz);
     
     RHSfunc *p = new RHSfunc(pgtype, pd);
@@ -82,8 +82,10 @@ int main(int argc, char *argv[]){
 
 
     // Elliptic solver for inner loop
-//    EllipticSolver *solver = new SOR(grid, omega_init, epsilon);
-    Boundary *psib = new SlowBoundary(*grid, *cd);    
+    double omega_init = 0.5;
+    double epsilon = 0.1;
+    EllipticSolver *solver = new SOR(*grid, *psi, *psi_prev, *psi_prev_prev,  omega_init, epsilon);
+    Boundary *psib = new SlowBoundary(*grid, *cd);
 
     /** determine which output type */
     Grad_Output *grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
@@ -94,11 +96,12 @@ int main(int argc, char *argv[]){
         psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
         
-//        solver->init(psi);
-        for (int n = 0; n < maxIterN; ++n) {
-            if (n != 0) calc_jphi(*grid, *jphi, *psi, *p, *g);
-//            psi = solver->step(*jphi);
-//            if (solver->norm() < solver->epsilon()) break;
+        solver->coeff();
+        solver->SOR_1(*jphi);
+        for (int n = 1; n < maxIterN; ++n) {
+            calc_jphi(*grid, *jphi, *psi, *p, *g);
+            solver->step(*jphi);
+            if (solver->norm() < solver->epsilon()) break;
         }
     }
 
@@ -110,10 +113,11 @@ int main(int argc, char *argv[]){
     delete grid;
     delete psi;
     delete psib;
+    delete solver;
     delete psi_prev;
-    delete psi_next;
-//    delete solver;
+    delete psi_prev_prev;
     delete jphi;
+    
     DeletePGData(pd);
     DeletePGData(gd);
     DeleteCoilData(cd);
