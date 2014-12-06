@@ -64,62 +64,62 @@ int main(int argc, char *argv[]){
   PGData *gd = NewPGDataFromFile(vm["p-filename"].as<string>(),1);
   PGData *pd = NewPGDataFromFile(vm["g-filename"].as<string>(),1);
   CoilData *cd = NewCoilDataFromFile(vm["coil-data-name"].as<string>(),1);
-
-    Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
-    Field *psi = new Field(nr,nz);
-    Field *psi_prev = new Field(nr,nz);
-    Field *psi_prev_prev = new Field(nr,nz);
-    Field *jphi = new Field(nr,nz);
+  
+  Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
+  Field *psi = new Field(nr,nz);
+  Field *psi_prev = new Field(nr,nz);
+  Field *psi_prev_prev = new Field(nr,nz);
+  Field *jphi = new Field(nr,nz);
     
-    RHSfunc *p = new RHSfunc(pgtype, pd);
-    RHSfunc *g = new RHSfunc(pgtype, gd);
+  RHSfunc *p = new RHSfunc(pgtype, pd);
+  RHSfunc *g = new RHSfunc(pgtype, gd);
 
-    for (int i = 0; i < grid->nr_; ++i) {
-      for (int j = 0; j < grid->nz_; ++j) {
-        psi->f_[i][j] = i*j;
-      }
+  for (int i = 0; i < grid->nr_; ++i) {
+    for (int j = 0; j < grid->nz_; ++j) {
+      psi->f_[i][j] = i*j;
     }
+  }
 
 
-    // Elliptic solver for inner loop
-    double omega_init = 0.5;
-    double epsilon = 0.1;
-    EllipticSolver *solver = new SOR(*grid, *psi, *psi_prev, *psi_prev_prev,  omega_init, epsilon);
-    Boundary *psib = new SlowBoundary(*grid, *cd);
+  // Elliptic solver for inner loop
+  double omega_init = 0.5;
+  double epsilon = 0.1;
+  EllipticSolver *solver = new SOR(*grid, *psi, *psi_prev, *psi_prev_prev,  omega_init, epsilon);
+  Boundary *psib = new SlowBoundary(*grid, *cd);
 
-    /** determine which output type */
-    Grad_Output *grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+  /** determine which output type */
+  Grad_Output *grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
 
-    // solve stuff
-    for (int m = 0; m < maxIterM; ++m){
-        calc_jphi(*grid, *jphi, *psi, *p, *g);
-        psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
-        // test convergence
+  // solve stuff
+  for (int m = 0; m < maxIterM; ++m){
+      calc_jphi(*grid, *jphi, *psi, *p, *g);
+      psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
+      // test convergence
         
-        solver->coeff();
-        solver->SOR_1(*jphi);
-        for (int n = 1; n < maxIterN; ++n) {
-            calc_jphi(*grid, *jphi, *psi, *p, *g);
-            solver->step(*jphi);
-            if (solver->norm() < solver->epsilon()) break;
-        }
-    }
+      solver->coeff();
+      solver->SOR_1(*jphi);
+      for (int n = 1; n < maxIterN; ++n) {
+          calc_jphi(*grid, *jphi, *psi, *p, *g);
+          solver->step(*jphi);
+          if (solver->norm() < solver->epsilon()) break;
+      }
+  }
 
-    // output stuff
-    std::string full_output_name = vm["output-name"].as<string>()+".txt";
-    grad_output->write_output(full_output_name.c_str());
+  // output stuff
+  std::string full_output_name = vm["output-name"].as<string>()+".txt";
+  grad_output->write_output(full_output_name.c_str());
 
-    delete grad_output;
-    delete grid;
-    delete psi;
-    delete psib;
-    delete psi_prev;
-    delete psi_prev_prev;
-    delete jphi;
+  delete grad_output;
+  delete grid;
+  delete psi;
+  delete psib;
+  delete psi_prev;
+  delete psi_prev_prev;
+  delete jphi;
     
-    DeletePGData(pd);
-    DeletePGData(gd);
-    DeleteCoilData(cd);
+  DeletePGData(pd);
+  DeletePGData(gd);
+  DeleteCoilData(cd);
 }
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g){
