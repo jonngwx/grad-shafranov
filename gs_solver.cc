@@ -111,6 +111,9 @@ int main(int argc, char *argv[]){
     delete psib;
 //    delete solver;
     delete jphi;
+    DeletePGData(pd);
+    DeletePGData(gd);
+    DeleteCoilData(cd);
 }
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g){
