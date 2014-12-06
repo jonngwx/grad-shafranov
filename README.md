@@ -3,8 +3,8 @@ COUGAR
 
 Nonstandard Requirements:
 -------------------------
-c++11 compiler like a recent version of g++
-boost_program_options
+* c++11 compiler like a recent version of g++
+* boost_program_options
 
 to compile, type 'make'
 
@@ -12,10 +12,11 @@ to run type
 
     ./gs_solver
 
-try out the command line options:
+Try out the command line options!
 
     --version
 and
+
     --help
 
 The options listed in help can be specified on the command line or in grad-shafranov.cfg (the default config file)
