@@ -31,7 +31,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("r-max", po::value<double>()->default_value(10.0), "grid's maximum r location (meters)")
       ("z-min", po::value<double>()->default_value(-3.0), "grid's minimum z location (meters)")
       ("z-max", po::value<double>()->default_value(3.0), "grid's maximum z location (meters)")
-      ("max-iter-N,N", po::value<int>()->default_value(10), 
+      ("max-iter-N,N", po::value<int>()->default_value(1), 
             "maximum inner iterations")
       ("error-tol-N", po::value<double>()->default_value(1.0e-4),
             "error tolerance inner loop")
