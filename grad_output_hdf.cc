@@ -35,10 +35,37 @@ void Grad_Output_Hdf::write_output(const char* filename){
     //dimz[1] = 1;
     /* Create and write R. */
     status = H5LTmake_dataset(file_id,"/R",1,dimr,H5T_NATIVE_DOUBLE, grid->R_);
+    check(status);
+    status = H5LTmake_dataset(file_id,"/z",1,dimz,H5T_NATIVE_DOUBLE, grid->z_);
+    check(status);
     
-    
+    double *x = new double[nr*nz];
+    //    double *gdata = new double[nr*nz];
+    twod_to_oned(f->f_, x, nr, nz);
+    status = H5LTmake_dataset(file_id,"/psi",2,dims,H5T_NATIVE_DOUBLE,x);
+    check(status);
+    for (int i = 0; i < nr; ++i){
+        for (int j = 0; j < nz; ++j){
+            x[i*nz + j] = p->eval(f->f_[i][j]);
+        }
+    }
+    status = H5LTmake_dataset(file_id,"/p",2,dims,H5T_NATIVE_DOUBLE,x);
+    for (int i = 0; i < nr; ++i){
+        for (int j = 0; j < nz; ++j){
+            x[i*nz + j] = g->eval(f->f_[i][j]);
+        }
+    }
+    status = H5LTmake_dataset(file_id,"/g",2,dims,H5T_NATIVE_DOUBLE,x);
     /* Close the file. */
     status = H5Fclose(file_id);
+    delete [] x;
 
 }
 
+void Grad_Output_Hdf::twod_to_oned(const double * const *f, double *x, int nx, int ny){
+    for (int i = 0; i < nx; ++i){
+        for (int j = 0; j < ny; ++j){
+            x[i*ny + j] = f[i][j];
+        }
+    }
+}
