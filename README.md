@@ -20,7 +20,7 @@ and
 
     --help
     
-The options listed in help can be specified on the command line or in grad-shafranov.cfg (the default config file)
+The options listed in help can be specified on the command line or in grad-shafranov.cfg (the default config file).
 
 Not all the options are implemented yet.
 
