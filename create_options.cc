@@ -22,19 +22,25 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("coil-data-name,c", 
            po::value< std::string>()->default_value("coil_data.tsv"), 
            "coil data file name")
-      ("pgtype", po::value<std::string>(), "p and p specification type")
-      ("g-filename", po::value<std::string>(), "g file name")
-      ("p-filename", po::value<std::string>(), "p file name")
+      ("pgtype", po::value<std::string>(), "p and g specification type")
+      ("p-filename", po::value<std::string>()->default_value("pg_data.tsv"), "p file name")
+      ("g-filename", po::value<std::string>()->default_value("pg_data.tsv"), "g file name")
+      ("grid-elems-r", po::value<int>()->default_value(10), "number of grid elements in r dimension")
+      ("grid-elems-z", po::value<int>()->default_value(10), "number of grid elements in z dimension")
+      ("r-min", po::value<double>()->default_value(5.0), "grid's minimum r location (meters)")
+      ("r-max", po::value<double>()->default_value(10.0), "grid's maximum r location (meters)")
+      ("z-min", po::value<double>()->default_value(-3.0), "grid's minimum z location (meters)")
+      ("z-max", po::value<double>()->default_value(3.0), "grid's maximum z location (meters)")
       ("max-iter-N,N", po::value<int>()->default_value(10), 
             "maximum inner iterations")
-      ("error-tol-N,eN", po::value<double>()->default_value(1e-5),
+      ("error-tol-N", po::value<double>()->default_value(1.0e-4),
             "error tolerance inner loop")
       ("max-iter-M,M", po::value<int>()->default_value(10),
             "maximum outer iterations")
-      ("error-tol-M,eM", po::value<double>()->default_value(1e-5),
+      ("error-tol-M", po::value<double>()->default_value(1.0e-4),
             "error tolerance outer loop")
       ("output-type", po::value<std::string>()->default_value("tsv"), "tsv or hdf5")
-      ("output name", po::value<std::string>()->default_value("cougar.out"), "prefix for output filename")
+      ("output-name", po::value<std::string>()->default_value("cougar.out"), "prefix for output filename")
       ;
 
   // Hidden options, will be allowed both on command line and
