@@ -1,4 +1,4 @@
-#include "elliptic_solver.h"
+#include "elliptic-solver.h"
 #include <math.h>
 #include "field.h"
 

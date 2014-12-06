@@ -1,7 +1,6 @@
-#include "elliptic-solver.h"
+#include "elliptic_solver.h"
 #include <math.h>
 #include "field.h"
-
 
 // Initialize solver with current Psi
 void init(const Field &Psi) {
@@ -40,11 +39,11 @@ void EllipticSolver::iter() {
 void EllipticSolver::boundary(const Field &Psi, const Field &Psi_next) {
   for (int i = 0; i < nr_; ++i) {
     Psi_next.f_[i][0] = Psi.f_[i][0];
-    Psi_next.f_[i][nz-1] = Psi.f_[i][nz-1];
+    Psi_next.f_[i][nz_-1] = Psi.f_[i][nz_-1];
   }
   for (int i = 0; i < nz_; ++i) {
     Psi_next.f_[0][i] = Psi.f_[i][0];
-    Psi_next.f_[nr-1][i] = Psi.f_[nr-1][0];
+    Psi_next.f_[nr_-1][i] = Psi.f_[nr_-1][0];
   }
 }
 

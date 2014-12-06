@@ -21,7 +21,7 @@ GaussSeidel::GaussSeidel(const Grid &GridS, double epsilon) :
     }
 }
 
-GaussSeidel::~GaussSeidel() {
+GaussSeidel::~GaussSeidel(){
   for (int i = 0; i < nr_; ++i) {
     delete [] a;
     delete [] b;
@@ -36,7 +36,7 @@ GaussSeidel::~GaussSeidel() {
   delete [] e;
 }
 
-void GaussSeidel::coeff(const Grid &GridS) {
+void coeff(const Grid &GridS) {
   
 }
 

@@ -11,6 +11,12 @@ public:
   void step(const Field &jphi);
   ~GaussSeidel();
 private:
+  Grid &Grid_;
+  Field &Psi_;
+  Field &Psi_prev_;
+  const int nr_;
+  const int nz_;
+  const double epsilon_;
   // Coefficient arrays
   const double **a;
   const double **b;

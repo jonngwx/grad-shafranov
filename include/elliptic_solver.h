@@ -6,28 +6,24 @@
 
 class EllipticSolver {
 public:
-  virtual ~EllipticSolver();
-// Initialize solver with current Psi
-  void init(const Field &Psi, const Grid &Grid);
+  virtual ~EllipticSolver() {}
 // Norm with last soluation
-  double norm_max(const Field &Psi, const Field &Psi_next);
-// Norm of residuals
-  double residuals(const Field &Psi, const Field &Psi_next);
+  virtual double norm_max(const Field &Psi, const Field &Psi_next) = 0;
 // Calculates coefficients for iteration
-  virtual void coeff(const Grid &GridS) = 0;
+  virtual void coeff() = 0;
 // Blend with Psi_ with Psi_prev to iterate
-  void iter();
+  virtual void iter(double omega) = 0;
 // Enforce boundary condition for n+
-  void boundary(const Field &Psi, const Field &Psi_next);
+  virtual void boundary(const Field &Psi, const Field &Psi_next) = 0;
 // Get epsilon
-  void epsilon();
-private:
-  Grid &Grid_;
-  Field &Psi_;
-  Field &Psi_prev_;
-  const int nr_;
-  const int nz_;
-  const double epsilon_;
+  virtual double epsilon()= 0;
+    
+  virtual void SOR_1(const Field &jphi)= 0;
+    
+  virtual void step(const Field &jphi) = 0;
+ 
+  virtual double omega() = 0;
+    
+  virtual double norm() = 0;
 };
-
 #endif

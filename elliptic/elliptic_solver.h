@@ -22,13 +22,6 @@ public:
   void boundary(const Field &Psi, const Field &Psi_next);
 // Get epsilon
   void epsilon();
-private:
-  Grid &Grid_;
-  Field &Psi_;
-  Field &Psi_prev_;
-  const int nr_;
-  const int nz_;
-  const double epsilon_;
 };
 
 #endif
