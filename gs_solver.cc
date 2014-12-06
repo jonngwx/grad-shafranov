@@ -102,8 +102,8 @@ int main(int argc, char *argv[]){
     }
 
     // output stuff
-    
-    grad_output->write_output(vm["output-name"].as<string>().c_str());
+    std::string full_output_name = vm["output-name"].as<string>()+".txt";
+    grad_output->write_output(full_output_name.c_str());
 
     delete grad_output;
     delete grid;
