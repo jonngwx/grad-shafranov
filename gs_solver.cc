@@ -112,16 +112,8 @@ int main(int argc, char *argv[]){
     delete grid;
     delete psi;
     delete psib;
-<<<<<<< HEAD
-    delete solver;
-    delete psi;
     delete psi_prev;
     delete psi_prev_prev;
-=======
-    delete psi_prev;
-    delete psi_next;
-//    delete solver;
->>>>>>> e9624d6729be3b8289e58d2a45853af0623e0310
     delete jphi;
     DeletePGData(pd);
     DeletePGData(gd);

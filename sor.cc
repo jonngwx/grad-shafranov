@@ -14,11 +14,11 @@ SOR::SOR(const Grid &GridS, const Field &Psi, const Field &Psi_prev, const Field
   epsilon_(epsilon),
   omega_init_(omega_init)
    {
-    *a = new double[nr_];
-    *b = new double[nr_];
-    *c = new double[nr_];
-    *d = new double[nr_];
-    *f = new double[nr_];
+    a = new double*[nr_];
+    b = new double*[nr_];
+    c = new double*[nr_];
+    d = new double*[nr_];
+    f = new double*[nr_];
     for(int i = 0; i< nr_; ++i) {
       a[i] = new double[nz_]();
       b[i] = new double[nz_]();
