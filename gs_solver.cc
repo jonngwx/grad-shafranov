@@ -6,7 +6,7 @@
 #include "include/rhs_func.h"
 #include "include/grad_output.h"
 #include "include/grad_output_txt.h"
-#include "include/sor.h"
+//#include "include/sor.h"
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
 #include "include/create_options.h"
@@ -34,28 +34,44 @@ int main(int argc, char *argv[]){
       return 0;
   }
 
-    // JACOB, I'm going to manually set some constants right now so we can test everything else  :)
-    int nr = 11;
-    int nz = 11;
-    double R0 = 5.0;
-    double Rend = 10.0;
-    double z0 = -3.0;
-    double zend = 3.0;
-    int maxIterM = vm["max-iter-M"].as<int>();
-    int maxIterN = 10;
- 
-    PGData *pgd = NewPGDataFromFile("pg_data.tsv",1);
-    CoilData *cd = NewCoilDataFromFile("coil_data.tsv",1);
-    string pgtype = "array";
-    
+  int nr = vm["grid-elems-r"].as<int>();
+  int nz = vm["grid-elems-z"].as<int>();
+  double R0 =   vm["r-min"].as<double>();
+  double Rend = vm["r-max"].as<double>();
+  double z0 =   vm["z-min"].as<double>();
+  double zend = vm["z-max"].as<double>();
+  int maxIterM = vm["max-iter-M"].as<int>();
+  int maxIterN = vm["max-iter-N"].as<int>();
+
+  std::string pgtype;
+  if (!vm.count("pgtype")){
+    std::cout << "Must specify pgtype: (array, choice2, choice 3)  \n";
+    exit(1);
+  }
+  else {
+    pgtype = vm["pgtype"].as<string>();
+    if (pgtype == "array"){
+    }
+    else if (pgtype == "choice2"){}
+    else if (pgtype == "choice3"){}
+    else {
+      std::cout << "Error: pgtype unrecognized; exiting\n";
+      exit(2);
+    }
+  }
+
+  PGData *gd = NewPGDataFromFile(vm["p-filename"].as<string>(),1);
+  PGData *pd = NewPGDataFromFile(vm["g-filename"].as<string>(),1);
+  CoilData *cd = NewCoilDataFromFile(vm["coil-data-name"].as<string>(),1);
+
     Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
     Field *psi = new Field(nr,nz);
-    Field *psi_prev = new Field(nr,nz);
+    Field *psi_prev = new Field(nr,nz); 
     Field *psi_next = new Field(nr,nz);
     Field *jphi = new Field(nr,nz);
     
-    RHSfunc *p = new RHSfunc(pgtype, pgd);
-    RHSfunc *g = new RHSfunc(pgtype, pgd);
+    RHSfunc *p = new RHSfunc(pgtype, pd);
+    RHSfunc *g = new RHSfunc(pgtype, gd);
 
     for (int i = 0; i < grid->nr_; ++i) {
       for (int j = 0; j < grid->nz_; ++j) {
@@ -87,7 +103,7 @@ int main(int argc, char *argv[]){
 
     // output stuff
     
-    grad_output->write_output("whatever");
+    grad_output->write_output(vm["output-name"].as<string>().c_str());
 
     delete grad_output;
     delete grid;
