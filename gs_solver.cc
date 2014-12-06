@@ -109,6 +109,8 @@ int main(int argc, char *argv[]){
     delete grid;
     delete psi;
     delete psib;
+    delete psi_prev;
+    delete psi_next;
 //    delete solver;
     delete jphi;
     DeletePGData(pd);
@@ -117,10 +119,10 @@ int main(int argc, char *argv[]){
 }
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g){
-
+  const double mu0 = 0.0000012566370614; // in SI units
   for (int i = 0; i < grid.nr_; ++i) {
       for (int j = 0; j < grid.nz_; ++j)  {
-          jphi.f_[i][j] = p.eval(psi.f_[i][j]) + g.eval_prime(psi.f_[i][j]); // not the right formula, but you get the idea
+          jphi.f_[i][j] = -grid.R_[i]*p.eval(psi.f_[i][j]) - g.eval(psi.f_[i][j])*g.eval_prime(psi.f_[i][j]/(mu0*grid.R_[i]));
       }
   }  
 
