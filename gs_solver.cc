@@ -91,14 +91,14 @@ int main(int argc, char *argv[]){
     Grad_Output *grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
 
     // solve stuff
+    solver->coeff();
     for (int m = 0; m < maxIterM; ++m){
         calc_jphi(*grid, *jphi, *psi, *p, *g);
         psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
         // test convergence
         
-        solver->coeff();
-        solver->SOR_1(*jphi);
-        for (int n = 1; n < maxIterN; ++n) {
+        for (int n = 0; n < maxIterN; ++n) {
+            if (n == 0) solver->SOR_1(*jphi);
             calc_jphi(*grid, *jphi, *psi, *p, *g);
             solver->step(*jphi);
             if (solver->norm() < solver->epsilon()) break;

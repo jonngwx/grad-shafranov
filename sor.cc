@@ -19,7 +19,7 @@ SOR::SOR(const Grid &GridS, const Field &Psi, const Field &Psi_prev, const Field
     c = new double*[nr_];
     d = new double*[nr_];
     f = new double*[nr_];
-    for(int i = 0; i< nr_; ++i) {
+    for(int i = 0; i < nr_; ++i) {
       a[i] = new double[nz_]();
       b[i] = new double[nz_]();
       c[i] = new double[nz_]();
