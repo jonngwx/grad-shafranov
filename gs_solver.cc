@@ -99,7 +99,7 @@ int main(int argc, char *argv[]){
         
     for (int n = 0; n < maxIterN; ++n) {
       if (n == 0) solver->SOR_1(*jphi);
-      calc_jphi(*grid, *jphi, *psi, *p, *g)
+      calc_jphi(*grid, *jphi, *psi, *p, *g);
       solver->step(*jphi);
       if (solver->norm() < solver->epsilon()) break;
     }
