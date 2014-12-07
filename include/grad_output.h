@@ -16,6 +16,11 @@ protected:
   RHSfunc *p;
   RHSfunc *g;
   Grid *grid;
+  /**
+  * @brief Parses the string of outputs to write to file..
+  * @param out comma separated string of outputs. Currently doesn't do anything.
+  * 
+  */
   void parse_outputs(const char *outputs);
   // output_list
 };

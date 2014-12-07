@@ -15,8 +15,9 @@ public:
   /**
    * Constructor for output class
    * @param f pointer to field containing flux function
-   * @param p pointer to field containing pressure function
-   * @param g pointer to field containing g function
+   * @param grid pointer to grid containing axis data
+   * @param p pointer to RHSfunc for evaluation of p
+   * @param g pointer to RHSfunc for evaluation of g
    * @param outputs string of comma separated output options
    * */
   Grad_Output_Txt(Field* f, Grid* grid, RHSfunc* p, RHSfunc* g, const char* outputs);
