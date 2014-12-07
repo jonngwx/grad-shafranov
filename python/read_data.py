@@ -3,6 +3,10 @@ import io
 import field
 import h5py
 
+FLOAT='[0-9]*\.[0-9]*'
+
+DATA= '([A-Za-z]): ((' + FLOAT+ ' )*)'
+
 def read_hdf5(filename):
     f = h5py.File(filename,'r')
     x = f['R'].shape[0]
