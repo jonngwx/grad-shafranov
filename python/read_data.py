@@ -16,6 +16,8 @@ def read_hdf5(filename):
         else:
             fields[data]=np.transpose(np.array(f[data]))
     f.close()
+    if is_invalid(fields):
+        return None
     return fields
 
 
@@ -50,7 +52,7 @@ def is_invalid(fields):
     invalid = False
     data = ['R','z','psi','p','g']
     for i in data:
-        invalid = (invalid or check_data(i,data))
+        invalid = (invalid or check_data(i,k))
     return invalid
 
 def check_data(name,keys):

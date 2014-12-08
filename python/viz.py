@@ -16,6 +16,9 @@ def plot(filename,format):
     except IOError:
         print "Invalid filename\n"
         return None
+    if F is None:
+        print "Error reading file " + filename
+        return None
     plt.figure(1)
     plt.subplot(2,1,1)
     plt.pcolormesh(F['R'],F['z'],F['psi'])
