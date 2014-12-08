@@ -19,12 +19,25 @@ void inline linspace(double min, double max, int n, double *array){
 }
 
 
+/**
+ * @brief prints a 1d array
+ * @param file file pointer to open output file
+ * @param data 1d array to print
+ * @param n number of array elements
+ */
 inline void print1d(FILE *file, double *data, int n){
     for (int i = 0; i < n; ++i){
         fprintf(file, "%15.8f ", data[i]);
     }
 }
 
+/**
+ * @brief prints a 2d array to a single line
+ * @param file file pointer to open output file
+ * @param data 2d array to print data[x][y]
+ * @param nx number of elements in x direction
+ * @param ny number of elements in y direction
+ */
 inline void print2d(FILE *file, double **data, int nx, int ny){
     for (int i = 0; i < nx; ++i){
         for (int j = 0; j < ny; ++j){
