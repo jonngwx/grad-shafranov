@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "grad_output.h"
 #include "field.h"
-#include "hdf5.h"
+#include <hdf5.h>
 
 class Grad_Output_Hdf : public Grad_Output{
 public:

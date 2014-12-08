@@ -1,15 +1,23 @@
 CXX = g++
-CXXFLAGS = -g -Wall -std=c++11
+CXXFLAGS = -c -g -Wall -std=c++11 -Iinclude
 LIBS = -lboost_program_options
 PROGS = gs_solver
 
 .PHONY: all
 all: $(PROGS)
 
-gs_solver: gs_solver.cc tsv_reader.cc rhs_func.cc grid.cc field.cc slow_boundary.cc grad_output.cc grad_output_txt.cc create_options.cc elliptic/sor.cc elliptic/elliptic_solver.cc
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS) -Iinclude
+gs_solver: gs_solver.o tsv_reader.o rhs_func.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o
+	$(CXX) -o $@ $^ $(LIBS) 
 
 .PHONY: clean
 clean:
-	$(RM) *.o
+	$(RM) -r *.o
+	$(RM) .depend
 
+%.o: %.cc
+	$(CXX) $(CXXFLAGS) $^ -o $@ 
+
+depend:
+	$(CXX) -MM $(CXXFLAGS) *.cc > .depend
+
+-include .depend
