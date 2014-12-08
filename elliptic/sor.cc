@@ -1,7 +1,7 @@
-#include "../include/sor.h"
-#include "../include/elliptic_solver.h"
-#include "../include/grid.h"
-#include "../include/field.h"
+#include "sor.h"
+#include "elliptic_solver.h"
+#include "grid.h"
+#include "field.h"
 #include <math.h>
 
 /*! 

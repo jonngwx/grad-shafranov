@@ -1,6 +1,6 @@
-#include "../include/elliptic_solver.h"
+#include "elliptic_solver.h"
 #include <math.h>
-#include "../include/field.h"
+#include "field.h"
 
 
 /*!

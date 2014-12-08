@@ -1,6 +1,6 @@
-#include "../include/gauss-seidel.h"
-#include "../include/field.h"
-#include "../include/grid.h"
+#include "gauss-seidel.h"
+#include "field.h"
+#include "grid.h"
 
 
 /*!

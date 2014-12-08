@@ -1,7 +1,7 @@
-#include "../include/critical.h"
+#include "critical.h"
 #include <math.h>
-#include "../include/field.h"
-#include "../include/grid.h"
+#include "field.h"
+#include "grid.h"
 
 Critical::Critical(const Grid &GridS, const Field &Psi, int max_iter, double epsilon) :
   Psi_(Psi),
