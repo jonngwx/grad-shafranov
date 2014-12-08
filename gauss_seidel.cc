@@ -3,18 +3,24 @@
 #include "grid.h"
 
 
+/*!
+ * \file Gauss-Seidel elliptic solver implementation
+ * inherited from EllipticSolver
+ */
+
 GaussSeidel::GaussSeidel(const Grid &GridS, Field &Psi) :
   EllipticSolver(GridS, Psi) { }
 
 /*!
- * Calculate coefficients for iteration from grid parameters
+ * @brief Calculates coefficients for iteration
  */
 void coeff(const Grid &GridS) {
   
 }
 
 /*!
- * Perform one iteration
+ * @brief For first iteration - use Gauss Seidel with blending
+ * @param jphi current evaluated at current Psi
  */
 void GaussSeidel::step(const Field &jphi){
 // Save Psi_ to Psi_prev

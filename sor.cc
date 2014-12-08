@@ -4,6 +4,11 @@
 #include "field.h"
 #include <math.h>
 
+/*! 
+ * \file Successive over reduction elliptic solver implementation
+ * inherited from EllipticSolver
+ */
+
 SOR::SOR(const Grid &GridS, Field &Psi, double omega_init):
   EllipticSolver(GridS, Psi),
   omega_init_(omega_init) {
@@ -15,7 +20,7 @@ SOR::~SOR() {
 }
 
 /*!
- * Calculates coefficients for iteration
+ * @brief Calculates coefficients for iteration
  */
 void SOR::coeff() {
   double dr = Grid_->dr_;
@@ -37,7 +42,8 @@ void SOR::coeff() {
 }
 
 /*!
- *For first iteration - use Gauss Seidel with blending
+ * @brief For first iteration - use Gauss Seidel with blending
+ * @param jphi current evaluated at current Psi
  */
 void SOR::step_1(const Field &jphi) {
   boundary(*Psi_, *Psi_prev_);
@@ -53,7 +59,8 @@ void SOR::step_1(const Field &jphi) {
 }
 
 /*!
- * Iterate with over-relaxation parameter omega
+ * @brief Iterate with over-relaxation parameter omega
+ * @param jphi current evaluated at current Psi
  */
 void SOR::step(const Field &jphi) {
   double nr = Grid_->nr_;
@@ -77,7 +84,7 @@ void SOR::step(const Field &jphi) {
 }
 
 /*!
- * Calculate over-relaxation parameter omega for finite differencing at each iteration
+ * @brief Calculate over-relaxation parameter omega for finite differencing at each iteration
  */
 double SOR::omega() {
   double delta = norm_max(*Psi_prev_, *Psi_prev_prev_)/norm_max(*Psi_, *Psi_prev_);

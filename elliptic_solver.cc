@@ -2,6 +2,11 @@
 #include <math.h>
 #include "field.h"
 
+
+/*!
+ * \file Base class implementation of EllipticSolver
+ */
+
 EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi){
   Grid_ = &Grid;
   Psi_ = &Psi;
@@ -37,7 +42,9 @@ EllipticSolver::~EllipticSolver(){
 }
 
 /*!
- * Calculate maximum of |Psi - Psi_prev| over grid
+ * @brief Calculate maximum of |Psi - Psi_prev| over grid
+ * @param Psi current value of Psi
+ * @param Psi_prev previous value of Psi
  */
 double EllipticSolver::norm_max(const Field &Psi, const Field &Psi_prev) {
   double max = 0;
@@ -53,7 +60,7 @@ double EllipticSolver::norm_max(const Field &Psi, const Field &Psi_prev) {
 }
 
 /*!
- * Calculates 2-norm of diffence between Psi and Psi_prev for convergence testing
+ * @brief Calculates 2-norm of diffence between Psi and Psi_prev for convergence testing
  */
 double EllipticSolver::norm() {
   double sum = 0;
@@ -68,14 +75,17 @@ double EllipticSolver::norm() {
 }
 
 /*!
- * Norm of residuals
+ * @brief Returns norm of residuals for convergence testing
+ * @param Psi current value of Psi
+ * @param Psi_prev previous value of Psi
  */
 double EllipticSolver::residuals(const Field &Psi, const Field &Psi_prev) {
   return 0;
 }
 
 /*!
- * Blend with old solution
+ * @brief Blend with old solution
+ * @param omega blending parameter used for iteration
  */
 void EllipticSolver::iter(double omega) {
   int nr = Grid_->nr_;
@@ -88,7 +98,10 @@ void EllipticSolver::iter(double omega) {
 }
 
 /*!
- * Enforce boundary condition
+ * @brief Enforce boundary condition by copying boundary values from
+ * Psi to Psi_prev
+ * @param Psi current value of Psi
+ * @param Psi_prev previous value of Psi
  */
 void EllipticSolver::boundary(Field &Psi, const Field &Psi_prev) {
   int nr = Grid_->nr_;
