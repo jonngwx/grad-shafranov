@@ -1,7 +1,7 @@
-#include "include/sor.h"
-#include "include/elliptic_solver.h"
-#include "grid.h"
-#include "field.h"
+#include "../include/sor.h"
+#include "../include/elliptic_solver.h"
+#include "../include/grid.h"
+#include "../include/field.h"
 #include <math.h>
 
 /*! 
@@ -49,7 +49,7 @@ void SOR::step_1(const Field &jphi) {
   boundary(*Psi_, *Psi_prev_);
   double nr = Grid_->nr_;
   double nz = Grid_->nz_;
-  // Iterate over non-boundary region
+  // Iterate over non-boundary
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
       Psi_->f_[i][j] = a[i][j]*Psi_prev_->f_[i+1][j] + b[i][j]*Psi_->f_[i-1][j] + c[i][j]*Psi_->f_[i][j+1] + d[i][j]*Psi_->f_[i][j-1] - f[i][j]*jphi.f_[i][j];
