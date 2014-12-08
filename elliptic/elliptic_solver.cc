@@ -111,7 +111,7 @@ void EllipticSolver::boundary(Field &Psi, const Field &Psi_prev) {
     Psi.f_[i][nz-1] = Psi_prev.f_[i][nz-1];
   }
   for (int i = 0; i < nz; ++i) {
-    Psi.f_[0][i] = Psi_prev.f_[i][0];
+    Psi.f_[0][i] = Psi_prev.f_[0][i];
     Psi.f_[nr-1][i] = Psi_prev.f_[nr-1][0];
   }
 }
