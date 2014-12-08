@@ -14,7 +14,7 @@ def read_hdf5(filename):
         if data == 'R' or data == 'z':
             fields[data]=np.array(f[data])
         else:
-            fields[data]=np.transpose(np.array(f[data])
+            fields[data]=np.transpose(np.array(f[data]))
     f.close()
     return fields
 
