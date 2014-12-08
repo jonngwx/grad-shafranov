@@ -7,22 +7,15 @@
 
 class GaussSeidel : public EllipticSolver {
 public:
-  GaussSeidel(const Grid &GridS, double epsilon);
+  GaussSeidel(const Grid &GridS, Field &Psi);
+/*!
+ * Perform one iteration
+ */
   void step(const Field &jphi);
-  ~GaussSeidel();
-private:
-  Grid &Grid_;
-  Field &Psi_;
-  Field &Psi_prev_;
-  const int nr_;
-  const int nz_;
-  const double epsilon_;
-  // Coefficient arrays
-  const double **a;
-  const double **b;
-  const double **c;
-  const double **d;
-  const double **e;
+/*!
+ * Calculate coefficients for iteration from grid parameters
+ */
+  void coeff();
 };
 
 #endif

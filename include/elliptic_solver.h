@@ -6,24 +6,50 @@
 
 class EllipticSolver {
 public:
-  virtual ~EllipticSolver() {}
-// Norm with last soluation
-  virtual double norm_max(const Field &Psi, const Field &Psi_next) = 0;
-// Calculates coefficients for iteration
-  virtual void coeff() = 0;
-// Blend with Psi_ with Psi_prev to iterate
-  virtual void iter(double omega) = 0;
-// Enforce boundary condition for n+
-  virtual void boundary(const Field &Psi, const Field &Psi_next) = 0;
-// Get epsilon
-  virtual double epsilon()= 0;
-    
-  virtual void SOR_1(const Field &jphi)= 0;
-    
+  EllipticSolver(const Grid &Grid, Field &Psi);
+  virtual ~EllipticSolver();
+/*!
+ * Norm with last soluation
+ */
+  double norm_max(const Field &Psi, const Field &Psi_prev);
+/*!
+ * Blend Psi_ with Psi_prev_ to iterate with parameter omega
+ */
+  void iter(double omega);
+/*!
+ * Enforce boundary condition for Psi_ using Psi_prev_
+ */
+  void boundary(Field &Psi, const Field &Psi_prev);
+/*!
+ * Calculates 2-norm of diffence between Psi_ and Psi_prev_ for convergence testing
+ */
+  double norm();
+/*!
+ * Perform first iteration
+ */
+  virtual void step_1(const Field &jphi) = 0;
+/*!
+ * Perform one iteration
+ */
   virtual void step(const Field &jphi) = 0;
- 
-  virtual double omega() = 0;
-    
-  virtual double norm() = 0;
+/*!
+ * Calculates coefficients for iteration
+ */
+  virtual void coeff() = 0;
+/*!
+ * Norm of residuals
+ */
+  double residuals(const Field &Psi, const Field &Psi_prev);
+  
+protected:
+  const Grid *Grid_;
+  Field *Psi_;
+  Field *Psi_prev_;
+// Coefficient arrays
+  double **a;
+  double **b;
+  double **c;
+  double **d;
+  double **f;
 };
 #endif

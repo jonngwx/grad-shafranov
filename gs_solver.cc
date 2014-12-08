@@ -67,8 +67,6 @@ int main(int argc, char *argv[]){
   
   Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
   Field *psi = new Field(nr,nz);
-  Field *psi_prev = new Field(nr,nz);
-  Field *psi_prev_prev = new Field(nr,nz);
   Field *jphi = new Field(nr,nz);
     
   RHSfunc *p = new RHSfunc(pgtype, pd);
@@ -84,7 +82,7 @@ int main(int argc, char *argv[]){
   // Elliptic solver for inner loop
   double omega_init = 0.5;
   double epsilon = 0.1;
-  EllipticSolver *solver = new SOR(*grid, *psi, *psi_prev, *psi_prev_prev,  omega_init, epsilon);
+  EllipticSolver *solver = new SOR(*grid, *psi, omega_init);
   Boundary *psib = new SlowBoundary(*grid, *cd);
 
   /** determine which output type */
@@ -98,13 +96,13 @@ int main(int argc, char *argv[]){
     // test convergence
         
         // Iterate once through elliptic solver
-        for (int n = 0; n < 1; ++n) {
-            if (n == 0) solver->SOR_1(*jphi);
+        for (int n = 0; n < maxIterN; ++n) {
+            if (n == 0) solver->step_1(*jphi);
             else {
               solver->step(*jphi);
               calc_jphi(*grid, *jphi, *psi, *p, *g);
             }
-            if (solver->norm() < solver->epsilon()) break;
+            if (solver->norm() < epsilon) break;
         }
   }
 
@@ -116,10 +114,8 @@ int main(int argc, char *argv[]){
   delete grid;
   delete psi;
   delete psib;
-  delete psi_prev;
-  delete psi_prev_prev;
   delete jphi;
-    
+  delete solver;
   DeletePGData(pd);
   DeletePGData(gd);
   DeleteCoilData(cd);

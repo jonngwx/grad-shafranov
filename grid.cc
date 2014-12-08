@@ -19,14 +19,18 @@ Grid::~Grid(){
     delete [] R_;
 }
 
-// Given r returns i coordinate of containing grid cell
-// returned as double so user can get position in cell
+/*!
+ * Given r returns i coordinate of containing grid cell
+ * returned as double so user can get position in cell
+ */
 double Grid::celli(double r) {
     return (r - R_[0])*(1.0/dr_);
 }
 
-// Given z returns j coordinate of containing grid cell
-// returned as double so user can get position in cell
+/*!
+ * Given z returns j coordinate of containing grid cell
+ * returned as double so user can get position in cell
+ */
 double Grid::cellj(double z) {
     return (z - z_[0])*(1.0/dz_);
 }
