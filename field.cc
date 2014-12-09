@@ -3,7 +3,7 @@
 Field::Field(Grid &grid) : grid_(grid) {
 	f_ = new double*[grid.nr_];
 	for (int i = 0; i < grid.nr_; ++i){
-		f_[i] = new double[gridnz_]();
+		f_[i] = new double[grid.nz_]();
 	}
 }
 
