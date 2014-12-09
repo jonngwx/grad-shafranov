@@ -44,7 +44,6 @@ def plot(filename,format):
     cpos[1,0] = gpos[1,0]-gpos[0,0]
     cpos[1,1] = cpos[1,1]-cpos[0,1]
     cfig.set_position(np.ndarray.flatten(cpos))
-    print cfig.get_position()
     plt.show()
     return F
 
