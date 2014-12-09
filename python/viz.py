@@ -20,18 +20,31 @@ def plot(filename,format):
         print "Error reading file " + filename
         return None
     plt.figure(1)
-    plt.subplot(2,1,1)
-    plt.pcolormesh(F['R'],F['z'],F['psi'])
+    cfig = plt.subplot(3,1,1)
+    plt.contour(F['R'],F['z'],F['psi'],colors='k')
     plt.title('$\Psi$')
     plt.xticks([])
     plt.ylabel('z')
-    plt.colorbar()
-    plt.subplot(2,1,2)
+#    plt.colorbar()
+    plt.subplot(3,1,2)
     plt.pcolormesh(F['R'],F['z'],F['p'])
     plt.title('p')
+#    plt.xlabel('$R$')
+    plt.ylabel('z')
+    plt.colorbar()
+    gfig = plt.subplot(3,1,3)
+    plt.pcolormesh(F['R'],F['z'],F['g'])
+    plt.title('g')
     plt.xlabel('$R$')
     plt.ylabel('z')
     plt.colorbar()
+    #positional hackery
+    cpos = cfig.get_position().get_points()
+    gpos = gfig.get_position().get_points()
+    cpos[1,0] = gpos[1,0]-gpos[0,0]
+    cpos[1,1] = cpos[1,1]-cpos[0,1]
+    cfig.set_position(np.ndarray.flatten(cpos))
+    print cfig.get_position()
     plt.show()
     return F
 
