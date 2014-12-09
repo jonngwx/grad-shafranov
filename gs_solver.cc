@@ -66,8 +66,8 @@ int main(int argc, char *argv[]){
   CoilData *cd = NewCoilDataFromFile(vm["coil-data-name"].as<string>(),1);
   
   Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
-  Field *psi = new Field(nr,nz);
-  Field *jphi = new Field(nr,nz);
+  Field *psi = new Field(*grid);
+  Field *jphi = new Field(*grid);
     
   RHSfunc *p = new RHSfunc(pgtype, pd);
   RHSfunc *g = new RHSfunc(pgtype, gd);
