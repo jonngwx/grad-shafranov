@@ -92,7 +92,7 @@ int main(int argc, char *argv[]){
   solver->coeff();
   for (int m = 0; m < maxIterM; ++m){
     calc_jphi(*grid, *jphi, *psi, *p, *g);
-    psib->CalcB(*psi, *jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
+    psib->CalcB(psi, jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
     // test convergence
         
         // Iterate once through elliptic solver
