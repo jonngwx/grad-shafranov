@@ -65,7 +65,8 @@ int main(int argc, char *argv[])
     } else {
         output_type = vm["output-type"].as<string>();
     }
-    PGData *pd = NewPGDataFromFile(vm["g-filename"].as<string>(),1);
+    PGData *gd = NewPGDataFromFile(vm["g-filename"].as<string>(),1);
+    PGData *pd = NewPGDataFromFile(vm["p-filename"].as<string>(),1);
     CoilData *cd = NewCoilDataFromFile(vm["coil-data-name"].as<string>(),1);
 
     Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
@@ -89,14 +90,14 @@ int main(int argc, char *argv[])
     Boundary *psib = new SlowBoundary(grid, cd);
 
     /** determine which output type */
-    Grad_Output *grad_output
-    if (output_type == "txt") {
-        output_type = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
-    } else if (output_type == "hdf") {
-        output_type = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+    Grad_Output *grad_output;
+    if (output_type == "tsv") {
+        grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+    } else if (output_type == "hdf5") {
+        grad_output = new Grad_Output_Hdf(psi,grid,p,g,"this,is,a,test");
     } else {
-        printf("Output type %s is not supported, use tsv or hdf. Defaulting to tsv. \n", output_type);
-        output_type = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+        printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
+        grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
     }
 
     // solve stuff
