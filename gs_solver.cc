@@ -83,7 +83,7 @@ int main(int argc, char *argv[]){
   double omega_init = 0.5;
   double epsilon = 0.1;
   EllipticSolver *solver = new SOR(*grid, *psi, omega_init);
-  Boundary *psib = new SlowBoundary(*grid, *cd);
+  Boundary *psib = new SlowBoundary(grid, cd);
 
   /** determine which output type */
   Grad_Output *grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
