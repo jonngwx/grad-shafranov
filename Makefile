@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -c -g -Wall -std=c++11 -Iinclude
-LIBS = -lboost_program_options
+LIBS = -lboost_program_options -lhdf5_hl -lhdf5
 PROGS = gs_solver
 
 .PHONY: all
