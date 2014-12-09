@@ -111,11 +111,11 @@ int main(int argc, char *argv[]){
   grad_output->write_output(full_output_name.c_str());
 
   delete grad_output;
-  delete grid;
   delete psi;
   delete psib;
   delete jphi;
   delete solver;
+  delete grid;
   DeletePGData(pd);
   DeletePGData(gd);
   DeleteCoilData(cd);

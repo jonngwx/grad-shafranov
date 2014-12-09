@@ -10,7 +10,7 @@
 EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi){
   Grid_ = &Grid;
   Psi_ = &Psi;
-  Psi_prev_ = new Field(Grid.nr_,Grid.nz_);
+  Psi_prev_ = new Field(Grid);
   a = new double*[Grid.nr_];
   b = new double*[Grid.nr_];
   c = new double*[Grid.nr_];

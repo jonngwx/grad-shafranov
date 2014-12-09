@@ -10,7 +10,7 @@
 
 class Field {
   public:
-  Field(Grid &grid);
+  Field(const Grid &grid);
   ~Field();
 
   const Grid * grid_; /** < pointer to grid data */

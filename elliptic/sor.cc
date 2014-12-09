@@ -12,7 +12,7 @@
 SOR::SOR(const Grid &GridS, Field &Psi, double omega_init):
   EllipticSolver(GridS, Psi),
   omega_init_(omega_init) {
-  Psi_prev_prev_ = new Field(GridS.nr_,GridS.nz_);
+  Psi_prev_prev_ = new Field(GridS);
 }
 
 SOR::~SOR() {
