@@ -8,7 +8,7 @@ def plot(filename,format):
     try:
         if format == "txt":
             F = read_data.read_text(filename)
-        elif format == "h5":
+        elif format == "h5" or format == "hdf" or format == "hdf5":
             F = read_data.read_hdf5(filename)
         else:
             print "Invalid format\n"
