@@ -1,7 +1,7 @@
 #include "elliptic_solver.h"
 #include <math.h>
 #include "field.h"
-
+#include <stdio.h>
 
 /*!
  * \file Base class implementation of EllipticSolver
@@ -28,17 +28,18 @@ EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi){
 EllipticSolver::~EllipticSolver(){
   delete Psi_prev_;
   for (int i = 0; i < Grid_->nr_; ++i) {
-    delete [] a;
-    delete [] b;
-    delete [] c;
-    delete [] d;
-    delete [] f;
+    delete [] a[i];
+    delete [] b[i];
+    delete [] c[i];
+    delete [] d[i];
+    delete [] f[i];
   }
   delete [] a;
   delete [] b;
   delete [] c;
   delete [] d;
   delete [] f;
+
 }
 
 /*!
