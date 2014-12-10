@@ -1,7 +1,7 @@
-#include "../include/elliptic_solver.h"
+#include "elliptic_solver.h"
 #include <math.h>
-#include "../include/field.h"
-
+#include "field.h"
+#include <stdio.h>
 
 /*!
  * \file Base class implementation of EllipticSolver
@@ -10,7 +10,7 @@
 EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi){
   Grid_ = &Grid;
   Psi_ = &Psi;
-  Psi_prev_ = new Field(Grid.nr_,Grid.nz_);
+  Psi_prev_ = new Field(Grid);
   a = new double*[Grid.nr_];
   b = new double*[Grid.nr_];
   c = new double*[Grid.nr_];
@@ -28,17 +28,18 @@ EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi){
 EllipticSolver::~EllipticSolver(){
   delete Psi_prev_;
   for (int i = 0; i < Grid_->nr_; ++i) {
-    delete [] a;
-    delete [] b;
-    delete [] c;
-    delete [] d;
-    delete [] f;
+    delete [] a[i];
+    delete [] b[i];
+    delete [] c[i];
+    delete [] d[i];
+    delete [] f[i];
   }
   delete [] a;
   delete [] b;
   delete [] c;
   delete [] d;
   delete [] f;
+
 }
 
 /*!
@@ -111,7 +112,7 @@ void EllipticSolver::boundary(Field &Psi, const Field &Psi_prev) {
     Psi.f_[i][nz-1] = Psi_prev.f_[i][nz-1];
   }
   for (int i = 0; i < nz; ++i) {
-    Psi.f_[0][i] = Psi_prev.f_[i][0];
+    Psi.f_[0][i] = Psi_prev.f_[0][i];
     Psi.f_[nr-1][i] = Psi_prev.f_[nr-1][0];
   }
 }

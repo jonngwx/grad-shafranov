@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "grad_output.h"
 #include "field.h"
-#include "hdf5.h"
+#include <hdf5.h>
 
 class Grad_Output_Hdf : public Grad_Output{
 public:
@@ -39,6 +39,10 @@ public:
      * */
     void twod_to_oned(const double * const *f, double *x, int nx, int ny);
 
+    /**
+     * @brief checks if hdf operations are successful
+     * @param status return value of hdf function calls
+     */
     inline void check(herr_t status){
         assert(status >= 0);
     };
