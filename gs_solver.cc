@@ -78,10 +78,21 @@ int main(int argc, char *argv[])
 
     RHSfunc *p = new RHSfunc(pgtype, pd);
     RHSfunc *g = new RHSfunc(pgtype, gd);
-
+    
+    double r_squared;
+    double Rg = 7.5;
+    double zg = 0.0;
+    double D = 2.0;
+    double c = 1.0;
     for (int i = 0; i < grid->nr_; ++i) {
         for (int j = 0; j < grid->nz_; ++j) {
-            psi->f_[i][j] = i*j;
+            r_squared = (grid->R_[i] - Rg)*(grid->R_[i] - Rg) + (grid->z_[j] - zg)*(grid->z_[j] - zg);
+            if (r_squared < D*D) {
+                jphi->f_[i][j] = (c/grid->R_[i])*(1 - r_squared/(D*D)) ;
+            }
+            else {
+                jphi->f_[i][j] = 0;
+            }  
         }
     }
 
@@ -110,8 +121,8 @@ int main(int argc, char *argv[])
     // solve stuff
     solver->coeff();
     for (int m = 0; m < maxIterM; ++m) {
-        calc_jphi(*grid, *jphi, *psi, *p, *g);
-        psib->CalcB(psi, jphi); // PETER this should come after as the initial guess already has a self consistent boundary?
+        if (m != 0) calc_jphi(*grid, *jphi, *psi, *p, *g);
+        psib->CalcB(psi, jphi);
         // test convergence
 
         // Iterate once through elliptic solver
@@ -124,7 +135,7 @@ int main(int argc, char *argv[])
             if (solver->norm() < epsilon) break;
         }
     }
-
+  
     // output stuff
     std::string full_output_name = vm["output-name"].as<string>()+".txt";
     grad_output->write_output(full_output_name.c_str());
