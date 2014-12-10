@@ -130,10 +130,9 @@ int main(int argc, char *argv[])
             if (n == 0) solver->step_1(*jphi);
             else {
               solver->step(*jphi);
+              calc_jphi(*grid, *jphi, *psi, *p, *g);
             }
-            calc_jphi(*grid, *jphi, *psi, *p, *g);
             if (solver->norm() < epsilon) break;
-        }
     }
   
     // output stuff

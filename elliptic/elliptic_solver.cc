@@ -4,7 +4,9 @@
 #include <stdio.h>
 
 /*!
- * \file Base class implementation of EllipticSolver
+ * @file elliptic_solver.cc
+ * @brief Base class implementation of EllipticSolver
+ * @section DESCRIPTION
  */
 
 EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi){

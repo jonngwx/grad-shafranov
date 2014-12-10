@@ -2,10 +2,10 @@
 #include "field.h"
 #include "grid.h"
 
-
 /*!
- * \file Gauss-Seidel elliptic solver implementation
- * inherited from EllipticSolver
+ * @file elliptic_solver.cc
+ * @brief Base class implementation of EllipticSolver
+ * @section DESCRIPTION
  */
 
 GaussSeidel::GaussSeidel(const Grid &GridS, Field &Psi) :

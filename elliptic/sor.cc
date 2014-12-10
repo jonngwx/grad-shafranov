@@ -4,9 +4,10 @@
 #include "field.h"
 #include <math.h>
 
-/*! 
- * \file Successive over reduction elliptic solver implementation
- * inherited from EllipticSolver
+/*!
+ * @file sor.cc
+ * @brief Base class implementation of Successive Over-Reduction implementation of EllipticSolver
+ * @section DESCRIPTION
  */
 
 SOR::SOR(const Grid &GridS, Field &Psi, double omega_init):
