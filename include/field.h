@@ -15,6 +15,7 @@ class Field {
   const int nr_; /** < number of points in R direction */
   const int nz_; /** < number of points in z direction */
   double **f_; /** < pointer to field data */
+  
   /**
    * Returns a the value of the ith boundary cell
    * TODO: do we really need this?

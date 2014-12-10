@@ -14,7 +14,9 @@ SlowBoundary::~SlowBoundary()
 
 int SlowBoundary::CalcB(Field &psi, Field &jphi) {
 
-  // lots to add here.  
+  // lots to add here.
+    
+    psi.f_[0][0] = 2000;
 
   return 0;
 }

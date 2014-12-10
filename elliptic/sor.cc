@@ -46,9 +46,15 @@ void SOR::coeff() {
  * @param jphi current evaluated at current Psi
  */
 void SOR::step_1(const Field &jphi) {
-  boundary(*Psi_, *Psi_prev_);
   double nr = Grid_->nr_;
   double nz = Grid_->nz_;
+  // Save Psi_ to Psi_prev and Psi_prev to Psi_prev_prev
+  for (int i = 1; i < nr-1; ++i) {
+    for(int j = 1; j < nz-1; ++j) {
+      Psi_prev_->f_[i][j] = Psi_->f_[i][j];
+    }
+  }
+  boundary(*Psi_, *Psi_prev_);
   // Iterate over non-boundary
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
