@@ -3,6 +3,7 @@
 #include "grid.h"
 #include "field.h"
 #include <math.h>
+#include <stdio.h>
 
 /*!
  * @file sor.cc
@@ -49,13 +50,13 @@ void SOR::coeff() {
 void SOR::step_1(const Field &jphi) {
   double nr = Grid_->nr_;
   double nz = Grid_->nz_;
-  // Save Psi_ to Psi_prev and Psi_prev to Psi_prev_prev
+  // Save Psi_ to Psi_prev
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
       Psi_prev_->f_[i][j] = Psi_->f_[i][j];
     }
   }
-  boundary(*Psi_, *Psi_prev_);
+
   // Iterate over non-boundary
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {

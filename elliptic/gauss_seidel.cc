@@ -3,8 +3,8 @@
 #include "grid.h"
 
 /*!
- * @file elliptic_solver.cc
- * @brief Base class implementation of EllipticSolver
+ * @file gauss_seidel.cc
+ * @brief Base class implementation of GaussSeidel
  * @section DESCRIPTION
  */
 
