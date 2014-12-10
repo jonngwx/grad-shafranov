@@ -14,6 +14,18 @@ void Grad_Output::parse_outputs(const char *out){
     while (tok){
       if (strcmp(tok,"j")==0){
           printf("output is %s\n", tok);
+          if (!find(CURRENT)) {
+              output_list.push_back(CURRENT);
+          } else {
+              printf("already there!\n");
+          }
+      } else if (strcmp(tok,"bt") == 0){
+          printf("bt\n");
+          if (!find(TOROIDAL_FIELD)) {
+              output_list.push_back(TOROIDAL_FIELD);
+          } else {
+              printf("bt already there!\n");
+          }
       }
       tok = strtok(NULL,",");
     }
