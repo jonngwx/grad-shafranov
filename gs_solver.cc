@@ -121,7 +121,6 @@ int main(int argc, char *argv[])
     // solve stuff
     solver->coeff();
     for (int m = 0; m < maxIterM; ++m) {
-        if (m != 0) calc_jphi(*grid, *jphi, *psi, *p, *g);
         psib->CalcB(psi, jphi);
         // test convergence
 
@@ -130,8 +129,8 @@ int main(int argc, char *argv[])
             if (n == 0) solver->step_1(*jphi);
             else {
               solver->step(*jphi);
-              calc_jphi(*grid, *jphi, *psi, *p, *g);
             }
+            calc_jphi(*grid, *jphi, *psi, *p, *g);
             if (solver->norm() < epsilon) break;
     }
   
