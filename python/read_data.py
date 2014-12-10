@@ -4,8 +4,8 @@ import h5py
 import re
 
 FLOAT='-?[0-9]*\.[0-9]*'
-
-DATA= '([A-Za-z]+): *((' + FLOAT+ ' *)*)'
+NAN = '-?nan'
+DATA= '([A-Za-z]+): *((' + FLOAT+ ' *|'+ NAN +' *)*)'
 
 def read_hdf5(filename):
     f = h5py.File(filename,'r')
