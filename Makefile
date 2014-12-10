@@ -1,13 +1,20 @@
 CXX = g++
 CXXFLAGS = -c -g -Wall -std=c++11 -Iinclude
 LIBS = -lboost_program_options -lhdf5_hl -lhdf5
+HDF = -DHDF_MODE
 PROGS = gs_solver
 
 .PHONY: all
 all: $(PROGS)
 
-gs_solver: gs_solver.o tsv_reader.o rhs_func.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o grad_output_hdf.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o
+gs_solver: gs_solver.o tsv_reader.o rhs_func.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o
 	$(CXX) -o $@ $^ $(LIBS) 
+
+gs_solver_hdf: gs_solver_hdf.o tsv_reader.o rhs_func.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o grad_output_hdf.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o
+	$(CXX) -o $@ $^ $(LIBS) $(HDF)
+
+gs_solver_hdf.o: gs_solver.cc
+	$(CXX) $(CXXFLAGS) $(HDF) $^ -o $@
 
 .PHONY: clean
 clean:

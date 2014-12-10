@@ -6,11 +6,14 @@
 #include "include/rhs_func.h"
 #include "include/grad_output.h"
 #include "include/grad_output_txt.h"
-#include "grad_output_hdf.h"
 #include "include/sor.h"
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
 #include "include/create_options.h"
+
+#ifdef HDF_MODE
+#include "grad_output_hdf.h"
+#endif 
 
 using namespace std;
 
@@ -93,7 +96,12 @@ int main(int argc, char *argv[])
     if (output_type == "tsv") {
         grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
     } else if (output_type == "hdf5") {
+        #ifdef HDF_MODE
         grad_output = new Grad_Output_Hdf(psi,grid,p,g,"this,is,a,test");
+        #else 
+        grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+        printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
+        #endif 
     } else {
         printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
         grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
