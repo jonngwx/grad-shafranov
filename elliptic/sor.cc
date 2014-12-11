@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <vector>
-
+#include <assert.h>
 
 /*!
  * @file sor.cc
@@ -70,6 +70,7 @@ void SOR::step(const Field &jphi) {
   // Save Psi_ to Psi_prev and Psi_prev to Psi_prev_prev
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
+      assert(!isnan(Psi_.f_[i][j]));
       Psi_prev_prev_.f_[i][j] = Psi_prev_.f_[i][j];
       Psi_prev_.f_[i][j] = Psi_.f_[i][j];
     }

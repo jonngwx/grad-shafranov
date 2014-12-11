@@ -9,7 +9,6 @@ Grid::Grid(double R0, double Rend, double z0, double zend, int nr, int nz)
     z_ = new double[nz_]();	
     dr_ = (Rend - R0)/(nr - 1.0);
     dz_ = (zend - z0)/(nz - 1.0);
-    // FIXME make the grid
     linspace(R0,Rend,nr,R_);
     linspace(z0,zend,nz,z_);
 }

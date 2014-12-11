@@ -7,6 +7,7 @@
 #include "include/grad_output.h"
 #include "include/grad_output_txt.h"
 #include "include/sor.h"
+#include "include/gauss_seidel.h"
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
 #include "include/create_options.h"
@@ -99,7 +100,7 @@ int main(int argc, char *argv[])
     // Elliptic solver for inner loop
     double omega_init = 0.5;
     double epsilon = 0.1;
-    EllipticSolver *solver = new SOR(*grid, *psi, omega_init);
+    EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, cd);
 
     /** determine which output type */
@@ -126,11 +127,15 @@ int main(int argc, char *argv[])
 
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
-            if (n == 0) solver->step_1(*jphi);
-            else solver->step(*jphi);
+//            if (n == 0) solver->step_1(*jphi);
+            solver->step(*jphi);
             calc_jphi(*grid, *jphi, *psi, *p, *g);
             if (solver->norm() < epsilon) break;
+            if (n == maxIterN-1) {
+                printf(" Elliptic solver reached maxIterN without convergence\n");
+            }
         }
+        
     }
   
     // output stuff
