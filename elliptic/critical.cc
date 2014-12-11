@@ -2,6 +2,7 @@
 #include <math.h>
 #include "field.h"
 #include "grid.h"
+#include <vector>
 
 Critical::Critical(const Grid &GridS, const Field &Psi, int max_iter, double epsilon) :
   Psi_(Psi),

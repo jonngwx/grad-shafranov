@@ -3,6 +3,7 @@
 
 #include "field.h"
 #include "grid.h"
+#include <vector>
 
 class EllipticSolver {
 public:
@@ -42,14 +43,11 @@ public:
   double residuals(const Field &Psi, const Field &Psi_prev);
   
 protected:
-  const Grid *Grid_;
-  Field *Psi_;
-  Field *Psi_prev_;
-// Coefficient arrays
-  double **a;
-  double **b;
-  double **c;
-  double **d;
-  double **f;
+  const Grid &Grid_;
+  Field &Psi_;
+  Field Psi_prev_;
+// Coefficients
+  std::vector<double> A;
+  double B, C;
 };
 #endif

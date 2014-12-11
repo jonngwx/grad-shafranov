@@ -6,7 +6,7 @@
 class Boundary {
   public:
     virtual ~Boundary() {}
-    virtual int CalcB(Field &psi, Field &jphi) = 0;
+    virtual int CalcB(Field* psi, Field* jphi) = 0;
 };
 
 #endif // BOUNDARY_H_

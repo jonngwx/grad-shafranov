@@ -4,6 +4,8 @@
 #include "elliptic_solver.h"
 #include "field.h"
 #include "grid.h"
+#include <vector>
+
 
 class GaussSeidel : public EllipticSolver {
 public:

@@ -1,13 +1,13 @@
 import numpy as np
 import io
-import h5py
 import re
 
 FLOAT='-?[0-9]*\.[0-9]*'
-
-DATA= '([A-Za-z]+): *((' + FLOAT+ ' *)*)'
+NAN = '-?nan'
+DATA= '([A-Za-z]+): *((' + FLOAT+ ' *|'+ NAN +' *)*)'
 
 def read_hdf5(filename):
+    import h5py
     f = h5py.File(filename,'r')
     fields = {}
     for data in f.keys():

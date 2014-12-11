@@ -8,13 +8,16 @@
 
 class SlowBoundary : public Boundary {
   public:
-    SlowBoundary(Grid &grid, CoilData &cond_data); 
+    SlowBoundary(Grid* grid, CoilData* cond_data); 
     ~SlowBoundary();
-    int CalcB(Field &psi, Field &jphi);
+    int CalcB(Field* psi, Field* jphi);
   private:
-    Grid &grid_;
-    CoilData &cond_data_;
-
+    int nr_;
+    int nz_;
+    CoilData* cond_data_;
+    int perim_;
+    double ***g_plasma_;
+    void LtoIJ(int ar[], int l);
 };
 
 #endif // SLOWBOUNDARY_H_
