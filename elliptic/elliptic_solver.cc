@@ -2,6 +2,7 @@
 #include <math.h>
 #include "field.h"
 #include <stdio.h>
+#include <vector>
 
 /*!
  * @file elliptic_solver.cc
@@ -12,36 +13,10 @@
 EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi) :
   Grid_(Grid),
   Psi_(Psi),
-  Psi_prev_(Grid) {
-  a = new double*[Grid.nr_];
-  b = new double*[Grid.nr_];
-  c = new double*[Grid.nr_];
-  d = new double*[Grid.nr_];
-  f = new double*[Grid.nr_];
-  for(int i = 0; i < Grid.nr_; ++i) {
-    a[i] = new double[Grid.nz_]();
-    b[i] = new double[Grid.nz_]();
-    c[i] = new double[Grid.nz_]();
-    d[i] = new double[Grid.nz_]();
-    f[i] = new double[Grid.nz_]();
-  }
-}
+  Psi_prev_(Grid),
+  A(Grid.nr_){}
 
-EllipticSolver::~EllipticSolver(){
-  for (int i = 0; i < Grid_.nr_; ++i) {
-    delete [] a[i];
-    delete [] b[i];
-    delete [] c[i];
-    delete [] d[i];
-    delete [] f[i];
-  }
-  delete [] a;
-  delete [] b;
-  delete [] c;
-  delete [] d;
-  delete [] f;
-
-}
+EllipticSolver::~EllipticSolver(){}
 
 /*!
  * @brief Calculate maximum of |Psi - Psi_prev| over grid

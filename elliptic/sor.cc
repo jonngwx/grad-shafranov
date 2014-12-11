@@ -4,6 +4,8 @@
 #include "field.h"
 #include <math.h>
 #include <stdio.h>
+#include <vector>
+
 
 /*!
  * @file sor.cc
@@ -23,22 +25,13 @@ SOR::~SOR() {}
  * @brief Calculates coefficients for iteration
  */
 void SOR::coeff() {
-  double dr = Grid_.dr_;
-  double dz = Grid_.dz_;
-  double nr = Grid_.nr_;
-  double nz = Grid_.nz_;
-  double *r = Grid_.R_;
-  double e = 2*(1/(dr*dr) + 1/(dz*dz));
-  for (int i = 1; i < nr-1; ++i) {
-    for(int j = 1; j < nz-1; ++j) {
-      e = 2*(1/(dr*dr) + 1/(dz*dz));
-      a[i][j] = (1/(dr*dr) + 1/(2*r[i]*dr))*(1/e);
-      b[i][j] = (1/(dz*dz))*(1/e);
-      c[i][j] = b[i][j];
-      d[i][j] = (1/(dr*dr) - 1/(2*r[i]*dr))*(1/e);
-      f[i][j] = 1;
+    double dr = Grid_.dr_;
+    double dz = Grid_.dz_;
+    B = (dr*dr*dz*dz)/(2*dz*dz + 2*dr*dr);
+    C = 1/(dz*dz);
+    for (int i = 0; i < Grid_.nr_; ++i) {
+        A[i] = 1/(2*Grid_.R_[i]*dr) + 1/(dr*dr);
     }
-  }
 }
 
 /*!
@@ -49,9 +42,10 @@ void SOR::step_1(const Field &jphi) {
   double nr = Grid_.nr_;
   double nz = Grid_.nz_;
   // Save Psi_ to Psi_prev
-  for (int i = 1; i < nr-1; ++i) {
-    for(int j = 1; j < nz-1; ++j) {
+  for (int i = 0; i < nr; ++i) {
+    for(int j = 0; j < nz; ++j) {
       Psi_prev_.f_[i][j] = Psi_.f_[i][j];
+      Psi_prev_prev_.f_[i][j] = Psi_prev_.f_[i][j];
     }
   }
 
@@ -79,12 +73,12 @@ void SOR::step(const Field &jphi) {
     }
   }
   // Enforce boundary condition on Psi_
-  boundary(Psi_, Psi_prev_);
+//  boundary(Psi_, Psi_prev_);
   double om = omega();
   // Iterate over non-boundary region
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
-      Psi_.f_[i][j] = om*(a[i][j]*Psi_.f_[i-1][j] + b[i][j]*Psi_.f_[i][j-1] + c[i][j]*Psi_prev_.f_[i][j+1] + d[i][j]*Psi_prev_.f_[i+1][j] + f[i][j]*jphi.f_[i][j]) + (1-om)*Psi_prev_.f_[i][j];
+      Psi_.f_[i][j] = (1-om)*Psi_prev_.f_[i][j] + om*B*(-jphi.f_[i][j]*muo*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A + Psi_.f_[i-1][j]*A + Psi_.f_[i,j-1]*C - Psi_prev_.f_[i,j+1]*C);
     }
   }
 }

@@ -45,11 +45,8 @@ protected:
   const Grid &Grid_;
   Field &Psi_;
   Field Psi_prev_;
-// Coefficient arrays
-  double **a;
-  double **b;
-  double **c;
-  double **d;
-  double **f;
+// Coefficients
+  std::vector<double> A;
+  double B, C;
 };
 #endif
