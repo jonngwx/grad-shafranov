@@ -5,8 +5,9 @@
 #include <hdf5.h>
 #include <hdf5_hl.h>
 
-Grad_Output_Hdf::Grad_Output_Hdf(Field* f0, Grid* grid0, RHSfunc * p0, RHSfunc * g0, const char* outputs) {
+Grad_Output_Hdf::Grad_Output_Hdf(Field* f0, Field* jphi0, Grid* grid0, RHSfunc * p0, RHSfunc * g0, const char* outputs) {
     f = f0;
+    jphi = jphi0;
     p = p0;
     g = g0;
     grid = grid0;
@@ -56,6 +57,25 @@ void Grad_Output_Hdf::write_output(const char* filename){
         }
     }
     status = H5LTmake_dataset(file_id,"/g",2,dims,H5T_NATIVE_DOUBLE,x);
+
+    /* Do custom output */
+    for (auto i : output_list){
+        switch(i){
+        case CURRENT:
+            twod_to_oned(jphi->f_, x, nr, nz);
+            status = H5LTmake_dataset(file_id,"/j",2,dims,H5T_NATIVE_DOUBLE,x);
+            break;
+        case TOROIDAL_FIELD:
+            for (int i = 0; i < nr; i++){
+                for (int j = 0; j < nz; j++){
+                    x[i*nz + j] = g->eval(f->f_[i][j])/grid->R_[i];
+                }
+            }
+            status = H5LTmake_dataset(file_id,"/bt",2,dims,H5T_NATIVE_DOUBLE,x);
+            break;
+        }
+    }
+
     /* Close the file. */
     status = H5Fclose(file_id);
     delete [] x;

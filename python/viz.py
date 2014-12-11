@@ -19,6 +19,10 @@ def plot(filename,format):
     if F is None:
         print "Error reading file " + filename
         return None
+    for i in F.keys():
+        if np.isnan(np.sum(F[i])):
+            print "Warning: nan in data, exiting."
+            return F
     plt.figure(1)
     cfig = plt.subplot(3,1,1)
     plt.contour(F['R'],F['z'],F['psi'],colors='k')

@@ -105,17 +105,17 @@ int main(int argc, char *argv[])
     /** determine which output type */
     Grad_Output *grad_output;
     if (output_type == "tsv") {
-        grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"j,bt,bt,this,is,a,test");
     } else if (output_type == "hdf5") {
         #ifdef HDF_MODE
-        grad_output = new Grad_Output_Hdf(psi,grid,p,g,"this,is,a,test");
+        grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,"j,bt,this,is,a,test");
         #else 
-        grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"this,is,a,test");
         printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
         #endif 
     } else {
         printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
-        grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"this,is,a,test");
     }
 
     // solve stuff
