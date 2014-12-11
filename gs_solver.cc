@@ -61,16 +61,16 @@ int main(int argc, char *argv[]){
     }
   }
 
-  PGData *gd = NewPGDataFromFile(vm["p-filename"].as<string>(),1);
-  PGData *pd = NewPGDataFromFile(vm["g-filename"].as<string>(),1);
-  CoilData *cd = NewCoilDataFromFile(vm["coil-data-name"].as<string>(),1);
+  PGData gd; gd.load_from_tsv(vm["p-filename"].as<string>(),1);
+  PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
+  CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
   
   Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
   Field *psi = new Field(nr,nz);
   Field *jphi = new Field(nr,nz);
     
-  RHSfunc *p = new RHSfunc(pgtype, pd);
-  RHSfunc *g = new RHSfunc(pgtype, gd);
+  RHSfunc *p = new RHSfunc(pgtype, &pd);
+  RHSfunc *g = new RHSfunc(pgtype, &gd);
 
   for (int i = 0; i < grid->nr_; ++i) {
     for (int j = 0; j < grid->nz_; ++j) {
@@ -83,7 +83,7 @@ int main(int argc, char *argv[]){
   double omega_init = 0.5;
   double epsilon = 0.1;
   EllipticSolver *solver = new SOR(*grid, *psi, omega_init);
-  Boundary *psib = new SlowBoundary(*grid, *cd);
+  Boundary *psib = new SlowBoundary(*grid, cd);
 
   /** determine which output type */
   Grad_Output *grad_output = new Grad_Output_Txt(psi,grid,p,g,"this,is,a,test");
@@ -116,9 +116,6 @@ int main(int argc, char *argv[]){
   delete psib;
   delete jphi;
   delete solver;
-  DeletePGData(pd);
-  DeletePGData(gd);
-  DeleteCoilData(cd);
 }
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g){

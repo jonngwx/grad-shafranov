@@ -9,6 +9,12 @@ all: $(PROGS)
 gs_solver: gs_solver.o tsv_reader.o rhs_func.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o
 	$(CXX) -o $@ $^ $(LIBS) 
 
+tsv_reader_example: tsv_reader_example.o tsv_reader.o 
+	$(CXX) -o $@ $^ $(LIBS)
+
+coil_data_example: coil_data_example.o tsv_reader.o
+	$(CXX) -o $@ $^ $(LIBS)
+
 .PHONY: clean
 clean:
 	$(RM) -r *.o

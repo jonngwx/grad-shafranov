@@ -7,136 +7,70 @@
 #include <iterator>
 #include <string>
 #include <vector>
-#include <assert.h>
 #include <iostream>
 #include <fstream>
-
 #include "include/tsv_reader.h"
 
-Table * NewTableFromFile(const std::string tsv_file_name) {
-  printf("Not skipping any header lines\n");
-  return NewTableFromFile(tsv_file_name, 0);
-}
-
-Table * NewTableFromFile(const std::string tsv_file_name, const int header_lines) {
-
-  printf("Will try reading from: %s\n", tsv_file_name.c_str());
+int Table::load_from_tsv(const std::string tsv_file_name, int header_lines) {
 
   std::ifstream filein(tsv_file_name.c_str());
   std::string line;
 
   if (!filein.is_open()) {
     perror("Error while opening file");
+    return kOpenFileError;
   }
-  std::vector< std::vector<double> > tsv_table;
   
+  int lines_read_in = 0;
   //skip 'header_lines' lines
   for (int i = 0; i < header_lines; ++i) {
     std::getline(filein,line);
+    lines_read_in++;
   }
   std::vector<double> doubleVector; 
   while (std::getline(filein, line)) {
+    lines_read_in++;
     std::istringstream ss(line);
     std::istream_iterator<std::string> begin(ss), end;
 
     //putting all the tokens in the vector  
     std::vector<std::string> arrayTokens(begin, end);
 
+    if(lines_read_in == header_lines +1){
+      num_columns_ = arrayTokens.size();
+    } else if ( arrayTokens.size() != num_columns_ ){
+      std::cout << "Inconsistent number of columns in line " << lines_read_in << "\n";
+      return kInconsistentColumnNumberError;
+    }
     doubleVector.resize(arrayTokens.size());
-    
+
     //convert the vector of strings to a vector of doubles
     std::transform(arrayTokens.begin(), arrayTokens.end(), doubleVector.begin(), [](std::string const& val){ return std::stod(val);});
 
-    //Should we now delete the arrayTokens vector?
-
-    tsv_table.push_back(doubleVector);
+    data_.push_back(doubleVector);
 
   }
   if (filein.bad()) {
     perror("Error while reading file");
+    return kFileReadError;
   }
 
+  num_rows_= data_.size();
+  
+  return 0;
+}
 
-
-  int num_tsv_lines = tsv_table.size();
-  int num_cols = doubleVector.size(); 
-  
-  Table * td = new Table();
-  assert (td != NULL);
-  td->num_entries = num_tsv_lines;
-  td->num_columns = num_cols;
-  
-  td->data = new double *[num_cols];
-  for(int i = 0; i < num_cols; ++i) {
-    td->data[i] = new double[num_tsv_lines];
-    assert(td->data[i] != NULL);
-  }
-  
-  for (int i = 0; i < num_cols; ++i) {
-    for (int j = 0; j < num_tsv_lines; ++j){
-      td->data[i][j] = tsv_table[j][i];
+int CoilData::load_from_tsv(const std::string tsv_file_name, int header_lines) {
+  int status = Table::load_from_tsv(tsv_file_name, header_lines);
+  if (status !=0){
+    return status;
+  } else {
+    if (num_columns_ != 3){
+      std::cout << "Error: CoilData must have three columns.\n";
+      return kNotThreeColumnsError;
+    } else {
+      return 0;
     }
-  }
-  
-  return td;
+  }  
 }
 
-void DeleteTable(Table * td){
-  assert(td != NULL);
-  printf("Deleting a tsv struct\n");
-  for(int i = 0; i < td->num_columns; ++i){
-    assert(td->data[i] != NULL);
-    delete td->data[i];
-  }
-  delete td;
-}
-
-//-------------------------------------------------------
-//functions for the CoilData struct
-
-CoilData *  NewCoilDataFromFile(const std::string tsv_file_name){
-  return NewCoilDataFromFile(tsv_file_name, 0);
-}
-
-CoilData * NewCoilDataFromFile(const std::string tsv_file_name, const int header_lines){
-  Table * td = NewTableFromFile(tsv_file_name, header_lines);
-  assert(td->num_columns==3);
-  CoilData * cd = new CoilData();
-  cd->data=td->data;
-  cd->num_columns=td->num_columns;
-  cd->num_entries=td->num_entries;
-  cd->r_locs = cd->data[0];
-  cd->z_locs = cd->data[1];
-  cd->currents = cd->data[2];
-
-  return cd;
-}
-
-void DeleteCoilData(CoilData * cd){
-  DeleteTable(cd);
-}
-
-//--------------------------------------------------------
-// functions for the PGData struct
-
-PGData *  NewPGDataFromFile(const std::string tsv_file_name){
-  return NewPGDataFromFile(tsv_file_name, 0);
-}
-
-PGData * NewPGDataFromFile(const std::string tsv_file_name, const int header_lines){
-  Table * td = NewTableFromFile(tsv_file_name, header_lines);
-  assert(td->num_columns==2);
-  
-  PGData * pgd = new PGData();
-  pgd->data=td->data;
-  pgd->num_columns=td->num_columns;
-  pgd->num_entries=td->num_entries;
-  pgd->psis = pgd->data[0];
-  pgd->values = pgd->data[1];
-
-  return pgd;
-}
-
-void DeletePGData(PGData * pgd){
-  DeleteTable(pgd);
-}
