@@ -88,8 +88,8 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
   }
   else
   {
-      store(parse_config_file(ifs, config_file_options), vm);
-      notify(vm);
+    store(parse_config_file(ifs, config_file_options), vm);
+    notify(vm);
   }
 
   return 0;
