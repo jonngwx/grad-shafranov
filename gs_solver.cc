@@ -62,12 +62,7 @@ int main(int argc, char *argv[])
             exit(2);
         }
     }
-    std::string output_type;
-    if (!vm.count("output-type")) {
-        output_type = "txt";
-    } else {
-        output_type = vm["output-type"].as<string>();
-    }
+    std::string output_type = vm["output-type"].as<string>();
   
     PGData gd; gd.load_from_tsv(vm["p-filename"].as<string>(),1);
     PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
