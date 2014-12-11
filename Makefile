@@ -19,6 +19,12 @@ gs_solver_hdf.o: gs_solver.cc
 elliptic_test: elliptic/elliptic_solver.o elliptic/elliptic_test.o elliptic/sor.o grid.o field.o elliptic/gauss_seidel.o
 	$(CXX) -o $@ $^ $(LIBS) 
 
+tsv_reader_example: tsv_reader_example.o tsv_reader.o 
+	$(CXX) -o $@ $^ $(LIBS)
+
+coil_data_example: coil_data_example.o tsv_reader.o
+	$(CXX) -o $@ $^ $(LIBS)
+
 .PHONY: clean
 clean:
 	$(RM) -r *.o

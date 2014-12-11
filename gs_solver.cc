@@ -63,22 +63,18 @@ int main(int argc, char *argv[])
             exit(2);
         }
     }
-    std::string output_type;
-    if (!vm.count("output-type")) {
-        output_type = "txt";
-    } else {
-        output_type = vm["output-type"].as<string>();
-    }
-    PGData *gd = NewPGDataFromFile(vm["g-filename"].as<string>(),1);
-    PGData *pd = NewPGDataFromFile(vm["p-filename"].as<string>(),1);
-    CoilData *cd = NewCoilDataFromFile(vm["coil-data-name"].as<string>(),1);
-
+    std::string output_type = vm["output-type"].as<string>();
+  
+    PGData gd; gd.load_from_tsv(vm["p-filename"].as<string>(),1);
+    PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
+    CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
+  
     Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
 
-    RHSfunc *p = new RHSfunc(pgtype, pd);
-    RHSfunc *g = new RHSfunc(pgtype, gd);
+    RHSfunc *p = new RHSfunc(pgtype, &pd);
+    RHSfunc *g = new RHSfunc(pgtype, &gd);
     
     double r_squared;
     double Rg = 7.5;
@@ -102,6 +98,8 @@ int main(int argc, char *argv[])
     double epsilon = 0.1;
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, cd);
+    EllipticSolver *solver = new SOR(*grid, *psi, omega_init);
+    Boundary *psib = new SlowBoundary(grid,  &cd);
 
     /** determine which output type */
     Grad_Output *grad_output;
@@ -127,7 +125,7 @@ int main(int argc, char *argv[])
 
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
-//            if (n == 0) solver->step_1(*jphi);
+            if (n == 0) solver->step_1(*jphi);
             solver->step(*jphi);
             calc_jphi(*grid, *jphi, *psi, *p, *g);
             if (solver->norm() < epsilon) break;
@@ -135,22 +133,17 @@ int main(int argc, char *argv[])
                 printf(" Elliptic solver reached maxIterN without convergence\n");
             }
         }
-        
-    }
-  
-    // output stuff
-    std::string full_output_name = vm["output-name"].as<string>()+".txt";
-    grad_output->write_output(full_output_name.c_str());
 
-    delete grad_output;
-    delete psi;
-    delete psib;
-    delete jphi;
-    delete solver;
-    delete grid;
-    DeletePGData(pd);
-    DeletePGData(gd);
-    DeleteCoilData(cd);
+  // output stuff
+  std::string full_output_name = vm["output-name"].as<string>()+".txt";
+  grad_output->write_output(full_output_name.c_str());
+
+  delete grad_output;
+  delete grid;
+  delete psi;
+  delete psib;
+  delete jphi;
+  delete solver;
 }
 
 int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g)

@@ -1,86 +1,82 @@
 /**
  * @file tsv_data.h
  *
- * Contains declarations for the struct Table 
+ * Contains declarations for the class Table
  * and methods pertaining to it.
- * Also describes its sub-structs CoilData and PGData
- * and methods for creating and destroying them.
+ * Also describes its sub-classes CoilData and PGData.
  *
  * @author Jacob Schwartz
- * @bug Should we change this from a struct to a class? Implement proper constructors and destructors? 
  */
 
 #ifndef TSV_DATA_H_
 #define TSV_DATA_H_
 
+#include <vector>
 #include <string>
 
-/** 
- * A basic container for a 2D table or array of doubles.
+/*!
+ * @brief A basic container for a 2D table or array of doubles.
  * data can be set and accessed like
- * data[i][j].
+ * data(row, col)
  */
-struct Table {
-  double ** data; /**< The two-d array of actual data. */
-  int num_columns; /**< For keeping track of the array's size. */
-  int num_entries; /**< For keeping track of the array's size. */
+class Table {
+ protected:
+  const static int kOpenFileError = 1;
+  const static int kInconsistentColumnNumberError = 2;
+  const static int kFileReadError = 3;
+  size_t num_columns_; /**< For keeping track of the array's size. */
+  size_t num_rows_;    /**< For keeping track of the array's size. */
+  std::vector<std::vector<double> > data_;
+
+ public:
+  /*!
+   * @brief Reads in a tsv file and creates a Table.
+   * Detects the number of rows & columns in the file programmatically.
+   * Behavior if some rows are shorter than others has not been tested.
+   * @param [in] filename the filename, as a string
+   * @param [in] header_lines how many inital lines to skip
+   * @return 0 if successful, nonzero if error.
+   */
+  virtual int load_from_tsv(const std::string filename, int header_lines = 0);
+  int num_columns() const { return num_columns_; }
+  int num_rows() const { return num_rows_; }
+  double data(int row, int column) const { return data_[row][column]; }
 };
-typedef struct Table Table;
 
-struct CoilData : Table {
-  double * r_locs;
-  double * z_locs;
-  double * currents;
+class CoilData : public Table {
+ private:
+  const static int kNotThreeColumnsError = 4;
+
+ public:
+  /*!
+   * @brief Reads in a tsv file and creates a CoilData,
+   * Inherits from Table, then checks that there is the proper number of
+   * columns.
+   * @param [in] filename the filename, as a string
+   * @param [in] header_lines how many inital lines to skip
+   * @return 0 if successful, nonzero if error.
+   */
+  int load_from_tsv(const std::string filename, int header_lines = 0) override;
+  double r(int i) const { return data_[i][0]; }
+  double z(int i) const { return data_[i][1]; }
+  double current(int i) const { return data_[i][2]; }
 };
-typedef struct CoilData CoilData;
 
-struct PGData : Table {
-  double * psis;
-  double * values;
+class PGData : public Table {
+ private:
+  const static int kNotTwoColumnsError = 4;
+
+ public:
+  /*!
+  * @brief Reads in a tsv file and creates a PGData,
+  * Inherits from Table, then checks that there is the proper number of columns.
+  * @param [in] filename the filename, as a string
+  * @param [in] header_lines how many inital lines to skip
+  * @return 0 if successful, nonzero if error.
+  */
+  int load_from_tsv(const std::string filename, int header_lines = 0) override;
+  double psi(int i) const { return data_[i][0]; }
+  double value(int i) const { return data_[i][1]; }
 };
-typedef struct PGData PGData;
-
-/**
- * @brief Reads in a tsv file and creates a Table.
- * Detects the number of rows & columns in the file programmatically.
- * Behavior if some rows are shorter than others has not been tested.
- */
-Table * NewTableFromFile(const std::string tsv_file_name, const int header_lines);
-Table * NewTableFromFile(const std::string tsv_file_name);
-
-/**
- * @brief Deletes a table.
- * May be memory leaks...
- */
-void DeleteTable(Table * td);
-
-/**
- * @brief Reads in a tsv file and creates a CoilData.
- * Calls NewTableFromFile and checks that there are 3 columns.
- * @see NewTableFromFile
- */
-CoilData * NewCoilDataFromFile(const std::string tsv_file_name, const int header_lines);
-CoilData * NewCoilDataFromFile(const std::string tsv_file_name);
-
-/** @brief Deletes a CoilData
- *  Calls the superstruct's DeleteTable.
- *  @see DeleteTable.
- */ 
-void DeleteCoilData(CoilData * cd);
-
-/**
- * @brief Reads in a tsv file and creates a PGData.
- * Calls NewTableFromFile and checks that there are 3 columns.
- * @see NewTableFromFile
- */
-PGData * NewPGDataFromFile(const std::string tsv_file_name, const int header_lines);
-PGData * NewPGDataFromFile(const std::string tsv_file_name);
-
-/** @brief Deletes a PGData
- *  Calls the superstruct's DeleteTable.
- *  @see DeleteTable.
- */ 
-void DeletePGData(PGData * pgd);
-
 
 #endif
