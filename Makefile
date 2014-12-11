@@ -25,6 +25,7 @@ coil_data_example: coil_data_example.o tsv_reader.o
 .PHONY: clean
 clean:
 	$(RM) -r *.o
+	$(RM) include/*.o
 	$(RM) .depend
 
 %.o: %.cc
