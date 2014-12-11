@@ -39,6 +39,7 @@ void SOR::coeff() {
  * @param jphi current evaluated at current Psi
  */
 void SOR::step_1(const Field &jphi) {
+  const double mu0 = 0.0000012566370614; // in SI units
   double nr = Grid_.nr_;
   double nz = Grid_.nz_;
   // Save Psi_ to Psi_prev
@@ -52,7 +53,7 @@ void SOR::step_1(const Field &jphi) {
   // Iterate over non-boundary
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
-      Psi_.f_[i][j] = a[i][j]*Psi_prev_.f_[i+1][j] + b[i][j]*Psi_.f_[i-1][j] + c[i][j]*Psi_.f_[i][j+1] + d[i][j]*Psi_.f_[i][j-1] - f[i][j]*jphi.f_[i][j];
+      Psi_.f_[i][j] = B*(-jphi.f_[i][j]*mu0*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A[i+1] + Psi_.f_[i-1][j]*A[i-1] + Psi_.f_[i][j-1]*C - Psi_prev_.f_[i][j+1]*C);
     }
   }
   iter(omega_init_);
@@ -63,6 +64,7 @@ void SOR::step_1(const Field &jphi) {
  * @param jphi current evaluated at current Psi
  */
 void SOR::step(const Field &jphi) {
+  const double mu0 = 0.0000012566370614; // in SI units
   double nr = Grid_.nr_;
   double nz = Grid_.nz_;
   // Save Psi_ to Psi_prev and Psi_prev to Psi_prev_prev
@@ -78,7 +80,7 @@ void SOR::step(const Field &jphi) {
   // Iterate over non-boundary region
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
-      Psi_.f_[i][j] = (1-om)*Psi_prev_.f_[i][j] + om*B*(-jphi.f_[i][j]*muo*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A + Psi_.f_[i-1][j]*A + Psi_.f_[i,j-1]*C - Psi_prev_.f_[i,j+1]*C);
+      Psi_.f_[i][j] = (1-om)*Psi_prev_.f_[i][j] + om*B*(-jphi.f_[i][j]*mu0*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A[i+1] + Psi_.f_[i-1][j]*A[i-1] + Psi_.f_[i][j-1]*C - Psi_prev_.f_[i][j+1]*C);
     }
   }
 }

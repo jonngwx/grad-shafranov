@@ -3,6 +3,7 @@
 
 #include "field.h"
 #include "grid.h"
+#include <vector>
 
 class EllipticSolver {
 public:

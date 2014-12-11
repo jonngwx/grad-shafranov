@@ -4,6 +4,7 @@
 #include "elliptic_solver.h"
 #include "field.h"
 #include "grid.h"
+#include <vector>
 
 class SOR : public EllipticSolver {
 public:

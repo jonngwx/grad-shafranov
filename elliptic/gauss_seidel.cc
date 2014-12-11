@@ -45,7 +45,7 @@ void GaussSeidel::step(const Field &jphi){
 //  boundary(Psi_prev_, Psi_);
   for (int i = 0; i < nr_; ++i) {
     for (int j = 0 ;j < nz_; ++j) {
-      Psi_.f_[i][j] = B*(-jphi.f_[i][j]*muo*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A + Psi_.f_[i-1][j]*A + Psi_.f_[i,j-1]*C - Psi_prev_.f_[i,j+1]*C);
+      Psi_.f_[i][j] = B*(-jphi.f_[i][j]*mu0*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A + Psi_.f_[i-1][j]*A + Psi_.f_[i,j-1]*C - Psi_prev_.f_[i,j+1]*C);
     }
   }
   iter();
