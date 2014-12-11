@@ -35,9 +35,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("error-tol-M", po::value<double>()->default_value(1.0e-4), "error tolerance outer loop")
       ("max-iter-crit", po::value<int>()->default_value(100), "max iterations for solving for the critical points")
       ("error-tol-crit",po::value<double>()->default_value(1.0e-3), "converge criterion for finding critical points")
-      ("output-type", po::value<std::string>()->default_value("tsv"), "tsv or hdf5")
-      ("output-name", po::value<std::string>()->default_value("cougar.out"), "prefix for output filename")
-      ;
+     ;
 
   /* For pgtype = "alpha"
    * Alpha, beta and p0 (pressure at magnetic axis)
@@ -59,29 +57,26 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("j-phi-Zg", po::value<double>(), "some variable Zg")
       ;
 
-  // Hidden options, will be allowed both on command line and
-  // in config file, but will not be shown to the user.
-  po::options_description hidden("Hidden options");
-  hidden.add_options()
-      ("unused", po::value< std::vector<std::string> >(), "placeholder")
+  po::options_description outputs("Output format");
+  outputs.add_options()
+      ("output-fields", po::value<std::string>(), "comma-separated list of J,Bt,...")
+      ("output-type", po::value<std::string>()->default_value("tsv"), "tsv or hdf5")
+      ("output-name", po::value<std::string>()->default_value("cougar.out"), "prefix for output filename")
       ;
 
   po::options_description cmdline_options;
-  cmdline_options.add(generic).add(config).add(pgtype_alpha).add(j_phi).add(hidden);
+  cmdline_options.add(generic).add(config).add(pgtype_alpha).add(j_phi).add(outputs);
 
   po::options_description config_file_options;
-  config_file_options.add(config).add(pgtype_alpha).add(j_phi).add(hidden);
+  config_file_options.add(config).add(pgtype_alpha).add(j_phi).add(outputs);
 
   // Add to the visible options list (which will be returned
   // for possible printing later)
-  visible.add(generic).add(config).add(pgtype_alpha).add(j_phi);
-  
-  po::positional_options_description p;
-  p.add("unused", -1);
+  visible.add(generic).add(config).add(pgtype_alpha).add(j_phi).add(outputs);
   
   //store in vm
   store(po::command_line_parser(ac, av).
-        options(cmdline_options).positional(p).run(), vm);
+        options(cmdline_options).run(), vm);
   notify(vm);
   
   std::string config_file = vm["config"].as<std::string>();
