@@ -3,6 +3,7 @@
 #include "field.h"
 #include <stdio.h>
 #include <vector>
+#include <assert.h>
 
 /*!
  * @file elliptic_solver.cc
@@ -33,6 +34,7 @@ double EllipticSolver::norm_max(const Field &Psi, const Field &Psi_prev) {
         max = abs(Psi.f_[i][j] - Psi_prev.f_[i][j]);
     }
   }
+  assert(!isnan(max));
   return max;
 }
 

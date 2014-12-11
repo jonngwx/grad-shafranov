@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <vector>
-
+#include <assert.h>
 
 /*!
  * @file sor.cc
@@ -70,6 +70,7 @@ void SOR::step(const Field &jphi) {
   // Save Psi_ to Psi_prev and Psi_prev to Psi_prev_prev
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {
+      assert(!isnan(Psi_.f_[i][j]));
       Psi_prev_prev_.f_[i][j] = Psi_prev_.f_[i][j];
       Psi_prev_.f_[i][j] = Psi_.f_[i][j];
     }
@@ -89,7 +90,15 @@ void SOR::step(const Field &jphi) {
  * @brief Calculate over-relaxation parameter omega for finite differencing at each iteration
  */
 double SOR::omega() {
-  double delta = norm_max(Psi_prev_, Psi_prev_prev_)/norm_max(Psi_, Psi_prev_);
-  return 2/(1 + sqrt(1 - delta));
+  double omega;
+  if (norm_max(Psi_, Psi_prev_) == 0) {
+    omega = 0.5;
+  }
+  else {
+    double delta = norm_max(Psi_prev_, Psi_prev_prev_)/norm_max(Psi_, Psi_prev_);
+    omega = 2/(1 + sqrt(1 - delta));
+  }
+  assert(!isnan(omega));
+  return omega;
 }
 

@@ -1,7 +1,10 @@
-#include "gauss-seidel.h"
+#include "gauss_seidel.h"
 #include "field.h"
 #include "grid.h"
+#include <assert.h>
 #include <vector>
+#include "elliptic_solver.h"
+#include <stdio.h>
 
 
 /*!
@@ -16,7 +19,7 @@ GaussSeidel::GaussSeidel(const Grid &GridS, Field &Psi) :
 /*!
  * @brief Calculates coefficients for iteration
  */
-void coeff(const Grid &GridS) {
+void GaussSeidel::coeff() {
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
     B = (dr*dr*dz*dz)/(2*dz*dz + 2*dr*dr);
@@ -24,6 +27,10 @@ void coeff(const Grid &GridS) {
     for (int i = 0; i < Grid_.nr_; ++i) {
         A[i] = 1/(2*Grid_.R_[i]*dr) + 1/(dr*dr);
     }
+}
+
+void GaussSeidel::step_1(const Field &jphi){
+  step(jphi);
 }
 
 /*!
@@ -43,10 +50,10 @@ void GaussSeidel::step(const Field &jphi){
   }
 // Copy over boundary values
 //  boundary(Psi_prev_, Psi_);
-  for (int i = 0; i < nr_; ++i) {
-    for (int j = 0 ;j < nz_; ++j) {
-      Psi_.f_[i][j] = B*(-jphi.f_[i][j]*mu0*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A + Psi_.f_[i-1][j]*A + Psi_.f_[i,j-1]*C - Psi_prev_.f_[i,j+1]*C);
+  for (int i = 1; i < nr-1; ++i) {
+    for (int j = 1;j < nz-1; ++j) {
+      Psi_.f_[i][j] = B*(-jphi.f_[i][j]*mu0*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A[i] + Psi_.f_[i-1][j]*A[i] + Psi_.f_[i][j-1]*C - Psi_prev_.f_[i][j+1]*C);
     }
   }
-  iter();
+  iter(0.5);
 }

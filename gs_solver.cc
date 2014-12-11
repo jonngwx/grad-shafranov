@@ -7,6 +7,7 @@
 #include "include/grad_output.h"
 #include "include/grad_output_txt.h"
 #include "include/sor.h"
+#include "include/gauss_seidel.h"
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
 #include "include/create_options.h"
@@ -95,8 +96,8 @@ int main(int argc, char *argv[])
     // Elliptic solver for inner loop
     double omega_init = 0.5;
     double epsilon = 0.1;
-    EllipticSolver *solver = new SOR(*grid, *psi, omega_init);
-    Boundary *psib = new SlowBoundary(grid,  &cd);
+    EllipticSolver *solver = new GaussSeidel(*grid, *psi);
+    Boundary *psib = new SlowBoundary(grid, &cd);
 
     /** determine which output type */
     Grad_Output *grad_output;
@@ -114,19 +115,23 @@ int main(int argc, char *argv[])
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"this,is,a,test");
     }
 
-  // solve stuff
-  solver->coeff();
-  for (int m = 0; m < maxIterM; ++m) {
-    psib->CalcB(psi, jphi);
-    // test convergence
-    // Iterate through elliptic solver
-    for (int n = 0; n < maxIterN; ++n) {
-      if (n == 0) solver->step_1(*jphi);
-      else solver->step(*jphi);
-      calc_jphi(*grid, *jphi, *psi, *p, *g);
-      if (solver->norm() < epsilon) break;
+    // solve stuff
+    solver->coeff();
+    for (int m = 0; m < maxIterM; ++m) {
+        psib->CalcB(psi, jphi);
+        // test convergence
+
+        // Iterate through elliptic solver
+        for (int n = 0; n < maxIterN; ++n) {
+            if (n == 0) solver->step_1(*jphi);
+            solver->step(*jphi);
+            calc_jphi(*grid, *jphi, *psi, *p, *g);
+            if (solver->norm() < epsilon) break;
+            if (n == maxIterN-1) {
+                printf(" Elliptic solver reached maxIterN without convergence\n");
+            }
+        }
     }
-  }
 
   // output stuff
   std::string full_output_name = vm["output-name"].as<string>()+".txt";

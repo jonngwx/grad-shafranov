@@ -29,7 +29,9 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("r-max", po::value<double>()->default_value(10.0), "grid's maximum r location (meters)")
       ("z-min", po::value<double>()->default_value(-3.0), "grid's minimum z location (meters)")
       ("z-max", po::value<double>()->default_value(3.0), "grid's maximum z location (meters)")
-      ("max-iter-N,N", po::value<int>()->default_value(1), "maximum inner iterations")
+      ("output-type", po::value<std::string>()->default_value("tsv"), "tsv or hdf5")
+      ("output-name", po::value<std::string>()->default_value("cougar.out"), "prefix for output filename")
+      ("max-iter-N,N", po::value<int>()->default_value(20), "maximum inner iterations")
       ("error-tol-N", po::value<double>()->default_value(1.0e-4), "error tolerance inner loop")
       ("max-iter-M,M", po::value<int>()->default_value(1), "maximum outer iterations")
       ("error-tol-M", po::value<double>()->default_value(1.0e-4), "error tolerance outer loop")
@@ -54,8 +56,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
   j_phi.add_options()
       ("j-phi-D", po::value<double>(), "some variable D")
       ("j-phi-Xg", po::value<double>(), "some variable Xg")
-      ("j-phi-Zg", po::value<double>(), "some variable Zg")
-      ;
+      ("j-phi-Zg", po::value<double>(), "some variable Zg")      ;
 
   po::options_description outputs("Output format");
   outputs.add_options()

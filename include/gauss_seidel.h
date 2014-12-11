@@ -14,6 +14,7 @@ public:
  * Perform one iteration
  */
   void step(const Field &jphi);
+  void step_1(const Field &jphi);
 /*!
  * Calculate coefficients for iteration from grid parameters
  */
