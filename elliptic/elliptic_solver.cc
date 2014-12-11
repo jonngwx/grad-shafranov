@@ -9,10 +9,10 @@
  * @section DESCRIPTION
  */
 
-EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi){
-  Grid_ = &Grid;
-  Psi_ = &Psi;
-  Psi_prev_ = new Field(Grid);
+EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi) :
+  Grid_(Grid),
+  Psi_(Psi),
+  Psi_prev_(Grid) {
   a = new double*[Grid.nr_];
   b = new double*[Grid.nr_];
   c = new double*[Grid.nr_];
@@ -28,8 +28,7 @@ EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi){
 }
 
 EllipticSolver::~EllipticSolver(){
-  delete Psi_prev_;
-  for (int i = 0; i < Grid_->nr_; ++i) {
+  for (int i = 0; i < Grid_.nr_; ++i) {
     delete [] a[i];
     delete [] b[i];
     delete [] c[i];
@@ -51,8 +50,8 @@ EllipticSolver::~EllipticSolver(){
  */
 double EllipticSolver::norm_max(const Field &Psi, const Field &Psi_prev) {
   double max = 0;
-  int nr = Grid_->nr_;
-  int nz = Grid_->nz_;
+  int nr = Grid_.nr_;
+  int nz = Grid_.nz_;
   for (int i = 0; i < nr; ++i) {
     for (int j = 0 ;j < nz; ++j) {
       if (abs(Psi.f_[i][j] - Psi_prev.f_[i][j]) > max)
@@ -67,11 +66,11 @@ double EllipticSolver::norm_max(const Field &Psi, const Field &Psi_prev) {
  */
 double EllipticSolver::norm() {
   double sum = 0;
-  double nr = Grid_->nr_;
-  double nz = Grid_->nz_;
+  double nr = Grid_.nr_;
+  double nz = Grid_.nz_;
   for (int i = 0; i < nr; ++i) {
     for(int j = 0; j < nz; ++j) {
-      sum += (Psi_->f_[i][j]-Psi_prev_->f_[i][j])*(Psi_->f_[i][j]-Psi_prev_->f_[i][j]);
+      sum += (Psi_.f_[i][j]-Psi_prev_.f_[i][j])*(Psi_.f_[i][j]-Psi_prev_.f_[i][j]);
     }
   }
   return sqrt(sum);
@@ -91,11 +90,11 @@ double EllipticSolver::residuals(const Field &Psi, const Field &Psi_prev) {
  * @param omega blending parameter used for iteration
  */
 void EllipticSolver::iter(double omega) {
-  int nr = Grid_->nr_;
-  int nz = Grid_->nz_;
+  int nr = Grid_.nr_;
+  int nz = Grid_.nz_;
   for (int i = 0; i < nr; ++i) {
     for (int j = 0 ;j < nz; ++j) {
-      Psi_->f_[i][j] = omega*Psi_->f_[i][j] + (1-omega)*Psi_prev_->f_[i][j];
+      Psi_.f_[i][j] = omega*Psi_.f_[i][j] + (1-omega)*Psi_prev_.f_[i][j];
     }
   }
 }
@@ -107,8 +106,8 @@ void EllipticSolver::iter(double omega) {
  * @param Psi_prev previous value of Psi
  */
 void EllipticSolver::boundary(Field &Psi, const Field &Psi_prev) {
-  int nr = Grid_->nr_;
-  int nz = Grid_->nz_;
+  int nr = Grid_.nr_;
+  int nz = Grid_.nz_;
   for (int i = 0; i < nr; ++i) {
     Psi.f_[i][0] = Psi_prev.f_[i][0];
     Psi.f_[i][nz-1] = Psi_prev.f_[i][nz-1];

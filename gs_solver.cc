@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
         psib->CalcB(psi, jphi);
         // test convergence
 
-        // Iterate once through elliptic solver
+        // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
             if (n == 0) solver->step_1(*jphi);
             else solver->step(*jphi);

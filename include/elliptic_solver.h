@@ -42,9 +42,9 @@ public:
   double residuals(const Field &Psi, const Field &Psi_prev);
   
 protected:
-  const Grid *Grid_;
-  Field *Psi_;
-  Field *Psi_prev_;
+  const Grid &Grid_;
+  Field &Psi_;
+  Field Psi_prev_;
 // Coefficient arrays
   double **a;
   double **b;

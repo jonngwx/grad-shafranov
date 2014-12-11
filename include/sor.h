@@ -26,7 +26,7 @@ public:
    */
   double omega();
 private:
-  Field *Psi_prev_prev_;
+  Field Psi_prev_prev_;
   const double omega_init_;
 };
 
