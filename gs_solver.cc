@@ -97,9 +97,7 @@ int main(int argc, char *argv[])
     double omega_init = 0.5;
     double epsilon = 0.1;
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
-    Boundary *psib = new SlowBoundary(grid, cd);
-    EllipticSolver *solver = new SOR(*grid, *psi, omega_init);
-    Boundary *psib = new SlowBoundary(grid,  &cd);
+    Boundary *psib = new SlowBoundary(grid, &cd);
 
     /** determine which output type */
     Grad_Output *grad_output;
@@ -133,6 +131,7 @@ int main(int argc, char *argv[])
                 printf(" Elliptic solver reached maxIterN without convergence\n");
             }
         }
+    }
 
   // output stuff
   std::string full_output_name = vm["output-name"].as<string>()+".txt";
