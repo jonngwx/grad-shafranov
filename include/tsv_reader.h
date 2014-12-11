@@ -52,8 +52,11 @@ class CoilData : public Table {
 };
 
 class PGData : public Table {
- public:
-  double psi(int i) const { return data_[i][0]; }
+  private:
+   const static int kNotTwoColumnsError = 4;
+  public:
+   int load_from_tsv(const std::string filename, int header_lines = 0) override;
+ double psi(int i) const { return data_[i][0]; }
   double value(int i) const { return data_[i][1]; }
 };
 
