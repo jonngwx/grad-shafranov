@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
     }
 
   // output stuff
-  std::string full_output_name = vm["output-name"].as<string>()+".txt";
+  std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
   grad_output->write_output(full_output_name.c_str());
 
   delete grad_output;
