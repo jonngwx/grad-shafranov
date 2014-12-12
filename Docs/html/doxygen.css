@@ -1097,6 +1097,7 @@ dl.section dd {
 #projectlogo img
 { 
 	border: 0px none;
+  width: 100px;
 }
  
 #projectname
