@@ -10,3 +10,5 @@ pg_data_example
 *.pyc
 cougar.out*
 gs_solver
+gs_solver_hdf
+elliptic_test
