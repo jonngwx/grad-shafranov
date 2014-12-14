@@ -13,3 +13,4 @@ gs_solver
 gs_solver_hdf
 elliptic_test
 .DS_Store
+*/.DS_Store
