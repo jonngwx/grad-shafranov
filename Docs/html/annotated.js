@@ -1,7 +1,5 @@
 var annotated =
 [
-    [ "std", "namespacestd.html", "namespacestd" ],
-    [ "testing", "namespacetesting.html", "namespacetesting" ],
     [ "Boundary", "class_boundary.html", "class_boundary" ],
     [ "CoilData", "class_coil_data.html", "class_coil_data" ],
     [ "Critical", "class_critical.html", "class_critical" ],
@@ -16,6 +14,5 @@ var annotated =
     [ "RHSfunc", "class_r_h_sfunc.html", "class_r_h_sfunc" ],
     [ "SlowBoundary", "class_slow_boundary.html", "class_slow_boundary" ],
     [ "SOR", "class_s_o_r.html", "class_s_o_r" ],
-    [ "Table", "class_table.html", "class_table" ],
-    [ "TsvData", "struct_tsv_data.html", "struct_tsv_data" ]
+    [ "Table", "class_table.html", "class_table" ]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['join',['join',['../classtesting_1_1internal_1_1linked__ptr__internal.html#acd5a341459f7e81b10b4112d8c764e2a',1,'testing::internal::linked_ptr_internal']]],
-  ['join_5fnew',['join_new',['../classtesting_1_1internal_1_1linked__ptr__internal.html#a742af1f65df2d5e2b7198a1b74264a83',1,'testing::internal::linked_ptr_internal']]]
+  ['norm',['norm',['../class_elliptic_solver.html#a7b32fa8721b53fea0aa6c9851780835f',1,'EllipticSolver']]],
+  ['norm_5fmax',['norm_max',['../class_elliptic_solver.html#abd379a634973798b1c5cb76ada08474b',1,'EllipticSolver']]],
+  ['num_5fcolumns',['num_columns',['../class_table.html#a89a9d0b706d074fad499e94262223fae',1,'Table']]],
+  ['num_5frows',['num_rows',['../class_table.html#a5ffced9d704ffa55f56413e2a5706d7e',1,'Table']]]
 ];

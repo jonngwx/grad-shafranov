@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['line_5fnumber',['line_number',['../classtesting_1_1_test_part_result.html#a174900cf4403d23784af34f50e7b0a46',1,'testing::TestPartResult']]],
-  ['linked_5fptr',['linked_ptr',['../classtesting_1_1internal_1_1linked__ptr.html#ae805418b9f03f14ff49649e710475dba',1,'testing::internal::linked_ptr::linked_ptr(T *ptr=NULL)'],['../classtesting_1_1internal_1_1linked__ptr.html#a7597ed91006edd0467c99bd1aaab07f5',1,'testing::internal::linked_ptr::linked_ptr(linked_ptr&lt; U &gt; const &amp;ptr)'],['../classtesting_1_1internal_1_1linked__ptr.html#abc076b5678cc7f64306d5ecfefc93aff',1,'testing::internal::linked_ptr::linked_ptr(linked_ptr const &amp;ptr)']]],
-  ['linspace',['linspace',['../util_8h.html#a183dd3fbaba2f4a05a355cbc0a69cf70',1,'util.h']]],
-  ['listeners',['listeners',['../classtesting_1_1_unit_test.html#aac10085cf7c0d1751306db10cdd953cb',1,'testing::UnitTest::listeners()'],['../classtesting_1_1internal_1_1_unit_test_impl.html#a67211f8475936f88d0e4d30f841c0da4',1,'testing::internal::UnitTestImpl::listeners()']]],
-  ['listtestsmatchingfilter',['ListTestsMatchingFilter',['../classtesting_1_1internal_1_1_unit_test_impl.html#ad2cfedef41d3d29aad23c2c64214e6f3',1,'testing::internal::UnitTestImpl']]],
-  ['load_5ffrom_5ftsv',['load_from_tsv',['../class_table.html#ab4d06900e83ea583a345475e2e871d97',1,'Table::load_from_tsv()'],['../class_coil_data.html#ae9275bc9a4d8b25ea4e27e60a9afa6e0',1,'CoilData::load_from_tsv()'],['../class_p_g_data.html#aa7438449cc0ad16a5a2552eff187dcea',1,'PGData::load_from_tsv()']]],
-  ['lock',['Lock',['../classtesting_1_1internal_1_1_mutex.html#ae7e2191886c00182176b23c4f4d049f8',1,'testing::internal::Mutex']]],
-  ['logtostderr',['LogToStderr',['../namespacetesting_1_1internal.html#a06b1b20029fbd1dbeb59752f914fab84',1,'testing::internal']]]
+  ['parse_5foutputs',['parse_outputs',['../class_grad___output.html#a359304ac08d46f45f6b462e7eb8eb8eb',1,'Grad_Output']]],
+  ['plot',['plot',['../namespaceviz.html#a71e46247c7a30a1c30a179a86bbaa3f1',1,'viz']]],
+  ['print1d',['print1d',['../util_8h.html#af07e826bc08e746319a94bafcb4f38cb',1,'util.h']]],
+  ['print2d',['print2d',['../util_8h.html#aecdf80df241e320882555683b30500f2',1,'util.h']]],
+  ['psi',['psi',['../class_p_g_data.html#a47c35a80fc4eb366f7619d55a3ae751d',1,'PGData']]],
+  ['psi_5finterp',['Psi_interp',['../class_critical.html#a9d6cc001ef6c26934c801a50431bbb2f',1,'Critical::Psi_interp(double r, double z)'],['../class_critical.html#a9d6cc001ef6c26934c801a50431bbb2f',1,'Critical::Psi_interp(double r, double z)']]],
+  ['psi_5fsearch',['Psi_search',['../class_critical.html#ab2a1f95baf227877f32dcba9e8fcbb46',1,'Critical']]]
 ];

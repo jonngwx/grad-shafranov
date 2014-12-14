@@ -1,14 +1,12 @@
 var searchData=
 [
-  ['line',['line',['../structtesting_1_1internal_1_1_trace_info.html#ae9d269de1b77f4a3180d0d34acb4d7ff',1,'testing::internal::TraceInfo']]],
-  ['line_5fnumber',['line_number',['../classtesting_1_1_test_part_result.html#a174900cf4403d23784af34f50e7b0a46',1,'testing::TestPartResult']]],
-  ['linked_5fptr',['linked_ptr',['../classtesting_1_1internal_1_1linked__ptr.html#a7763f286ca03a7f7363a033d996c8c1c',1,'testing::internal::linked_ptr::linked_ptr()'],['../classtesting_1_1internal_1_1linked__ptr.html#ae805418b9f03f14ff49649e710475dba',1,'testing::internal::linked_ptr::linked_ptr(T *ptr=NULL)'],['../classtesting_1_1internal_1_1linked__ptr.html#a7597ed91006edd0467c99bd1aaab07f5',1,'testing::internal::linked_ptr::linked_ptr(linked_ptr&lt; U &gt; const &amp;ptr)'],['../classtesting_1_1internal_1_1linked__ptr.html#abc076b5678cc7f64306d5ecfefc93aff',1,'testing::internal::linked_ptr::linked_ptr(linked_ptr const &amp;ptr)']]],
-  ['linked_5fptr',['linked_ptr',['../classtesting_1_1internal_1_1linked__ptr.html',1,'testing::internal']]],
-  ['linked_5fptr_5finternal',['linked_ptr_internal',['../classtesting_1_1internal_1_1linked__ptr__internal.html',1,'testing::internal']]],
-  ['linspace',['linspace',['../util_8h.html#a183dd3fbaba2f4a05a355cbc0a69cf70',1,'util.h']]],
-  ['listeners',['listeners',['../classtesting_1_1_unit_test.html#aac10085cf7c0d1751306db10cdd953cb',1,'testing::UnitTest::listeners()'],['../classtesting_1_1internal_1_1_unit_test_impl.html#a67211f8475936f88d0e4d30f841c0da4',1,'testing::internal::UnitTestImpl::listeners()']]],
-  ['listtestsmatchingfilter',['ListTestsMatchingFilter',['../classtesting_1_1internal_1_1_unit_test_impl.html#ad2cfedef41d3d29aad23c2c64214e6f3',1,'testing::internal::UnitTestImpl']]],
-  ['load_5ffrom_5ftsv',['load_from_tsv',['../class_table.html#ab4d06900e83ea583a345475e2e871d97',1,'Table::load_from_tsv()'],['../class_coil_data.html#ae9275bc9a4d8b25ea4e27e60a9afa6e0',1,'CoilData::load_from_tsv()'],['../class_p_g_data.html#aa7438449cc0ad16a5a2552eff187dcea',1,'PGData::load_from_tsv()']]],
-  ['lock',['Lock',['../classtesting_1_1internal_1_1_mutex.html#ae7e2191886c00182176b23c4f4d049f8',1,'testing::internal::Mutex']]],
-  ['logtostderr',['LogToStderr',['../namespacetesting_1_1internal.html#a06b1b20029fbd1dbeb59752f914fab84',1,'testing::internal']]]
+  ['nan',['NAN',['../namespaceread__data.html#a5304c58d291abf7e359ab5231e9ebd1c',1,'read_data']]],
+  ['norm',['norm',['../class_elliptic_solver.html#a7b32fa8721b53fea0aa6c9851780835f',1,'EllipticSolver']]],
+  ['norm_5fmax',['norm_max',['../class_elliptic_solver.html#abd379a634973798b1c5cb76ada08474b',1,'EllipticSolver']]],
+  ['nr_5f',['nr_',['../class_grid.html#ad46bcc3a951b1f58763092686628b495',1,'Grid']]],
+  ['num_5fcolumns',['num_columns',['../class_table.html#a89a9d0b706d074fad499e94262223fae',1,'Table']]],
+  ['num_5fcolumns_5f',['num_columns_',['../class_table.html#a30a4ba2be0b86dd0368081d0fac576ff',1,'Table']]],
+  ['num_5frows',['num_rows',['../class_table.html#a5ffced9d704ffa55f56413e2a5706d7e',1,'Table']]],
+  ['num_5frows_5f',['num_rows_',['../class_table.html#ab0b37d53c674e95885989a2a42944c3d',1,'Table']]],
+  ['nz_5f',['nz_',['../class_grid.html#af66fb5b609dbae6a5c47db6a3726a109',1,'Grid']]]
 ];

@@ -5,12 +5,9 @@ var NAVTREE =
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", "namespacemembers_dup" ],
-        [ "Functions", "namespacemembers_func.html", "namespacemembers_func" ],
-        [ "Variables", "namespacemembers_vars.html", null ],
-        [ "Typedefs", "namespacemembers_type.html", null ],
-        [ "Enumerations", "namespacemembers_enum.html", null ],
-        [ "Enumerator", "namespacemembers_eval.html", null ]
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ]
       ] ]
     ] ],
     [ "Classes", null, [
@@ -18,23 +15,19 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
-        [ "Enumerator", "functions_eval.html", null ],
-        [ "Related Functions", "functions_rela.html", null ]
+        [ "Enumerator", "functions_eval.html", null ]
       ] ]
     ] ],
     [ "Files", null, [
       [ "File List", "files.html", "files" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", "globals_dup" ],
+        [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
-        [ "Macros", "globals_defs.html", "globals_defs" ]
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]
@@ -42,13 +35,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"classtesting_1_1_test_info.html#addea8766df3b8abe4cc4103218a49a65",
-"classtesting_1_1internal_1_1_type_with_size_3_014_01_4.html#a7d559570f830bf35d095eeb94d98de58",
-"gtest-death-test_8cc.html#ad93c9ec89517d047ed323b79d96df251",
-"gtest-port_8h.html#af0970cdea09f16dbb1dbfccdaa693eeb",
-"gtest_8h.html#a1a6db8b1338ee7040329322b77779086",
-"rhs__func__example_2tsv__reader_8h.html#abe5a83b8c00eda4926ce937b368d8339"
+"annotated.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
