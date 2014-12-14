@@ -1,7 +1,7 @@
 var searchData=
 [
   ['c',['C',['../class_elliptic_solver.html#aea508bf9a4526b867d325a28ec92afb2',1,'EllipticSolver']]],
-  ['calc_5fjphi',['calc_jphi',['../gs__solver_8cc.html#a749158277e6991762e30edeb08f6b109',1,'calc_jphi(Grid &amp;grid, Field &amp;jphi, Field &amp;psi, RHSfunc &amp;p, RHSfunc &amp;g):&#160;gs_solver.cc'],['../gs__solver2_8cc.html#a749158277e6991762e30edeb08f6b109',1,'calc_jphi(Grid &amp;grid, Field &amp;jphi, Field &amp;psi, RHSfunc &amp;p, RHSfunc &amp;g):&#160;gs_solver2.cc']]],
+  ['calc_5fjphi',['calc_jphi',['../gs__solver_8cc.html#a749158277e6991762e30edeb08f6b109',1,'gs_solver.cc']]],
   ['calcb',['CalcB',['../class_boundary.html#ae06d221bc3faf8a11dd389572f75d113',1,'Boundary::CalcB()'],['../class_slow_boundary.html#a03ac3a9b06bd978608cfecc9308c710d',1,'SlowBoundary::CalcB()']]],
   ['cell_5falpha',['cell_alpha',['../class_critical.html#a84403f4a74df429807fc77c7b84cfa08',1,'Critical']]],
   ['cell_5fbeta',['cell_beta',['../class_critical.html#a956fffb5b57bcbd2b0350a7b58db67fd',1,'Critical']]],
@@ -9,7 +9,6 @@ var searchData=
   ['cellj',['cellj',['../class_grid.html#a50647d1af982fad71c90614198adf874',1,'Grid']]],
   ['check_5fdata',['check_data',['../namespaceread__data.html#a0ab9aa1fd6b3de9b65feb92ed8d73270',1,'read_data']]],
   ['coeff',['coeff',['../class_elliptic_solver.html#af0636405b7a5c07c6afdb3aa2c20d365',1,'EllipticSolver::coeff()'],['../class_gauss_seidel.html#aeedf15634532045f9213e9ce0498145f',1,'GaussSeidel::coeff()'],['../class_s_o_r.html#a3acbcece672550e6dc512a2696d3b42a',1,'SOR::coeff()']]],
-  ['coil_5fdata_5fexample_2ecc',['coil_data_example.cc',['../coil__data__example_8cc.html',1,'']]],
   ['coildata',['CoilData',['../class_coil_data.html',1,'']]],
   ['create_5foptions_2ecc',['create_options.cc',['../create__options_8cc.html',1,'']]],
   ['create_5foptions_2eh',['create_options.h',['../create__options_8h.html',1,'']]],

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['read_5fdata_2epy',['read_data.py',['../read__data_8py.html',1,'']]],
-  ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
-  ['rhs_5ffunc_2ecc',['rhs_func.cc',['../rhs__func_8cc.html',1,'']]],
-  ['rhs_5ffunc_2eh',['rhs_func.h',['../rhs__func_8h.html',1,'']]]
+  ['slow_5fboundary_2ecc',['slow_boundary.cc',['../slow__boundary_8cc.html',1,'']]],
+  ['slow_5fboundary_2eh',['slow_boundary.h',['../slow__boundary_8h.html',1,'']]],
+  ['sor_2ecc',['sor.cc',['../sor_8cc.html',1,'']]],
+  ['sor_2eh',['sor.h',['../sor_8h.html',1,'']]]
 ];

@@ -17,6 +17,5 @@ var searchData=
   ['grid_2ecc',['grid.cc',['../grid_8cc.html',1,'']]],
   ['grid_2eh',['grid.h',['../grid_8h.html',1,'']]],
   ['grid_5f',['Grid_',['../class_critical.html#a71b2f9ddffc0c1158866488e55318217',1,'Critical::Grid_()'],['../class_elliptic_solver.html#a62b303889cb865c2b26e5f8ffd86fa4a',1,'EllipticSolver::Grid_()'],['../class_field.html#adedf34fa503588ea6a6c203d2f0a0b3f',1,'Field::grid_()']]],
-  ['gs_5fsolver_2ecc',['gs_solver.cc',['../gs__solver_8cc.html',1,'']]],
-  ['gs_5fsolver2_2ecc',['gs_solver2.cc',['../gs__solver2_8cc.html',1,'']]]
+  ['gs_5fsolver_2ecc',['gs_solver.cc',['../gs__solver_8cc.html',1,'']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['calc_5fjphi',['calc_jphi',['../gs__solver_8cc.html#a749158277e6991762e30edeb08f6b109',1,'calc_jphi(Grid &amp;grid, Field &amp;jphi, Field &amp;psi, RHSfunc &amp;p, RHSfunc &amp;g):&#160;gs_solver.cc'],['../gs__solver2_8cc.html#a749158277e6991762e30edeb08f6b109',1,'calc_jphi(Grid &amp;grid, Field &amp;jphi, Field &amp;psi, RHSfunc &amp;p, RHSfunc &amp;g):&#160;gs_solver2.cc']]],
+  ['calc_5fjphi',['calc_jphi',['../gs__solver_8cc.html#a749158277e6991762e30edeb08f6b109',1,'gs_solver.cc']]],
   ['calcb',['CalcB',['../class_boundary.html#ae06d221bc3faf8a11dd389572f75d113',1,'Boundary::CalcB()'],['../class_slow_boundary.html#a03ac3a9b06bd978608cfecc9308c710d',1,'SlowBoundary::CalcB()']]],
   ['cell_5falpha',['cell_alpha',['../class_critical.html#a84403f4a74df429807fc77c7b84cfa08',1,'Critical']]],
   ['cell_5fbeta',['cell_beta',['../class_critical.html#a956fffb5b57bcbd2b0350a7b58db67fd',1,'Critical']]],

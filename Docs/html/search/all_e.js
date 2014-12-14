@@ -2,7 +2,6 @@ var searchData=
 [
   ['p',['p',['../class_grad___output.html#af593d5cf8788827c1a2fc39a505e6dcf',1,'Grad_Output']]],
   ['parse_5foutputs',['parse_outputs',['../class_grad___output.html#a359304ac08d46f45f6b462e7eb8eb8eb',1,'Grad_Output']]],
-  ['pg_5fdata_5fexample_2ecc',['pg_data_example.cc',['../pg__data__example_8cc.html',1,'']]],
   ['pgdata',['PGData',['../class_p_g_data.html',1,'']]],
   ['plot',['plot',['../namespaceviz.html#a71e46247c7a30a1c30a179a86bbaa3f1',1,'viz']]],
   ['print1d',['print1d',['../util_8h.html#af07e826bc08e746319a94bafcb4f38cb',1,'util.h']]],

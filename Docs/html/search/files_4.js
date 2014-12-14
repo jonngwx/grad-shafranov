@@ -10,6 +10,5 @@ var searchData=
   ['grad_5foutput_5ftxt_2eh',['grad_output_txt.h',['../grad__output__txt_8h.html',1,'']]],
   ['grid_2ecc',['grid.cc',['../grid_8cc.html',1,'']]],
   ['grid_2eh',['grid.h',['../grid_8h.html',1,'']]],
-  ['gs_5fsolver_2ecc',['gs_solver.cc',['../gs__solver_8cc.html',1,'']]],
-  ['gs_5fsolver2_2ecc',['gs_solver2.cc',['../gs__solver2_8cc.html',1,'']]]
+  ['gs_5fsolver_2ecc',['gs_solver.cc',['../gs__solver_8cc.html',1,'']]]
 ];
