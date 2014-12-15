@@ -38,23 +38,25 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
      ;
 
   /* For pgtype = "alpha"
-   * Alpha, beta and p0 (pressure at magnetic axis)
+   * n1, n2, p0 (pressure at magnetic axis), and g0 (R0*B0)
    */
   po::options_description pgtype_alpha("For pgtype=alpha");
   pgtype_alpha.add_options()
-      ("pgta-alpha", po::value<double>(), "alpha")
-      ("pgta-beta",  po::value<double>(), "beta")
-      ("pgta-p0",  po::value<double>(), "p0: pressure on axis")
+      ("pgta-n1", po::value<double>()->default_value(1.0), "n1")
+      ("pgta-n2",  po::value<double>()->default_value(1.0), "n2")
+      ("pgta-p0",  po::value<double>()->default_value(12000.0), "p0: pressure on axis")
+      ("pgta-g0",  po::value<double>()->default_value(7.5), "g0: R0*B0 (loc of mag axis times field at that point)")
       ;
    
   /* for inputting j-phi
-   * D, Xg, Zg, 
+   * Ip, D, R0, z0, 
    */
   po::options_description j_phi("For specifying initial current distribution");
   j_phi.add_options()
-      ("j-phi-D", po::value<double>(), "some variable D")
-      ("j-phi-Xg", po::value<double>(), "some variable Xg")
-      ("j-phi-Zg", po::value<double>(), "some variable Zg")      ;
+      ("j-phi-Ip", po::value<double>()->default_value(1000000.0), "total plasma current")
+      ("j-phi-D", po::value<double>()->default_value(2.0), "radius of initial curr dist")
+      ("j-phi-R0", po::value<double>(), "initial R value of mag axis")
+      ("j-phi-z0", po::value<double>(), "initial z value of mag axis")      ;
 
   po::options_description outputs("Output format");
   outputs.add_options()

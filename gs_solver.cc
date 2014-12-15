@@ -42,10 +42,10 @@ int main(int argc, char *argv[])
 
     int nr = vm["grid-elems-r"].as<int>();
     int nz = vm["grid-elems-z"].as<int>();
-    double R0 =   vm["r-min"].as<double>();
-    double Rend = vm["r-max"].as<double>();
-    double z0 =   vm["z-min"].as<double>();
-    double zend = vm["z-max"].as<double>();
+    double Rmin =   vm["r-min"].as<double>();
+    double Rmax = vm["r-max"].as<double>();
+    double zmin =   vm["z-min"].as<double>();
+    double zmax = vm["z-max"].as<double>();
     int maxIterM = vm["max-iter-M"].as<int>();
     int maxIterN = vm["max-iter-N"].as<int>();
     double epsilon = vm["error-tol-N"].as<double>();    
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
     CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
   
-    Grid *grid = new Grid(R0, Rend, z0, zend, nr, nz);
+    Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
 
@@ -78,13 +78,15 @@ int main(int argc, char *argv[])
     RHSfunc *g = new RHSfunc(pgtype, &gd);
     
     double r_squared;
-    double Rg = 7.5;
-    double zg = 0.0;
-    double D = 2.0;
+    double R0 = Rmin + (Rmax - Rmin)/2.0;
+    double z0 = zmin + (zmax - zmin)/2.0;
+    double D = vm["j-phi-D"].as<double>();
+    double Ip = vm["j-phi-Ip"].as<double>();
     double c = 1.0;
+
     for (int i = 0; i < grid->nr_; ++i) {
         for (int j = 0; j < grid->nz_; ++j) {
-            r_squared = (grid->R_[i] - Rg)*(grid->R_[i] - Rg) + (grid->z_[j] - zg)*(grid->z_[j] - zg);
+            r_squared = (grid->R_[i] - R0)*(grid->R_[i] - R0) + (grid->z_[j] - z0)*(grid->z_[j] - z0);
             if (r_squared < D*D) {
                 jphi->f_[i][j] = (c/grid->R_[i])*(1 - r_squared/(D*D)) ;
             }
