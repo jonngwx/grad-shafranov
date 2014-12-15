@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+#include <math.h>
 #include "include/grid.h"
 #include "include/field.h"
 #include "include/rhs_func.h"
@@ -78,11 +79,15 @@ int main(int argc, char *argv[])
     RHSfunc *g = new RHSfunc(pgtype, &gd);
     
     double r_squared;
-    double R0 = Rmin + (Rmax - Rmin)/2.0;
-    double z0 = zmin + (zmax - zmin)/2.0;
+    double R0 = Rmin + (Rmax - Rmin)/2.0; // not necessarily true.  just for now
+    double z0 = zmin + (zmax - zmin)/2.0; // see above comment
     double D = vm["j-phi-D"].as<double>();
     double Ip = vm["j-phi-Ip"].as<double>();
-    double c = 1.0;
+
+    // calc constant c to be consistent with specified Ip
+    double a = pow(D/R0,2); // just for convenience.  should be less than 1
+    double c = Ip*a/(4.188790205*R0*(pow(1-a,1.5) - (1 - 1.5*a)));
+    printf("c = %f \n", c);
 
     for (int i = 0; i < grid->nr_; ++i) {
         for (int j = 0; j < grid->nz_; ++j) {
