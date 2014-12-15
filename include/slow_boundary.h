@@ -14,10 +14,15 @@ class SlowBoundary : public Boundary {
   private:
     int nr_;
     int nz_;
+    double *R_;
+    double *z_;
+    double dr_;
+    double dz_;
     CoilData* cond_data_;
     int perim_;
     double ***g_plasma_;
-    void LtoIJ(int ar[], int l);
+    int LtoI(int l);
+    int LtoJ(int l);
 };
 
 #endif // SLOWBOUNDARY_H_
