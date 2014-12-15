@@ -65,8 +65,8 @@ int main(int argc, char *argv[])
     }
     std::string output_type = vm["output-type"].as<string>();
   
-    PGData gd; gd.load_from_tsv(vm["p-filename"].as<string>(),1);
-    PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
+  //  PGData gd; gd.load_from_tsv(vm["p-filename"].as<string>(),1);
+  //  PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
     CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
   
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
@@ -137,6 +137,7 @@ int main(int argc, char *argv[])
             printf("n = %i \n", n);
             if (n == 0) solver->step_1(*jphi);
             solver->step(*jphi);
+            jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;
             if (n == maxIterN-1) {
@@ -157,5 +158,6 @@ int main(int argc, char *argv[])
   delete solver;
   delete p;
   delete g;
+  delete jsa;
 }
 

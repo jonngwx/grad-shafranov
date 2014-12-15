@@ -5,6 +5,9 @@ Field::Field(const Grid &grid) : grid_(&grid) {
 	for (int i = 0; i < grid.nr_; ++i){
 		f_[i] = new double[grid.nz_]();
 	}
+
+        f_l = 0;
+        f_0 = 0;
 }
 
 Field::~Field(){

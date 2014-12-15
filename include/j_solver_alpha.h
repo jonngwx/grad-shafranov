@@ -8,7 +8,7 @@ class JSolverAlpha {
     public:
         JSolverAlpha(double P0, double g0, double n1, double n2, double Ip, Grid *grid);
         ~JSolverAlpha();
-        void update(Field *jphi, Field *psi);
+        void update(Field *jphi, Field *psi, Field *p, Field *g);
     private:
         double P0_;
         double g0_;
@@ -18,7 +18,8 @@ class JSolverAlpha {
         double *R_;
         double dr_;
         double dz_;
-
+        double nr_;
+        double nz_;
 
 
 
