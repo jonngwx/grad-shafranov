@@ -4,7 +4,6 @@
 #include <math.h>
 #include "include/grid.h"
 #include "include/field.h"
-#include "include/rhs_func.h"
 #include "include/grad_output.h"
 #include "include/grad_output_txt.h"
 #include "include/sor.h"
@@ -12,14 +11,13 @@
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
 #include "include/create_options.h"
+#include "include/j_solver_alpha.h"
 
 #ifdef HDF_MODE
 #include "grad_output_hdf.h"
 #endif 
 
 using namespace std;
-
-int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g);
 
 int main(int argc, char *argv[])
 {
@@ -74,10 +72,9 @@ int main(int argc, char *argv[])
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
+    Field *p = new Field(*grid);
+    Field *g = new Field(*grid);
 
-    RHSfunc *p = new RHSfunc(pgtype, &pd);
-    RHSfunc *g = new RHSfunc(pgtype, &gd);
-    
     double r_squared;
     double R0 = Rmin + (Rmax - Rmin)/2.0; // not necessarily true.  just for now
     double z0 = zmin + (zmax - zmin)/2.0; // see above comment
@@ -100,6 +97,13 @@ int main(int argc, char *argv[])
             }  
         }
     }
+
+    // set up JSolverAlpha class
+    double P0 = vm["pgta-p0"].as<double>();
+    double g0 = vm["pgta-g0"].as<double>();
+    double n1 = vm["pgta-n1"].as<double>();
+    double n2 = vm["pgta-n2"].as<double>();
+    JSolverAlpha *jsa = new JSolverAlpha(P0,g0,n1,n2,Ip,grid);
 
     // Elliptic solver for inner loop
     double omega_init = 0.5;
@@ -133,7 +137,6 @@ int main(int argc, char *argv[])
             printf("n = %i \n", n);
             if (n == 0) solver->step_1(*jphi);
             solver->step(*jphi);
-            calc_jphi(*grid, *jphi, *psi, *p, *g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;
             if (n == maxIterN-1) {
@@ -152,16 +155,7 @@ int main(int argc, char *argv[])
   delete psib;
   delete jphi;
   delete solver;
+  delete p;
+  delete g;
 }
 
-int calc_jphi(Grid &grid, Field &jphi, Field &psi, RHSfunc &p, RHSfunc &g)
-{
-    const double mu0 = 0.0000012566370614; // in SI units
-    for (int i = 0; i < grid.nr_; ++i) {
-        for (int j = 0; j < grid.nz_; ++j)  {
-            jphi.f_[i][j] = -grid.R_[i]*p.eval(psi.f_[i][j]) - g.eval(psi.f_[i][j])*g.eval_prime(psi.f_[i][j]/(mu0*grid.R_[i]));
-        }
-    }
-
-    return 0;
-}

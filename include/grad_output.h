@@ -5,7 +5,6 @@
 #include <vector>
 #include "field.h"
 #include "grid.h"
-#include "rhs_func.h"
 #include <algorithm>
 
 class Grad_Output{
@@ -16,8 +15,8 @@ class Grad_Output{
 protected:
   Field *f;
   Field *jphi;
-  RHSfunc *p;
-  RHSfunc *g;
+  Field *p;
+  Field *g;
   Grid *grid;
   /**
   * @brief Parses the string of outputs to write to file..

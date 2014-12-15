@@ -21,7 +21,7 @@ public:
    * @param g pointer to RHSfunc for evaluation of g
    * @param outputs string of comma separated output options
    * */
-    Grad_Output_Txt(Field* f, Field* jphi, Grid* grid, RHSfunc* p, RHSfunc* g, const char* outputs);
+    Grad_Output_Txt(Field* f, Field* jphi, Grid* grid, Field* p, Field* g, const char* outputs);
   ~Grad_Output_Txt();
 
   /**
