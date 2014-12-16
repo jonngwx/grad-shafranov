@@ -110,11 +110,11 @@ int main(int argc, char *argv[])
     double omega_init = 0.5;
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, &cd);
-    
+   
     // set up Critical
     double z_limiter1 = vm["z_limiter1"].as<double>();
     double z_limiter2 = vm["z_limiter2"].as<double>();
-    double max_iter_crit = vm["max-iter-crit"].as<double>();
+    int max_iter_crit = vm["max-iter-crit"].as<int>();
     double error_tol_crit = vm["error-tol-crit"].as<double>();
     Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2);
 
