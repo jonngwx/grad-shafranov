@@ -1,4 +1,4 @@
-/**
+/*!
  * @file create_options.h
  * @author Jacob Schwartz
  * @brief Header for the create_options method and a helper printer method.
