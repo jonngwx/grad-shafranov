@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('class_table.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>A basic container for a 2D table or array of doubles. data can be set and accessed like data(row, col)  
+<p>A basic container for a 2D table or array of doubles.  
  <a href="class_table.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="tsv__reader_8h_source.html">tsv_reader.h</a>&gt;</code></p>
@@ -127,21 +127,22 @@ Inheritance diagram for Table:</div>
  <div class="center">
   <img src="class_table.png" usemap="#Table_map" alt=""/>
   <map id="Table_map" name="Table_map">
-<area href="class_coil_data.html" alt="CoilData" shape="rect" coords="0,56,60,80"/>
-<area href="class_p_g_data.html" alt="PGData" shape="rect" coords="70,56,130,80"/>
+<area href="class_coil_data.html" title="A container for the r and z location (m) and currents (A) of external coils. " alt="CoilData" shape="rect" coords="0,56,60,80"/>
+<area href="class_p_g_data.html" title="A container for one sort of data describing initial P and G. " alt="PGData" shape="rect" coords="70,56,130,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4d06900e83ea583a345475e2e871d97"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#ab4d06900e83ea583a345475e2e871d97">load_from_tsv</a> (const std::string filename, int header_lines=0)</td></tr>
-<tr class="memdesc:ab4d06900e83ea583a345475e2e871d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in a tsv file and creates a <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. data can be set and accessed like data(row...">Table</a>. Detects the number of rows &amp; columns in the file programmatically. Behavior if some rows are shorter than others has not been tested.  <a href="#ab4d06900e83ea583a345475e2e871d97">More...</a><br /></td></tr>
+<tr class="memdesc:ab4d06900e83ea583a345475e2e871d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in a tsv file and populates a <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. ">Table</a>.  <a href="#ab4d06900e83ea583a345475e2e871d97">More...</a><br /></td></tr>
 <tr class="separator:ab4d06900e83ea583a345475e2e871d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89a9d0b706d074fad499e94262223fae"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a89a9d0b706d074fad499e94262223fae">num_columns</a> () const </td></tr>
 <tr class="separator:a89a9d0b706d074fad499e94262223fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ffced9d704ffa55f56413e2a5706d7e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a5ffced9d704ffa55f56413e2a5706d7e">num_rows</a> () const </td></tr>
 <tr class="separator:a5ffced9d704ffa55f56413e2a5706d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6e317db4eaff12cdf7788d804855e34"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#ad6e317db4eaff12cdf7788d804855e34">data</a> (int row, int column) const </td></tr>
+<tr class="memdesc:ad6e317db4eaff12cdf7788d804855e34"><td class="mdescLeft">&#160;</td><td class="mdescRight">get data from the table  <a href="#ad6e317db4eaff12cdf7788d804855e34">More...</a><br /></td></tr>
 <tr class="separator:ad6e317db4eaff12cdf7788d804855e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -164,7 +165,8 @@ Static Protected Attributes</h2></td></tr>
 <tr class="separator:ae57ef6752df400c4c366814667b88b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A basic container for a 2D table or array of doubles. data can be set and accessed like data(row, col) </p>
+<div class="textblock"><p>A basic container for a 2D table or array of doubles. </p>
+<p>data can be accessed like data(row, col) and cannot currently be set. There is also no standard constructor right now. To use, do <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. ">Table</a> tb; tb.load_from_tsv(&lt;filename&gt;); </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ad6e317db4eaff12cdf7788d804855e34"></a>
 <div class="memitem">
@@ -197,6 +199,17 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>get data from the table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>integer of row (starting from 0) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>integer of column (starting from 0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the data point (which is a double)</dd></dl>
+<p>Does not do any bounds checking. </p>
 
 </div>
 </div>
@@ -232,8 +245,8 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reads in a tsv file and creates a <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. data can be set and accessed like data(row...">Table</a>. Detects the number of rows &amp; columns in the file programmatically. Behavior if some rows are shorter than others has not been tested. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Reads in a tsv file and populates a <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. ">Table</a>. </p>
+<p>Detects the number of rows &amp; columns in the file programmatically. Checks that there are the same number of columns for each row or stops and returns an error. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>the filename, as a string </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">header_lines</td><td>how many inital lines to skip </td></tr>
@@ -425,7 +438,7 @@ Static Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_table.html">Table</a></li>
-    <li class="footer">Generated on Tue Dec 16 2014 11:53:50 for COUGAR by
+    <li class="footer">Generated on Tue Dec 16 2014 12:59:02 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

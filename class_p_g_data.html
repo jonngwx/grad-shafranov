@@ -115,6 +115,9 @@ $(document).ready(function(){initNavTree('class_p_g_data.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A container for one sort of data describing initial P and G.  
+ <a href="class_p_g_data.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="tsv__reader_8h_source.html">tsv_reader.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for PGData:</div>
@@ -122,18 +125,20 @@ Inheritance diagram for PGData:</div>
  <div class="center">
   <img src="class_p_g_data.png" usemap="#PGData_map" alt=""/>
   <map id="PGData_map" name="PGData_map">
-<area href="class_table.html" title="A basic container for a 2D table or array of doubles. data can be set and accessed like data(row..." alt="Table" shape="rect" coords="0,0,55,24"/>
+<area href="class_table.html" title="A basic container for a 2D table or array of doubles. " alt="Table" shape="rect" coords="0,0,55,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7438449cc0ad16a5a2552eff187dcea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_g_data.html#aa7438449cc0ad16a5a2552eff187dcea">load_from_tsv</a> (const std::string filename, int header_lines=0) override</td></tr>
-<tr class="memdesc:aa7438449cc0ad16a5a2552eff187dcea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in a tsv file and creates a <a class="el" href="class_p_g_data.html">PGData</a>, Inherits from <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. data can be set and accessed like data(row...">Table</a>, then checks that there is the proper number of columns.  <a href="#aa7438449cc0ad16a5a2552eff187dcea">More...</a><br /></td></tr>
+<tr class="memdesc:aa7438449cc0ad16a5a2552eff187dcea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in a tsv file and populates a <a class="el" href="class_p_g_data.html" title="A container for one sort of data describing initial P and G. ">PGData</a>.  <a href="#aa7438449cc0ad16a5a2552eff187dcea">More...</a><br /></td></tr>
 <tr class="separator:aa7438449cc0ad16a5a2552eff187dcea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47c35a80fc4eb366f7619d55a3ae751d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_g_data.html#a47c35a80fc4eb366f7619d55a3ae751d">psi</a> (int i) const </td></tr>
+<tr class="memdesc:a47c35a80fc4eb366f7619d55a3ae751d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the i'th value of psi.  <a href="#a47c35a80fc4eb366f7619d55a3ae751d">More...</a><br /></td></tr>
 <tr class="separator:a47c35a80fc4eb366f7619d55a3ae751d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a832518369d5660ec447edf2c7da80e99"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_g_data.html#a832518369d5660ec447edf2c7da80e99">value</a> (int i) const </td></tr>
+<tr class="memdesc:a832518369d5660ec447edf2c7da80e99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the i'th value of (p or g)  <a href="#a832518369d5660ec447edf2c7da80e99">More...</a><br /></td></tr>
 <tr class="separator:a832518369d5660ec447edf2c7da80e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_table"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_table')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_table.html">Table</a></td></tr>
 <tr class="memitem:a89a9d0b706d074fad499e94262223fae inherit pub_methods_class_table"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a89a9d0b706d074fad499e94262223fae">num_columns</a> () const </td></tr>
@@ -141,6 +146,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5ffced9d704ffa55f56413e2a5706d7e inherit pub_methods_class_table"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a5ffced9d704ffa55f56413e2a5706d7e">num_rows</a> () const </td></tr>
 <tr class="separator:a5ffced9d704ffa55f56413e2a5706d7e inherit pub_methods_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6e317db4eaff12cdf7788d804855e34 inherit pub_methods_class_table"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#ad6e317db4eaff12cdf7788d804855e34">data</a> (int row, int column) const </td></tr>
+<tr class="memdesc:ad6e317db4eaff12cdf7788d804855e34 inherit pub_methods_class_table"><td class="mdescLeft">&#160;</td><td class="mdescRight">get data from the table  <a href="#ad6e317db4eaff12cdf7788d804855e34">More...</a><br /></td></tr>
 <tr class="separator:ad6e317db4eaff12cdf7788d804855e34 inherit pub_methods_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -161,7 +167,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ae57ef6752df400c4c366814667b88b91 inherit pro_static_attribs_class_table"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#ae57ef6752df400c4c366814667b88b91">kFileReadError</a> = 3</td></tr>
 <tr class="separator:ae57ef6752df400c4c366814667b88b91 inherit pro_static_attribs_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A container for one sort of data describing initial P and G. </p>
+<p>Useful for the 'array' type of P and G input. Contains either P or G as a function of psi. Reads from a 2-column text file: each row has a value of psi and a value of p-or-g. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="aa7438449cc0ad16a5a2552eff187dcea"></a>
 <div class="memitem">
 <div class="memproto">
@@ -194,8 +203,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reads in a tsv file and creates a <a class="el" href="class_p_g_data.html">PGData</a>, Inherits from <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. data can be set and accessed like data(row...">Table</a>, then checks that there is the proper number of columns. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Reads in a tsv file and populates a <a class="el" href="class_p_g_data.html" title="A container for one sort of data describing initial P and G. ">PGData</a>. </p>
+<p>Inherits from <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. ">Table</a>, then checks that there is the proper number of columns. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>the filename, as a string </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">header_lines</td><td>how many inital lines to skip </td></tr>
@@ -230,6 +239,15 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get the i'th value of psi. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>which value of psi (starting from 0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the i'th value of psi </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a832518369d5660ec447edf2c7da80e99"></a>
@@ -254,6 +272,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get the i'th value of (p or g) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>which value of psi (starting from 0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the i'th value of (p or g)</dd></dl>
+<p>Since this PGTable stores either p or g it can only return the corresponding value of course... </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -266,7 +294,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_p_g_data.html">PGData</a></li>
-    <li class="footer">Generated on Tue Dec 16 2014 11:53:50 for COUGAR by
+    <li class="footer">Generated on Tue Dec 16 2014 12:59:02 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -115,6 +115,9 @@ $(document).ready(function(){initNavTree('class_coil_data.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A container for the r and z location (m) and currents (A) of external coils.  
+ <a href="class_coil_data.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="tsv__reader_8h_source.html">tsv_reader.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for CoilData:</div>
@@ -122,20 +125,23 @@ Inheritance diagram for CoilData:</div>
  <div class="center">
   <img src="class_coil_data.png" usemap="#CoilData_map" alt=""/>
   <map id="CoilData_map" name="CoilData_map">
-<area href="class_table.html" title="A basic container for a 2D table or array of doubles. data can be set and accessed like data(row..." alt="Table" shape="rect" coords="0,0,60,24"/>
+<area href="class_table.html" title="A basic container for a 2D table or array of doubles. " alt="Table" shape="rect" coords="0,0,60,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae9275bc9a4d8b25ea4e27e60a9afa6e0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coil_data.html#ae9275bc9a4d8b25ea4e27e60a9afa6e0">load_from_tsv</a> (const std::string filename, int header_lines=0) override</td></tr>
-<tr class="memdesc:ae9275bc9a4d8b25ea4e27e60a9afa6e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in a tsv file and creates a <a class="el" href="class_coil_data.html">CoilData</a>, Inherits from <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. data can be set and accessed like data(row...">Table</a>, then checks that there is the proper number of columns.  <a href="#ae9275bc9a4d8b25ea4e27e60a9afa6e0">More...</a><br /></td></tr>
+<tr class="memdesc:ae9275bc9a4d8b25ea4e27e60a9afa6e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in a tsv file and populates a <a class="el" href="class_coil_data.html" title="A container for the r and z location (m) and currents (A) of external coils. ">CoilData</a>.  <a href="#ae9275bc9a4d8b25ea4e27e60a9afa6e0">More...</a><br /></td></tr>
 <tr class="separator:ae9275bc9a4d8b25ea4e27e60a9afa6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30af24e40804ffae9c977ae261262e47"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coil_data.html#a30af24e40804ffae9c977ae261262e47">r</a> (int i) const </td></tr>
+<tr class="memdesc:a30af24e40804ffae9c977ae261262e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for r location (meters) of i'th coil.  <a href="#a30af24e40804ffae9c977ae261262e47">More...</a><br /></td></tr>
 <tr class="separator:a30af24e40804ffae9c977ae261262e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36b8a5de838761db4b2625cbb48e8f42"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coil_data.html#a36b8a5de838761db4b2625cbb48e8f42">z</a> (int i) const </td></tr>
+<tr class="memdesc:a36b8a5de838761db4b2625cbb48e8f42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for z location (meters) of i'th coil.  <a href="#a36b8a5de838761db4b2625cbb48e8f42">More...</a><br /></td></tr>
 <tr class="separator:a36b8a5de838761db4b2625cbb48e8f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af79bedb38b95e5f563190266988a6494"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coil_data.html#af79bedb38b95e5f563190266988a6494">current</a> (int i) const </td></tr>
+<tr class="memdesc:af79bedb38b95e5f563190266988a6494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for current (Amps) of i'th coil.  <a href="#af79bedb38b95e5f563190266988a6494">More...</a><br /></td></tr>
 <tr class="separator:af79bedb38b95e5f563190266988a6494"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_table"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_table')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_table.html">Table</a></td></tr>
 <tr class="memitem:a89a9d0b706d074fad499e94262223fae inherit pub_methods_class_table"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a89a9d0b706d074fad499e94262223fae">num_columns</a> () const </td></tr>
@@ -143,6 +149,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5ffced9d704ffa55f56413e2a5706d7e inherit pub_methods_class_table"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a5ffced9d704ffa55f56413e2a5706d7e">num_rows</a> () const </td></tr>
 <tr class="separator:a5ffced9d704ffa55f56413e2a5706d7e inherit pub_methods_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6e317db4eaff12cdf7788d804855e34 inherit pub_methods_class_table"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#ad6e317db4eaff12cdf7788d804855e34">data</a> (int row, int column) const </td></tr>
+<tr class="memdesc:ad6e317db4eaff12cdf7788d804855e34 inherit pub_methods_class_table"><td class="mdescLeft">&#160;</td><td class="mdescRight">get data from the table  <a href="#ad6e317db4eaff12cdf7788d804855e34">More...</a><br /></td></tr>
 <tr class="separator:ad6e317db4eaff12cdf7788d804855e34 inherit pub_methods_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -163,7 +170,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ae57ef6752df400c4c366814667b88b91 inherit pro_static_attribs_class_table"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#ae57ef6752df400c4c366814667b88b91">kFileReadError</a> = 3</td></tr>
 <tr class="separator:ae57ef6752df400c4c366814667b88b91 inherit pro_static_attribs_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A container for the r and z location (m) and currents (A) of external coils. </p>
+<p>Load from a (3-column) tsv of doubles like <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. ">Table</a> does. Can access the data in the same way or use getter functions r(i) z(i) and current(i) </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="af79bedb38b95e5f563190266988a6494"></a>
 <div class="memitem">
 <div class="memproto">
@@ -185,6 +195,15 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Getter for current (Amps) of i'th coil. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>the number of the coil </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>current in amps of the coil </dd></dl>
 
 </div>
 </div>
@@ -220,8 +239,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reads in a tsv file and creates a <a class="el" href="class_coil_data.html">CoilData</a>, Inherits from <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. data can be set and accessed like data(row...">Table</a>, then checks that there is the proper number of columns. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Reads in a tsv file and populates a <a class="el" href="class_coil_data.html" title="A container for the r and z location (m) and currents (A) of external coils. ">CoilData</a>. </p>
+<p>Inherits from <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. ">Table</a>, then checks that there is the proper number of columns. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>the filename, as a string </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">header_lines</td><td>how many inital lines to skip </td></tr>
@@ -256,6 +275,15 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Getter for r location (meters) of i'th coil. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>the number of the coil </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>r location of the coil from the axis (meters) </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a36b8a5de838761db4b2625cbb48e8f42"></a>
@@ -280,6 +308,15 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Getter for z location (meters) of i'th coil. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>the number of the coil </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>z location of the coil above the midplane (meters) </dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -292,7 +329,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_coil_data.html">CoilData</a></li>
-    <li class="footer">Generated on Tue Dec 16 2014 11:53:49 for COUGAR by
+    <li class="footer">Generated on Tue Dec 16 2014 12:59:02 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
