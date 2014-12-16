@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     double zmax = vm["z-max"].as<double>();
     int maxIterM = vm["max-iter-M"].as<int>();
     int maxIterN = vm["max-iter-N"].as<int>();
-    double epsilon = vm["error-tol-N"].as<double>();    
+    double epsilon = vm["error-tol-N"].as<double>();
 
     std::string pgtype;
     if (!vm.count("pgtype")) {
@@ -109,6 +109,13 @@ int main(int argc, char *argv[])
     double omega_init = 0.5;
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, &cd);
+    
+    // set up Critical
+    double z_limiter1 = vm["z_limiter1"].as<double>();
+    double z_limiter2 = vm["z_limiter2"].as<double>();
+    double max-iter-crit = vm["max-iter-crit"].as<double>();
+    double error-tol-crit = vm["error-tol-crit"].as<double>();
+    Critical *crit = new Critical(*grid, *psi, max-iter-crit, error-tol-crit, z_limiter1, z_limiter2);
 
     /** determine which output type */
     Grad_Output *grad_output;

@@ -5,22 +5,37 @@
 
 class Critical {
 public:
-    Critical(const Grid &GridS, const Field &Psi, int max_iter, double epsilon);
+    Critical(const Grid &GridS, const Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2);
     ~Critical();
-    // Calculates alpha, beta grid for interpolation
+    /*!
+     * @brief Calculates alpha, beta grid for interpolation
+     */
     void interpolate();
-    // Interpolated Psi defined for all r, z
+    /*!
+     * @brief Interpolated Psi defined for all r, z
+     */
     void Psi_interp(double r, double z);
-    // Find alpha for given position
+    /*!
+     * @brief Find alpha for given position
+     */
     double cell_alpha(double r, double z);
-    // Find beta for given position
+    /*!
+     * @brief Find beta for given position
+     */
     double cell_beta(double r, double z);
-    // Interpolated Psi defined for all r, z
+    /*!
+     * @brief Interpolated Psi defined for all r, z
+     */
     void Psi_interp(double r, double z);
-    // returns dr, dz to progress toward critical point search in Psi
+    /*!
+     * @brief returns dr, dz to progress toward critical point search 
+     * in Psi
+     */
     void Psi_search(double r, double z, double *dr, double *dz);
-    // Perform search for critical points beginning with initial
-    // guess r, z
+    /*!
+     * @brief Perform search for critical points beginning with 
+     * initial guess r, z
+     */
     void Psi_critical(double r, double z,double *rcrit, double *zcrit);
     /*! 
      * @brief Performs critical point search; updates Psi_i and Psi_o
@@ -29,6 +44,8 @@ public:
 private:
     const double epsilon;
     const int max_iter;
+    const double z_limiter1;
+    const double z_limiter2;
     const Field &Psi_;
     const Grid &Grid_;
     double **alpha;

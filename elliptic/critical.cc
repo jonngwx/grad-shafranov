@@ -4,11 +4,13 @@
 #include "grid.h"
 #include <vector>
 
-Critical::Critical(const Grid &GridS, const Field &Psi, int max_iter, double epsilon) :
+Critical::Critical(const Grid &GridS, const Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2) :
   Psi_(Psi),
   Grid_(GridS),
   max_iter(max_iter),
-  epsilon(epsilon) {
+  epsilon(epsilon),
+  z_limiter1(z_limiter1),
+  z_limiter2(z_limiter2) {
     alpha = new double[Grid_.nr_];
     beta = new double[Grid_.nr_];
     for(int i = 0; i < Grid_.nr_; ++i) {
