@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>COUGAR: Welcome to COUGAR!</title>
+<title>COUGAR: COUGAR</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,8 +46,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -81,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('index.html','');});
+$(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -100,13 +100,24 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Welcome to COUGAR! </div>  </div>
+<div class="title">COUGAR </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>COUGAR: COde Usually Generates Axisymmetric Reconstruction</p>
-<p>A program for magnetic reconstruction of axisymmetric tokamak plasmas, written for APC523, Princeton U, Fall 2014.</p>
-<p>Authors: P. Bolgert, J. Ng, E. Paul, &amp; J. Schwartz </p>
-</div></div><!-- contents -->
+<div class="textblock"><h2>Nonstandard Requirements: </h2>
+<ul>
+<li>c++11 compiler like a recent version of g++</li>
+<li>boost_program_options</li>
+<li>python 2.7 (with library numpy, matplotlib and h5py)</li>
+</ul>
+<p>to compile, type 'make'</p>
+<p>to run type </p><pre class="fragment">./gs_solver
+</pre><p>Try out the command line options! </p><pre class="fragment">--version
+</pre><p> and </p><pre class="fragment">--help
+</pre><p>The options listed in help can be specified on the command line or in grad-shafranov.cfg (the default config file).</p>
+<p>Not all the options are implemented yet.</p>
+<p>Of course, if you specify an illegal value for an option, or a file which does not exist or is not the right format, the program may terminate with an Error message, or with a crash.</p>
+<p>To plot the output, type </p><pre class="fragment">python python/viz.py cougar.out.txt txt
+</pre><p>if the default output filename is used. More generally, type </p><pre class="fragment">python python/viz.py &lt;filename&gt; txt</pre> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
