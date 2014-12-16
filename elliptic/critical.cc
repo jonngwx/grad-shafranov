@@ -3,23 +3,24 @@
 #include "field.h"
 #include "grid.h"
 #include <vector>
+#include <stdio.h>
 
-Critical::Critical(const Grid &GridS, const Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2) :
+Critical::Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2) :
   Psi_(Psi),
   Grid_(GridS),
   max_iter(max_iter),
   epsilon(epsilon),
   z_limiter1(z_limiter1),
   z_limiter2(z_limiter2) {
-    alpha = new double[Grid_.nr_];
-    beta = new double[Grid_.nr_];
+    alpha = new double*[Grid_.nr_];
+    beta = new double*[Grid_.nr_];
     for(int i = 0; i < Grid_.nr_; ++i) {
       alpha[i] = new double[Grid_.nz_];
       beta[i] = new double[Grid_.nz_];
     }
 }
 
-void Critical::~Critical() {
+Critical::~Critical() {
   for (int i = 0; i < Grid_.nr_; ++i) {
     delete [] alpha[i];
     delete [] beta[i];
@@ -36,12 +37,12 @@ void Critical::~Critical() {
  * Determines Psi = r^alpha z^beta inside rectangle defined by (r[i], r[i+1])x(z[i], z[i+1])
  */
 void Critical::interpolate() {
-  double c1, c2, c3, c4, c5, c6, , c7, c8, d1, d2, d3, d4, d5, w_r1, w_r2, w_z1, w_z2, e1, e2, e3, e4;
-  double **r = Grid_.r;
-  double **z = Grid_.z;
+  double c1, c2, c3, c4, c5, c6, c7, c8, d1, d2, d3, d4, d5, w_r1, w_r2, w_z1, w_z2, e1, e2, e3, e4;
+  double *r = Grid_.R_;
+  double *z = Grid_.z_;
   double **Psi = Psi_.f_;
-  for (int i = 1; i < nr-1; ++i) {
-    for(int j = 1; j < nz-1; ++j) {
+  for (int i = 1; i < Grid_.nr_-1; ++i) {
+    for(int j = 1; j < Grid_.nz_-1; ++j) {
       // C[i-1][j]
       c1 = (Psi[i][j] - Psi[i-1][j])/(r[i]-r[i-1]);
       // C[i][j]
@@ -80,8 +81,8 @@ void Critical::interpolate() {
         w_z1 = 1;
         w_z2 = 1;
       }
-      Psi_r = (w_r1*c1 + w_r2*c2)/(w_r1 + w_r2);
-      Psi_z = (w_z1*d1 + w_z2*d2)/(w_z1 + w_z2);
+      double Psi_r = (w_r1*c1 + w_r2*c2)/(w_r1 + w_r2);
+      double Psi_z = (w_z1*d1 + w_z2*d2)/(w_z1 + w_z2);
       // e[i][j]
       e1 = (c3 - c2)/(z[j+1]-z[j]);
       // e[i-1][j-1] = (c[i-1][j] - c[i-1][j-1])/(z[j]-z[j-1])
@@ -90,7 +91,7 @@ void Critical::interpolate() {
       e3 = (c2 - c5)/(z[j-1] - z[j-2]);
       // e[i-1][j] = (c[i-1][j+1] - c[i-1][j])/(z[j+1] - z[j])
       e4 = (c6 - c1)/(z[j+1] - z[j]);
-      Psi_rz = (w_r1*(w_z1*e2 + w_z2*e4) + w_r2*(w_z1*e3 + w_z2*e1))/((w_r1 + w_r2)(w_z1 + w_z2));
+      double Psi_rz = (w_r1*(w_z1*e2 + w_z2*e4) + w_r2*(w_z1*e3 + w_z2*e1))/((w_r1 + w_r2)*(w_z1 + w_z2));
       alpha[i][j] = Psi_rz*r[i]/Psi_z;
       beta[i][j] = Psi_rz*z[j]/Psi_r;
     }
@@ -102,12 +103,12 @@ void Critical::interpolate() {
  */
 double Critical::cell_alpha(double r, double z) {
   // Find containing cell's indices
-  double i = GridS.celli(r);
-  double j = GridS.cellj(z);
+  double i = Grid_.celli(r);
+  double j = Grid_.cellj(z);
   // Determine where bivariate polynomial is defined
-  if ((int)GridS.celli(r) - i < 0) --i;
-  if ((int)GridS.cellj(z) - j < 0) --j;
-  return alpha[i][j];
+  if ((int)Grid_.celli(r) - i < 0) --i;
+  if ((int)Grid_.cellj(z) - j < 0) --j;
+  return alpha[(int)i][(int)j];
 }
 
 /*!
@@ -115,21 +116,21 @@ double Critical::cell_alpha(double r, double z) {
  */
 double Critical::cell_beta(double r, double z) {
   // Find containing cell's indices
-  double i = GridS.celli(r);
-  double j = GridS.cellj(z);
+  double i = Grid_.celli(r);
+  double j = Grid_.cellj(z);
   // Determine where bivariate polynomial is defined
-  if ((int)GridS.celli(r) - i < 0) --i;
-  if ((int)GridS.cellj(z) - j < 0) --j;
-  return beta[i][j]
+  if ((int)Grid_.celli(r) - i < 0) --i;
+  if ((int)Grid_.cellj(z) - j < 0) --j;
+  return beta[(int)i][(int)j];
 }
 
 /*!
  * @brief Interpolated Psi defined for all r, z
  */
-void Critical::Psi_interp(double r, double z) {
+double Critical::Psi_interp(double r, double z) {
   double alpha = cell_alpha(r,z);
   double beta = cell_beta(r,z);
-  return (r^alpha)*(z^beta);
+  return pow(r,alpha)*pow(z,beta);
 }
 
 /*!
@@ -141,12 +142,12 @@ void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   // D = Psi_rr*Psi_zz - Psi_rz^2
   beta = cell_beta(r,z);
   alpha = cell_alpha(r,z);
-  Psi_zz = beta*(beta-1)*z^(beta-2)*r^(alpha);
-  Psi_rr = alpha*(alpha-1)*r^(alpha-2)*z^(beta);
-  Psi_rz = alpha*beta*r^(alpha-1)*z^(beta-1);
-  Psi_r = (alpha)*r^(alpha-1)*z^(beta);
-  Psi_z = (beta)*z^(beta-1)*r^(alpha);
-  D = Psi_rr*Psi_zz - Psi_rz^2;
+  Psi_zz = beta*(beta-1)*pow(z,beta-2)*pow(r,alpha);
+  Psi_rr = alpha*(alpha-1)*pow(r,alpha-2)*pow(z,beta);
+  Psi_rz = alpha*beta*pow(r,alpha-1)*pow(z,beta-1);
+  Psi_r = (alpha)*pow(r,alpha-1)*pow(z,beta);
+  Psi_z = (beta)*pow(z,beta-1)*pow(r,alpha);
+  D = Psi_rr*Psi_zz - pow(Psi_rz,2);
   *dr = (-Psi_zz*Psi_r + Psi_rz*Psi_z)*(1.0/D);
   *dz = (Psi_rz*Psi_r - Psi_rr*Psi_z)*(1.0/D);
 }
@@ -160,10 +161,10 @@ void Critical::Psi_critical(double r, double z, double *rcrit, double *zcrit) {
     // Calculate |del Psi(r,z)|
     beta = cell_beta(r,z);
     alpha = cell_alpha(r,z);
-    Psi_r = (alpha)*r^(alpha-1)*z^(beta);
-    Psi_z = (beta)*z^(beta-1)*r^(alpha);
+    double Psi_r = (alpha)*pow(r,alpha-1)*pow(z,beta);
+    double Psi_z = (beta)*pow(z,beta-1)*pow(r,alpha);
     // If within tolerence, return
-    if (sqrt(Psi_r^2 + Psi_z^2) < epsilon){
+    if (sqrt(pow(Psi_r,2) + pow(Psi_z,2)) < epsilon){
       *rcrit = r;
       *zcrit = z;
       return;
@@ -177,7 +178,7 @@ void Critical::Psi_critical(double r, double z, double *rcrit, double *zcrit) {
 }
 
 /*!
- * @brief Performs critical point search; updates Psi_i and Psi_o
+ * @brief Performs critical point search; updates Psi_l and Psi_o
  */
 void Critical::update() {
     

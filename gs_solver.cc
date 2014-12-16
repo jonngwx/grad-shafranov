@@ -12,6 +12,7 @@
 #include "include/tsv_reader.h"
 #include "include/create_options.h"
 #include "include/j_solver_alpha.h"
+#include "include/critical.h"
 
 #ifdef HDF_MODE
 #include "grad_output_hdf.h"
@@ -113,9 +114,9 @@ int main(int argc, char *argv[])
     // set up Critical
     double z_limiter1 = vm["z_limiter1"].as<double>();
     double z_limiter2 = vm["z_limiter2"].as<double>();
-    double max-iter-crit = vm["max-iter-crit"].as<double>();
-    double error-tol-crit = vm["error-tol-crit"].as<double>();
-    Critical *crit = new Critical(*grid, *psi, max-iter-crit, error-tol-crit, z_limiter1, z_limiter2);
+    double max_iter_crit = vm["max-iter-crit"].as<double>();
+    double error_tol_crit = vm["error-tol-crit"].as<double>();
+    Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2);
 
     /** determine which output type */
     Grad_Output *grad_output;
