@@ -5,6 +5,7 @@ var searchData=
   ['print1d',['print1d',['../util_8h.html#af07e826bc08e746319a94bafcb4f38cb',1,'util.h']]],
   ['print2d',['print2d',['../util_8h.html#aecdf80df241e320882555683b30500f2',1,'util.h']]],
   ['psi',['psi',['../class_p_g_data.html#a47c35a80fc4eb366f7619d55a3ae751d',1,'PGData']]],
+  ['psi_5fcritical',['Psi_critical',['../class_critical.html#af162493374b6229bfa9c89fe234f7131',1,'Critical']]],
   ['psi_5finterp',['Psi_interp',['../class_critical.html#a9d6cc001ef6c26934c801a50431bbb2f',1,'Critical::Psi_interp(double r, double z)'],['../class_critical.html#a9d6cc001ef6c26934c801a50431bbb2f',1,'Critical::Psi_interp(double r, double z)']]],
   ['psi_5fsearch',['Psi_search',['../class_critical.html#ab2a1f95baf227877f32dcba9e8fcbb46',1,'Critical']]]
 ];

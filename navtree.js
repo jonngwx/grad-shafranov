@@ -2,7 +2,7 @@ var NAVTREE =
 [
   [ "COUGAR", "index.html", [
     [ "Welcome to COUGAR!", "index.html", null ],
-    [ "COUGAR", "md__r_e_a_d_m_e.html", null ],
+    [ "COUGAR README", "md__r_e_a_d_m_e.html", null ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [

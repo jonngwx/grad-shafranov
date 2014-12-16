@@ -16,9 +16,9 @@ var searchData=
   ['green_5ffcn',['green_fcn',['../green__fcn_8cc.html#af7dba855cd3763101772c26e6bcb06bf',1,'green_fcn(double R1, double Z1, double R2, double Z2):&#160;green_fcn.cc'],['../green__fcn_8h.html#af7dba855cd3763101772c26e6bcb06bf',1,'green_fcn(double R1, double Z1, double R2, double Z2):&#160;green_fcn.cc']]],
   ['green_5ffcn_2ecc',['green_fcn.cc',['../green__fcn_8cc.html',1,'']]],
   ['green_5ffcn_2eh',['green_fcn.h',['../green__fcn_8h.html',1,'']]],
-  ['grid',['Grid',['../class_grid.html',1,'Grid'],['../class_grad___output.html#a60e7d674e2615fa636869ea1b0d816fb',1,'Grad_Output::grid()'],['../class_grid.html#ab78d3cef00ffeaf870bcbb19921aec0e',1,'Grid::Grid()']]],
+  ['grid',['Grid',['../class_grid.html',1,'Grid'],['../class_grid.html#ab78d3cef00ffeaf870bcbb19921aec0e',1,'Grid::Grid()'],['../class_grad___output.html#a60e7d674e2615fa636869ea1b0d816fb',1,'Grad_Output::grid()']]],
   ['grid_2ecc',['grid.cc',['../grid_8cc.html',1,'']]],
   ['grid_2eh',['grid.h',['../grid_8h.html',1,'']]],
-  ['grid_5f',['Grid_',['../class_critical.html#a71b2f9ddffc0c1158866488e55318217',1,'Critical::Grid_()'],['../class_elliptic_solver.html#a62b303889cb865c2b26e5f8ffd86fa4a',1,'EllipticSolver::Grid_()'],['../class_field.html#adedf34fa503588ea6a6c203d2f0a0b3f',1,'Field::grid_()']]],
+  ['grid_5f',['Grid_',['../class_elliptic_solver.html#a62b303889cb865c2b26e5f8ffd86fa4a',1,'EllipticSolver::Grid_()'],['../class_field.html#adedf34fa503588ea6a6c203d2f0a0b3f',1,'Field::grid_()']]],
   ['gs_5fsolver_2ecc',['gs_solver.cc',['../gs__solver_8cc.html',1,'']]]
 ];

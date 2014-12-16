@@ -12,9 +12,9 @@ var searchData=
   ['create_5foptions_2ecc',['create_options.cc',['../create__options_8cc.html',1,'']]],
   ['create_5foptions_2eh',['create_options.h',['../create__options_8h.html',1,'']]],
   ['createoptions',['CreateOptions',['../create__options_8cc.html#a097a3cfa8f93a66ea7be411fd003fc44',1,'CreateOptions(int ac, char *av[], po::options_description &amp;visible, po::variables_map &amp;vm):&#160;create_options.cc'],['../create__options_8h.html#a097a3cfa8f93a66ea7be411fd003fc44',1,'CreateOptions(int ac, char *av[], po::options_description &amp;visible, po::variables_map &amp;vm):&#160;create_options.cc']]],
-  ['critical',['Critical',['../class_critical.html',1,'Critical'],['../class_critical.html#ab2c5d4bc7acb1f38791820837c61c8d4',1,'Critical::Critical()']]],
+  ['critical',['Critical',['../class_critical.html',1,'Critical'],['../class_critical.html#ae5f53090f36885d1e83086b3474c74ab',1,'Critical::Critical(const Grid &amp;GridS, const Field &amp;Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2)'],['../class_critical.html#ab32d4b5684a9ca9aa881ca365080c17b',1,'Critical::critical()']]],
   ['critical_2ecc',['critical.cc',['../critical_8cc.html',1,'']]],
   ['critical_2eh',['critical.h',['../critical_8h.html',1,'']]],
   ['current',['CURRENT',['../class_grad___output.html#af76e38da8114d0f8f33966b8b60f8fe8ab24cf58ec6f711a0304e976b258fe3ac',1,'Grad_Output::CURRENT()'],['../class_coil_data.html#af79bedb38b95e5f563190266988a6494',1,'CoilData::current()']]],
-  ['cougar',['COUGAR',['../md__r_e_a_d_m_e.html',1,'']]]
+  ['cougar_20readme',['COUGAR README',['../md__r_e_a_d_m_e.html',1,'']]]
 ];

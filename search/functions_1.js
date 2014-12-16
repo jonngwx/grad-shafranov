@@ -8,6 +8,6 @@ var searchData=
   ['check_5fdata',['check_data',['../namespaceread__data.html#a0ab9aa1fd6b3de9b65feb92ed8d73270',1,'read_data']]],
   ['coeff',['coeff',['../class_elliptic_solver.html#af0636405b7a5c07c6afdb3aa2c20d365',1,'EllipticSolver::coeff()'],['../class_gauss_seidel.html#aeedf15634532045f9213e9ce0498145f',1,'GaussSeidel::coeff()'],['../class_s_o_r.html#a3acbcece672550e6dc512a2696d3b42a',1,'SOR::coeff()']]],
   ['createoptions',['CreateOptions',['../create__options_8cc.html#a097a3cfa8f93a66ea7be411fd003fc44',1,'CreateOptions(int ac, char *av[], po::options_description &amp;visible, po::variables_map &amp;vm):&#160;create_options.cc'],['../create__options_8h.html#a097a3cfa8f93a66ea7be411fd003fc44',1,'CreateOptions(int ac, char *av[], po::options_description &amp;visible, po::variables_map &amp;vm):&#160;create_options.cc']]],
-  ['critical',['Critical',['../class_critical.html#ab2c5d4bc7acb1f38791820837c61c8d4',1,'Critical']]],
+  ['critical',['Critical',['../class_critical.html#ae5f53090f36885d1e83086b3474c74ab',1,'Critical::Critical(const Grid &amp;GridS, const Field &amp;Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2)'],['../class_critical.html#ab32d4b5684a9ca9aa881ca365080c17b',1,'Critical::critical()']]],
   ['current',['current',['../class_coil_data.html#af79bedb38b95e5f563190266988a6494',1,'CoilData']]]
 ];
