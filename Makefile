@@ -8,10 +8,10 @@ TESTPROGS = elliptic_test tsv_reader_example coil_data_example
 .PHONY: all
 all: $(PROGS) $(TESTPROGS)
 
-gs_solver: gs_solver.o tsv_reader.o j_solver_alpha.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o
+gs_solver: gs_solver.o tsv_reader.o j_solver_alpha.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o
 	$(CXX) -o $@ $^ $(LIBS) 
 
-gs_solver_hdf: gs_solver_hdf.o tsv_reader.o j_solver_alpha.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o grad_output_hdf.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o
+gs_solver_hdf: gs_solver_hdf.o tsv_reader.o j_solver_alpha.o grid.o field.o slow_boundary.o grad_output.o grad_output_txt.o grad_output_hdf.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o
 	$(CXX) -o $@ $^ $(LIBS) $(HDF)
 
 gs_solver_hdf.o: gs_solver.cc
