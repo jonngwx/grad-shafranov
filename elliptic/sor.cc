@@ -25,13 +25,16 @@ SOR::~SOR() {}
  * @brief Calculates coefficients for iteration
  */
 void SOR::coeff() {
-    double dr = Grid_.dr_;
-    double dz = Grid_.dz_;
-    B = (dr*dr*dz*dz)/(2*dz*dz + 2*dr*dr);
-    C = 1/(dz*dz);
-    for (int i = 0; i < Grid_.nr_; ++i) {
-        A[i] = 1/(2*Grid_.R_[i]*dr) + 1/(dr*dr);
-    }
+  double dr = Grid_.dr_;
+  double dz = Grid_.dz_;
+  B = (dr*dr*dz*dz)/(2*dz*dz + 2*dr*dr);
+  C = 1/(dz*dz);
+  for (int i = 0; i < Grid_.nr_; ++i) {
+    A[i] = 1/(2*Grid_.R_[i]*dr) + 1/(dr*dr);
+    assert(!isnan(A[i]));
+  }
+  assert(!isnan(B));
+  assert(!isnan(C));
 }
 
 /*!
@@ -78,6 +81,7 @@ void SOR::step(const Field &jphi) {
   // Enforce boundary condition on Psi_
 //  boundary(Psi_, Psi_prev_);
   double om = omega();
+  printf("omega = %f\n", om);
   // Iterate over non-boundary region
   for (int i = 1; i < nr-1; ++i) {
     for(int j = 1; j < nz-1; ++j) {

@@ -26,11 +26,13 @@ void Critical::~Critical() {
   delete [] beta;
 }
 
-// Bivariate interpolation of Psi s.t. preserves smoothness
-// as described in Akima, 1974
-// Calculates Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
-// Determines Psi = r^alpha z^beta inside rectangle defined by
-// (r[i], r[i+1])x(z[i], z[i+1])
+/*!
+ * @brief Bivariate interpolation of Psi
+ *
+ * preserves smoothness as described in Akima, 1974
+ * Calculates Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
+ * Determines Psi = r^alpha z^beta inside rectangle defined by (r[i], r[i+1])x(z[i], z[i+1])
+ */
 void Critical::interpolate() {
   double c1, c2, c3, c4, c5, c6, , c7, c8, d1, d2, d3, d4, d5, w_r1, w_r2, w_z1, w_z2, e1, e2, e3, e4;
   double **r = Grid_.r;
@@ -93,7 +95,9 @@ void Critical::interpolate() {
   }
 }
 
-// Find alpha for given position
+/*!
+ * @brief Find alpha for given position
+ */
 double Critical::cell_alpha(double r, double z) {
   // Find containing cell's indices
   double i = GridS.celli(r);
@@ -104,7 +108,9 @@ double Critical::cell_alpha(double r, double z) {
   return alpha[i][j];
 }
 
-// Find beta for given position
+/*!
+ * @brief Find beta for given position
+ */
 double Critical::cell_beta(double r, double z) {
   // Find containing cell's indices
   double i = GridS.celli(r);
@@ -115,14 +121,18 @@ double Critical::cell_beta(double r, double z) {
   return beta[i][j]
 }
 
-// Interpolated Psi defined for all r, z
+/*!
+ * @brief Interpolated Psi defined for all r, z
+ */
 void Critical::Psi_interp(double r, double z) {
   double alpha = cell_alpha(r,z);
   double beta = cell_beta(r,z);
   return (r^alpha)*(z^beta);
 }
 
-// returns dr, dz to progress toward critical point in Psi
+/*!
+ * @brief returns dr, dz to progress toward critical point in Psi
+ */
 void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   double beta, alpha, Psi_zz, Psi_rr, Psi_rz, Psi_r, Psi_z, D;
   // Psi = r^alpha z^beta
@@ -139,8 +149,9 @@ void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   *dz = (Psi_rz*Psi_r - Psi_rr*Psi_z)*(1.0/D);
 }
 
-// Perform search for critical points beginning with initial
-// guess r, z
+/*!
+ * @brief Perform search for critical points beginning with initial guess r, z
+ */
 void Critical::Psi_critical(double r, double z, double *rcrit, double *zcrit) {
   double dr, dz, alpha, beta;
   for (int i = 0; i < max_iter; ++i) {
@@ -161,6 +172,13 @@ void Critical::Psi_critical(double r, double z, double *rcrit, double *zcrit) {
   }
   printf("Critical point not found within %d iterations \n", max_iter);
   exit(1);
+}
+
+/*!
+ * @brief Performs critical point search; updates Psi_i and Psi_o
+ */
+void Critical::update() {
+    
 }
 
 

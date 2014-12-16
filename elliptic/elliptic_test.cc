@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum)
   for (int i = 0; i < nr; ++i) {
     for (int j = 0; j < nz; ++j) {
       psi->f_[i][j] = 1;
-      jphi->f_[i][j] = 0;
+      jphi->f_[i][j] = 1;
     }
   }
   

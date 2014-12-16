@@ -35,6 +35,8 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("error-tol-M", po::value<double>()->default_value(1.0e-4), "error tolerance outer loop")
       ("max-iter-crit", po::value<int>()->default_value(100), "max iterations for solving for the critical points")
       ("error-tol-crit",po::value<double>()->default_value(1.0e-3), "converge criterion for finding critical points")
+      ("z_limiter1",po::value<double>()->default_value(2), "Horizontal limiter point for calculating critical points")
+      ("z_limiter2",po::value<double>()->default_value(-2), "Horizontal limiter point for calculating critical points")
      ;
 
   /* For pgtype = "alpha"

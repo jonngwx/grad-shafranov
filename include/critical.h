@@ -21,7 +21,11 @@ public:
     void Psi_search(double r, double z, double *dr, double *dz);
     // Perform search for critical points beginning with initial
     // guess r, z
-    void Psi_critical(double r, double z,double *rcrit, double *zcrit)
+    void Psi_critical(double r, double z,double *rcrit, double *zcrit);
+    /*! 
+     * @brief Performs critical point search; updates Psi_i and Psi_o
+     */
+    void critical();
 private:
     const double epsilon;
     const int max_iter;
