@@ -1,0 +1,14 @@
+/**
+@brief Documentation for COUGAR
+@author the COUGAR pack
+@file Mainpage.dox
+*//
+/**
+@mainpage Welcome to COUGAR!
+COUGAR: COde Usually Generates Axisymmetric Reconstruction
+
+A program for magnetic reconstruction of axisymmetric tokamak plasmas,
+written for APC523, Princeton U, Fall 2014.
+
+Authors: P. Bolgert, J. Ng, E. Paul, & J. Schwartz
+*/

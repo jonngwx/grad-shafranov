@@ -1,5 +1,5 @@
-COUGAR
-======
+COUGAR README
+=============
 
 Nonstandard Requirements:
 -------------------------
