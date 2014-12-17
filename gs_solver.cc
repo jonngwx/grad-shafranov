@@ -12,6 +12,7 @@
 #include "include/tsv_reader.h"
 #include "include/create_options.h"
 #include "include/j_solver_alpha.h"
+#include "include/critical.h"
 
 #ifdef HDF_MODE
 #include "grad_output_hdf.h"
@@ -106,17 +107,16 @@ int main(int argc, char *argv[])
     JSolverAlpha *jsa = new JSolverAlpha(P0,g0,n1,n2,Ip,grid);
 
     // Elliptic solver for inner loop
-    double omega_init = 0.5;
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, &cd);
-    
+   
     // set up Critical
     double z_limiter1 = vm["z_limiter1"].as<double>();
     double z_limiter2 = vm["z_limiter2"].as<double>();
-    int max-iter-crit = vm["max-iter-crit"].as<int>();
-    double error-tol-crit = vm["error-tol-crit"].as<double>();
-    Critical *crit = new Critical(*grid, *psi, max-iter-crit, error-tol-crit, z_limiter1, z_limiter2, R0, z0);
-    crit::interpolate();
+    int max_iter_crit = vm["max-iter-crit"].as<int>();
+    double error_tol_crit = vm["error-tol-crit"].as<double>();
+    Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2);
+    crit->interpolate();
 
     /** determine which output type */
     Grad_Output *grad_output;
@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
             printf("n = %i \n", n);
             if (n == 0) solver->step_1(*jphi);
             else solver->step(*jphi);
-            crit::update();
+            crit->update();
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;

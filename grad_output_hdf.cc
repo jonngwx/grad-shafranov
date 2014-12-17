@@ -41,7 +41,7 @@ void Grad_Output_Hdf::write_output(const char* filename){
     check(status);
     
     double *x = new double[nr*nz];
-    //    double *gdata = new double[nr*nz];
+    // hackery due to need for contiguous memory
     twod_to_oned(f->f_, x, nr, nz);
     status = H5LTmake_dataset(file_id,"/psi",2,dims,H5T_NATIVE_DOUBLE,x);
     check(status);
