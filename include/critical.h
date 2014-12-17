@@ -33,10 +33,10 @@ public:
      */
     void Psi_search(double r, double z, double *dr, double *dz);
     /*!
-     * @brief Perform search for critical points beginning with 
-     * initial guess r, z
+     * @brief Perform search for critical points of limiter beginning 
+     * with initial guess r, z
      */
-    void Psi_critical(double r, double z,double *rcrit, double *zcrit);
+    void Psi_limiter(double r, double z,double *rcrit, double *zcrit, double *Psi_min);
     /*! 
      * @brief Performs critical point search; updates Psi_i and Psi_o
      */
@@ -46,6 +46,11 @@ private:
     const int max_iter;
     const double z_limiter1;
     const double z_limiter2;
+    // Critical points - updated with every critical search
+    double R0; // R coordinate of magnetic axis
+    double z0; // Z coordinate of magnetic axis
+    double Rl; // R coordinate of limiter
+    double zl; // Z coordinate of limiter
     const Field &Psi_;
     const Grid &Grid_;
     double **alpha;

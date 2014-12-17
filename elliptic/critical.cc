@@ -129,7 +129,7 @@ double Critical::cell_beta(double r, double z) {
 void Critical::Psi_interp(double r, double z) {
   double alpha = cell_alpha(r,z);
   double beta = cell_beta(r,z);
-  return (r^alpha)*(z^beta);
+  return (pow(r,alpha)*pow(z,beta);
 }
 
 /*!
@@ -141,46 +141,127 @@ void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   // D = Psi_rr*Psi_zz - Psi_rz^2
   beta = cell_beta(r,z);
   alpha = cell_alpha(r,z);
-  Psi_zz = beta*(beta-1)*z^(beta-2)*r^(alpha);
-  Psi_rr = alpha*(alpha-1)*r^(alpha-2)*z^(beta);
-  Psi_rz = alpha*beta*r^(alpha-1)*z^(beta-1);
-  Psi_r = (alpha)*r^(alpha-1)*z^(beta);
-  Psi_z = (beta)*z^(beta-1)*r^(alpha);
-  D = Psi_rr*Psi_zz - Psi_rz^2;
+  Psi_zz = beta*(beta-1)*pow(z,(beta-2))*pow(r,alpha);
+  Psi_rr = alpha*(alpha-1)*pow(r,(alpha-2))*pow(z,beta);
+  Psi_rz = alpha*beta*pow(r, (alpha-1))*pow(z,(beta-1));
+  Psi_r = (alpha)*pow(r,(alpha-1))*pow(z,beta);
+  Psi_z = (beta)*pow(z,(beta-1))*pow(r,alpha);
+  D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
   *dr = (-Psi_zz*Psi_r + Psi_rz*Psi_z)*(1.0/D);
   *dz = (Psi_rz*Psi_r - Psi_rr*Psi_z)*(1.0/D);
 }
 
 /*!
- * @brief Perform search for critical points beginning with initial guess r, z
+ * @brief Perform search for critical points beginning with initial
+ * guess r, z
  */
-void Critical::Psi_critical(double r, double z, double *rcrit, double *zcrit) {
+void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, double *Psi_min) {
   double dr, dz, alpha, beta;
+  double r_crit, z_crit, r_lim1, z_lim1, r_lim2, z_lim2;
+  double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz;
   for (int i = 0; i < max_iter; ++i) {
     // Calculate |del Psi(r,z)|
     beta = cell_beta(r,z);
     alpha = cell_alpha(r,z);
-    Psi_r = (alpha)*r^(alpha-1)*z^(beta);
-    Psi_z = (beta)*z^(beta-1)*r^(alpha);
-    // If within tolerence, return
-    if (sqrt(Psi_r^2 + Psi_z^2) < epsilon){
-      *rcrit = r;
-      *zcrit = z;
-      return;
+    Psi_r = (alpha)*pow(r,(alpha-1))*pow(z, beta);
+    Psi_z = (beta)*pow(z,(beta-1))*pow(r, alpha);
+    // If within tolerence
+    if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
+      // Second derivative test
+      Psi_rr = (alpha)*(alpha-1)*pow(r, (alpha-2))*pow(z,beta);
+      Psi_zz = (beta)*(beta-1)*pow(z, (beta-2))*pow(r, alpha);
+      Psi_rz = (alpha)*pow(r,(alpha-1))*(beta)*pow(z, (beta-1));
+      D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
+      // If critical point corresponds to a minimum
+      if (D > 0) {
+        r_crit = r;
+        z_crit = z;
+        Psi_crit = Psi_interp(r_crit, z_crit);
+        return;
+      }
     }
     Psi_search(r, z, &dr, &dz);
     r += dr;
     z += dz;
   }
-  printf("Critical point not found within %d iterations \n", max_iter);
-  exit(1);
+  // If search failed, use original coordinates of magnetic axis
+  r_crit = R0;
+  z_crit = z0;
+  Psi_crit = Psi_interp(r_crit, z_crit);
 }
-
+          
+/*!
+ * @brief Perform search for critical points beginning with initial
+ * guess r, z
+ */
+void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, double *Psi_min) {
+  double dr, dz, alpha, beta;
+  double r_crit, z_crit, r_lim1, z_lim1, r_lim2, z_lim2;
+  double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz;
+  for (int i = 0; i < max_iter; ++i) {
+    // Calculate |del Psi(r,z)|
+    beta = cell_beta(r,z);
+    alpha = cell_alpha(r,z);
+    Psi_r = (alpha)*pow(r,(alpha-1))*pow(z, beta);
+    Psi_z = (beta)*pow(z,(beta-1))*pow(r, alpha);
+    // If within tolerence
+    if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
+      // Second derivative test
+      Psi_rr = (alpha)*(alpha-1)*pow(r, (alpha-2))*pow(z,beta);
+      Psi_zz = (beta)*(beta-1)*pow(z, (beta-2))*pow(r, alpha);
+      Psi_rz = (alpha)*pow(r,(alpha-1))*(beta)*pow(z, (beta-1));
+      D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
+      // If critical point corresponds to a saddle point
+      if (D < 0) {
+        r_crit = r;
+        z_crit = z;
+      }
+      else {
+        r_crit = r_limiter1;
+        z_crit = z_limiter1;
+      }
+      break;
+    }
+    Psi_search(r, z, &dr, &dz);
+    r += dr;
+    z += dz;
+  }
+  Psi_lim1 = Psi_interp(r_limiter1, z_limiter1);
+  Psi_lim2 = Psi_interp(r_limiter2, z_limiter2);
+  Psi_crit = Psi_interp(r_crit, z_crit);
+  if(Psi_lim1 < Psi_lim2) {
+    rcrit = r_limiter1;
+    zcrit = z_limiter1;
+    Psi_min = Psi_lim1;
+  }
+  else {
+    rcrit = r_limiter2;
+    zcrit = z_limiter2;
+    Psi_min = Psi_lim2;
+  }
+  if(Psi_crit < Psi_min) {
+    rcrit = r;
+    zcrit = z;
+    Psi_min = Psi_crit;
+  }
+}
+          
 /*!
  * @brief Performs critical point search; updates Psi_i and Psi_o
  */
 void Critical::update() {
-    
+  double rcrit, zcrit, Psi_min;
+  // Calculate Psi_l using previous coordinates for limiter
+  Psi_limiter(Rl, zl, &rcrit, &zcrit, &Psi_min);
+  // Update Psi_l, r_l, and z_l
+  Psi_.f_l = Psi_min;
+  Rl = rcrit;
+  zl = zcrit;
+  // Calculate Psi_o using previous coordinates
+  Psi_magnetic(r_o, z_o, &rcrit, &zcrit, &Psi_min);
+  Psi_.f_o = Psi_min;
+  R0 = rcrit;
+  z0 = zcrit;
 }
 
 
