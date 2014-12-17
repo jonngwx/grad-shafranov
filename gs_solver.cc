@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
         for (int n = 0; n < maxIterN; ++n) {
             printf("n = %i \n", n);
             if (n == 0) solver->step_1(*jphi);
-            solver->step(*jphi);
+            else solver->step(*jphi);
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;
