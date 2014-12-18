@@ -12,8 +12,6 @@ class SlowBoundary : public Boundary {
     ~SlowBoundary();
     int CalcB(Field* psi, Field* jphi);
   private:
-    int nr_;
-    int nz_;
     double *R_;
     double *z_;
     double dr_;
@@ -21,8 +19,6 @@ class SlowBoundary : public Boundary {
     CoilData* cond_data_;
     int perim_;
     double ***g_plasma_;
-    int LtoI(int l);
-    int LtoJ(int l);
 };
 
 #endif // SLOWBOUNDARY_H_
