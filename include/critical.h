@@ -5,7 +5,7 @@
 
 class Critical {
 public:
-    Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2);
+    Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2, double R0, double z0);
     ~Critical();
     /*!
      * @brief Calculates alpha, beta grid for interpolation

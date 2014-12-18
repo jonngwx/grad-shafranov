@@ -5,19 +5,23 @@
 #include <vector>
 #include <stdio.h>
 
-Critical::Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2) :
+Critical::Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2, double R0, double z0) :
   Psi_(Psi),
   max_iter(max_iter),
   Grid_(GridS),
   epsilon(epsilon),
   z_limiter1(z_limiter1),
-  z_limiter2(z_limiter2) {
+  z_limiter2(z_limiter2),
+  R0(R0),
+  z0(z0) {
     alpha = new double*[Grid_.nr_];
     beta = new double*[Grid_.nr_];
     for(int i = 0; i < Grid_.nr_; ++i) {
       alpha[i] = new double[Grid_.nz_];
       beta[i] = new double[Grid_.nz_];
     }
+    Rl = R0;
+    zl = z_limiter1;
 }
 
 Critical::~Critical() {
@@ -184,6 +188,10 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
       Psi_search(r, z, &dr, &dz);
       r += dr;
       z += dz;
+      // Check if outside limiters
+      if (z >= z_limiter1 || z <= z_limiter2) break;
+      // Check if outside grid boundaries
+      if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
     }
   }
   // If search failed, use original coordinates of magnetic axis
@@ -249,6 +257,8 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
     z += dz;
     // Check if outside limiters
     if (z >= z_limiter1 || z <= z_limiter2) break;
+    // Check if outside grid boundaries
+    if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
   return;
 }

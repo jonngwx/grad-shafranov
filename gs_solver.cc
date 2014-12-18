@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     double z_limiter2 = vm["z_limiter2"].as<double>();
     int max_iter_crit = vm["max-iter-crit"].as<int>();
     double error_tol_crit = vm["error-tol-crit"].as<double>();
-    Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2);
+    Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2, R0, z0);
     crit->interpolate();
 
     /** determine which output type */
@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
             printf("n = %i \n", n);
             if (n == 0) solver->step_1(*jphi);
             else solver->step(*jphi);
-            crit->update();
+            // crit->update();
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;
