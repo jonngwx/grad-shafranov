@@ -48,6 +48,7 @@ protected:
   Field Psi_prev_;
 // Coefficients
   std::vector<double> A;
-  double B, C;
+  std::vector<double> C;
+  double B,D;
 };
 #endif

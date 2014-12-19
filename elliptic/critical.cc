@@ -4,6 +4,7 @@
 #include "grid.h"
 #include <vector>
 #include <stdio.h>
+#include <assert.h>
 
 Critical::Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2, double R0, double z0) :
   Psi_(Psi),
@@ -122,9 +123,23 @@ double Critical::cell_beta(double r, double z) {
   // Find containing cell's indices
   double i = Grid_.celli(r);
   double j = Grid_.cellj(z);
+  assert(i >= 0);
+  assert(i < Grid_.nr_);
+  assert(j >= 0);
+  assert(j < Grid_.nz_);
+
   // Determine where bivariate polynomial is defined
   if ((int)Grid_.celli(r) - i < 0) --i;
   if ((int)Grid_.cellj(z) - j < 0) --j;
+  assert(i >= 0 && i < Grid_.nr_);
+  printf("nr = %d\n", Grid_.nr_);
+  assert(j >= 0 && j < Grid_.nz_);
+  printf("nz = %d\n", Grid_.nz_);
+  
+  if (isnan(beta[(int)i][(int)j])) {
+    printf("i = %d\n", i);
+    printf("j = %d\n", j);
+  }
   return beta[(int)i][(int)j];
 }
 
@@ -152,6 +167,9 @@ void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   Psi_r = (alpha)*pow(r,alpha-1)*pow(z,beta);
   Psi_z = (beta)*pow(z,beta-1)*pow(r,alpha);
   D = Psi_rr*Psi_zz - pow(Psi_rz,2);
+  assert(D != 0);
+  assert(!isnan(beta));
+  assert(!isnan(alpha));
   *dr = (-Psi_zz*Psi_r + Psi_rz*Psi_z)*(1.0/D);
   *dz = (Psi_rz*Psi_r - Psi_rr*Psi_z)*(1.0/D);
 }
@@ -226,6 +244,8 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
   }
   
   for (int i = 0; i < max_iter; ++i) {
+    assert(!isnan(r));
+    assert(!isnan(z));
     // Calculate |del Psi(r,z)|
     beta = cell_beta(r,z);
     alpha = cell_alpha(r,z);
@@ -253,6 +273,8 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
       break;
     }
     Psi_search(r, z, &dr, &dz);
+    assert(!isnan(dr));
+    assert(!isnan(dz));
     r += dr;
     z += dz;
     // Check if outside limiters
@@ -269,6 +291,8 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
 void Critical::update() {
   double rcrit, zcrit, Psi_min;
   // Calculate Psi_l using previous coordinates for limiter
+  assert(!isnan(Rl));
+  assert(!isnan(zl));
   Psi_limiter(Rl, zl, &rcrit, &zcrit, &Psi_min);
   // Update Psi_l, r_l, and z_l
   Psi_.f_l = Psi_min;

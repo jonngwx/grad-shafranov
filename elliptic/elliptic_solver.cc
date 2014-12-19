@@ -15,7 +15,8 @@ EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi) :
   Grid_(Grid),
   Psi_(Psi),
   Psi_prev_(Grid),
-  A(Grid.nr_){}
+  A(Grid.nr_),
+  C(Grid.nr_){}
 
 EllipticSolver::~EllipticSolver(){}
 

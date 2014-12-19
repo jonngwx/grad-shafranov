@@ -22,10 +22,11 @@ GaussSeidel::GaussSeidel(const Grid &GridS, Field &Psi) :
 void GaussSeidel::coeff() {
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
-    B = (dr*dr*dz*dz)/(2*dz*dz + 2*dr*dr);
-    C = 1/(dz*dz);
+    B = -(dr*dr*dz*dz)/(2*dz*dz + 2*dr*dr);
+    D = -1/(dz*dz);
     for (int i = 0; i < Grid_.nr_; ++i) {
-        A[i] = 1/(2*Grid_.R_[i]*dr) + 1/(dr*dr);
+        A[i] = 1/(2*Grid_.R_[i]*dr) - 1/(dr*dr);
+        C[i] = -1/(2*Grid_.R_[i]*dr) - 1/(dr*dr);
     }
 }
 
@@ -52,7 +53,7 @@ void GaussSeidel::step(const Field &jphi){
 //  boundary(Psi_prev_, Psi_);
   for (int i = 1; i < nr-1; ++i) {
     for (int j = 1;j < nz-1; ++j) {
-      Psi_.f_[i][j] = B*(-jphi.f_[i][j]*mu0*Grid_.R_[i] - Psi_prev_.f_[i+1][j]*A[i] + Psi_.f_[i-1][j]*A[i] + Psi_.f_[i][j-1]*C - Psi_prev_.f_[i][j+1]*C);
+      Psi_.f_[i][j] = B*(jphi.f_[i][j]*mu0*Grid_.R_[i] + A[i]*Psi_prev_.f_[i+1][j] + C[i]*Psi_.f_[i-1][j] + D*Psi_.f_[i][j-1] + D*Psi_prev_.f_[i][j+1]);
     }
   }
   iter(0.5);
