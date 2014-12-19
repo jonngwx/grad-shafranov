@@ -97,8 +97,17 @@ void Critical::interpolate() {
       // e[i-1][j] = (c[i-1][j+1] - c[i-1][j])/(z[j+1] - z[j])
       e4 = (c6 - c1)/(z[j+1] - z[j]);
       double Psi_rz = (w_r1*(w_z1*e2 + w_z2*e4) + w_r2*(w_z1*e3 + w_z2*e1))/((w_r1 + w_r2)*(w_z1 + w_z2));
+      assert(Psi_z != 0);
+      assert(Psi_r != 0);
       alpha[i][j] = Psi_rz*r[i]/Psi_z;
       beta[i][j] = Psi_rz*z[j]/Psi_r;
+      if (isnan(beta[i][j])) {
+        printf("BETA NAN\n");
+        printf("i = %d\n", i);
+        printf("j = %d\n", j);
+      }
+      assert(!isnan(beta[i][j]));
+      assert(!isnan(alpha[i][j]));
     }
   }
 }
@@ -121,26 +130,23 @@ double Critical::cell_alpha(double r, double z) {
  */
 double Critical::cell_beta(double r, double z) {
   // Find containing cell's indices
-  double i = Grid_.celli(r);
-  double j = Grid_.cellj(z);
+  double i_ = Grid_.celli(r);
+  double j_ = Grid_.cellj(z);
+  int i = (int)i_;
+  int j = (int)j_;
+  if (i - i_ < 0) --i;
+  if (j - j_ < 0) --j;
   assert(i >= 0);
   assert(i < Grid_.nr_);
   assert(j >= 0);
   assert(j < Grid_.nz_);
-
-  // Determine where bivariate polynomial is defined
-  if ((int)Grid_.celli(r) - i < 0) --i;
-  if ((int)Grid_.cellj(z) - j < 0) --j;
-  assert(i >= 0 && i < Grid_.nr_);
-  printf("nr = %d\n", Grid_.nr_);
-  assert(j >= 0 && j < Grid_.nz_);
-  printf("nz = %d\n", Grid_.nz_);
-  
-  if (isnan(beta[(int)i][(int)j])) {
+  if (isnan(beta[i][j])) {
+    printf("IS NAN\n");
     printf("i = %d\n", i);
     printf("j = %d\n", j);
   }
-  return beta[(int)i][(int)j];
+  assert(!isnan(beta[i][j]));
+  return beta[i][j];
 }
 
 /*!

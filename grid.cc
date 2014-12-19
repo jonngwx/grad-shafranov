@@ -23,7 +23,9 @@ Grid::~Grid(){
  * returned as double so user can get position in cell
  */
 double Grid::celli(double r) {
-    return (r - R_[0])*(1.0/dr_);
+    double i = (r - R_[0])*(1.0/dr_);
+//    printf("i = %f\n\n", i);
+    return i;
 }
 
 /*!
@@ -31,5 +33,7 @@ double Grid::celli(double r) {
  * returned as double so user can get position in cell
  */
 double Grid::cellj(double z) {
+    double j = (z - z_[0])*(1.0/dz_);
+//    printf("j = %f\n\n", j);
     return (z - z_[0])*(1.0/dz_);
 }

@@ -20,8 +20,8 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
     double Rend = 10;
     double Z0 = -5;
     double Zend = 5;
-    double nr = 7;
-    double nz = 7;
+    double nr = 10;
+    double nz = 10;
     double max_iter = 100;
     double epsilon = 0.1;
     double perim = 2.0*(nr + nz -2.0);
@@ -97,8 +97,8 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
     double Rend = 10;
     double Z0 = -5;
     double Zend = 5;
-    double nr = 7;
-    double nz = 7;
+    double nr = 10;
+    double nz = 10;
     double max_iter = 100;
     double epsilon = 0.1;
     double perim = 2.0*(nr + nz -2.0);

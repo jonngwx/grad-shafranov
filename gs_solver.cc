@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
             printf("n = %i \n", n);
             if (n == 0) solver->step_1(*jphi);
             else solver->step(*jphi);
-            // crit->update();
+            crit->update();
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;
