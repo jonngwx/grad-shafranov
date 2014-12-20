@@ -19,6 +19,6 @@ var searchData=
   ['grid',['Grid',['../class_grid.html',1,'Grid'],['../class_grid.html#ab78d3cef00ffeaf870bcbb19921aec0e',1,'Grid::Grid()'],['../class_grad___output.html#a60e7d674e2615fa636869ea1b0d816fb',1,'Grad_Output::grid()']]],
   ['grid_2ecc',['grid.cc',['../grid_8cc.html',1,'']]],
   ['grid_2eh',['grid.h',['../grid_8h.html',1,'']]],
-  ['grid_5f',['Grid_',['../class_elliptic_solver.html#a62b303889cb865c2b26e5f8ffd86fa4a',1,'EllipticSolver::Grid_()'],['../class_field.html#adedf34fa503588ea6a6c203d2f0a0b3f',1,'Field::grid_()']]],
+  ['grid_5f',['grid_',['../class_field.html#adedf34fa503588ea6a6c203d2f0a0b3f',1,'Field::grid_()'],['../class_elliptic_solver.html#a62b303889cb865c2b26e5f8ffd86fa4a',1,'EllipticSolver::Grid_()']]],
   ['gs_5fsolver_2ecc',['gs_solver.cc',['../gs__solver_8cc.html',1,'']]]
 ];

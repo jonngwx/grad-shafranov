@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['_7eboundary',['~Boundary',['../class_boundary.html#a5fe110e6abd74ac429d5318d30c4acaa',1,'Boundary']]],
-  ['_7ecritical',['~Critical',['../class_critical.html#a57e38f73f6e40608324b2c97a07bd40b',1,'Critical']]],
+  ['_7eboundary',['~Boundary',['../class_boundary.html#a86eab4f2362618c5b1e3d0df3a5f7f42',1,'Boundary']]],
+  ['_7ecritical',['~Critical',['../class_critical.html#a1c6bc45c6c3db32058f24dc9ecd7675e',1,'Critical']]],
   ['_7eellipticsolver',['~EllipticSolver',['../class_elliptic_solver.html#a067b570f521459f30b5653316f457eb1',1,'EllipticSolver']]],
   ['_7efield',['~Field',['../class_field.html#a45d6e6d09b8f8e46de62b40119d62c60',1,'Field']]],
   ['_7egrad_5foutput',['~Grad_Output',['../class_grad___output.html#a60099711aa9caaa2e5d8034a27fa44f3',1,'Grad_Output']]],

@@ -12,7 +12,8 @@ var class_elliptic_solver =
     [ "step_1", "class_elliptic_solver.html#abc6b1b39b09d2bac8680a556a49d02a4", null ],
     [ "A", "class_elliptic_solver.html#a4a137987c9dc835c6fa5ef25ecbd3d48", null ],
     [ "B", "class_elliptic_solver.html#a7be28593c9fa8c6b23b4b55c272820d1", null ],
-    [ "C", "class_elliptic_solver.html#aea508bf9a4526b867d325a28ec92afb2", null ],
+    [ "C", "class_elliptic_solver.html#a7ca6e2f51afd9a2a770b2c8da11a1889", null ],
+    [ "D", "class_elliptic_solver.html#a34ee086d9b3ed0d2c4683e4ebdee9db7", null ],
     [ "Grid_", "class_elliptic_solver.html#a62b303889cb865c2b26e5f8ffd86fa4a", null ],
     [ "Psi_", "class_elliptic_solver.html#af6db7ea29804907c1f89bddb6237f8ba", null ],
     [ "Psi_prev_", "class_elliptic_solver.html#ae38679a91ac8d0bb3238ab6c13b1f0d2", null ]
