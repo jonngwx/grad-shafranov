@@ -19,11 +19,6 @@ public:
  * Calculate coefficients for iteration from grid parameters
  */
   void coeff();
-private:
-  double D;
-  std::vector<double>E;
-  std::vector<double>F;
-  double G;
 };
 
 #endif
