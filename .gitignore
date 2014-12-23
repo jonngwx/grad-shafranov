@@ -15,3 +15,4 @@ elliptic_test
 .DS_Store
 */.DS_Store
 Docs/html
+*.dSYM
