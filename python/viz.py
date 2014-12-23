@@ -5,6 +5,10 @@ import sys
 import read_data
 
 def plot(filename,format):
+    """Please describe this function
+
+    in some detail.
+    """
     try:
         if format == "txt":
             F = read_data.read_text(filename)
