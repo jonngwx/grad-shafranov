@@ -8,6 +8,7 @@ class Boundary {
     Boundary(Grid *grid);
     virtual ~Boundary();
     virtual int CalcB(Field *psi, Field* jphi);
+    /*! What does this method do? What does it return? */
     int LtoI(int l);
     int LtoJ(int l);
   protected:

@@ -34,8 +34,9 @@ SlowBoundary::~SlowBoundary()
 {}
 
 int SlowBoundary::CalcB(Field* psi, Field* jphi) {
- 
-    double mu0 = 0.0000012566370614;
+  
+  /*What is this magic number? Provide some documentation please.*/
+  double mu0 = 0.0000012566370614;
 //    printf("perim_ is %d.\n",perim_); 
     for (int l=0; l < perim_; ++l){
 //      printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));

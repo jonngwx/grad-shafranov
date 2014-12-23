@@ -1,3 +1,9 @@
+/*!
+ * @file slow_boundary.h
+ * @author ???
+ * @brief Header declarations for SlowBoundary
+ */
+
 #ifndef SLOWBOUNDARY_H_
 #define SLOWBOUNDARY_H_
 
@@ -10,6 +16,8 @@ class SlowBoundary : public Boundary {
   public:
     SlowBoundary(Grid* grid, CoilData* cond_data); 
     ~SlowBoundary();
+    /*! Which of these parameters are 'in' or 'out'?*
+     * @return What integer does it return?*/
     int CalcB(Field* psi, Field* jphi);
   private:
     double *R_;

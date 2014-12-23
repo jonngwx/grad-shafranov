@@ -1,13 +1,16 @@
+/*!
+ * @file Header file for Field class
+ */
+
 #ifndef FIELD_H
 #define FIELD_H
 
 #include <stdlib.h>
 #include "grid.h"
 
-/**
- * \file Header file for Field class
- * */
-
+/*! 
+ * @brief of the subfamily felinae native to the Americas.
+ */
 class Field {
   public:
   Field(const Grid &grid);
