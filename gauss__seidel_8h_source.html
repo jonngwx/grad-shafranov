@@ -117,34 +117,33 @@ $(document).ready(function(){initNavTree('gauss__seidel_8h_source.html','');});
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grid_8h.html">grid.h</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_gauss_seidel.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_gauss_seidel.html">GaussSeidel</a> : <span class="keyword">public</span> <a class="code" href="class_elliptic_solver.html">EllipticSolver</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <a class="code" href="class_gauss_seidel.html#a99115adeeceef0cfaa0616354c71f59f">GaussSeidel</a>(<span class="keyword">const</span> <a class="code" href="class_grid.html">Grid</a> &amp;GridS, <a class="code" href="class_field.html">Field</a> &amp;Psi);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_gauss_seidel.html#a0a60a6be55e3a822fffe1e5ad3ff62a7">step</a>(<span class="keyword">const</span> <a class="code" href="class_field.html">Field</a> &amp;jphi);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_gauss_seidel.html#a98a6552e42b87576acc72a3ff4e41a85">step_1</a>(<span class="keyword">const</span> <a class="code" href="class_field.html">Field</a> &amp;jphi);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_gauss_seidel.html#aeedf15634532045f9213e9ce0498145f">coeff</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_gauss_seidel.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_gauss_seidel.html">GaussSeidel</a> : <span class="keyword">public</span> <a class="code" href="class_elliptic_solver.html">EllipticSolver</a> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <a class="code" href="class_gauss_seidel.html#a99115adeeceef0cfaa0616354c71f59f">GaussSeidel</a>(<span class="keyword">const</span> <a class="code" href="class_grid.html">Grid</a> &amp;GridS, <a class="code" href="class_field.html">Field</a> &amp;Psi);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_gauss_seidel.html#a0a60a6be55e3a822fffe1e5ad3ff62a7">step</a>(<span class="keyword">const</span> <a class="code" href="class_field.html">Field</a> &amp;jphi);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_gauss_seidel.html#a98a6552e42b87576acc72a3ff4e41a85">step_1</a>(<span class="keyword">const</span> <a class="code" href="class_field.html">Field</a> &amp;jphi);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_gauss_seidel.html#aeedf15634532045f9213e9ce0498145f">coeff</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_gauss_seidel_html_a98a6552e42b87576acc72a3ff4e41a85"><div class="ttname"><a href="class_gauss_seidel.html#a98a6552e42b87576acc72a3ff4e41a85">GaussSeidel::step_1</a></div><div class="ttdeci">void step_1(const Field &amp;jphi)</div><div class="ttdef"><b>Definition:</b> gauss_seidel.cc:32</div></div>
 <div class="ttc" id="class_gauss_seidel_html_aeedf15634532045f9213e9ce0498145f"><div class="ttname"><a href="class_gauss_seidel.html#aeedf15634532045f9213e9ce0498145f">GaussSeidel::coeff</a></div><div class="ttdeci">void coeff()</div><div class="ttdoc">Calculates coefficients for iteration. </div><div class="ttdef"><b>Definition:</b> gauss_seidel.cc:21</div></div>
-<div class="ttc" id="class_gauss_seidel_html"><div class="ttname"><a href="class_gauss_seidel.html">GaussSeidel</a></div><div class="ttdef"><b>Definition:</b> gauss_seidel.h:10</div></div>
+<div class="ttc" id="class_gauss_seidel_html"><div class="ttname"><a href="class_gauss_seidel.html">GaussSeidel</a></div><div class="ttdoc">Its range, from the Canadian Yukon to the southern. </div><div class="ttdef"><b>Definition:</b> gauss_seidel.h:12</div></div>
 <div class="ttc" id="class_gauss_seidel_html_a99115adeeceef0cfaa0616354c71f59f"><div class="ttname"><a href="class_gauss_seidel.html#a99115adeeceef0cfaa0616354c71f59f">GaussSeidel::GaussSeidel</a></div><div class="ttdeci">GaussSeidel(const Grid &amp;GridS, Field &amp;Psi)</div><div class="ttdef"><b>Definition:</b> gauss_seidel.cc:15</div></div>
-<div class="ttc" id="class_field_html"><div class="ttname"><a href="class_field.html">Field</a></div><div class="ttdef"><b>Definition:</b> field.h:11</div></div>
+<div class="ttc" id="class_field_html"><div class="ttname"><a href="class_field.html">Field</a></div><div class="ttdoc">of the subfamily felinae native to the Americas. </div><div class="ttdef"><b>Definition:</b> field.h:14</div></div>
 <div class="ttc" id="class_gauss_seidel_html_a0a60a6be55e3a822fffe1e5ad3ff62a7"><div class="ttname"><a href="class_gauss_seidel.html#a0a60a6be55e3a822fffe1e5ad3ff62a7">GaussSeidel::step</a></div><div class="ttdeci">void step(const Field &amp;jphi)</div><div class="ttdoc">For first iteration - use Gauss Seidel with blending. </div><div class="ttdef"><b>Definition:</b> gauss_seidel.cc:40</div></div>
 <div class="ttc" id="elliptic__solver_8h_html"><div class="ttname"><a href="elliptic__solver_8h.html">elliptic_solver.h</a></div></div>
 <div class="ttc" id="grid_8h_html"><div class="ttname"><a href="grid_8h.html">grid.h</a></div></div>
-<div class="ttc" id="class_elliptic_solver_html"><div class="ttname"><a href="class_elliptic_solver.html">EllipticSolver</a></div><div class="ttdef"><b>Definition:</b> elliptic_solver.h:8</div></div>
+<div class="ttc" id="class_elliptic_solver_html"><div class="ttname"><a href="class_elliptic_solver.html">EllipticSolver</a></div><div class="ttdoc">mountain lion, puma, or catamount, is a large </div><div class="ttdef"><b>Definition:</b> elliptic_solver.h:11</div></div>
 <div class="ttc" id="field_8h_html"><div class="ttname"><a href="field_8h.html">field.h</a></div></div>
-<div class="ttc" id="class_grid_html"><div class="ttname"><a href="class_grid.html">Grid</a></div><div class="ttdef"><b>Definition:</b> grid.h:10</div></div>
+<div class="ttc" id="class_grid_html"><div class="ttname"><a href="class_grid.html">Grid</a></div><div class="ttdoc">Stores information about the solution grid. </div><div class="ttdef"><b>Definition:</b> grid.h:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="gauss__seidel_8h.html">gauss_seidel.h</a></li>
-    <li class="footer">Generated on Fri Dec 19 2014 20:00:32 for COUGAR by
+    <li class="footer">Generated on Mon Dec 22 2014 18:10:30 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -109,43 +109,41 @@ $(document).ready(function(){initNavTree('j__solver__alpha_8h_source.html','');}
 <div class="title">j_solver_alpha.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="j__solver__alpha_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef J_SOLVER_ALPHA_H_</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define J_SOLVER_ALPHA_H_</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grid_8h.html">grid.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="field_8h.html">field.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_j_solver_alpha.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_j_solver_alpha.html">JSolverAlpha</a> {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        <a class="code" href="class_j_solver_alpha.html#a286b1bc3af7e1017a3baa879b3edbc09">JSolverAlpha</a>(<span class="keywordtype">double</span> P0, <span class="keywordtype">double</span> g0, <span class="keywordtype">double</span> n1, <span class="keywordtype">double</span> n2, <span class="keywordtype">double</span> Ip, <a class="code" href="class_grid.html">Grid</a> *grid);</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <a class="code" href="class_j_solver_alpha.html#a63d8403c3729b9797d8aeb65785692b8">~JSolverAlpha</a>();</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_j_solver_alpha.html#a80c4a06620002bb22a532ec8a7867144">update</a>(<a class="code" href="class_field.html">Field</a> *jphi, <a class="code" href="class_field.html">Field</a> *psi, <a class="code" href="class_field.html">Field</a> *p, <a class="code" href="class_field.html">Field</a> *g);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">double</span> P0_;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">double</span> g0_;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordtype">double</span> n1_;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">double</span> n2_;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">double</span> Ip_;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">double</span> *R_;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">double</span> dr_;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordtype">double</span> dz_;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">double</span> nr_;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">double</span> nz_;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<a href="j__solver__alpha_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef J_SOLVER_ALPHA_H_</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define J_SOLVER_ALPHA_H_</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grid_8h.html">grid.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="field_8h.html">field.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_j_solver_alpha.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_j_solver_alpha.html">JSolverAlpha</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="class_j_solver_alpha.html#a286b1bc3af7e1017a3baa879b3edbc09">JSolverAlpha</a>(<span class="keywordtype">double</span> P0, <span class="keywordtype">double</span> g0, <span class="keywordtype">double</span> n1, <span class="keywordtype">double</span> n2, <span class="keywordtype">double</span> Ip,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;               <a class="code" href="class_grid.html">Grid</a> *grid);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <a class="code" href="class_j_solver_alpha.html#a63d8403c3729b9797d8aeb65785692b8">~JSolverAlpha</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_j_solver_alpha.html#a80c4a06620002bb22a532ec8a7867144">update</a>(<a class="code" href="class_field.html">Field</a> *jphi, <a class="code" href="class_field.html">Field</a> *psi, <a class="code" href="class_field.html">Field</a> *p, <a class="code" href="class_field.html">Field</a> *g);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif // J_SOLVER_ALPHA_H_</span></div>
-<div class="ttc" id="class_j_solver_alpha_html"><div class="ttname"><a href="class_j_solver_alpha.html">JSolverAlpha</a></div><div class="ttdef"><b>Definition:</b> j_solver_alpha.h:7</div></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">double</span> P0_;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">double</span> g0_;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">double</span> n1_;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">double</span> n2_;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keywordtype">double</span> Ip_;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordtype">double</span> *R_;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">double</span> dr_;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">double</span> dz_;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">double</span> nr_;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">double</span> nz_;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif  // J_SOLVER_ALPHA_H_</span></div>
+<div class="ttc" id="class_j_solver_alpha_html"><div class="ttname"><a href="class_j_solver_alpha.html">JSolverAlpha</a></div><div class="ttdoc">found in most American habitat types. </div><div class="ttdef"><b>Definition:</b> j_solver_alpha.h:17</div></div>
 <div class="ttc" id="class_j_solver_alpha_html_a286b1bc3af7e1017a3baa879b3edbc09"><div class="ttname"><a href="class_j_solver_alpha.html#a286b1bc3af7e1017a3baa879b3edbc09">JSolverAlpha::JSolverAlpha</a></div><div class="ttdeci">JSolverAlpha(double P0, double g0, double n1, double n2, double Ip, Grid *grid)</div><div class="ttdef"><b>Definition:</b> j_solver_alpha.cc:5</div></div>
-<div class="ttc" id="class_field_html"><div class="ttname"><a href="class_field.html">Field</a></div><div class="ttdef"><b>Definition:</b> field.h:11</div></div>
+<div class="ttc" id="class_field_html"><div class="ttname"><a href="class_field.html">Field</a></div><div class="ttdoc">of the subfamily felinae native to the Americas. </div><div class="ttdef"><b>Definition:</b> field.h:14</div></div>
 <div class="ttc" id="class_j_solver_alpha_html_a63d8403c3729b9797d8aeb65785692b8"><div class="ttname"><a href="class_j_solver_alpha.html#a63d8403c3729b9797d8aeb65785692b8">JSolverAlpha::~JSolverAlpha</a></div><div class="ttdeci">~JSolverAlpha()</div><div class="ttdef"><b>Definition:</b> j_solver_alpha.cc:18</div></div>
 <div class="ttc" id="grid_8h_html"><div class="ttname"><a href="grid_8h.html">grid.h</a></div></div>
 <div class="ttc" id="field_8h_html"><div class="ttname"><a href="field_8h.html">field.h</a></div></div>
-<div class="ttc" id="class_grid_html"><div class="ttname"><a href="class_grid.html">Grid</a></div><div class="ttdef"><b>Definition:</b> grid.h:10</div></div>
+<div class="ttc" id="class_grid_html"><div class="ttname"><a href="class_grid.html">Grid</a></div><div class="ttdoc">Stores information about the solution grid. </div><div class="ttdef"><b>Definition:</b> grid.h:11</div></div>
 <div class="ttc" id="class_j_solver_alpha_html_a80c4a06620002bb22a532ec8a7867144"><div class="ttname"><a href="class_j_solver_alpha.html#a80c4a06620002bb22a532ec8a7867144">JSolverAlpha::update</a></div><div class="ttdeci">void update(Field *jphi, Field *psi, Field *p, Field *g)</div><div class="ttdef"><b>Definition:</b> j_solver_alpha.cc:21</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -153,7 +151,7 @@ $(document).ready(function(){initNavTree('j__solver__alpha_8h_source.html','');}
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="j__solver__alpha_8h.html">j_solver_alpha.h</a></li>
-    <li class="footer">Generated on Fri Dec 19 2014 20:00:32 for COUGAR by
+    <li class="footer">Generated on Mon Dec 22 2014 18:10:30 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
