@@ -10,6 +10,7 @@ void Grad_Output::parse_outputs(const char *out){
     char outputs[len];
     strcpy(outputs,out);
     char *tok = NULL;
+    //    printf("%s\n",outputs);
     tok = strtok(outputs, ",");
     while (tok){
       if (strcmp(tok,"j")==0){

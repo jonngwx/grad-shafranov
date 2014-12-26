@@ -62,7 +62,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
 
   po::options_description outputs("Output format");
   outputs.add_options()
-      ("output-fields", po::value<std::string>(), "comma-separated list of J,Bt,...")
+      ("output-fields", po::value<std::string>()->default_value("none"), "comma-separated list of J,Bt,...")
       ("output-type", po::value<std::string>()->default_value("tsv"), "tsv or hdf5 (won't work unless you've compiled with hdf5)")
       ("output-name", po::value<std::string>()->default_value("cougar.out"), "prefix for output filename")
       ;
