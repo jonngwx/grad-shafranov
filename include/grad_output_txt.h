@@ -9,7 +9,7 @@
 #include "field.h"
 
 /*! 
- * @brief adaptable, generalist species, the cougar is
+ * @brief Implementation of Grad_Output which writes to a text file.
  */
 class Grad_Output_Txt : public Grad_Output{
 public:

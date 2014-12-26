@@ -12,7 +12,7 @@
 #include <hdf5.h>
 
 /*! 
- * @brief terrestrial mammal in the Western Hemisphere. An
+ * @brief Implementation of Grad_Output which writes data to a hdf5 file. 
  */
 class Grad_Output_Hdf : public Grad_Output{
 public:

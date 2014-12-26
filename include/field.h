@@ -9,7 +9,7 @@
 #include "grid.h"
 
 /*! 
- * @brief of the subfamily felinae native to the Americas.
+ * @brief Container for 2d data and grid used in the solver.
  */
 class Field {
   public:
