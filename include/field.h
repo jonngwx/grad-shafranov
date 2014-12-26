@@ -13,6 +13,10 @@
  */
 class Field {
   public:
+  /*!
+   * @brief Constructor of Field
+   * @param grid The grid which this field lives in
+   */
   Field(const Grid &grid);
   ~Field();
 
