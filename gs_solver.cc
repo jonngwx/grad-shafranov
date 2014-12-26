@@ -48,6 +48,8 @@ int main(int argc, char *argv[])
     double zmax = vm["z-max"].as<double>();
     int maxIterM = vm["max-iter-M"].as<int>();
     int maxIterN = vm["max-iter-N"].as<int>();
+    int outputEveryN = vm["output-every-n"].as<int>();
+    int outputEveryM = vm["output-every-m"].as<int>();
     double epsilon = vm["error-tol-N"].as<double>();
 
     std::string pgtype;
@@ -140,6 +142,11 @@ int main(int argc, char *argv[])
     solver->coeff();
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(psi, jphi);
+        if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
+            std::string partial_output_name = vm["output-name"].as<string>()+ ".m" + std::to_string(m) + "." +output_type;
+            grad_output->write_output(partial_output_name.c_str());
+            printf("Writing output for m = %d\n",m);
+        }
         // test convergence
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
@@ -150,6 +157,11 @@ int main(int argc, char *argv[])
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;
+            if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
+                std::string partial_output_name = vm["output-name"].as<string>()+".n" + std::to_string(n) + ".m" + std::to_string(m) + "." +output_type;
+                grad_output->write_output(partial_output_name.c_str());
+                printf("Writing output for n = %d, m = %d\n",n,m);
+            }
             if (n == maxIterN-1) {
                 printf(" Elliptic solver reached maxIterN without convergence\n");
             }
