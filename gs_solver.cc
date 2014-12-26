@@ -142,6 +142,8 @@ int main(int argc, char *argv[])
     solver->coeff();
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(psi, jphi);
+        
+        // output during calculation 
         if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
             std::string partial_output_name = vm["output-name"].as<string>()+ ".m" + std::to_string(m) + "." +output_type;
             grad_output->write_output(partial_output_name.c_str());
@@ -157,6 +159,8 @@ int main(int argc, char *argv[])
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;
+
+            // output during calculation
             if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
                 std::string partial_output_name = vm["output-name"].as<string>()+".n" + std::to_string(n) + ".m" + std::to_string(m) + "." +output_type;
                 grad_output->write_output(partial_output_name.c_str());
@@ -171,9 +175,10 @@ int main(int argc, char *argv[])
   // output stuff
   std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
   grad_output->write_output(full_output_name.c_str());
+  
 
   delete grad_output;
-  delete grid;
+  delete crit;
   delete psi;
   delete psib;
   delete jphi;
@@ -181,5 +186,6 @@ int main(int argc, char *argv[])
   delete p;
   delete g;
   delete jsa;
+  delete grid;
 }
 
