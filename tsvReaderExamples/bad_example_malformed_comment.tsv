@@ -1,0 +1,4 @@
+r	z	value
+1	2.3	4 
+3.4	5	1 #this comment is not acceptable
+12.3e10	1.23e-3	2

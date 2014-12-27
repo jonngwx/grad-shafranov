@@ -1,0 +1,10 @@
+r	z	value
+1	2.3	4
+# this line is a comment
+3.4	5	1
+#   this line is a comment
+# so is this
+# and so is this
+12.3e10	1.23e-3	2
+#this line is also a comment
+#This line is yet another comment

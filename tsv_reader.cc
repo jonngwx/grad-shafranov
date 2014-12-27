@@ -1,5 +1,8 @@
-// a simple test of reading in some parameters to a text file.
-
+/*!
+ * @file tsv_reader.cc
+ * @brief implementation for Table and CoilData and PGData classes.
+ * @author Jacob Schwartz
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include <sstream>
@@ -29,8 +32,15 @@ int Table::load_from_tsv(const std::string tsv_file_name, int header_lines) {
   }
   std::vector<double> doubleVector;
   while (std::getline(filein, line)) {
-    lines_read_in++;
     std::istringstream ss(line);
+
+    /*if the first character is a # ignore the line */
+    if(ss.peek() == '#'){
+      continue;
+    } else {
+      lines_read_in++;
+    }
+
     std::istream_iterator<std::string> begin(ss), end;
 
     // putting all the tokens in the vector
