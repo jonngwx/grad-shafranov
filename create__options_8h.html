@@ -180,7 +180,18 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if successful, some other integer if a problem. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if successful, some other integer if a problem.</dd></dl>
+<p>Loads options from command line and config file.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ac</td><td>main's argc </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">av</td><td>main's argv </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">visible</td><td>a boost::program_options::options_description which will be loaded up with options marked 'visible', to be printed if the user says to print the help. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">vm</td><td>a boost::program_options::variables_map which will be loaded up with keys and values of the options specified on the command line and in the config file. If an option is unspecified it will default to the value specified below in this function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 to indicate success (in the future nonzero returns could indicate an error, but none have been implemented) </dd></dl>
 
 </div>
 </div>
@@ -220,7 +231,7 @@ template&lt;class T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="create__options_8h.html">create_options.h</a></li>
-    <li class="footer">Generated on Fri Dec 26 2014 23:05:09 for COUGAR by
+    <li class="footer">Generated on Sat Dec 27 2014 14:54:37 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -111,6 +111,9 @@ $(document).ready(function(){initNavTree('create__options_8cc.html','');});
 <div class="title">create_options.cc File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>defines the CreateOptions function  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &quot;<a class="el" href="create__options_8h_source.html">create_options.h</a>&quot;</code><br />
@@ -118,10 +121,13 @@ $(document).ready(function(){initNavTree('create__options_8cc.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a097a3cfa8f93a66ea7be411fd003fc44"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="create__options_8cc.html#a097a3cfa8f93a66ea7be411fd003fc44">CreateOptions</a> (int ac, char *av[], po::options_description &amp;visible, po::variables_map &amp;vm)</td></tr>
-<tr class="memdesc:a097a3cfa8f93a66ea7be411fd003fc44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads options from command line and config file.  <a href="#a097a3cfa8f93a66ea7be411fd003fc44">More...</a><br /></td></tr>
+<tr class="memdesc:a097a3cfa8f93a66ea7be411fd003fc44"><td class="mdescLeft">&#160;</td><td class="mdescRight">loads options from command line and config file. Called once from main. Encapsulated here to make main shorter.  <a href="#a097a3cfa8f93a66ea7be411fd003fc44">More...</a><br /></td></tr>
 <tr class="separator:a097a3cfa8f93a66ea7be411fd003fc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>defines the CreateOptions function </p>
+<dl class="section author"><dt>Author</dt><dd>Jacob Schwartz </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a097a3cfa8f93a66ea7be411fd003fc44"></a>
 <div class="memitem">
 <div class="memproto">
@@ -158,17 +164,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Loads options from command line and config file. </p>
+<p>loads options from command line and config file. Called once from main. Encapsulated here to make main shorter. </p>
+<p>Loads options from command line and config file.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">ac</td><td>main's argc: the number of command line tokens(?) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">av</td><td>main's argv: the string of the command line </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">visible</td><td>Loaded up with the list of Visible options (so it can be printed in main if help is called) </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">vm</td><td>A key-value pair map of options. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ac</td><td>main's argc </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">av</td><td>main's argv </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">visible</td><td>a boost::program_options::options_description which will be loaded up with options marked 'visible', to be printed if the user says to print the help. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">vm</td><td>a boost::program_options::variables_map which will be loaded up with keys and values of the options specified on the command line and in the config file. If an option is unspecified it will default to the value specified below in this function. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if successful, some other integer if a problem. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 to indicate success (in the future nonzero returns could indicate an error, but none have been implemented) </dd></dl>
 
 </div>
 </div>
@@ -178,7 +185,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="create__options_8cc.html">create_options.cc</a></li>
-    <li class="footer">Generated on Fri Dec 26 2014 23:05:09 for COUGAR by
+    <li class="footer">Generated on Sat Dec 27 2014 14:54:37 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
