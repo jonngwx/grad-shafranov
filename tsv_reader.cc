@@ -34,7 +34,7 @@ int Table::load_from_tsv(const std::string tsv_file_name, int header_lines) {
   while (std::getline(filein, line)) {
     std::istringstream ss(line);
 
-    /*if the first character is a # ignore the line */
+    /*if the first character is a # ignore the line and read in another. */
     if(ss.peek() == '#'){
       continue;
     } else {
@@ -42,7 +42,6 @@ int Table::load_from_tsv(const std::string tsv_file_name, int header_lines) {
     }
 
     std::istream_iterator<std::string> begin(ss), end;
-
     // putting all the tokens in the vector
     std::vector<std::string> arrayTokens(begin, end);
 
@@ -61,6 +60,7 @@ int Table::load_from_tsv(const std::string tsv_file_name, int header_lines) {
 
     data_.push_back(doubleVector);
   }
+
   if (filein.bad()) {
     perror("Error while reading file");
     return kFileReadError;
