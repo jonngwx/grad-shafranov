@@ -48,9 +48,12 @@ int main(int argc, char *argv[])
     double zmax = vm["z-max"].as<double>();
     int maxIterM = vm["max-iter-M"].as<int>();
     int maxIterN = vm["max-iter-N"].as<int>();
+    int outputEveryN = vm["output-every-n"].as<int>();
+    int outputEveryM = vm["output-every-m"].as<int>();
     double epsilon = vm["error-tol-N"].as<double>();
 
     std::string pgtype;
+    std::string output_list;
     if (!vm.count("pgtype")) {
         std::cout << "Must specify pgtype: (array, choice2, choice 3)  \n";
         exit(1);
@@ -120,26 +123,33 @@ int main(int argc, char *argv[])
 
     /** determine which output type */
     Grad_Output *grad_output;
+    output_list = vm["output-fields"].as<string>();
     if (output_type == "tsv") {
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"j,bt,bt,this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     } else if (output_type == "hdf5") {
         #ifdef HDF_MODE
-        grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,"j,bt,this,is,a,test");
+        grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,output_list.c_str());
         #else 
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
         printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
         #endif 
     } else {
         printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     }
 
     // solve stuff
     solver->coeff();
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(psi, jphi);
+        
+        // output during calculation 
+        if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
+            std::string partial_output_name = vm["output-name"].as<string>()+ ".m" + std::to_string(m) + "." +output_type;
+            grad_output->write_output(partial_output_name.c_str());
+            printf("Writing output for m = %d\n",m);
+        }
         // test convergence
-
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
             printf("n = %i \n", n);
@@ -149,6 +159,13 @@ int main(int argc, char *argv[])
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
             if (solver->norm() < epsilon) break;
+
+            // output during calculation
+            if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
+                std::string partial_output_name = vm["output-name"].as<string>()+".n" + std::to_string(n) + ".m" + std::to_string(m) + "." +output_type;
+                grad_output->write_output(partial_output_name.c_str());
+                printf("Writing output for n = %d, m = %d\n",n,m);
+            }
             if (n == maxIterN-1) {
                 printf(" Elliptic solver reached maxIterN without convergence\n");
             }
@@ -158,9 +175,10 @@ int main(int argc, char *argv[])
   // output stuff
   std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
   grad_output->write_output(full_output_name.c_str());
+  
 
   delete grad_output;
-  delete grid;
+  delete crit;
   delete psi;
   delete psib;
   delete jphi;
@@ -168,5 +186,6 @@ int main(int argc, char *argv[])
   delete p;
   delete g;
   delete jsa;
+  delete grid;
 }
 

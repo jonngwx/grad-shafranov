@@ -16,3 +16,4 @@ elliptic_test
 */.DS_Store
 Docs/html
 *.dSYM
+PeterTest/boost_test

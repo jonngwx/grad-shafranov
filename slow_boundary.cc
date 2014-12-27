@@ -31,7 +31,15 @@ SlowBoundary::SlowBoundary(Grid* grid, CoilData* cond_data)
 }
 
 SlowBoundary::~SlowBoundary()
-{}
+{
+    for (int i=0; i < nr_; ++i){
+        for (int j=0 ; j < nz_; ++j){
+            delete [] g_plasma_[i][j];
+        }
+        delete [] g_plasma_[i];
+    }
+    delete [] g_plasma_;
+}
 
 int SlowBoundary::CalcB(Field* psi, Field* jphi) {
   
