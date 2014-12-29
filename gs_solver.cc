@@ -99,6 +99,7 @@ int main(int argc, char *argv[])
             else {
                 jphi->f_[i][j] = 0;
             }  
+            psi->f_[i][j] = 10*exp(-pow(grid->R_[i] - R0,2))*exp(-pow(grid->z_[j],2)/10.);
         }
     }
 
@@ -112,7 +113,7 @@ int main(int argc, char *argv[])
     // Elliptic solver for inner loop
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, &cd);
-   
+
     // set up Critical
     double z_limiter1 = vm["z_limiter1"].as<double>();
     double z_limiter2 = vm["z_limiter2"].as<double>();
@@ -120,6 +121,7 @@ int main(int argc, char *argv[])
     double error_tol_crit = vm["error-tol-crit"].as<double>();
     Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2, R0, z0);
     crit->interpolate();
+
 
     /** determine which output type */
     Grad_Output *grad_output;
@@ -154,7 +156,9 @@ int main(int argc, char *argv[])
         for (int n = 0; n < maxIterN; ++n) {
             printf("n = %i \n", n);
             if (n == 0) solver->step_1(*jphi);
-            else solver->step(*jphi);
+            else {
+                solver->step(*jphi);
+            }
             crit->update();
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());

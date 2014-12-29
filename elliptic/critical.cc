@@ -120,9 +120,7 @@ double Critical::cell_alpha(double r, double z) {
   double i = Grid_.celli(r);
   double j = Grid_.cellj(z);
   // Determine where bivariate polynomial is defined
-  if ((int)Grid_.celli(r) - i < 0) --i;
-  if ((int)Grid_.cellj(z) - j < 0) --j;
-  return alpha[(int)i][(int)j];
+  return alpha[(int)(i+0.5)][(int)(j+0.5)];
 }
 
 /*!
@@ -154,7 +152,7 @@ double Critical::cell_beta(double r, double z) {
  */
 double Critical::Psi_interp(double r, double z) {
   double alpha = cell_alpha(r,z);
-  double beta = cell_beta(r,z);
+  double beta = cell_beta(r,z); 
   return pow(r,alpha)*pow(z,beta);
 }
 
@@ -234,7 +232,7 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
   double dr, dz, alpha, beta;
   double Psi_lim1, Psi_lim2;
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D, Psi_crit;
-  
+
   // Calculate minimum over limiters
   Psi_lim1 = Psi_interp(R0, z_limiter1);
   Psi_lim2 = Psi_interp(R0, z_limiter2);
@@ -248,7 +246,6 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
     zcrit = &z_limiter2;
     Psi_min = &Psi_lim2;
   }
-  
   for (int i = 0; i < max_iter; ++i) {
     assert(!isnan(r));
     assert(!isnan(z));
