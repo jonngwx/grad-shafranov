@@ -1,7 +1,7 @@
 /*! 
  * @file green_fcn.h
  * @author ???
- * @brief defines green_fcn()
+ * @brief delcaration for green_fcn()
  */
 
 #ifndef GREEN_FCN_H
