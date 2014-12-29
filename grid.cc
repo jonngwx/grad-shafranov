@@ -35,5 +35,5 @@ double Grid::celli(double r) {
 double Grid::cellj(double z) {
     double j = (z - z_[0])*(1.0/dz_);
 //    printf("j = %f\n\n", j);
-    return (z - z_[0])*(1.0/dz_);
+    return j;
 }
