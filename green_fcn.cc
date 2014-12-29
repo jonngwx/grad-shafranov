@@ -1,7 +1,7 @@
 /*! 
  * @file green_fcn.cc
  * @author ???
- * @brief defines cc
+* @brief implements green_fcn()
  */
 #include <math.h>
 #include <boost/math/special_functions/ellint_1.hpp>
@@ -9,19 +9,6 @@
 
 using namespace boost::math;
 
-/*!
- * @brief get Psi at R1, Z1, due to current at R2, Z2
- *
- * Evaluates the Green's function that gives Psi at point R1, Z1,
- * from a toroidal current at radius R2 from axis and height Z2.
- *
- * @param[in] R1 radius of the field point
- * @param[in] Z1 height of the field point
- * @param[in] R2 radius of the source point
- * @param[in] Z2 height of the source point
- *
- * @return The value of psi from this one neat toroidal current element.
- */
 double green_fcn(double R1, double Z1, double R2, double Z2) {
   if ((R1 == R2) && (Z1 == Z2)) {
     return 0;
