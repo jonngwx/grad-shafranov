@@ -30,4 +30,3 @@ class SlowBoundary : public Boundary {
 };
 
 #endif // SLOWBOUNDARY_H_
-

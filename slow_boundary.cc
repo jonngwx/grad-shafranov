@@ -1,10 +1,9 @@
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
 #include "include/grid.h"
-#include <boost/math/special_functions/ellint_1.hpp>
-#include <boost/math/special_functions/ellint_2.hpp>
 #include "include/field.h"
 #include <stdio.h>
+#include <math.h>
 #include "include/green_fcn.h"
 
 SlowBoundary::SlowBoundary(Grid* grid, CoilData* cond_data)
@@ -42,9 +41,8 @@ SlowBoundary::~SlowBoundary()
 }
 
 int SlowBoundary::CalcB(Field* psi, Field* jphi) {
-  
-  /*What is this magic number? Provide some documentation please.*/
-  double mu0 = 0.0000012566370614;
+//  double mu0 = 0.0000012566370614;
+    double mu0 = 4 * M_PI * 1e-7; /*magnetic permeability of free space*/
 //    printf("perim_ is %d.\n",perim_); 
     for (int l=0; l < perim_; ++l){
 //      printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));
