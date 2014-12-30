@@ -204,7 +204,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
         rcrit = &r;
         zcrit = &z;
         Psi_min_ = (Psi_interp(*rcrit, *zcrit));
-        Psi_min = &Psi_min_;
+        *Psi_min = Psi_min_;
         return;
       }
       Psi_search(r, z, &dr, &dz);
@@ -220,7 +220,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
   *rcrit = R0;
   *zcrit = z0;
   Psi_min_ = (Psi_interp(*rcrit, *zcrit));
-  Psi_min = &Psi_min_;
+  *Psi_min = Psi_min_;
   return;
 }
 
@@ -265,9 +265,9 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
       if (D < 0) {
         Psi_crit = Psi_interp(r, z);
         if(Psi_crit < *Psi_min) {
-          rcrit = &r;
-          zcrit = &z;
-          Psi_min = &Psi_crit;
+          *rcrit = r;
+          *zcrit = z;
+          *Psi_min = Psi_crit;
         }
         return;
       }
