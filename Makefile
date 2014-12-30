@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -c -g -std=c++11 -Iinclude 
+CXXFLAGS = -c -g -std=c++11 -Iinclude -Wall 
 LIBS = -lboost_program_options -lboost_unit_test_framework -lboost_math_tr1
 HDF = -lhdf5_hl -lhdf5 -DHDF_MODE
 PROGS = gs_solver

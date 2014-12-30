@@ -3,6 +3,7 @@ Boundary::Boundary(Grid* grid) : nr_(grid->nr_), nz_(grid->nz_) {}
 
 Boundary::~Boundary() {}
 
+//so this gets called in elliptic_test. The compiler gives a warning that there's no 'return' statement for this nonvoid function. Since this is not implemented, should I assume that our actual program will ever only call SlowBoundary's CalcB???
 int Boundary::CalcB(Field* psi, Field* jphi) {}
 
 /* L is numbered like:  This function will return:
