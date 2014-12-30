@@ -130,9 +130,9 @@ double Critical::cell_beta(double r, double z) {
   // Find containing cell's indices
   double i_ = Grid_.celli(r);
   double j_ = Grid_.cellj(z);
-  int i = (int)i_;
-  int j = (int)j_;
-  if (i - i_ < 0) --i;
+  int i = (int)(i_+0.5);
+  int j = (int)(j_+0.5);
+  /* if (i - i_ < 0) --i;
   if (j - j_ < 0) --j;
   assert(i >= 0);
   assert(i < Grid_.nr_);
@@ -143,7 +143,7 @@ double Critical::cell_beta(double r, double z) {
     printf("i = %d\n", i);
     printf("j = %d\n", j);
   }
-  assert(!isnan(beta[i][j]));
+  assert(!isnan(beta[i][j]));*/
   return beta[i][j];
 }
 
@@ -217,8 +217,8 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     }
   }
   // If search failed, use original coordinates of magnetic axis
-  rcrit = &R0;
-  zcrit = &z0;
+  *rcrit = R0;
+  *zcrit = z0;
   Psi_min_ = (Psi_interp(*rcrit, *zcrit));
   Psi_min = &Psi_min_;
   return;
@@ -232,19 +232,18 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
   double dr, dz, alpha, beta;
   double Psi_lim1, Psi_lim2;
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D, Psi_crit;
-
   // Calculate minimum over limiters
   Psi_lim1 = Psi_interp(R0, z_limiter1);
   Psi_lim2 = Psi_interp(R0, z_limiter2);
   if(Psi_lim1 < Psi_lim2) {
-    rcrit = &R0;
-    zcrit = &z_limiter1;
-    Psi_min = &Psi_lim1;
+    *rcrit = R0;
+    *zcrit = z_limiter1;
+    *Psi_min = Psi_lim1;
   }
   else {
-    rcrit = &R0;
-    zcrit = &z_limiter2;
-    Psi_min = &Psi_lim2;
+    *rcrit = R0;
+    *zcrit = z_limiter2;
+    *Psi_min = Psi_lim2;
   }
   for (int i = 0; i < max_iter; ++i) {
     assert(!isnan(r));
