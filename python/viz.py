@@ -10,7 +10,7 @@ def plot(filename,format):
     in some detail.
     """
     try:
-        if format == "txt":
+        if format == "txt" or format == "tsv":
             F = read_data.read_text(filename)
         elif format == "h5" or format == "hdf" or format == "hdf5":
             F = read_data.read_hdf5(filename)

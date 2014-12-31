@@ -1,5 +1,6 @@
 #include "include/grid.h"
 #include "include/util.h"
+#include <math.h>
 
 Grid::Grid(double R0, double Rend, double z0, double zend, int nr, int nz)
    : nr_(nr),
@@ -25,7 +26,7 @@ Grid::~Grid(){
 double Grid::celli(double r) {
     double i = (r - R_[0])*(1.0/dr_);
 //    printf("i = %f\n\n", i);
-    return i;
+    return fmin(nr_-1,fmax(i,0));
 }
 
 /*!
@@ -35,5 +36,5 @@ double Grid::celli(double r) {
 double Grid::cellj(double z) {
     double j = (z - z_[0])*(1.0/dz_);
 //    printf("j = %f\n\n", j);
-    return j;
+    return fmin(nz_-1,fmax(j,0));
 }
