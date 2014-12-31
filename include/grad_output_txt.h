@@ -1,15 +1,16 @@
+/*!
+ * @file Header file for grad_output_txt
+ */
 #ifndef GRAD_OUTPUT_TXT
 #define GRAD_OUTPUT_TXT
-
-
-/**
- * \file Header file for grad_output_txt
- * */
  
 #include <stdlib.h>
 #include "grad_output.h"
 #include "field.h"
 
+/*! 
+ * @brief Implementation of Grad_Output which writes to a text file.
+ */
 class Grad_Output_Txt : public Grad_Output{
 public:
   /**

@@ -7,6 +7,9 @@
 #include "grid.h"
 #include <algorithm>
 
+/*! 
+ * @brief Interface for writing the output of the solver to file. 
+ */
 class Grad_Output{
   public:
   virtual ~Grad_Output(){};
@@ -19,7 +22,7 @@ protected:
   Field *g;
   Grid *grid;
   /**
-  * @brief Parses the string of outputs to write to file..
+  * @brief Parses the string of outputs to write to file.
   * @param outputs comma separated string of outputs. Currently doesn't do anything.
   * 
   */

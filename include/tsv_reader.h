@@ -32,6 +32,10 @@ class Table {
    *
    * Detects the number of rows & columns in the file programmatically.
    * Checks that there are the same number of columns for each row or stops and returns an error.
+   *
+   * Skips header_lines lines to start. Then, while reading the body of the tsv, will skip any line for which the first character is a #.
+   * Inline or end-of-line comments are not allowed.
+   *
    * @param [in] filename the filename, as a string
    * @param [in] header_lines how many inital lines to skip
    * @return 0 if successful, nonzero if error.

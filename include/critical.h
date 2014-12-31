@@ -4,6 +4,9 @@
 #include "grid.h"
 #include <vector>
 
+/*! 
+ * @brief The cougar (Puma concolor), also commonly known as the
+ */
 class Critical {
 public:
     Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2, double R0, double z0);

@@ -32,7 +32,7 @@ P(4, std::vector<double>(4)) {
   Psi_lim1 = Psi_interp(R0, z_limiter1);
   // Interpolate Psi_ at (R0, z_limiter2)
   try {
-    updateP(R0,z_limiter2);
+    updateP(R0, z_limiter2);
   }
   catch(int i) {
     printf("Error: limiter2 outside grid\n");
@@ -52,6 +52,10 @@ Critical::~Critical() {}
  * @brief Bivariate interpolation of Psi
  *
  * preserves smoothness as described in Akima, 1974
+ *
+ * Do you mean "A Method of Bivariate Interpolation and Smooth Surface Fitting Based on Local Procedures", Communications of the ACM, Volume 17 Issue 1, Jan. 1974 ? I will assume that this is the paper you were referring to. I will call that paper [[Akima 1974]] with the double [[]].
+ * I'm not quite sure why you chose variable names here which are different from those in the paper... I will do my best to annotate this method. -JAS
+ *
  * Calculates Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
  * Determines Psi = sum(a_ij*r^i z^j) inside rectangle defined by (r[i], r[i+1])x(z[i], z[i+1])
  */
@@ -68,7 +72,6 @@ double Critical::Psi_interp(double r, double z) {
 
 double Critical::Psir_interp(double r, double z) {
   double r2 = r*r;
-  double r3 = r2*r;
   double z2 = z*z;
   double z3 = z2*z;
   return (a01 + 2*a02*r + 3*a03*r2) +
@@ -78,8 +81,6 @@ double Critical::Psir_interp(double r, double z) {
 }
 
 double Critical::Psirr_interp(double r, double z) {
-  double r2 = r*r;
-  double r3 = r2*r;
   double z2 = z*z;
   double z3 = z2*z;
   return (2*a02 + 6*a03*r) +
@@ -90,9 +91,7 @@ double Critical::Psirr_interp(double r, double z) {
 
 double Critical::Psirz_interp(double r, double z) {
   double r2 = r*r;
-  double r3 = r2*r;
   double z2 = z*z;
-  double z3 = z2*z;
   return (a11 + 2*a12*r + 3*a13*r2) +
        2*(a21 + 2*a22*r + 3*a23*r2)*z +
        3*(a31 + 2*a32*r + 3*a33*r2)*z2;
@@ -102,7 +101,6 @@ double Critical::Psiz_interp(double r, double z) {
   double r2 = r*r;
   double r3 = r2*r;
   double z2 = z*z;
-  double z3 = z2*z;
   return (a10 + a11*r + a12*r2 + a13*r3) +
   2*(a20 + a21*r + a22*r2 + a23*r3)*z +
   3*(a30 + a31*r + a32*r2 + a33*r3)*z2;
@@ -111,8 +109,6 @@ double Critical::Psiz_interp(double r, double z) {
 double Critical::Psizz_interp(double r, double z) {
   double r2 = r*r;
   double r3 = r2*r;
-  double z2 = z*z;
-  double z3 = z2*z;
   return 2*(a20 + a21*r + a22*r2 + a23*r3) +
   6*(a30 + a31*r + a32*r2 + a33*r3)*z;
 }
@@ -192,7 +188,7 @@ void Critical::updateP(double r, double z) {
  */
 void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, double *Psi_min) {
   double Psi_min_;
-  double dr, dz, alpha, beta;
+  double dr, dz;
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D;
   for (int i = 0; i < max_iter; ++i) {
     try {
@@ -216,6 +212,10 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
       if (D > 0) {
         double Psi_min_ = Psi_interp(r,z);
         Psi_min = &Psi_min_;
+        rcrit = &r;
+        zcrit = &z;
+        Psi_min_ = (Psi_interp(*rcrit, *zcrit));
+        *Psi_min = Psi_min_;
         return;
       }
       Psi_search(r, z, &dr, &dz);
@@ -230,6 +230,11 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
   // If search failed, use original coordinates of magnetic axis
   Psi_min_ = Psi_interp(R0, z0);
   Psi_min = &Psi_min_;
+    
+  *rcrit = R0;
+  *zcrit = z0;
+  Psi_min_ = (Psi_interp(*rcrit, *zcrit));
+  *Psi_min = Psi_min_;
   return;
 }
 
@@ -238,10 +243,23 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
  * guess r, z
  */
 void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, double *Psi_min) {
-  double dr, dz, alpha, beta;
+  double dr, dz;
   double Psi_lim1, Psi_lim2;
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D, Psi_crit;
   
+  // Calculate minimum over limiters
+  Psi_lim1 = Psi_interp(R0, z_limiter1);
+  Psi_lim2 = Psi_interp(R0, z_limiter2);
+  if(Psi_lim1 < Psi_lim2) {
+    *rcrit = R0;
+    *zcrit = z_limiter1;
+    *Psi_min = Psi_lim1;
+  }
+  else {
+    *rcrit = R0;
+    *zcrit = z_limiter2;
+    *Psi_min = Psi_lim2;
+  }
   for (int i = 0; i < max_iter; ++i) {
     assert(!isnan(r));
     assert(!isnan(z));
@@ -269,9 +287,9 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
         printf("D < 0\n");
         Psi_crit = Psi_interp(r, z);
         if(Psi_crit < *Psi_min) {
-          rcrit = &r;
-          zcrit = &z;
-          Psi_min = &Psi_crit;
+          *rcrit = r;
+          *zcrit = z;
+          *Psi_min = Psi_crit;
         }
         return;
       }

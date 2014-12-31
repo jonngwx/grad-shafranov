@@ -1,15 +1,22 @@
+/*!
+ * @file Header file for Field class
+ */
+
 #ifndef FIELD_H
 #define FIELD_H
 
 #include <stdlib.h>
 #include "grid.h"
 
-/**
- * \file Header file for Field class
- * */
-
+/*! 
+ * @brief Container for 2d data and grid used in the solver.
+ */
 class Field {
   public:
+  /*!
+   * @brief Constructor of Field
+   * @param grid The grid which this field lives in
+   */
   Field(const Grid &grid);
   ~Field();
 

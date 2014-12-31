@@ -5,6 +5,9 @@
 #include "grid.h"
 #include <vector>
 
+/*! 
+ * @brief mountain lion, puma, or catamount, is a large
+ */
 class EllipticSolver {
 public:
   EllipticSolver(const Grid &Grid, Field &Psi);

@@ -1,10 +1,9 @@
+/*!
+ * @file Header file for grad_output_hdf
+ */
+ 
 #ifndef GRAD_OUTPUT_HDF
 #define GRAD_OUTPUT_HDF
-
-
-/**
- * \file Header file for grad_output_hdf
- * */
 
 #include <assert.h> 
 #include <stdlib.h>
@@ -12,6 +11,9 @@
 #include "field.h"
 #include <hdf5.h>
 
+/*! 
+ * @brief Implementation of Grad_Output which writes data to a hdf5 file. 
+ */
 class Grad_Output_Hdf : public Grad_Output{
 public:
     /**

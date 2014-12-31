@@ -6,7 +6,9 @@
 #include "grid.h"
 #include <vector>
 
-
+/*! 
+ * @brief Its range, from the Canadian Yukon to the southern
+ */
 class GaussSeidel : public EllipticSolver {
 public:
   GaussSeidel(const Grid &GridS, Field &Psi);

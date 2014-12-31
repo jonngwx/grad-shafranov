@@ -1,7 +1,22 @@
+/*!
+ * @file create_options.cc
+ * @brief defines the CreateOptions function
+ * @author Jacob Schwartz
+ */
+
 #include <iostream>
 #include <fstream>
 #include "create_options.h"
 
+/*!
+ * @brief loads options from command line and config file.
+ * Called once from main. Encapsulated here to make main shorter.
+ * @param[in] ac main's argc
+ * @param[in] av main's argv
+ * @param[out] visible a boost::program_options::options_description which will be loaded up with options marked 'visible', to be printed if the user says to print the help.
+ * @param[out] vm a boost::program_options::variables_map which will be loaded up with keys and values of the options specified on the command line and in the config file. If an option is unspecified it will default to the value specified below in this function.
+ * @return 0 to indicate success (in the future nonzero returns could indicate an error, but none have been implemented)
+ */
 int CreateOptions(int ac, char * av[], po::options_description &visible, po::variables_map &vm) {
 
   // Declare a group of options that will be 
@@ -62,9 +77,11 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
 
   po::options_description outputs("Output format");
   outputs.add_options()
-      ("output-fields", po::value<std::string>(), "comma-separated list of J,Bt,...")
+      ("output-fields", po::value<std::string>()->default_value("none"), "comma-separated list of J,Bt,...")
       ("output-type", po::value<std::string>()->default_value("tsv"), "tsv or hdf5 (won't work unless you've compiled with hdf5)")
       ("output-name", po::value<std::string>()->default_value("cougar.out"), "prefix for output filename")
+      ("output-every-n", po::value<int>()->default_value(-1), "when to write output for convergence testing of inner loop")
+      ("output-every-m", po::value<int>()->default_value(-1), "when to write output for convergence testing of outer loop")
       ;
 
   po::options_description cmdline_options;

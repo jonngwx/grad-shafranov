@@ -7,6 +7,8 @@ NAN = '-?nan'
 DATA= '([A-Za-z]+): *((' + FLOAT+ ' *|'+ NAN +' *)*)'
 
 def read_hdf5(filename):
+    """Reads in an hdf5 file.
+    """
     import h5py
     f = h5py.File(filename,'r')
     fields = {}

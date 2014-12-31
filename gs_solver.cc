@@ -48,9 +48,12 @@ int main(int argc, char *argv[])
     double zmax = vm["z-max"].as<double>();
     int maxIterM = vm["max-iter-M"].as<int>();
     int maxIterN = vm["max-iter-N"].as<int>();
-    double epsilon = vm["error-tol-N"].as<double>();
+    int outputEveryN = vm["output-every-n"].as<int>();
+    int outputEveryM = vm["output-every-m"].as<int>();
+    double error_epsilon = vm["error-tol-N"].as<double>();
 
     std::string pgtype;
+    std::string output_list;
     if (!vm.count("pgtype")) {
         std::cout << "Must specify pgtype: (array, choice2, choice 3)  \n";
         exit(1);
@@ -77,16 +80,18 @@ int main(int argc, char *argv[])
     Field *g = new Field(*grid);
 
     double r_squared;
-    double R0 = Rmin + (Rmax - Rmin)/2.0; // not necessarily true.  just for now
+    double R0 = Rmin + (Rmax - Rmin)/2.0; // not necessarily true.  just for now           /*What's not true??? -JAS*/ 
     double z0 = zmin + (zmax - zmin)/2.0; // see above comment
     double D = vm["j-phi-D"].as<double>();
     double Ip = vm["j-phi-Ip"].as<double>();
 
     // calc constant c to be consistent with specified Ip
     double a = pow(D/R0,2); // just for convenience.  should be less than 1
+    //What number is that? 
     double c = Ip*a/(4.188790205*R0*(pow(1-a,1.5) - (1 - 1.5*a)));
     printf("c = %f \n", c);
 
+    //What is happening here?
     for (int i = 0; i < grid->nr_; ++i) {
         for (int j = 0; j < grid->nz_; ++j) {
             r_squared = (grid->R_[i] - R0)*(grid->R_[i] - R0) + (grid->z_[j] - z0)*(grid->z_[j] - z0);
@@ -95,7 +100,9 @@ int main(int argc, char *argv[])
             }
             else {
                 jphi->f_[i][j] = 0;
-            }  
+            } 
+            //What does the number 10 mean?
+            psi->f_[i][j] = 10*exp(-pow(grid->R_[i] - R0,2))*exp(-pow(grid->z_[j],2)/10.);
         }
     }
 
@@ -109,7 +116,7 @@ int main(int argc, char *argv[])
     // Elliptic solver for inner loop
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, &cd);
-   
+
     // set up Critical
     double z_limiter1 = vm["z_limiter1"].as<double>();
     double z_limiter2 = vm["z_limiter2"].as<double>();
@@ -117,49 +124,69 @@ int main(int argc, char *argv[])
     double error_tol_crit = vm["error-tol-crit"].as<double>();
     Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2, R0, z0);
 
+
     /** determine which output type */
     Grad_Output *grad_output;
+    output_list = vm["output-fields"].as<string>();
     if (output_type == "tsv") {
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"j,bt,bt,this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     } else if (output_type == "hdf5") {
         #ifdef HDF_MODE
-        grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,"j,bt,this,is,a,test");
+        grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,output_list.c_str());
         #else 
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
         printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
         #endif 
     } else {
         printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,"this,is,a,test");
+        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     }
 
     // solve stuff
+    // WHAT ARE WE SOLVING FOR?
     solver->coeff();
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(psi, jphi);
+        
+        // output during calculation 
+        if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
+            std::string partial_output_name = vm["output-name"].as<string>()+ ".m" + std::to_string(m) + "." +output_type;
+            grad_output->write_output(partial_output_name.c_str());
+            printf("Writing output for m = %d\n",m);
+        }
         // test convergence
-
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
             printf("n = %i \n", n);
-            if (n == 0) solver->step_1(*jphi);
-            else solver->step(*jphi);
+            if (n == 0) {
+              solver->step_1(*jphi);
+            } else {
+              solver->step(*jphi);
+            }
             crit->update();
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
-            if (solver->norm() < epsilon) break;
+            if (solver->norm() < error_epsilon) {break;}
+
+            // output during calculation
+            if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
+                std::string partial_output_name = vm["output-name"].as<string>()+".n" + std::to_string(n) + ".m" + std::to_string(m) + "." +output_type;
+                grad_output->write_output(partial_output_name.c_str());
+                printf("Writing output for n = %d, m = %d\n",n,m);
+            }
             if (n == maxIterN-1) {
                 printf(" Elliptic solver reached maxIterN without convergence\n");
             }
         }
     }
 
-  // output stuff
+  // Write final output 
   std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
   grad_output->write_output(full_output_name.c_str());
+  
 
   delete grad_output;
-  delete grid;
+  delete crit;
   delete psi;
   delete psib;
   delete jphi;
@@ -167,5 +194,6 @@ int main(int argc, char *argv[])
   delete p;
   delete g;
   delete jsa;
+  delete grid;
 }
 

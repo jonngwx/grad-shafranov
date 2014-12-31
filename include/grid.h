@@ -2,14 +2,15 @@
 #define GRID_H
 #include <stdlib.h>
 
-/**
- * \file Stores the x and y axes of grid used in the solver and 
+/*!
+ * @brief Stores information about the solution grid.
+ *
+ * Stores the x and y axes of grid used in the solver and 
  * methods to determine cell indices from coordinates.
  */
-
 class Grid{
 public:
-    /**
+    /*!
      * Constructor of grid 
      * @param R0 - value of R at left boundary
      * @param Rend - value of R at right boundary
@@ -18,7 +19,7 @@ public:
      * @param nr - number of grid points in the R direction
      * @param nz - number of points in the z direction
      *
-     * */
+     */
     Grid(double R0, double Rend, double z0, double zend, int nr, int nz);
     ~Grid();
     double celli(double r);
