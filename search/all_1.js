@@ -5,7 +5,7 @@ var searchData=
   ['boost_5ftest_2ecc',['boost_test.cc',['../boost__test_8cc.html',1,'']]],
   ['boost_5ftest_5fdyn_5flink',['BOOST_TEST_DYN_LINK',['../elliptic__test_8cc.html#a139f00d2466d591f60b8d6a73c8273f1',1,'elliptic_test.cc']]],
   ['boost_5ftest_5fmodule',['BOOST_TEST_MODULE',['../elliptic__test_8cc.html#a6b2a3852db8bb19ab6909bac01859985',1,'elliptic_test.cc']]],
-  ['boundary',['Boundary',['../class_boundary.html',1,'Boundary'],['../class_elliptic_solver.html#a3ddddb9ef7027d2e2f49594d02b719c7',1,'EllipticSolver::boundary()'],['../class_boundary.html#aa9194b8860b84b7af181e569a2117221',1,'Boundary::Boundary()']]],
+  ['boundary',['Boundary',['../class_boundary.html',1,'Boundary'],['../class_boundary.html#aa9194b8860b84b7af181e569a2117221',1,'Boundary::Boundary()'],['../class_elliptic_solver.html#a3ddddb9ef7027d2e2f49594d02b719c7',1,'EllipticSolver::boundary()']]],
   ['boundary_2ecc',['boundary.cc',['../boundary_8cc.html',1,'']]],
   ['boundary_2eh',['boundary.h',['../boundary_8h.html',1,'']]]
 ];
