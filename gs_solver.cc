@@ -80,16 +80,18 @@ int main(int argc, char *argv[])
     Field *g = new Field(*grid);
 
     double r_squared;
-    double R0 = Rmin + (Rmax - Rmin)/2.0; // not necessarily true.  just for now
+    double R0 = Rmin + (Rmax - Rmin)/2.0; // not necessarily true.  just for now           /*What's not true??? -JAS*/ 
     double z0 = zmin + (zmax - zmin)/2.0; // see above comment
     double D = vm["j-phi-D"].as<double>();
     double Ip = vm["j-phi-Ip"].as<double>();
 
     // calc constant c to be consistent with specified Ip
     double a = pow(D/R0,2); // just for convenience.  should be less than 1
+    //What number is that? 
     double c = Ip*a/(4.188790205*R0*(pow(1-a,1.5) - (1 - 1.5*a)));
     printf("c = %f \n", c);
 
+    //What is happening here?
     for (int i = 0; i < grid->nr_; ++i) {
         for (int j = 0; j < grid->nz_; ++j) {
             r_squared = (grid->R_[i] - R0)*(grid->R_[i] - R0) + (grid->z_[j] - z0)*(grid->z_[j] - z0);
@@ -98,7 +100,8 @@ int main(int argc, char *argv[])
             }
             else {
                 jphi->f_[i][j] = 0;
-            }  
+            } 
+            //What does the number 10 mean?
             psi->f_[i][j] = 10*exp(-pow(grid->R_[i] - R0,2))*exp(-pow(grid->z_[j],2)/10.);
         }
     }
@@ -141,6 +144,7 @@ int main(int argc, char *argv[])
     }
 
     // solve stuff
+    // WHAT ARE WE SOLVING FOR?
     solver->coeff();
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(psi, jphi);
@@ -162,7 +166,7 @@ int main(int argc, char *argv[])
             crit->update();
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
-            if (solver->norm() < epsilon) break;
+            if (solver->norm() < epsilon) {break;}
 
             // output during calculation
             if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
