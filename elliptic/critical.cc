@@ -38,8 +38,17 @@ Critical::~Critical() {
  * @brief Bivariate interpolation of Psi
  *
  * preserves smoothness as described in Akima, 1974
+ *
+ * Do you mean "A Method of Bivariate Interpolation and Smooth Surface Fitting Based on Local Procedures", Communications of the ACM, Volume 17 Issue 1, Jan. 1974 ? I will assume that this is the paper you were referring to. I will call that paper [[Akima 1974]] with the double [[]].
+ * I'm not quite sure why you chose variable names here which are different from those in the paper... I will do my best to annotate this method. -JAS
+ *
  * Calculates Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
+ * ^^^ No, it doesn't..... -JAS
+ *
  * Determines Psi = r^alpha z^beta inside rectangle defined by (r[i], r[i+1])x(z[i], z[i+1])
+ *
+ * ^^^ This appears to be setting up alpha and beta, not determining any psi. I'm really confused. -JAS
+ *
  */
 void Critical::interpolate() {
   double c1, c2, c3, c4, c5, c6, c7, c8, d1, d2, d3, d4, d5, w_r1, w_r2, w_z1, w_z2, e1, e2, e3, e4;
@@ -86,6 +95,8 @@ void Critical::interpolate() {
         w_z1 = 1;
         w_z2 = 1;
       }
+      /* Compute the first order partial derivatives in the r and z directions.
+       * Corresponds to equations (1) and (2) of [[Akima 1974]]. */
       double Psi_r = (w_r1*c1 + w_r2*c2)/(w_r1 + w_r2);
       double Psi_z = (w_z1*d1 + w_z2*d2)/(w_z1 + w_z2);
       // e[i][j]
@@ -96,6 +107,8 @@ void Critical::interpolate() {
       e3 = (c2 - c5)/(z[j-1] - z[j-2]);
       // e[i-1][j] = (c[i-1][j+1] - c[i-1][j])/(z[j+1] - z[j])
       e4 = (c6 - c1)/(z[j+1] - z[j]);
+      /* Compute the second-order partial derivative. 
+       * Corresponds to equation (9) of [[Akima 1974]]. */
       double Psi_rz = (w_r1*(w_z1*e2 + w_z2*e4) + w_r2*(w_z1*e3 + w_z2*e1))/((w_r1 + w_r2)*(w_z1 + w_z2));
       assert(Psi_z != 0);
       assert(Psi_r != 0);
