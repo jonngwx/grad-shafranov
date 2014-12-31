@@ -116,7 +116,6 @@ int main(int argc, char *argv[])
     int max_iter_crit = vm["max-iter-crit"].as<int>();
     double error_tol_crit = vm["error-tol-crit"].as<double>();
     Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2, R0, z0);
-    crit->interpolate();
 
     /** determine which output type */
     Grad_Output *grad_output;
