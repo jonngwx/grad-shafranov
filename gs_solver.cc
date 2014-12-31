@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     int maxIterN = vm["max-iter-N"].as<int>();
     int outputEveryN = vm["output-every-n"].as<int>();
     int outputEveryM = vm["output-every-m"].as<int>();
-    double epsilon = vm["error-tol-N"].as<double>();
+    double error_epsilon = vm["error-tol-N"].as<double>();
 
     std::string pgtype;
     std::string output_list;
@@ -159,14 +159,15 @@ int main(int argc, char *argv[])
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
             printf("n = %i \n", n);
-            if (n == 0) solver->step_1(*jphi);
-            else {
-                solver->step(*jphi);
+            if (n == 0) {
+              solver->step_1(*jphi);
+            } else {
+              solver->step(*jphi);
             }
             crit->update();
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
-            if (solver->norm() < epsilon) {break;}
+            if (solver->norm() < error_epsilon) {break;}
 
             // output during calculation
             if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
@@ -180,7 +181,7 @@ int main(int argc, char *argv[])
         }
     }
 
-  // output stuff
+  // Write final output 
   std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
   grad_output->write_output(full_output_name.c_str());
   
