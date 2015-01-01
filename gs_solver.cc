@@ -23,6 +23,9 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
+    /************************************************
+     * Load options from config file and command line
+     ***********************************************/
     po::options_description visible_options("Allowed options");
     po::variables_map vm;
     int return_value = CreateOptions(argc, argv, visible_options, vm);
@@ -72,7 +75,7 @@ int main(int argc, char *argv[])
   //  PGData gd; gd.load_from_tsv(vm["p-filename"].as<string>(),1);
   //  PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
     CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
-  
+
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
@@ -87,11 +90,9 @@ int main(int argc, char *argv[])
 
     // calc constant c to be consistent with specified Ip
     double a = pow(D/R0,2); // just for convenience.  should be less than 1
-    //What number is that? 
-    double c = Ip*a/(4.188790205*R0*(pow(1-a,1.5) - (1 - 1.5*a)));
+    double c = Ip*a/((4.0*M_PI/3.0) * R0 * (pow(1-a,1.5) - (1 - 1.5*a)));
     printf("c = %f \n", c);
 
-    //What is happening here?
     for (int i = 0; i < grid->nr_; ++i) {
         for (int j = 0; j < grid->nz_; ++j) {
             r_squared = (grid->R_[i] - R0)*(grid->R_[i] - R0) + (grid->z_[j] - z0)*(grid->z_[j] - z0);
@@ -142,9 +143,11 @@ int main(int argc, char *argv[])
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     }
 
-    // solve stuff
-    // WHAT ARE WE SOLVING FOR?
+    // solve stuff   "What???" -JAS
     solver->coeff();
+    /************************************************
+     * Main program loop 
+     ***********************************************/
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(psi, jphi);
         
