@@ -19,7 +19,7 @@ JSolverAlpha::~JSolverAlpha()
 {}
 
 void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
-    const double mu0 = 0.0000012566370614;
+    const double mu0 = 4 * M_PI * 1e-7; // the permeability of free space
     double temp1 = 0;
     double temp2 = 0;
     double psi_s = 0; // "psi-squiggle"
@@ -32,6 +32,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
     for (int i=0; i < nr_; ++i) {
         for (int j=0; j < nz_; ++j) {
             jtot1 += jphi->f_[i][j] * dr_ * dz_;
+            /* can we say in words what this if statement means? */
             if ((psi->f_[i][j] >= psi->f_0) && (psi->f_[i][j] <= psi->f_l)) {
                 psi_s = (psi->f_l - psi->f_[i][j])/delta_psi;
                 temp1 += R_[i]*n1_*pow(psi_s, n1_ - 1.0);
@@ -47,7 +48,6 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
     double alpha_g = mu0*(-P0_*temp1 + Ip_*delta_psi/(dr_*dz_))/(0.5*g0_*g0_*temp2);
 //    printf("alpha_g = %f \n", alpha_g);
     printf("summed jphi before update = %f\n", jtot1);
-
 
     // update fields g, and jphi
     for (int i=0; i < nr_; ++i) {
@@ -69,7 +69,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
     double jtot=0;
     for (int i=0; i < nr_; ++i) {
         for (int j=0; j< nz_; ++j) {
-            jtot += jphi->f_[i][j];   
+            jtot += jphi->f_[i][j];  
         }
     }
     jtot *= (dr_*dz_);
