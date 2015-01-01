@@ -59,6 +59,9 @@ int main(int argc, char *argv[])
     int outputEveryM = vm["output-every-m"].as<int>();
     double error_epsilon = vm["error-tol-N"].as<double>();
 
+    /* commented out because pgtype is not used anywhere else in main
+     * so this block is useless. If we're not planning
+     * to use it we should delete it.
     std::string pgtype;
     if (!vm.count("pgtype")) {
         std::cout << "Must specify pgtype: (array, choice2, choice 3)  \n";
@@ -72,10 +75,8 @@ int main(int argc, char *argv[])
             std::cout << "Error: pgtype unrecognized; exiting\n";
             exit(2);
         }
-    }
+    }*/
   
-  //  PGData gd; gd.load_from_tsv(vm["p-filename"].as<string>(),1);
-  //  PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
     CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
 
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
@@ -84,6 +85,11 @@ int main(int argc, char *argv[])
     Field *p = new Field(*grid);
     Field *g = new Field(*grid);
 
+    /****************************************************************
+     * Initialize the plasma current (jphi) and psi.
+     * The initialization for current looks the same as Johnson 1979 Step A.
+     * I'm not sure where this psi initialization comes from. -JAS
+     ***************************************************************/
     double r_squared;
     double R0 = (Rmax + Rmin)/2.0; // not necessarily true.  just for now           /*What's not true??? -JAS*/ 
     double z0 = (zmax + zmin)/2.0; // see above comment
@@ -98,7 +104,7 @@ int main(int argc, char *argv[])
 
     for (int i = 0; i < grid->nr_; ++i) {
         for (int j = 0; j < grid->nz_; ++j) {
-            r_squared = (grid->R_[i] - R0)*(grid->R_[i] - R0) + (grid->z_[j] - z0)*(grid->z_[j] - z0);
+            r_squared = pow(grid->R_[i] - R0,2) + pow(grid->z_[j] - z0,2);
             if (r_squared < D*D) {
                 jphi->f_[i][j] = (c/grid->R_[i])*(1 - r_squared/(D*D)) ;
             }
@@ -189,7 +195,9 @@ int main(int argc, char *argv[])
         }//end inner loop
     }//end outer loop
 
-  // Write final output 
+  /************************************************
+   * Write final output and close 
+   ***********************************************/
   std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
   grad_output->write_output(full_output_name.c_str());
   
