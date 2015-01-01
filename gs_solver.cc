@@ -23,9 +23,9 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
-    /************************************************
-     * Load options from config file and command line
-     ***********************************************/
+    /*********************************************************
+     * Load options from config file and command line into vm
+     ********************************************************/
     po::options_description visible_options("Allowed options");
     po::variables_map vm;
     int return_value = CreateOptions(argc, argv, visible_options, vm);
@@ -33,6 +33,10 @@ int main(int argc, char *argv[])
         exit(return_value);
     }
 
+    /************************************************
+     * Process options that would print and then end
+     * the program before any computation
+     ***********************************************/
     if (vm.count("help")) {
         std::cout << visible_options << "\n";
         return 0;
@@ -56,7 +60,6 @@ int main(int argc, char *argv[])
     double error_epsilon = vm["error-tol-N"].as<double>();
 
     std::string pgtype;
-    std::string output_list;
     if (!vm.count("pgtype")) {
         std::cout << "Must specify pgtype: (array, choice2, choice 3)  \n";
         exit(1);
@@ -70,7 +73,6 @@ int main(int argc, char *argv[])
             exit(2);
         }
     }
-    std::string output_type = vm["output-type"].as<string>();
   
   //  PGData gd; gd.load_from_tsv(vm["p-filename"].as<string>(),1);
   //  PGData pd; gd.load_from_tsv(vm["g-filename"].as<string>(),1);
@@ -83,13 +85,14 @@ int main(int argc, char *argv[])
     Field *g = new Field(*grid);
 
     double r_squared;
-    double R0 = Rmin + (Rmax - Rmin)/2.0; // not necessarily true.  just for now           /*What's not true??? -JAS*/ 
-    double z0 = zmin + (zmax - zmin)/2.0; // see above comment
+    double R0 = (Rmax + Rmin)/2.0; // not necessarily true.  just for now           /*What's not true??? -JAS*/ 
+    double z0 = (zmax + zmin)/2.0; // see above comment
     double D = vm["j-phi-D"].as<double>();
     double Ip = vm["j-phi-Ip"].as<double>();
 
     // calc constant c to be consistent with specified Ip
     double a = pow(D/R0,2); // just for convenience.  should be less than 1
+    /* what is the number 1.5 for? */
     double c = Ip*a/((4.0*M_PI/3.0) * R0 * (pow(1-a,1.5) - (1 - 1.5*a)));
     printf("c = %f \n", c);
 
@@ -126,9 +129,10 @@ int main(int argc, char *argv[])
     Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2, R0, z0);
 
 
-    /** determine which output type */
+    /** determine which output type: tsv or hdf5 */
     Grad_Output *grad_output;
-    output_list = vm["output-fields"].as<string>();
+    std::string output_type = vm["output-type"].as<string>();
+    std::string output_list = vm["output-fields"].as<string>();
     if (output_type == "tsv") {
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     } else if (output_type == "hdf5") {
@@ -169,7 +173,9 @@ int main(int argc, char *argv[])
             crit->update();
             jsa->update(jphi, psi, p, g);
             printf("error norm = %f \n", solver->norm());
-            if (solver->norm() < error_epsilon) {break;}
+            if (solver->norm() < error_epsilon){ 
+              break;
+            }
 
             // output during calculation
             if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
@@ -180,14 +186,13 @@ int main(int argc, char *argv[])
             if (n == maxIterN-1) {
                 printf(" Elliptic solver reached maxIterN without convergence\n");
             }
-        }
-    }
+        }//end inner loop
+    }//end outer loop
 
   // Write final output 
   std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
   grad_output->write_output(full_output_name.c_str());
   
-
   delete grad_output;
   delete crit;
   delete psi;
