@@ -34,7 +34,7 @@ class SlowBoundary : public Boundary {
     double *z_;
     double dr_;          // Size of a grid cell in the r direction
     double dz_;          // Size of a grid cell in the z direction
-    CoilData* cond_data; // Contains data on the external coil currents
+    CoilData* cond_data_; // Contains data on the external coil currents
     int perim_;          // The number of perimeter cells of the grid
     double ***g_plasma_; /*  A three dimensional array. 
      * The value g_plasma[i][j][l] 
