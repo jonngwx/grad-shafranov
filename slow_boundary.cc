@@ -1,3 +1,8 @@
+/*!
+ * @file slow_boundary.cc
+ * @author ???
+ * @brief fill in this please.
+ */
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
 #include "include/grid.h"
@@ -39,11 +44,10 @@ SlowBoundary::~SlowBoundary() {
 }
 
 int SlowBoundary::CalcB(Field* psi, Field* jphi) {
-  //  double mu0 = 0.0000012566370614;
   double mu0 = 4 * M_PI * 1e-7; /*magnetic permeability of free space*/
-                                //    printf("perim_ is %d.\n",perim_);
+  // printf("perim_ is %d.\n",perim_);
   for (int l = 0; l < perim_; ++l) {
-    //      printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));
+    // printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));
     psi->f_[LtoI(l)][LtoJ(l)] = 0;
     for (int i = 0; i < nr_; ++i) {
       for (int j = 0; j < nz_; ++j) {
@@ -52,7 +56,7 @@ int SlowBoundary::CalcB(Field* psi, Field* jphi) {
       }
     }
     psi->f_[LtoI(l)][LtoJ(l)] *= (dr_ * dz_);
-    //    printf("boundary value at i = %i and j = %i is %f \n", LtoI(l),
+    // printf("boundary value at i = %i and j = %i is %f \n", LtoI(l),
     // LtoJ(l), psi->f_[LtoI(l)][LtoJ(l)]);
   }
 
