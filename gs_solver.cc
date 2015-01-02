@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
                 jphi->f_[i][j] = 0;
             } 
             //What does the number 10 mean?
-            psi->f_[i][j] = 10*exp(-pow(grid->R_[i] - R0,2))*exp(-pow(grid->z_[j],2)/10.);
+            //            psi->f_[i][j] = 10*exp(-pow(grid->R_[i] - R0,2))*exp(-pow(grid->z_[j],2)/10.);
         }
     }
 

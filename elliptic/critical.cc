@@ -42,8 +42,8 @@ P(4, std::vector<double>(4)) {
   printf("INITIAL\n");
   printf("Rl = %f\n", Rl);
   printf("zl = %f\n", zl);
-  printf("R0 = %f\n", Rl);
-  printf("z0 = %f\n", zl);
+  printf("R0 = %f\n", R0);
+  printf("z0 = %f\n", z0);
 }
 
 Critical::~Critical() {}
@@ -211,9 +211,9 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
       // If critical point corresponds to a minimum
       if (D > 0) {
         double Psi_min_ = Psi_interp(r,z);
-        Psi_min = &Psi_min_;
-        rcrit = &r;
-        zcrit = &z;
+        *Psi_min = Psi_min_;
+        *rcrit = r;
+        *zcrit = z;
         Psi_min_ = (Psi_interp(*rcrit, *zcrit));
         *Psi_min = Psi_min_;
         return;
@@ -229,7 +229,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
   }
   // If search failed, use original coordinates of magnetic axis
   Psi_min_ = Psi_interp(R0, z0);
-  Psi_min = &Psi_min_;
+  *Psi_min = Psi_min_;
     
   *rcrit = R0;
   *zcrit = z0;
@@ -307,9 +307,9 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
     if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
   // Alternate case - use previous value of limiter
-  rcrit = &R0;
-  zcrit = &z0;
-  Psi_min = &Psi_.f_l;
+  *rcrit = R0;
+  *zcrit = z0;
+  *Psi_min = Psi_.f_l;
   return;
 }
 
@@ -335,8 +335,8 @@ void Critical::update() {
   z0 = zcrit;
   printf("Rl = %f\n", Rl);
   printf("zl = %f\n", zl);
-  printf("R0 = %f\n", Rl);
-  printf("z0 = %f\n", zl);
+  printf("R0 = %f\n", R0);
+  printf("z0 = %f\n", z0);
 }
 
 
