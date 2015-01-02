@@ -248,10 +248,10 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D, Psi_crit;
   
   // Calculate minimum over limiters
-  Psi_lim1 = Psi_interp(R0, z_limiter1);
-  Psi_lim2 = Psi_interp(R0, z_limiter2);
+  Psi_lim1 = Psi_interp(Rl, z_limiter1);
+  Psi_lim2 = Psi_interp(Rl, z_limiter2);
   if(Psi_lim1 < Psi_lim2) {
-    *rcrit = R0;
+    *rcrit = Rl;
     *zcrit = z_limiter1;
     *Psi_min = Psi_lim1;
   }
@@ -307,8 +307,8 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
     if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
   // Alternate case - use previous value of limiter
-  *rcrit = R0;
-  *zcrit = z0;
+  *rcrit = Rl;
+  *zcrit = zl;
   *Psi_min = Psi_.f_l;
   return;
 }
