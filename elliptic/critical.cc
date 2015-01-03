@@ -128,6 +128,7 @@ void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   assert(D != 0);
   *dr = (-Psi_zz*Psi_r + Psi_rz*Psi_z)*(1.0/D);
   *dz = (Psi_rz*Psi_r - Psi_rr*Psi_z)*(1.0/D);
+  printf("Psi_rr = %f, Psi_rz = %f, D= %f, Psi_zz = %f, Psi_z = %f, Psi_r = %f, dr = %f, dz = %f\n",Psi_rr, Psi_rz, D, Psi_zz, Psi_z, Psi_r ,*dr, *dz);
 }
 
 void Critical::updateCoefficients() {
@@ -161,8 +162,8 @@ void Critical::updateP(double r, double z) {
   if (is < 0 || (is+3) > (Grid_.nr_-1) || js < 0 || (js+3) > (Grid_.nz_-1)) {
     throw OutsideGrid;
   }
-  printf("is = %d\n", is);
-  printf("js = %d\n", js);
+  //printf("is = %d\n", is);
+  // printf("js = %d\n", js);
   // Fill in P
   P[0][0] = Psi_.f_[is][js];
   P[0][1] = Psi_.f_[is][js+1];
@@ -218,14 +219,14 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
         *Psi_min = Psi_min_;
         return;
       }
-      Psi_search(r, z, &dr, &dz);
-      r += dr;
-      z += dz;
-      // Check if outside limiters
-      if (z >= z_limiter1 || z <= z_limiter2) break;
-      // Check if outside grid boundaries
-      if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
     }
+    Psi_search(r, z, &dr, &dz);
+    r += dr;
+    z += dz;
+    // Check if outside limiters
+    if (z >= z_limiter1 || z <= z_limiter2) break;
+    // Check if outside grid boundaries
+    if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break; 
   }
   // If search failed, use original coordinates of magnetic axis
   Psi_min_ = Psi_interp(R0, z0);
