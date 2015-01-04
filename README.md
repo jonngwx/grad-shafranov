@@ -7,7 +7,9 @@ Nonstandard Requirements:
 * boost_program_options
 * python 2.7 (with library numpy, matplotlib and h5py)
 
-to compile, type 'make'
+to compile, type `make`
+
+to run tests, type `make runtests` 
 
 to run type
 
