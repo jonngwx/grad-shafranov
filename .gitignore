@@ -17,3 +17,4 @@ elliptic_test
 Docs/html
 *.dSYM
 PeterTest/boost_test
+output_test
