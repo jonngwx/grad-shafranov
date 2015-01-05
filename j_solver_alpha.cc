@@ -34,7 +34,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
             jtot1 += jphi->f_[i][j] * dr_ * dz_;
             psi_s = (psi->f_l - psi->f_[i][j])/delta_psi;
             /* can we say in words what this if statement means? */
-            if (psi_s > 0 && psi_s < 1){
+            if (psi_s > 0) {
               
                 temp1 += R_[i]*n1_*pow(psi_s, n1_ - 1.0);
                 temp2 += n2_*pow(psi_s, n2_ - 1.0) / R_[i];
@@ -54,7 +54,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
     for (int i=0; i < nr_; ++i) {
         for (int j=0; j < nz_; ++j) {
             psi_s = (psi->f_l - psi->f_[i][j])/delta_psi;
-            if (psi_s > 0 && psi_s < 1) {
+            if (psi_s > 0) {
                 
                 g->f_[i][j] = g0_*sqrt(1 + alpha_g*pow(psi_s,n2_)); //update g field
                 // printf("g = %f \n", g->f_[i][j]);
