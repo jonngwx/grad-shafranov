@@ -34,4 +34,4 @@ To plot the output, type
     
 if the default output filename is used.  More generally, type
 
-    python python/viz.py <filename> txt
+    python python/viz.py <filename> txt/hdf
