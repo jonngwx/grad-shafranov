@@ -1,3 +1,8 @@
+/*!
+ * @file boundary.cc
+ * @author ???
+ * @brief Implementation for the Boundary class.
+ */
 #include "include/boundary.h"
 Boundary::Boundary(Grid* grid) : nr_(grid->nr_), nz_(grid->nz_) {}
 

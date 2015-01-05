@@ -11,7 +11,7 @@
 
 /*!
  * @brief A basic container for a 2D table or array of doubles.
- * 
+ *
  * data can be accessed like
  * data(row, col) and cannot currently be set.
  * There is also no standard constructor right now.
@@ -31,9 +31,11 @@ class Table {
    * @brief Reads in a tsv file and populates a Table.
    *
    * Detects the number of rows & columns in the file programmatically.
-   * Checks that there are the same number of columns for each row or stops and returns an error.
+   * Checks that there are the same number of columns for each row or stops and
+   * returns an error.
    *
-   * Skips header_lines lines to start. Then, while reading the body of the tsv, will skip any line for which the first character is a #.
+   * Skips header_lines lines to start. Then, while reading the body of the tsv,
+   * will skip any line for which the first character is a #.
    * Inline or end-of-line comments are not allowed.
    *
    * @param [in] filename the filename, as a string
@@ -43,8 +45,8 @@ class Table {
   virtual int load_from_tsv(const std::string filename, int header_lines = 0);
   int num_columns() const { return num_columns_; }
   int num_rows() const { return num_rows_; }
-  
-  /*! 
+
+  /*!
    * @brief get data from the table
    * @param [in] row integer of row (starting from 0)
    * @param [in] column integer of column (starting from 0)
@@ -56,10 +58,11 @@ class Table {
 };
 
 /*!
- * @brief A container for the r and z location (m) and currents (A) of external coils.
- * 
- * Load from a (3-column) tsv of doubles like Table does. Can access the data in the same way
- * or use getter functions r(i) z(i) and current(i)
+ * @brief A container for the r and z location (m) and currents (A) of external
+ *coils.
+ *
+ * Load from a (3-column) tsv of doubles like Table does. Can access the data in
+ * the same way or use getter functions r(i) z(i) and current(i)
  */
 class CoilData : public Table {
  private:
@@ -135,7 +138,8 @@ class PGData : public Table {
    * @param [in] i which value of psi (starting from 0)
    * @return the i'th value of (p or g)
    *
-   * Since this PGTable stores either p or g it can only return the corresponding value of course...
+   * Since this PGTable stores either p or g it can only return the
+   * corresponding value of course...
    */
   double value(int i) const { return data_[i][1]; }
 };
