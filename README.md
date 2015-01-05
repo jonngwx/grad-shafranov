@@ -30,8 +30,8 @@ Of course, if you specify an illegal value for an option, or a file which does n
 
 To plot the output, type
 
-    python python/viz.py cougar.out.txt txt
+    python python/viz.py cougar.out.tsv tsv
     
 if the default output filename is used.  More generally, type
 
-    python python/viz.py <filename> txt/hdf
+    python python/viz.py <filename> <tsv|hdf>
