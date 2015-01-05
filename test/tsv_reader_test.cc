@@ -1,7 +1,7 @@
 /*! 
  * @file tsv_reader_test.cc
  * @author Jacob Schwartz
- * @brief Some tests for the Table class using the boost_test library.
+ * @brief Some tests for the Table and CoilData classes using the boost_test library.
  */
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE tsv_reader_test

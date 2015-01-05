@@ -1,7 +1,7 @@
 /*!
  * @file slow_boundary.cc
  * @author ???
- * @brief fill in this please.
+ * @brief Implementation for the SlowBoundary class.
  */
 #include "include/slow_boundary.h"
 #include "include/tsv_reader.h"
@@ -44,7 +44,7 @@ SlowBoundary::~SlowBoundary() {
 }
 
 int SlowBoundary::CalcB(Field* psi, Field* jphi) {
-  double mu0 = 4 * M_PI * 1e-7; /*magnetic permeability of free space*/
+  double mu0 = 4 * M_PI * 1e-7; /* magnetic permeability of free space */
   // printf("perim_ is %d.\n",perim_);
   for (int l = 0; l < perim_; ++l) {
     // printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));

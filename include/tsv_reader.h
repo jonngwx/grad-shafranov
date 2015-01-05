@@ -1,5 +1,5 @@
 /*!
- * @file tsv_data.h
+ * @file tsv_reader.h
  * @author Jacob Schwartz
  * @brief Header declarations for Table, CoilData, and PGData.
  */

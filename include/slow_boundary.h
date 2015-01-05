@@ -1,7 +1,7 @@
 /*!
  * @file slow_boundary.h
  * @author ???
- * @brief Header declarations for SlowBoundary
+ * @brief Header declarations the SlowBoundary class.
  */
 
 #ifndef SLOWBOUNDARY_H_
@@ -13,21 +13,32 @@
 #include "boundary.h"
 
 /*!
- * @brief something something
+ * @brief This boundary-value calculating class iterates over the field of j_phi and (should do ... not implemented yet) over the set of external coils) using Green's functions.
  */
 class SlowBoundary : public Boundary {
   public:
     /*!
      * Constructor of SlowBoundary.
+     *
+     * Initializes the Green's function array: a cache of values representing the effect of psi at the boundary from a unit current at any point on the grid.
+     *
      * @param grid The grid for which this class will calculate boundary
      *  conditions.
      * @param cond_data The external coil currents which 
      *  influence the boundary conditions for psi.
+     *  Currently the affect of these coils has not been implemented.
      */
     SlowBoundary(Grid* grid, CoilData* cond_data); 
     ~SlowBoundary();
-    /*! Which of these parameters are 'in' or 'out'?*
-     * @return What integer does it return?*/
+    /*!
+     * @brief Calculate the updated boundary values for psi based on the plasma current.
+     *
+     * Should we add another parameter of the external coil currents???
+     *
+     * @param[out] psi The field to which these new boundary values will be written.  
+     * @param[in] jphi The plasma current.
+     * @return The number 0 to indicate success.
+     */
     int CalcB(Field* psi, Field* jphi);
   private:
     double *R_;
