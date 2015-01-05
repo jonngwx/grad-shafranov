@@ -27,13 +27,29 @@ class Grid {
    */
   Grid(double R0, double Rend, double z0, double zend, int nr, int nz);
   ~Grid();
+  
+  /*!
+   * @brief Converts radial position in meters to i-coordinate in grid-cell-space
+   * which ranges from 0. to (nr_ - 1.0).
+   * @param[in] r A radial position in meters.
+   * @return The (floating-point-) number of cells in the radial direction 
+   * out from the 0th cell that this location corresponds to. The returned value is clamped between 0.0 and (nr_ - 1.0).
+   */
   double celli(double r);
+
+  /*!
+   * @brief Converts z position in meters to j-coordinate in grid-cell-space
+   * which ranges from 0. to (nz_ - 1.0).
+   * @param[in] z A z position in meters.
+   * @return The (floating-point-) number of cells in the vertical direction 
+   * up from the 0th cell that this location corresponds to. The returned value is clamped between 0.0 and (nz_ - 1.0).
+   */
   double cellj(double z);
 
-  const int nr_; /**< number of points in R direction */
-  const int nz_; /**< number of points in z direction */
-  double *R_;    /**< pointer to array of radial grid points */
-  double *z_;    /**< pointer to array of vertical grid points */
+  const int nr_; /**< Number of cells in R direction */
+  const int nz_; /**< Number of cells in z direction */
+  double *R_;    /**< Array of grid cell radial locations in meters*/
+  double *z_;    /**< Array of grid cell vertical locations in meters*/
   double dr_;    /**< Size of a grid cell in the r direction */
   double dz_;    /**< Size of a grid cell in the z direction */
 };

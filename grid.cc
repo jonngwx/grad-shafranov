@@ -1,3 +1,9 @@
+/*!
+ * @file grid.cc
+ * @author ???
+ * @brief Implementation for class Grid.
+ */
+
 #include "include/grid.h"
 #include "include/util.h"
 #include <math.h>
@@ -10,6 +16,7 @@ Grid::Grid(double R0, double Rend, double z0, double zend, int nr, int nz)
     z_ = new double[nz_]();	
     dr_ = (Rend - R0)/(nr - 1.0);
     dz_ = (zend - z0)/(nz - 1.0);
+    //Fill up R and Z
     linspace(R0,Rend,nr,R_);
     linspace(z0,zend,nz,z_);
 }
@@ -19,22 +26,13 @@ Grid::~Grid(){
     delete [] R_;
 }
 
-/*!
- * Given r returns i coordinate of containing grid cell
- * returned as double so user can get position in cell
- */
 double Grid::celli(double r) {
     double i = (r - R_[0])*(1.0/dr_);
-//    printf("i = %f\n\n", i);
+    //ensure that the returned position is between 0 and nr_-1.
     return fmin(nr_-1,fmax(i,0));
 }
 
-/*!
- * Given z returns j coordinate of containing grid cell
- * returned as double so user can get position in cell
- */
 double Grid::cellj(double z) {
     double j = (z - z_[0])*(1.0/dz_);
-//    printf("j = %f\n\n", j);
     return fmin(nz_-1,fmax(j,0));
 }
