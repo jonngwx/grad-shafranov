@@ -152,8 +152,8 @@ void Critical::updateCoefficients() {
 
 void Critical::updateP(double r, double z) {
   int is, js;
-  int i = (int)Grid_.celli(r);
-  int j = (int)Grid_.cellj(z);
+  int i = (int)(Grid_.celli(r)+.5);
+  int j = (int)(Grid_.cellj(z)+.5);
   if (Grid_.celli(r) - i >= 0) is = i - 1;
   else is = i - 2;
   if (Grid_.cellj(r) - j >= 0) js = j - 1;
