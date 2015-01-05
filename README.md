@@ -35,3 +35,9 @@ To plot the output, type
 if the default output filename is used.  More generally, type
 
     python python/viz.py <filename> <tsv|hdf>
+    
+To access the data in python, import viz, then use
+
+    F = viz.plot(filename, format)
+
+F will be a dictionary of the grid and data arrays.
