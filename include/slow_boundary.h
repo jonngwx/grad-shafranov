@@ -59,6 +59,7 @@ class SlowBoundary : public Boundary {
    * due to a unit current at point [i][j] in the plasma.
    * Note that for cells on the boundary,
    * g_plasma[ce,ll][corresponding cell] = 0. */
+  double** g_coils_;  
 };
 
 #endif  // SLOWBOUNDARY_H_
