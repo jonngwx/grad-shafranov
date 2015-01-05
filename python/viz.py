@@ -35,7 +35,7 @@ def plot(filename,format):
     nz = F['z'].shape[0]
     dr = (Rend-R0)/(nR-1)
     dz = (zend-z0)/(nz-1)
-    plt.figure(1)
+    fig = plt.figure(1,figsize=(4,9),dpi = 80)
     cfig = plt.subplot(3,1,1)
     plt.contour(F['R'],F['z'],F['psi'],colors='k')
     plt.pcolormesh(F['R'],F['z'],F['psi'])
@@ -49,12 +49,14 @@ def plot(filename,format):
             return 'R = %1.4f, z = %1.4f'%(x,y)
 
     cfig.format_coord = format_coord_psi
+    cb = plt.colorbar()
     plt.title('$\Psi$')
     plt.xticks([])
     plt.ylabel('z')
-#    plt.colorbar()
+    cfig.set_aspect('equal')
+
     pfig = plt.subplot(3,1,2)
-    plt.pcolormesh(F['R'],F['z'],F['p'],shading='gouraud')
+    plt.pcolormesh(F['R'],F['z'],F['p'])#,shading='gouraud')
     def format_coord_p(x,y):
         col = int((x-R0)/dr)
         row = int((y-z0)/dz)
@@ -65,11 +67,14 @@ def plot(filename,format):
             return 'R = %1.4f, z = %1.4f'%(x,y)
     pfig.format_coord = format_coord_p
     plt.title('p')
-#    plt.xlabel('$R$')
     plt.ylabel('z')
+    plt.xlim([R0,Rend])
     plt.colorbar()
+    pfig.set_aspect('equal')
+
+
     gfig = plt.subplot(3,1,3)
-    plt.pcolormesh(F['R'],F['z'],F['g'],shading='gouraud')
+    plt.pcolormesh(F['R'],F['z'],F['g'])#,shading='gouraud')
     plt.title('g')
     def format_coord_g(x,y):
         col = int((x-R0)/dr)
@@ -82,13 +87,22 @@ def plot(filename,format):
     gfig.format_coord = format_coord_g
     plt.xlabel('$R$')
     plt.ylabel('z')
+    plt.xlim([R0,Rend])
     plt.colorbar()
+    gfig.set_aspect('equal')
     #positional hackery
     cpos = cfig.get_position().get_points()
     gpos = gfig.get_position().get_points()
+   # print cpos
+   # print gpos
+    cpos[0,0] = gpos[0,0]
     cpos[1,0] = gpos[1,0]-gpos[0,0]
     cpos[1,1] = cpos[1,1]-cpos[0,1]
+   # print cpos
     cfig.set_position(np.ndarray.flatten(cpos))
+   # print cfig.get_position().get_points()
+   # print gfig.get_position().get_points()
+    fig.delaxes(fig.axes[1])
     plt.show()
     return F
 
