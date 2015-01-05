@@ -5,9 +5,9 @@ import sys
 import read_data
 
 def plot(filename,format):
-    """Please describe this function
-
-    in some detail.
+    """
+    This is a function which plots things. It takes two strings, one of which is the filename, followed by the format.
+    @return F a dict containing all the data in the file.
     """
     try:
         if format == "txt" or format == "tsv":
