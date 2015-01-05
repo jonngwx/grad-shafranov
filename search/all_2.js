@@ -2,6 +2,8 @@ var searchData=
 [
   ['c',['C',['../class_elliptic_solver.html#a7ca6e2f51afd9a2a770b2c8da11a1889',1,'EllipticSolver']]],
   ['calcb',['CalcB',['../class_boundary.html#ac46c262fec63e0091d1118e55f0f0783',1,'Boundary::CalcB()'],['../class_slow_boundary.html#a03ac3a9b06bd978608cfecc9308c710d',1,'SlowBoundary::CalcB()']]],
+  ['cd',['cd',['../structcdtest.html#a9e07c45cf39c0fa2bae2b57d0272f498',1,'cdtest']]],
+  ['cdtest',['cdtest',['../structcdtest.html',1,'cdtest'],['../structcdtest.html#a9ff842c44a3bef7136d04643d994ed02',1,'cdtest::cdtest()']]],
   ['celli',['celli',['../class_grid.html#a72bdd582877557a2a249b2f4c9005f8a',1,'Grid']]],
   ['cellj',['cellj',['../class_grid.html#a50647d1af982fad71c90614198adf874',1,'Grid']]],
   ['check_5fdata',['check_data',['../namespaceread__data.html#a0ab9aa1fd6b3de9b65feb92ed8d73270',1,'read_data']]],

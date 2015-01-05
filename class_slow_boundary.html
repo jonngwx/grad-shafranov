@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('class_slow_boundary.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>something something  
+<p>This boundary-value calculating class iterates over the field of j_phi and (should do ... not implemented yet) over the set of external coils) using Green's functions.  
  <a href="class_slow_boundary.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="slow__boundary_8h_source.html">slow_boundary.h</a>&gt;</code></p>
@@ -136,6 +136,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa4f5c6cfe4e7637c4ec43435b6a71422"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slow_boundary.html#aa4f5c6cfe4e7637c4ec43435b6a71422">~SlowBoundary</a> ()</td></tr>
 <tr class="separator:aa4f5c6cfe4e7637c4ec43435b6a71422"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03ac3a9b06bd978608cfecc9308c710d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slow_boundary.html#a03ac3a9b06bd978608cfecc9308c710d">CalcB</a> (<a class="el" href="class_field.html">Field</a> *psi, <a class="el" href="class_field.html">Field</a> *jphi)</td></tr>
+<tr class="memdesc:a03ac3a9b06bd978608cfecc9308c710d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the updated boundary values for psi based on the plasma current.  <a href="#a03ac3a9b06bd978608cfecc9308c710d">More...</a><br /></td></tr>
 <tr class="separator:a03ac3a9b06bd978608cfecc9308c710d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_boundary"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_boundary')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_boundary.html">Boundary</a></td></tr>
 <tr class="memitem:aa9194b8860b84b7af181e569a2117221 inherit pub_methods_class_boundary"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_boundary.html#aa9194b8860b84b7af181e569a2117221">Boundary</a> (<a class="el" href="class_grid.html">Grid</a> *grid)</td></tr>
@@ -156,7 +157,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a6be09f0a340c92fc8747186262942116 inherit pro_attribs_class_boundary"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>something something </p>
+<div class="textblock"><p>This boundary-value calculating class iterates over the field of j_phi and (should do ... not implemented yet) over the set of external coils) using Green's functions. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a6710ee647b3e7ee2a3485383224466ac"></a>
 <div class="memitem">
@@ -181,10 +182,12 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Constructor of <a class="el" href="class_slow_boundary.html" title="something something ">SlowBoundary</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Constructor of <a class="el" href="class_slow_boundary.html" title="This boundary-value calculating class iterates over the field of j_phi and (should do ...">SlowBoundary</a>.</p>
+<p>Initializes the Green's function array: a cache of values representing the effect of psi at the boundary from a unit current at any point on the grid.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">grid</td><td>The grid for which this class will calculate boundary conditions. </td></tr>
-    <tr><td class="paramname">cond_data</td><td>The external coil currents which influence the boundary conditions for psi. </td></tr>
+    <tr><td class="paramname">cond_data</td><td>The external coil currents which influence the boundary conditions for psi. Currently the affect of these coils has not been implemented. </td></tr>
   </table>
   </dd>
 </dl>
@@ -238,7 +241,17 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Which of these parameters are 'in' or 'out'?* </p><dl class="section return"><dt>Returns</dt><dd>What integer does it return? </dd></dl>
+
+<p>Calculate the updated boundary values for psi based on the plasma current. </p>
+<p>Should we add another parameter of the external coil currents???</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">psi</td><td>The field to which these new boundary values will be written. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">jphi</td><td>The plasma current. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number 0 to indicate success. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_boundary.html#ac46c262fec63e0091d1118e55f0f0783">Boundary</a>.</p>
 
@@ -254,7 +267,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_slow_boundary.html">SlowBoundary</a></li>
-    <li class="footer">Generated on Sun Jan 4 2015 15:47:52 for COUGAR by
+    <li class="footer">Generated on Sun Jan 4 2015 20:22:12 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

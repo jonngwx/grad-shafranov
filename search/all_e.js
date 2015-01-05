@@ -6,6 +6,7 @@ var searchData=
   ['plot',['plot',['../namespaceviz.html#a71e46247c7a30a1c30a179a86bbaa3f1',1,'viz']]],
   ['print1d',['print1d',['../util_8h.html#af07e826bc08e746319a94bafcb4f38cb',1,'util.h']]],
   ['print2d',['print2d',['../util_8h.html#aecdf80df241e320882555683b30500f2',1,'util.h']]],
+  ['protected',['protected',['../test__output_8cc.html#a363c8dcebb1777654ad1703136a14ec8',1,'test_output.cc']]],
   ['psi',['psi',['../class_p_g_data.html#a47c35a80fc4eb366f7619d55a3ae751d',1,'PGData']]],
   ['psi_5f',['Psi_',['../class_elliptic_solver.html#af6db7ea29804907c1f89bddb6237f8ba',1,'EllipticSolver']]],
   ['psi_5finterp',['Psi_interp',['../class_critical.html#ad6c4f5bdc9732ae73982429e593035f3',1,'Critical']]],
