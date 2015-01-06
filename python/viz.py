@@ -37,7 +37,9 @@ def plot(filename,format):
     dz = (zend-z0)/(nz-1)
     fig = plt.figure(1,figsize=(4,9),dpi = 80)
     cfig = plt.subplot(3,1,1)
-    plt.contour(F['R'],F['z'],F['psi'],colors='k')
+    clist = np.linspace(np.min(F['psilo']),np.max(F['psilo']),10)
+    plt.contour(F['R'],F['z'],F['psi'],clist,colors='k')
+    plt.contour(F['R'],F['z'],F['psi'],[F['psilo'][0],F['psilo'][0]],colors='r')
     plt.pcolormesh(F['R'],F['z'],F['psi'])
     def format_coord_psi(x,y):
         col = int((x-R0)/dr)
@@ -69,6 +71,7 @@ def plot(filename,format):
     plt.title('p')
     plt.ylabel('z')
     plt.xlim([R0,Rend])
+    plt.ylim([z0,zend])
     plt.colorbar()
     pfig.set_aspect('equal')
 
@@ -88,6 +91,7 @@ def plot(filename,format):
     plt.xlabel('$R$')
     plt.ylabel('z')
     plt.xlim([R0,Rend])
+    plt.ylim([z0,zend])
     plt.colorbar()
     gfig.set_aspect('equal')
     #positional hackery

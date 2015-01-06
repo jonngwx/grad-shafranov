@@ -45,6 +45,12 @@ void Grad_Output_Hdf::write_output(const char* filename){
     twod_to_oned(f->f_, x, nr, nz);
     status = H5LTmake_dataset(file_id,"/psi",2,dims,H5T_NATIVE_DOUBLE,x);
     check(status);
+
+    hsize_t dimpsil = 1;
+    status = H5LTset_attribute_double(file_id, "/psi", "psi_l", &(f->f_l), dimpsil);
+    check(status);
+    status = H5LTset_attribute_double(file_id, "/psi", "psi_0", &(f->f_0), dimpsil);
+    check(status);
     for (int i = 0; i < nr; ++i){
         for (int j = 0; j < nz; ++j){
             x[i*nz + j] = p->f_[i][j];

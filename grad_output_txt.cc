@@ -32,10 +32,15 @@ void Grad_Output_Txt::write_output(const char* filename){
     print1d(file,grid->z_,nz);
     fprintf(file,"\n");
 
+    double psilo[2] = {f->f_l,f->f_0};
+    fprintf(file,"psilo: ");
+    print1d(file, psilo ,2);
+    fprintf(file,"\n");
+
     fprintf(file,"psi: ");
     print2d(file,f->f_,nr,nz);
     fprintf(file,"\n");
-
+    
     fprintf(file,"g: ");
     print2d(file,g->f_,nr,nz);
     fprintf(file,"\n");

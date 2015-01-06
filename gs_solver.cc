@@ -150,6 +150,7 @@ int main(int argc, char *argv[])
         #endif 
     } else {
         printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
+        output_type = "tsv";
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     }
 

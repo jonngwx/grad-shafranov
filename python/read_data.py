@@ -17,6 +17,10 @@ def read_hdf5(filename):
             fields[data]=np.array(f[data])
         else:
             fields[data]=np.transpose(np.array(f[data]))
+            if data == 'psi':
+                p0 = f[data].attrs['psi_0']
+                pl = f[data].attrs['psi_l']
+                fields['psilo'] = np.array([pl, p0])
     f.close()
     if is_invalid(fields):
         return None
@@ -39,7 +43,7 @@ def read_text(filename):
     nx = fields['R'].shape[0]
     ny = fields['z'].shape[0]
     for data in fields.keys():
-        if data == 'R' or data == 'z':
+        if data == 'R' or data == 'z' or data == 'psilo':
             continue
         else:
             fields[data] = np.transpose(np.reshape(fields[data],[nx,ny]))
