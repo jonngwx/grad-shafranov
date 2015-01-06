@@ -22,9 +22,12 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
     const double mu0 = 4 * M_PI * 1e-7; // the permeability of free space
     double temp1 = 0;
     double temp2 = 0;
-    double psi_s = 0; // "psi-squiggle"
+    double psi_s = 0; /* "psi-squiggle": a normalized psi equal to
+    0 at the plasma-vacuum boundary and 1 on the magnetic axis.*/
 
     printf("psi_l = %f, psi_0 = %f \n", psi->f_l, psi->f_0);
+    /* delta_psi: The difference between the value of psi at the
+     * plasma-vacuum boundary and the value on axis. */
     double delta_psi = psi->f_l - psi->f_0;
    
     double jtot1=0;
@@ -33,14 +36,12 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
         for (int j=0; j < nz_; ++j) {
             jtot1 += jphi->f_[i][j] * dr_ * dz_;
             psi_s = (psi->f_l - psi->f_[i][j])/delta_psi;
-            /* can we say in words what this if statement means? */
+            /* If this is a point inside the plasma */ 
             if (psi_s > 0) {
-              
                 temp1 += R_[i]*n1_*pow(psi_s, n1_ - 1.0);
                 temp2 += n2_*pow(psi_s, n2_ - 1.0) / R_[i];
                 p->f_[i][j] = P0_*pow(psi_s,n1_); //update pressure field
-            }
-            else {
+            } else {
                 p->f_[i][j] = 0;
             }
           //  printf("psi = %f .... p = %f \n", psi->f_[i][j], p->f_[i][j]);
@@ -63,8 +64,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
                 jphi->f_[i][j] = -n1_*P0_*pow(psi_s,n1_-1)*R_[i] - .5*g0_*g0_/mu0/R_[i] * alpha_g*pow(psi_s,n2_-1)*n2_;
 
                 //P0_*temp1/delta_psi + g0_*g0_*alpha_g*temp2/(2*mu0*delta_psi); //update jphi
-            }
-            else {
+            } else {
                 g->f_[i][j] = g0_;
                 jphi->f_[i][j] = 0;
             }
