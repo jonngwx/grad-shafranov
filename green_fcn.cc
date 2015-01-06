@@ -16,7 +16,7 @@ double green_fcn(double R1, double Z1, double R2, double Z2) {
     double k =
         sqrt(4.0 * R1 * R2 / ((R1 + R2) * (R1 + R2) + (Z1 - Z2) * (Z1 - Z2)));
     /*Numerical coefficient below is 1 over 2 pi */
-    double g = (1.0 / 6.28318530718) * (sqrt(R1 * R2) / k) *
+    double g = -(1.0 / 6.28318530718) * (sqrt(R1 * R2) / k) *
                ((2 - k * k) * ellint_1(k) - 2 * ellint_2(k));
     return g;
   }
