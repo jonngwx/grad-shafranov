@@ -154,6 +154,8 @@ int main(int argc, char *argv[])
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     }
 
+    std::string output_filename_base = vm["output-name"].as<string>();
+
     // solve stuff   "What???" -JAS
     solver->coeff();
     /************************************************
@@ -164,7 +166,7 @@ int main(int argc, char *argv[])
         
         // output during calculation 
         if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
-            std::string partial_output_name = vm["output-name"].as<string>()+ ".m" + std::to_string(m) + "." +output_type;
+            std::string partial_output_name = output_filename_base + ".m" + std::to_string(m) + "." + output_type;
             grad_output->write_output(partial_output_name.c_str());
             printf("Writing output for m = %d\n",m);
         }
@@ -186,7 +188,7 @@ int main(int argc, char *argv[])
 
             // output during calculation
             if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
-                std::string partial_output_name = vm["output-name"].as<string>()+".n" + std::to_string(n) + ".m" + std::to_string(m) + "." +output_type;
+                std::string partial_output_name = output_filename_base + std::to_string(n) + ".m" + std::to_string(m) + "." + output_type;
                 grad_output->write_output(partial_output_name.c_str());
                 printf("Writing output for n = %d, m = %d\n",n,m);
             }
@@ -199,7 +201,7 @@ int main(int argc, char *argv[])
   /************************************************
    * Write final output and close 
    ***********************************************/
-  std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
+  std::string full_output_name = output_filename_base + "." + output_type;
   grad_output->write_output(full_output_name.c_str());
   
   delete grad_output;
