@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string>
 #include <math.h>
+#include <time.h>
 #include "include/grid.h"
 #include "include/field.h"
 #include "include/grad_output.h"
@@ -28,7 +29,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-
+  
+    clock_t time0 = clock();
     /*********************************************************
      * Load options from config file and command line into vm
      ********************************************************/
@@ -160,7 +162,7 @@ int main(int argc, char *argv[])
         output_type = "tsv";
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     }
-
+    clock_t time1 = clock();
     std::string output_filename_base = vm["output-name"].as<string>();
 
     // solve stuff   "What???" -JAS
@@ -204,13 +206,16 @@ int main(int argc, char *argv[])
             }
         }//end inner loop
     }//end outer loop
-
+    clock_t time2 = clock();
   /************************************************
    * Write final output and close 
    ***********************************************/
   std::string full_output_name = output_filename_base + "." + output_type;
   grad_output->write_output(full_output_name.c_str());
   
+  float t1 = ((float)(time1-time0))/CLOCKS_PER_SEC;
+  float t2 = ((float)(time2-time1))/CLOCKS_PER_SEC;
+  printf("init time = %f, solver time = %f\n",t1,t2);
   delete grad_output;
   delete crit;
   delete psi;
