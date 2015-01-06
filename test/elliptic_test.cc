@@ -10,13 +10,19 @@
 #include <math.h>
 #include "../include/boundary.h"
 
+struct elliptictester {
+  elliptictester() { R0= 0; }
+  ~elliptictester() {}
+  double R0;
+};
+
+BOOST_FIXTURE_TEST_SUITE( suite1 , elliptictester)
 /*!
  * Tests SOR elliptic solver by comparison to vacuum
  * solution constrained to be even about the Z = 0
  * midplane
  */
 BOOST_AUTO_TEST_CASE (SOR_vacuum) {
-    double R0 = 0;
     double Rend = 10;
     double Z0 = -5;
     double Zend = 5;
@@ -61,6 +67,7 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
         psi->f_[psib->LtoI(l)][psib->LtoJ(l)] = psi_sol->f_[psib->LtoI(l)][psib->LtoJ(l)];
     }
     
+    /* 
     printf("\n SOLUTION \n");
     for (int i = 0; i < nr; ++i) {
         for (int j=0; j < nz; ++j) {
@@ -68,6 +75,7 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
         }
         printf("\n");
     }
+    */
     
     // Solve for psi given the proper boundary conditions
     EllipticSolver *solver = new SOR(*grid, *psi, epsilon);
@@ -77,13 +85,14 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
         else solver->step(*jphi);
         if (solver->norm() < epsilon) break;
     }
-    printf("\n FINAL \n");
+   
+    //printf("\n FINAL \n");
     for (int i = 0; i < nr; ++i) {
         for (int j = 0; j < nz; ++j) {
-            printf("%f\t", psi->f_[i][j]);
+            //printf("%f\t", psi->f_[i][j]);
             BOOST_CHECK_CLOSE(psi_sol->f_[i][j], psi->f_[i][j], 4);
         }
-        printf("\n");
+        //printf("\n");
     }
 }
 
@@ -92,6 +101,7 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
  * solution constrained to be even about the Z = 0
  * midplane
  */
+
 BOOST_AUTO_TEST_CASE (GS_vacuum) {
     double R0 = 0;
     double Rend = 10;
@@ -137,7 +147,8 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
     for (int l = 0; l < perim; ++l) {
         psi->f_[psib->LtoI(l)][psib->LtoJ(l)] = psi_sol->f_[psib->LtoI(l)][psib->LtoJ(l)];
     }
-    
+   
+    /* 
     printf("\n SOLUTION \n");
     for (int i = 0; i < nr; ++i) {
         for (int j=0; j < nz; ++j) {
@@ -145,6 +156,7 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
         }
         printf("\n");
     }
+    */
     
     // Solve for psi given the proper boundary conditions
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
@@ -154,12 +166,14 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
         else solver->step(*jphi);
         if (solver->norm() < epsilon) break;
     }
-    printf("\n FINAL \n");
+    //printf("\n FINAL \n");
     for (int i = 0; i < nr; ++i) {
         for (int j = 0; j < nz; ++j) {
-            printf("%f\t", psi->f_[i][j]);
+            //printf("%f\t", psi->f_[i][j]);
             BOOST_CHECK_CLOSE(psi_sol->f_[i][j], psi->f_[i][j], 4);
         }
-        printf("\n");
+        //printf("\n");
     }
 }
+
+BOOST_AUTO_TEST_SUITE_END()
