@@ -1,3 +1,9 @@
+/*! 
+ * @file gs_solver.cc
+ * @author The COUGAR Team
+ * @brief The main program for COUGAR
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
