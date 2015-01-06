@@ -132,7 +132,7 @@ def midplane_plot(F,x):
     plt.clf()
     plt.plot(F['R'],a[nz/2,::])
     plt.show()
-    return F['R'], a[nz/2,::])
+    return F['R'], a[nz/2,::]
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
