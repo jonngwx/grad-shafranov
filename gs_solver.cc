@@ -152,6 +152,7 @@ int main(int argc, char *argv[])
         grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,output_list.c_str());
         #else 
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
+	output_type = "tsv";
         printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
         #endif 
     } else {

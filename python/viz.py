@@ -111,6 +111,29 @@ def plot(filename,format):
     return F
 
 
+def midplane_plot(F,x):
+    """
+    A radial plot of a quantity along the midplane of the tokamak
+    @param F container holding fields and grid
+    @param x the quantity to plot
+    @return R the grid in the radial direction
+    @return a the field x along the midplane, or None if invalid
+    """
+    if x not in F.keys():
+        print "The specified quantity is not available"
+        return F['R'],None
+    a = F[x]
+    if np.array(a.shape).shape[0] != 2:
+        print "The specified quantity is not a 2d array"
+        return F['R'],None
+    nz = a.shape[0]
+    plt.close(1)
+    plt.figure(1)
+    plt.clf()
+    plt.plot(F['R'],a[nz/2,::])
+    plt.show()
+    return F['R'], a[nz/2,::]
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print 'wrong number of arguments'
