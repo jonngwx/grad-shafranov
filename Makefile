@@ -5,7 +5,8 @@ HDF = -lhdf5_hl -lhdf5 -DHDF_MODE
 PROGS = gs_solver
 TESTDIR = test
 TESTPROGS = output_test elliptic_test $(TESTDIR)/tsv_reader_test
-EXAMPLEPROGS = tsv_reader_example coil_data_example
+EXDIR = exampleClassUsage
+EXAMPLEPROGS = $(EXDIR)/tsv_reader_example $(EXDIR)/coil_data_example
 OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o
 
 .PHONY: all
@@ -29,10 +30,10 @@ $(TESTDIR)/tsv_reader_test: tsv_reader.o $(TESTDIR)/tsv_reader_test.o
 output_test: test/test_output.o grad_output.o grad_output_txt.o field.o grid.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-tsv_reader_example: tsv_reader_example.o tsv_reader.o 
+$(EXDIR)/tsv_reader_example: $(EXDIR)/tsv_reader_example.o tsv_reader.o 
 	$(CXX) -o $@ $^ $(LIBS)
 
-coil_data_example: coil_data_example.o tsv_reader.o
+$(EXDIR)/coil_data_example: $(EXDIR)/coil_data_example.o tsv_reader.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 .PHONY: runtests

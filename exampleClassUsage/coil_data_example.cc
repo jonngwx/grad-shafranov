@@ -13,7 +13,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/tsv_reader.h"
+#include "../include/tsv_reader.h"
 
 int main(int argc, char* argv[]) {
 
