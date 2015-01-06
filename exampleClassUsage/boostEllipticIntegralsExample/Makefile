@@ -1,12 +1,12 @@
 CXX = g++
 CXXFLAGS = -c -g -Wall
 LIBS = -lboost_math_tr1
-PROGS = boost_test  
+PROGS = ellint_ex
 
 .PHONY: all
 all: $(PROGS)
 
-boost_test: boost_test.o 
+ellint_ex: ellint_ex.o 
 	$(CXX) -o $@ $^ $(LIBS) 
 
 .PHONY: clean
