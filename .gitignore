@@ -21,3 +21,4 @@ PeterTest/boost_test
 test/simple_test_output.tsv
 test/tsv_reader_test
 test/test_output
+exampleClassUsage/boostEllipticIntegralExample/ellint_ex
