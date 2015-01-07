@@ -1,5 +1,6 @@
 /*!
  *  @file util.h
+ *  @author Anthonyi
  *  @brief A few helper functions.
  */ 
 

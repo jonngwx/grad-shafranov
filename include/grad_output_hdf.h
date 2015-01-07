@@ -1,5 +1,6 @@
 /*!
  * @file grad_output_hdf.h
+ * @author Catamount
  * @brief Header file for grad_output_hdf.
  */
 

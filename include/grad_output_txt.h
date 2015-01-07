@@ -1,5 +1,6 @@
 /*!
  * @file Header file for grad_output_txt
+ * @author Mountain Lion
  */
 #ifndef GRAD_OUTPUT_TXT
 #define GRAD_OUTPUT_TXT
