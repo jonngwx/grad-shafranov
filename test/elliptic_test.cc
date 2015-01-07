@@ -16,7 +16,7 @@ struct elliptictester {
   double R0;
 };
 
-BOOST_FIXTURE_TEST_SUITE( suite1 , elliptictester)
+BOOST_FIXTURE_TEST_SUITE(suite1 , elliptictester)
 /*!
  * Tests SOR elliptic solver by comparison to vacuum
  * solution constrained to be even about the Z = 0
