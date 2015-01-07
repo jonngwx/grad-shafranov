@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -c -g -std=c++11 -Iinclude  
-LIBS = -lboost_program_options -lboost_unit_test_framework -lboost_math_tr1
+CXXFLAGS = -c -g -std=c++11 -Iinclude -Wall -I/usr/pppl/boost/1.52.0/include
+LIBS = -lboost_program_options -lboost_unit_test_framework -lboost_math_tr1 -L/usr/pppl/boost/1.52.0/lib
 HDF = -lhdf5_hl -lhdf5 -DHDF_MODE
 PROGS = gs_solver
 TESTDIR = test
