@@ -21,7 +21,7 @@ gs_solver_hdf: gs_solver_hdf.o grad_output_hdf.o $(OBJECTS)
 gs_solver_hdf.o: gs_solver.cc
 	$(CXX) $(CXXFLAGS) $(HDF) $^ -o $@
 
-$(TESTDIR)/elliptic_test: elliptic/elliptic_solver.o test/elliptic_test.o elliptic/sor.o grid.o field.o elliptic/gauss_seidel.o boundary.o
+$(TESTDIR)/elliptic_test: elliptic/elliptic_solver.o test/elliptic_test.o elliptic/sor.o grid.o field.o elliptic/gauss_seidel.o boundary.o 
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(TESTDIR)/tsv_reader_test: tsv_reader.o $(TESTDIR)/tsv_reader_test.o
@@ -36,7 +36,7 @@ $(TESTDIR)/grid_test: $(TESTDIR)/grid_test.o grid.o
 $(TESTDIR)/boundary_test: $(TESTDIR)/boundary_test.o boundary.o grid.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/slow_boundary_test: $(TESTDIR)/slow_boundary_test.o slow_boundary.o boundary.o grid.o field.o tsv_reader.o green_fcn.o
+$(TESTDIR)/slow_boundary_test: $(TESTDIR)/slow_boundary_test.o slow_boundary.o boundary.o grid.o field.o tsv_reader.o green_fcn.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(EXDIR)/tsv_reader_example: $(EXDIR)/tsv_reader_example.o tsv_reader.o 
