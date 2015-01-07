@@ -23,4 +23,5 @@ test/tsv_reader_test
 test/test_output
 test/grid_test
 test/boundary_test
+test/slow_boundary_test
 exampleClassUsage/boostEllipticIntegralExample/ellint_ex
