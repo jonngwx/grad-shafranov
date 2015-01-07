@@ -12,8 +12,11 @@ class Boundary {
   public:
     Boundary(Grid *grid);
     virtual ~Boundary();
-    virtual int CalcB(Field *psi, Field* jphi);
 
+    /*!
+     * @brief Updates boundary cells of psi based on the plasma current jphi.
+     */
+    virtual int CalcB(Field *psi, Field* jphi);
     /*! 
      * @brief Gets the horizontal index of the l'th boundary cell
      *
@@ -31,8 +34,8 @@ class Boundary {
      */
     int LtoJ(int l);
   protected:
-    int nr_; /*!< Number of grid cells in the r direction */
-    int nz_; /*!< Number of grid cells in the z direction */
+    int nr_; //!< Number of grid cells in the r direction.
+    int nz_; //!< Number of grid cells in the z direction.
 };
 
 #endif // BOUNDARY_H_
