@@ -23,9 +23,9 @@ class Table {
   const static int kInconsistentColumnNumberError = 2;
   const static int kFileReadError = 3;
   const static int kNoDataFoundError = 4;
-  size_t num_columns_; /*!< For keeping track of the array's size. */
-  size_t num_rows_;    /*!< For keeping track of the array's size. */
-  std::vector<std::vector<double> > data_;
+  size_t num_rows_;    //!< Number of rows of data.
+  size_t num_columns_; //!< Number of columns of data.
+  std::vector<std::vector<double> > data_; //!< A 2D-vector in which the data is stored, row-major.
 
  public:
   /*! 
@@ -109,7 +109,7 @@ class CoilData : public Table {
 };
 
 /*!
- * @brief A container for one sort of data describing initial P and G
+ * @brief (THIS CLASS IS NOT USED)  A container for one sort of data describing initial P and G
  *
  * Useful for the 'array' type of P and G input.
  * Contains either P or G as a function of psi.

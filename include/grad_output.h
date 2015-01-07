@@ -35,7 +35,13 @@ protected:
   void parse_outputs(const char *outputs);
   // output_list
   enum Output {CURRENT, TOROIDAL_FIELD};
-  std::vector< Output > output_list; /*!< A list of the different fields to be output. */
+  std::vector< Output > output_list; //!< A list of the different fields to be output.
+
+  /*!
+   * @brief Determines whether a given Output is present in output_list.
+   * @param[in] out The variety of output to test for.
+   * @return If it is present in output_list, then true, else false. 
+   */
   bool inline find(Output out){
       return std::find(output_list.begin(),output_list.end(),out)!=output_list.end();
   }

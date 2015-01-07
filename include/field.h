@@ -22,10 +22,10 @@ class Field {
   Field(const Grid &grid);
   ~Field();
 
-  const Grid * grid_; /**< Pointer to grid data: stores the physical dimension information */
-  double **f_; /**< Pointer to field data: a 2D array of data. */
-  double f_l; /**< Value of the field at plasma edge. */
-  double f_0;  /**< Value of the field at the magnetic axis. */
+  const Grid * grid_; //!< Pointer to grid data: stores the physical dimension information.
+  double **f_; //!< Pointer to field data: a 2D array of data.
+  double f_l; //!< Value of the field at plasma edge.
+  double f_0;  //!< Value of the field at the magnetic axis.
 };
 
 
