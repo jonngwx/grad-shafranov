@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('namespaceviz.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -106,7 +106,8 @@ $(document).ready(function(){initNavTree('namespaceviz.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">viz Namespace Reference</div>  </div>
 </div><!--header-->
@@ -116,8 +117,50 @@ $(document).ready(function(){initNavTree('namespaceviz.html','');});
 Functions</h2></td></tr>
 <tr class="memitem:a71e46247c7a30a1c30a179a86bbaa3f1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#a71e46247c7a30a1c30a179a86bbaa3f1">plot</a></td></tr>
 <tr class="separator:a71e46247c7a30a1c30a179a86bbaa3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b8e5294672417de07fe2f5caefffc1f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#a0b8e5294672417de07fe2f5caefffc1f">midplane_plot</a></td></tr>
+<tr class="separator:a0b8e5294672417de07fe2f5caefffc1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aee89f5626ecd7b8bb421426c98a58593"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">FILE</a> = '.*\.(hdf5|tsv)'</td></tr>
+<tr class="separator:aee89f5626ecd7b8bb421426c98a58593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3da7a6bab2793b7f33abb9342eda9ffc"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#a3da7a6bab2793b7f33abb9342eda9ffc">prog</a> = re.compile(<a class="el" href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">FILE</a>)</td></tr>
+<tr class="separator:a3da7a6bab2793b7f33abb9342eda9ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5e3a6ec485be426971514163be97faf"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#aa5e3a6ec485be426971514163be97faf">result</a> = prog.match(sys.argv[1])</td></tr>
+<tr class="separator:aa5e3a6ec485be426971514163be97faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a0b8e5294672417de07fe2f5caefffc1f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def viz.midplane_plot </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">A radial plot of a quantity along the midplane of the tokamak
+@param F container holding fields and grid
+@param x the quantity to plot
+@return R the grid in the radial direction
+@return a the field x along the midplane, or None if invalid
+</pre> 
+</div>
+</div>
 <a class="anchor" id="a71e46247c7a30a1c30a179a86bbaa3f1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -141,10 +184,46 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Please describe this function
-
-in some detail.
+<pre class="fragment">This is a function which plots things. It takes two strings, one of which is the filename, followed by the format.
+@return F a dict containing all the data in the file.
 </pre> 
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="aee89f5626ecd7b8bb421426c98a58593"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string viz.FILE = '.*\.(hdf5|tsv)'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3da7a6bab2793b7f33abb9342eda9ffc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple viz.prog = re.compile(<a class="el" href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">FILE</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa5e3a6ec485be426971514163be97faf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple viz.result = prog.match(sys.argv[1])</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 </div><!-- contents -->
@@ -153,7 +232,7 @@ in some detail.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceviz.html">viz</a></li>
-    <li class="footer">Generated on Sun Jan 4 2015 20:22:12 for COUGAR by
+    <li class="footer">Generated on Tue Jan 6 2015 23:51:00 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

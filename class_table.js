@@ -1,5 +1,7 @@
 var class_table =
 [
+    [ "Table", "class_table.html#a049f2e06391781ae255c6698869c4ad1", null ],
+    [ "~Table", "class_table.html#a9a559f2e7beb37b511ee9f88873164f8", null ],
     [ "data", "class_table.html#ad6e317db4eaff12cdf7788d804855e34", null ],
     [ "load_from_tsv", "class_table.html#ab4d06900e83ea583a345475e2e871d97", null ],
     [ "num_columns", "class_table.html#a89a9d0b706d074fad499e94262223fae", null ],

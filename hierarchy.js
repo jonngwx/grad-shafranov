@@ -3,7 +3,6 @@ var hierarchy =
     [ "Boundary", "class_boundary.html", [
       [ "SlowBoundary", "class_slow_boundary.html", null ]
     ] ],
-    [ "cdtest", "structcdtest.html", null ],
     [ "Critical", "class_critical.html", null ],
     [ "EllipticSolver", "class_elliptic_solver.html", [
       [ "GaussSeidel", "class_gauss_seidel.html", null ],
@@ -16,10 +15,8 @@ var hierarchy =
     ] ],
     [ "Grid", "class_grid.html", null ],
     [ "JSolverAlpha", "class_j_solver_alpha.html", null ],
-    [ "RHSfunc", "class_r_h_sfunc.html", null ],
     [ "Table", "class_table.html", [
       [ "CoilData", "class_coil_data.html", null ],
       [ "PGData", "class_p_g_data.html", null ]
-    ] ],
-    [ "tbtest", "structtbtest.html", null ]
+    ] ]
 ];

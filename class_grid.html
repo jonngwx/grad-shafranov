@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('class_grid.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -128,8 +128,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3661d0a7f998caaaf8627d7a67072116"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a3661d0a7f998caaaf8627d7a67072116">~Grid</a> ()</td></tr>
 <tr class="separator:a3661d0a7f998caaaf8627d7a67072116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72bdd582877557a2a249b2f4c9005f8a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a72bdd582877557a2a249b2f4c9005f8a">celli</a> (double r)</td></tr>
+<tr class="memdesc:a72bdd582877557a2a249b2f4c9005f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts radial position in meters to i-coordinate in grid-cell-space which ranges from 0. to (nr_ - 1.0).  <a href="#a72bdd582877557a2a249b2f4c9005f8a">More...</a><br /></td></tr>
 <tr class="separator:a72bdd582877557a2a249b2f4c9005f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50647d1af982fad71c90614198adf874"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a50647d1af982fad71c90614198adf874">cellj</a> (double z)</td></tr>
+<tr class="memdesc:a50647d1af982fad71c90614198adf874"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts z position in meters to j-coordinate in grid-cell-space which ranges from 0. to (nz_ - 1.0).  <a href="#a50647d1af982fad71c90614198adf874">More...</a><br /></td></tr>
 <tr class="separator:a50647d1af982fad71c90614198adf874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -241,7 +243,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Given r returns i coordinate of containing grid cell returned as double so user can get position in cell </p>
+
+<p>Converts radial position in meters to i-coordinate in grid-cell-space which ranges from 0. to (nr_ - 1.0). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>A radial position in meters. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The (floating-point-) number of cells in the radial direction out from the 0th cell that this location corresponds to. The returned value is clamped between 0.0 and (nr_ - 1.0). </dd></dl>
 
 </div>
 </div>
@@ -258,7 +268,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Given z returns j coordinate of containing grid cell returned as double so user can get position in cell </p>
+
+<p>Converts z position in meters to j-coordinate in grid-cell-space which ranges from 0. to (nz_ - 1.0). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>A z position in meters. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The (floating-point-) number of cells in the vertical direction up from the 0th cell that this location corresponds to. The returned value is clamped between 0.0 and (nz_ - 1.0). </dd></dl>
 
 </div>
 </div>
@@ -298,7 +316,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>number of points in R direction </p>
+<p>Number of cells in R direction </p>
 
 </div>
 </div>
@@ -311,7 +329,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>number of points in z direction </p>
+<p>Number of cells in z direction </p>
 
 </div>
 </div>
@@ -324,7 +342,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>pointer to array of radial grid points </p>
+<p>Array of grid cell radial locations in meters </p>
 
 </div>
 </div>
@@ -337,7 +355,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>pointer to array of vertical grid points </p>
+<p>Array of grid cell vertical locations in meters </p>
 
 </div>
 </div>
@@ -351,7 +369,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_grid.html">Grid</a></li>
-    <li class="footer">Generated on Sun Jan 4 2015 20:22:12 for COUGAR by
+    <li class="footer">Generated on Tue Jan 6 2015 23:51:00 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

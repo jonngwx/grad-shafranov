@@ -1,9 +1,9 @@
 var files =
 [
-    [ "elliptic", "dir_ad73226ebe385775b3c066159a7d62ce.html", "dir_ad73226ebe385775b3c066159a7d62ce" ],
-    [ "include", "dir_d44c64559bbebec7f509842c48db8b23.html", "dir_d44c64559bbebec7f509842c48db8b23" ],
-    [ "python", "dir_7837fde3ab9c1fb2fc5be7b717af8d79.html", "dir_7837fde3ab9c1fb2fc5be7b717af8d79" ],
-    [ "test", "dir_13e138d54eb8818da29c3992edef070a.html", "dir_13e138d54eb8818da29c3992edef070a" ],
+    [ "elliptic", "dir_5d82bbfee64ccfb3b4dda0cc9829b1cf.html", "dir_5d82bbfee64ccfb3b4dda0cc9829b1cf" ],
+    [ "exampleClassUsage", "dir_cc2da517f7353ceca3d8dabbbc3e62c7.html", "dir_cc2da517f7353ceca3d8dabbbc3e62c7" ],
+    [ "include", "dir_04551c75b1b1df3df3c1f86f11f16b64.html", "dir_04551c75b1b1df3df3c1f86f11f16b64" ],
+    [ "python", "dir_1382d7e7f8afdcfd88434a0a9c0abf99.html", "dir_1382d7e7f8afdcfd88434a0a9c0abf99" ],
     [ "boundary.cc", "boundary_8cc.html", null ],
     [ "create_options.cc", "create__options_8cc.html", "create__options_8cc" ],
     [ "field.cc", "field_8cc.html", null ],
@@ -14,7 +14,6 @@ var files =
     [ "grid.cc", "grid_8cc.html", null ],
     [ "gs_solver.cc", "gs__solver_8cc.html", "gs__solver_8cc" ],
     [ "j_solver_alpha.cc", "j__solver__alpha_8cc.html", null ],
-    [ "rhs_func.cc", "rhs__func_8cc.html", null ],
     [ "slow_boundary.cc", "slow__boundary_8cc.html", null ],
     [ "tsv_reader.cc", "tsv__reader_8cc.html", null ]
 ];

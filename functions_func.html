@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -156,9 +156,6 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>CalcB()
 : <a class="el" href="class_boundary.html#ac46c262fec63e0091d1118e55f0f0783">Boundary</a>
 , <a class="el" href="class_slow_boundary.html#a03ac3a9b06bd978608cfecc9308c710d">SlowBoundary</a>
-</li>
-<li>cdtest()
-: <a class="el" href="structcdtest.html#a9ff842c44a3bef7136d04643d994ed02">cdtest</a>
 </li>
 <li>celli()
 : <a class="el" href="class_grid.html#a72bdd582877557a2a249b2f4c9005f8a">Grid</a>
@@ -190,12 +187,6 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
 <li>EllipticSolver()
 : <a class="el" href="class_elliptic_solver.html#ae50c3d42eb4840d6380f316670353e71">EllipticSolver</a>
-</li>
-<li>eval()
-: <a class="el" href="class_r_h_sfunc.html#a0241f8b8e5d05afc48935810c34187f8">RHSfunc</a>
-</li>
-<li>eval_prime()
-: <a class="el" href="class_r_h_sfunc.html#aab6b39cae75bf9cc976c98da6b56fe92">RHSfunc</a>
 </li>
 </ul>
 
@@ -322,9 +313,6 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>residuals()
 : <a class="el" href="class_elliptic_solver.html#a128fbbbfb2c761a3939ee56b63f825b4">EllipticSolver</a>
 </li>
-<li>RHSfunc()
-: <a class="el" href="class_r_h_sfunc.html#aad4418a726b757eebc7c9345634d42e1">RHSfunc</a>
-</li>
 </ul>
 
 
@@ -349,8 +337,8 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
-<li>tbtest()
-: <a class="el" href="structtbtest.html#a2725c2e09231d039f77cc5668d04277a">tbtest</a>
+<li>Table()
+: <a class="el" href="class_table.html#a049f2e06391781ae255c6698869c4ad1">Table</a>
 </li>
 </ul>
 
@@ -396,9 +384,6 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>~Boundary()
 : <a class="el" href="class_boundary.html#a86eab4f2362618c5b1e3d0df3a5f7f42">Boundary</a>
 </li>
-<li>~cdtest()
-: <a class="el" href="structcdtest.html#acef904221023d5c0017a0ca6da1096f2">cdtest</a>
-</li>
 <li>~Critical()
 : <a class="el" href="class_critical.html#a1c6bc45c6c3db32058f24dc9ecd7675e">Critical</a>
 </li>
@@ -423,17 +408,14 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>~JSolverAlpha()
 : <a class="el" href="class_j_solver_alpha.html#a63d8403c3729b9797d8aeb65785692b8">JSolverAlpha</a>
 </li>
-<li>~RHSfunc()
-: <a class="el" href="class_r_h_sfunc.html#a97c4fcb9a417f635c7700a7329239b49">RHSfunc</a>
-</li>
 <li>~SlowBoundary()
 : <a class="el" href="class_slow_boundary.html#aa4f5c6cfe4e7637c4ec43435b6a71422">SlowBoundary</a>
 </li>
 <li>~SOR()
 : <a class="el" href="class_s_o_r.html#aa3db8b4840076358adc037034dd566bf">SOR</a>
 </li>
-<li>~tbtest()
-: <a class="el" href="structtbtest.html#a75e466dcccbdfb6f89768f6833670050">tbtest</a>
+<li>~Table()
+: <a class="el" href="class_table.html#a9a559f2e7beb37b511ee9f88873164f8">Table</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -441,7 +423,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jan 4 2015 20:22:12 for COUGAR by
+    <li class="footer">Generated on Tue Jan 6 2015 23:51:00 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

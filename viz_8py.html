@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('viz_8py.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -107,7 +107,8 @@ $(document).ready(function(){initNavTree('viz_8py.html','');});
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">viz.py File Reference</div>  </div>
 </div><!--header-->
@@ -122,14 +123,25 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a71e46247c7a30a1c30a179a86bbaa3f1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#a71e46247c7a30a1c30a179a86bbaa3f1">viz.plot</a></td></tr>
 <tr class="separator:a71e46247c7a30a1c30a179a86bbaa3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b8e5294672417de07fe2f5caefffc1f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#a0b8e5294672417de07fe2f5caefffc1f">viz.midplane_plot</a></td></tr>
+<tr class="separator:a0b8e5294672417de07fe2f5caefffc1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aee89f5626ecd7b8bb421426c98a58593"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">viz.FILE</a> = '.*\.(hdf5|tsv)'</td></tr>
+<tr class="separator:aee89f5626ecd7b8bb421426c98a58593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3da7a6bab2793b7f33abb9342eda9ffc"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#a3da7a6bab2793b7f33abb9342eda9ffc">viz.prog</a> = re.compile(FILE)</td></tr>
+<tr class="separator:a3da7a6bab2793b7f33abb9342eda9ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5e3a6ec485be426971514163be97faf"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceviz.html#aa5e3a6ec485be426971514163be97faf">viz.result</a> = prog.match(sys.argv[1])</td></tr>
+<tr class="separator:aa5e3a6ec485be426971514163be97faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="viz_8py.html">viz.py</a></li>
-    <li class="footer">Generated on Sun Jan 4 2015 20:22:12 for COUGAR by
+    <li class="navelem"><a class="el" href="dir_1382d7e7f8afdcfd88434a0a9c0abf99.html">python</a></li><li class="navelem"><a class="el" href="viz_8py.html">viz.py</a></li>
+    <li class="footer">Generated on Tue Jan 6 2015 23:51:00 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
