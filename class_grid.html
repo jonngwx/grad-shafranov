@@ -137,16 +137,22 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ad46bcc3a951b1f58763092686628b495"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#ad46bcc3a951b1f58763092686628b495">nr_</a></td></tr>
+<tr class="memdesc:ad46bcc3a951b1f58763092686628b495"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cells in R direction.  <a href="#ad46bcc3a951b1f58763092686628b495">More...</a><br /></td></tr>
 <tr class="separator:ad46bcc3a951b1f58763092686628b495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af66fb5b609dbae6a5c47db6a3726a109"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#af66fb5b609dbae6a5c47db6a3726a109">nz_</a></td></tr>
+<tr class="memdesc:af66fb5b609dbae6a5c47db6a3726a109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cells in z direction.  <a href="#af66fb5b609dbae6a5c47db6a3726a109">More...</a><br /></td></tr>
 <tr class="separator:af66fb5b609dbae6a5c47db6a3726a109"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f0c628fee6a43d8d50afa4ee9fb4f19"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a5f0c628fee6a43d8d50afa4ee9fb4f19">R_</a></td></tr>
+<tr class="memdesc:a5f0c628fee6a43d8d50afa4ee9fb4f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of grid cell radial locations in meters.  <a href="#a5f0c628fee6a43d8d50afa4ee9fb4f19">More...</a><br /></td></tr>
 <tr class="separator:a5f0c628fee6a43d8d50afa4ee9fb4f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfe207b9f2596238018440ba4e29c25e"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#acfe207b9f2596238018440ba4e29c25e">z_</a></td></tr>
+<tr class="memdesc:acfe207b9f2596238018440ba4e29c25e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of grid cell vertical locations in meters.  <a href="#acfe207b9f2596238018440ba4e29c25e">More...</a><br /></td></tr>
 <tr class="separator:acfe207b9f2596238018440ba4e29c25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c4119dd6b39f882beca90d71e6b11a2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a9c4119dd6b39f882beca90d71e6b11a2">dr_</a></td></tr>
+<tr class="memdesc:a9c4119dd6b39f882beca90d71e6b11a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of a grid cell in the r direction.  <a href="#a9c4119dd6b39f882beca90d71e6b11a2">More...</a><br /></td></tr>
 <tr class="separator:a9c4119dd6b39f882beca90d71e6b11a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdd9642e0544eaf666eaed1458147f35"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#afdd9642e0544eaf666eaed1458147f35">dz_</a></td></tr>
+<tr class="memdesc:afdd9642e0544eaf666eaed1458147f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of a grid cell in the z direction.  <a href="#afdd9642e0544eaf666eaed1458147f35">More...</a><br /></td></tr>
 <tr class="separator:afdd9642e0544eaf666eaed1458147f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -206,8 +212,8 @@ Public Attributes</h2></td></tr>
     <tr><td class="paramname">Rend</td><td>value of R at right boundary </td></tr>
     <tr><td class="paramname">z0</td><td>value of z at lower boundary </td></tr>
     <tr><td class="paramname">zend</td><td>value of z at upper boundary </td></tr>
-    <tr><td class="paramname">nr</td><td>number of grid points in the R direction </td></tr>
-    <tr><td class="paramname">nz</td><td>number of points in the z direction </td></tr>
+    <tr><td class="paramname">nr</td><td>number of cells in the R direction </td></tr>
+    <tr><td class="paramname">nz</td><td>number of cells in the z direction </td></tr>
   </table>
   </dd>
 </dl>
@@ -290,7 +296,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Size of a grid cell in the r direction </p>
+
+<p>Size of a grid cell in the r direction. </p>
 
 </div>
 </div>
@@ -303,7 +310,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Size of a grid cell in the z direction </p>
+
+<p>Size of a grid cell in the z direction. </p>
 
 </div>
 </div>
@@ -316,7 +324,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Number of cells in R direction </p>
+
+<p>Number of cells in R direction. </p>
 
 </div>
 </div>
@@ -329,7 +338,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Number of cells in z direction </p>
+
+<p>Number of cells in z direction. </p>
 
 </div>
 </div>
@@ -342,7 +352,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Array of grid cell radial locations in meters </p>
+
+<p>Array of grid cell radial locations in meters. </p>
 
 </div>
 </div>
@@ -355,7 +366,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Array of grid cell vertical locations in meters </p>
+
+<p>Array of grid cell vertical locations in meters. </p>
 
 </div>
 </div>
@@ -369,7 +381,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_grid.html">Grid</a></li>
-    <li class="footer">Generated on Wed Jan 7 2015 15:43:51 for COUGAR by
+    <li class="footer">Generated on Wed Jan 7 2015 16:24:02 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

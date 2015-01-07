@@ -128,7 +128,7 @@ Inheritance diagram for Table:</div>
   <img src="class_table.png" usemap="#Table_map" alt=""/>
   <map id="Table_map" name="Table_map">
 <area href="class_coil_data.html" title="A container for the r and z location (m) and currents (A) of external coils. " alt="CoilData" shape="rect" coords="0,56,60,80"/>
-<area href="class_p_g_data.html" title="A container for one sort of data describing initial P and G. " alt="PGData" shape="rect" coords="70,56,130,80"/>
+<area href="class_p_g_data.html" title="(THIS CLASS IS NOT USED) A container for one sort of data describing initial P and G ..." alt="PGData" shape="rect" coords="70,56,130,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -152,12 +152,15 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a30a4ba2be0b86dd0368081d0fac576ff"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a30a4ba2be0b86dd0368081d0fac576ff">num_columns_</a></td></tr>
-<tr class="separator:a30a4ba2be0b86dd0368081d0fac576ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0b37d53c674e95885989a2a42944c3d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#ab0b37d53c674e95885989a2a42944c3d">num_rows_</a></td></tr>
+<tr class="memdesc:ab0b37d53c674e95885989a2a42944c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows of data.  <a href="#ab0b37d53c674e95885989a2a42944c3d">More...</a><br /></td></tr>
 <tr class="separator:ab0b37d53c674e95885989a2a42944c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30a4ba2be0b86dd0368081d0fac576ff"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a30a4ba2be0b86dd0368081d0fac576ff">num_columns_</a></td></tr>
+<tr class="memdesc:a30a4ba2be0b86dd0368081d0fac576ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns of data.  <a href="#a30a4ba2be0b86dd0368081d0fac576ff">More...</a><br /></td></tr>
+<tr class="separator:a30a4ba2be0b86dd0368081d0fac576ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34e0cf3f9044d84ca34313282e1114b1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector<br class="typebreak" />
 &lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a34e0cf3f9044d84ca34313282e1114b1">data_</a></td></tr>
+<tr class="memdesc:a34e0cf3f9044d84ca34313282e1114b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">A 2D-vector in which the data is stored, row-major.  <a href="#a34e0cf3f9044d84ca34313282e1114b1">More...</a><br /></td></tr>
 <tr class="separator:a34e0cf3f9044d84ca34313282e1114b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
@@ -382,6 +385,8 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>A 2D-vector in which the data is stored, row-major. </p>
+
 </div>
 </div>
 <a class="anchor" id="ae57ef6752df400c4c366814667b88b91"></a>
@@ -481,7 +486,8 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>For keeping track of the array's size. </p>
+
+<p>Number of columns of data. </p>
 
 </div>
 </div>
@@ -502,7 +508,8 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>For keeping track of the array's size. </p>
+
+<p>Number of rows of data. </p>
 
 </div>
 </div>
@@ -516,7 +523,7 @@ Static Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_table.html">Table</a></li>
-    <li class="footer">Generated on Wed Jan 7 2015 15:43:51 for COUGAR by
+    <li class="footer">Generated on Wed Jan 7 2015 16:24:02 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

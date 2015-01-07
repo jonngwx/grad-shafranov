@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('class_p_g_data.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>A container for one sort of data describing initial P and G.  
+<p>(THIS CLASS IS NOT USED) A container for one sort of data describing initial P and G  
  <a href="class_p_g_data.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="tsv__reader_8h_source.html">tsv_reader.h</a>&gt;</code></p>
@@ -132,7 +132,7 @@ Inheritance diagram for PGData:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7438449cc0ad16a5a2552eff187dcea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_g_data.html#aa7438449cc0ad16a5a2552eff187dcea">load_from_tsv</a> (const std::string filename, int header_lines=0) override</td></tr>
-<tr class="memdesc:aa7438449cc0ad16a5a2552eff187dcea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in a tsv file and populates a <a class="el" href="class_p_g_data.html" title="A container for one sort of data describing initial P and G. ">PGData</a>.  <a href="#aa7438449cc0ad16a5a2552eff187dcea">More...</a><br /></td></tr>
+<tr class="memdesc:aa7438449cc0ad16a5a2552eff187dcea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in a tsv file and populates a <a class="el" href="class_p_g_data.html" title="(THIS CLASS IS NOT USED) A container for one sort of data describing initial P and G ...">PGData</a>.  <a href="#aa7438449cc0ad16a5a2552eff187dcea">More...</a><br /></td></tr>
 <tr class="separator:aa7438449cc0ad16a5a2552eff187dcea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47c35a80fc4eb366f7619d55a3ae751d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_g_data.html#a47c35a80fc4eb366f7619d55a3ae751d">psi</a> (int i) const </td></tr>
 <tr class="memdesc:a47c35a80fc4eb366f7619d55a3ae751d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the i'th value of psi.  <a href="#a47c35a80fc4eb366f7619d55a3ae751d">More...</a><br /></td></tr>
@@ -157,12 +157,15 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_class_table"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_table')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_table.html">Table</a></td></tr>
-<tr class="memitem:a30a4ba2be0b86dd0368081d0fac576ff inherit pro_attribs_class_table"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a30a4ba2be0b86dd0368081d0fac576ff">num_columns_</a></td></tr>
-<tr class="separator:a30a4ba2be0b86dd0368081d0fac576ff inherit pro_attribs_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0b37d53c674e95885989a2a42944c3d inherit pro_attribs_class_table"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#ab0b37d53c674e95885989a2a42944c3d">num_rows_</a></td></tr>
+<tr class="memdesc:ab0b37d53c674e95885989a2a42944c3d inherit pro_attribs_class_table"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows of data.  <a href="#ab0b37d53c674e95885989a2a42944c3d">More...</a><br /></td></tr>
 <tr class="separator:ab0b37d53c674e95885989a2a42944c3d inherit pro_attribs_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30a4ba2be0b86dd0368081d0fac576ff inherit pro_attribs_class_table"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a30a4ba2be0b86dd0368081d0fac576ff">num_columns_</a></td></tr>
+<tr class="memdesc:a30a4ba2be0b86dd0368081d0fac576ff inherit pro_attribs_class_table"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns of data.  <a href="#a30a4ba2be0b86dd0368081d0fac576ff">More...</a><br /></td></tr>
+<tr class="separator:a30a4ba2be0b86dd0368081d0fac576ff inherit pro_attribs_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34e0cf3f9044d84ca34313282e1114b1 inherit pro_attribs_class_table"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector<br class="typebreak" />
 &lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#a34e0cf3f9044d84ca34313282e1114b1">data_</a></td></tr>
+<tr class="memdesc:a34e0cf3f9044d84ca34313282e1114b1 inherit pro_attribs_class_table"><td class="mdescLeft">&#160;</td><td class="mdescRight">A 2D-vector in which the data is stored, row-major.  <a href="#a34e0cf3f9044d84ca34313282e1114b1">More...</a><br /></td></tr>
 <tr class="separator:a34e0cf3f9044d84ca34313282e1114b1 inherit pro_attribs_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_class_table"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_class_table')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="class_table.html">Table</a></td></tr>
 <tr class="memitem:acf845efab78b45aaca363ebc7a62bb7e inherit pro_static_attribs_class_table"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table.html#acf845efab78b45aaca363ebc7a62bb7e">kOpenFileError</a> = 1</td></tr>
@@ -175,7 +178,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a074d2e59f850173c08bd8af76497f48c inherit pro_static_attribs_class_table"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A container for one sort of data describing initial P and G. </p>
+<div class="textblock"><p>(THIS CLASS IS NOT USED) A container for one sort of data describing initial P and G </p>
 <p>Useful for the 'array' type of P and G input. Contains either P or G as a function of psi. Reads from a 2-column text file: each row has a value of psi and a value of p-or-g. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="aa7438449cc0ad16a5a2552eff187dcea"></a>
@@ -210,7 +213,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reads in a tsv file and populates a <a class="el" href="class_p_g_data.html" title="A container for one sort of data describing initial P and G. ">PGData</a>. </p>
+<p>Reads in a tsv file and populates a <a class="el" href="class_p_g_data.html" title="(THIS CLASS IS NOT USED) A container for one sort of data describing initial P and G ...">PGData</a>. </p>
 <p>Inherits from <a class="el" href="class_table.html" title="A basic container for a 2D table or array of doubles. ">Table</a>, then checks that there is the proper number of columns. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>the filename, as a string </td></tr>
@@ -301,7 +304,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_p_g_data.html">PGData</a></li>
-    <li class="footer">Generated on Wed Jan 7 2015 15:43:51 for COUGAR by
+    <li class="footer">Generated on Wed Jan 7 2015 16:24:02 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
