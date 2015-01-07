@@ -4,6 +4,7 @@
  * @brief Implementation for the SlowBoundary class.
  */
 #include "include/slow_boundary.h"
+#include "include/boundary.h"
 #include "include/tsv_reader.h"
 #include "include/grid.h"
 #include "include/field.h"
