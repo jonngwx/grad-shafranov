@@ -110,38 +110,38 @@ $(document).ready(function(){initNavTree('grad__output__hdf_8h_source.html','');
 </div><!--header-->
 <div class="contents">
 <a href="grad__output__hdf_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef GRAD_OUTPUT_HDF</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define GRAD_OUTPUT_HDF</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grad__output_8h.html">grad_output.h</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="field_8h.html">field.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;hdf5.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_grad___output___hdf.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_grad___output___hdf.html">Grad_Output_Hdf</a> : <span class="keyword">public</span> <a class="code" href="class_grad___output.html">Grad_Output</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="class_grad___output___hdf.html#ad6732c40e9e228d16301c51757dc21f7">Grad_Output_Hdf</a>(<a class="code" href="class_field.html">Field</a>* <a class="code" href="class_grad___output.html#a220bb5a5f5cf810a4990c29bb5d8d40c">f</a>, <a class="code" href="class_field.html">Field</a>* <a class="code" href="class_grad___output.html#ae2dc342d62b7014ccfaaf8e3e647cbbe">jphi</a>, <a class="code" href="class_grid.html">Grid</a>* <a class="code" href="class_grad___output.html#a60e7d674e2615fa636869ea1b0d816fb">grid</a>, <a class="code" href="class_field.html">Field</a>* <a class="code" href="class_grad___output.html#a55d0e1f76ad585ffdeed6b1f8b608652">p</a>, <a class="code" href="class_field.html">Field</a>* <a class="code" href="class_grad___output.html#ade932545cdc074e0b54bc6ff98124eab">g</a>,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                  <span class="keyword">const</span> <span class="keywordtype">char</span>* outputs);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="class_grad___output___hdf.html#a30103a05a2fcd5126b7cbe70fb4f95a5">~Grad_Output_Hdf</a>();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_grad___output___hdf.html#ac636db83e67430b0c9f0d29bb5cb8f79">write_output</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">void</span> twod_to_oned(<span class="keyword">const</span> <span class="keywordtype">double</span>* <span class="keyword">const</span>* f, <span class="keywordtype">double</span>* x, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> ny);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span> check(herr_t status) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    assert(status &gt;= 0);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  };</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef GRAD_OUTPUT_HDF</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define GRAD_OUTPUT_HDF</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grad__output_8h.html">grad_output.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="field_8h.html">field.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;hdf5.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_grad___output___hdf.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_grad___output___hdf.html">Grad_Output_Hdf</a> : <span class="keyword">public</span> <a class="code" href="class_grad___output.html">Grad_Output</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="class_grad___output___hdf.html#ad6732c40e9e228d16301c51757dc21f7">Grad_Output_Hdf</a>(<a class="code" href="class_field.html">Field</a>* <a class="code" href="class_grad___output.html#a220bb5a5f5cf810a4990c29bb5d8d40c">f</a>, <a class="code" href="class_field.html">Field</a>* <a class="code" href="class_grad___output.html#ae2dc342d62b7014ccfaaf8e3e647cbbe">jphi</a>, <a class="code" href="class_grid.html">Grid</a>* <a class="code" href="class_grad___output.html#a60e7d674e2615fa636869ea1b0d816fb">grid</a>, <a class="code" href="class_field.html">Field</a>* <a class="code" href="class_grad___output.html#a55d0e1f76ad585ffdeed6b1f8b608652">p</a>, <a class="code" href="class_field.html">Field</a>* <a class="code" href="class_grad___output.html#ade932545cdc074e0b54bc6ff98124eab">g</a>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                  <span class="keyword">const</span> <span class="keywordtype">char</span>* outputs);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="class_grad___output___hdf.html#a30103a05a2fcd5126b7cbe70fb4f95a5">~Grad_Output_Hdf</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_grad___output___hdf.html#ac636db83e67430b0c9f0d29bb5cb8f79">write_output</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">void</span> twod_to_oned(<span class="keyword">const</span> <span class="keywordtype">double</span>* <span class="keyword">const</span>* f, <span class="keywordtype">double</span>* x, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> ny);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span> check(herr_t status) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    assert(status &gt;= 0);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  };</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_grad___output___hdf_html_ad6732c40e9e228d16301c51757dc21f7"><div class="ttname"><a href="class_grad___output___hdf.html#ad6732c40e9e228d16301c51757dc21f7">Grad_Output_Hdf::Grad_Output_Hdf</a></div><div class="ttdeci">Grad_Output_Hdf(Field *f, Field *jphi, Grid *grid, Field *p, Field *g, const char *outputs)</div><div class="ttdef"><b>Definition:</b> grad_output_hdf.cc:8</div></div>
 <div class="ttc" id="grad__output_8h_html"><div class="ttname"><a href="grad__output_8h.html">grad_output.h</a></div><div class="ttdoc">Declarations for class Grad_Output. </div></div>
 <div class="ttc" id="class_grad___output_html_a55d0e1f76ad585ffdeed6b1f8b608652"><div class="ttname"><a href="class_grad___output.html#a55d0e1f76ad585ffdeed6b1f8b608652">Grad_Output::p</a></div><div class="ttdeci">Field * p</div><div class="ttdef"><b>Definition:</b> grad_output.h:27</div></div>
 <div class="ttc" id="class_grad___output_html_ae2dc342d62b7014ccfaaf8e3e647cbbe"><div class="ttname"><a href="class_grad___output.html#ae2dc342d62b7014ccfaaf8e3e647cbbe">Grad_Output::jphi</a></div><div class="ttdeci">Field * jphi</div><div class="ttdef"><b>Definition:</b> grad_output.h:26</div></div>
 <div class="ttc" id="class_field_html"><div class="ttname"><a href="class_field.html">Field</a></div><div class="ttdoc">Container for 2d data and grid used in the solver. </div><div class="ttdef"><b>Definition:</b> field.h:16</div></div>
-<div class="ttc" id="class_grad___output___hdf_html"><div class="ttname"><a href="class_grad___output___hdf.html">Grad_Output_Hdf</a></div><div class="ttdoc">Implementation of Grad_Output which writes data to a hdf5 file. </div><div class="ttdef"><b>Definition:</b> grad_output_hdf.h:18</div></div>
+<div class="ttc" id="class_grad___output___hdf_html"><div class="ttname"><a href="class_grad___output___hdf.html">Grad_Output_Hdf</a></div><div class="ttdoc">Implementation of Grad_Output which writes data to a hdf5 file. </div><div class="ttdef"><b>Definition:</b> grad_output_hdf.h:19</div></div>
 <div class="ttc" id="class_grad___output___hdf_html_a30103a05a2fcd5126b7cbe70fb4f95a5"><div class="ttname"><a href="class_grad___output___hdf.html#a30103a05a2fcd5126b7cbe70fb4f95a5">Grad_Output_Hdf::~Grad_Output_Hdf</a></div><div class="ttdeci">~Grad_Output_Hdf()</div><div class="ttdef"><b>Definition:</b> grad_output_hdf.cc:17</div></div>
 <div class="ttc" id="class_grad___output_html_ade932545cdc074e0b54bc6ff98124eab"><div class="ttname"><a href="class_grad___output.html#ade932545cdc074e0b54bc6ff98124eab">Grad_Output::g</a></div><div class="ttdeci">Field * g</div><div class="ttdef"><b>Definition:</b> grad_output.h:28</div></div>
 <div class="ttc" id="class_grad___output_html"><div class="ttname"><a href="class_grad___output.html">Grad_Output</a></div><div class="ttdoc">Interface for writing the output of the solver to file. </div><div class="ttdef"><b>Definition:</b> grad_output.h:19</div></div>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('grad__output__hdf_8h_source.html','');
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_04551c75b1b1df3df3c1f86f11f16b64.html">include</a></li><li class="navelem"><a class="el" href="grad__output__hdf_8h.html">grad_output_hdf.h</a></li>
-    <li class="footer">Generated on Tue Jan 6 2015 23:51:00 for COUGAR by
+    <li class="footer">Generated on Wed Jan 7 2015 15:43:51 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -117,8 +117,8 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html','');});
 </pre><p>The options listed in help can be specified on the command line or in grad-shafranov.cfg (the default config file).</p>
 <p>Not all the options are implemented yet.</p>
 <p>Of course, if you specify an illegal value for an option, or a file which does not exist or is not the right format, the program may terminate with an Error message, or with a crash.</p>
-<p>To plot the output, type </p><pre class="fragment">python python/viz.py cougar.out.tsv tsv
-</pre><p>if the default output filename is used. More generally, type </p><pre class="fragment">python python/viz.py &lt;filename&gt; &lt;tsv|hdf&gt;
+<p>To plot the output, type </p><pre class="fragment">python python/viz.py cougar.out.tsv 
+</pre><p>if the default output filename is used. More generally, type </p><pre class="fragment">python python/viz.py &lt;filename&gt; 
 </pre><p>To access the data in python, import viz, then use </p><pre class="fragment">F = viz.plot(filename, format)
 </pre><p>F will be a dictionary of the grid and data arrays. </p>
 </div></div><!-- contents -->
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 6 2015 23:51:00 for COUGAR by
+    <li class="footer">Generated on Wed Jan 7 2015 15:43:51 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

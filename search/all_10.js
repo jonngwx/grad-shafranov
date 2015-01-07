@@ -2,7 +2,7 @@ var searchData=
 [
   ['slow_5fboundary_2ecc',['slow_boundary.cc',['../slow__boundary_8cc.html',1,'']]],
   ['slow_5fboundary_2eh',['slow_boundary.h',['../slow__boundary_8h.html',1,'']]],
-  ['slowboundary',['SlowBoundary',['../class_slow_boundary.html',1,'SlowBoundary'],['../class_slow_boundary.html#a6710ee647b3e7ee2a3485383224466ac',1,'SlowBoundary::SlowBoundary()']]],
+  ['slowboundary',['SlowBoundary',['../class_slow_boundary.html',1,'SlowBoundary'],['../class_slow_boundary.html#acfde30a97f60d5af7d64ea4bbf63487b',1,'SlowBoundary::SlowBoundary(Grid *grid)'],['../class_slow_boundary.html#a6710ee647b3e7ee2a3485383224466ac',1,'SlowBoundary::SlowBoundary(Grid *grid, CoilData *cond_data)']]],
   ['sor',['SOR',['../class_s_o_r.html',1,'SOR'],['../class_s_o_r.html#aecedffe2e98103e786c4e038a6126265',1,'SOR::SOR()']]],
   ['sor_2ecc',['sor.cc',['../sor_8cc.html',1,'']]],
   ['sor_2eh',['sor.h',['../sor_8h.html',1,'']]],
