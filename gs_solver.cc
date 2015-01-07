@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
     double n1 = vm["pgta-n1"].as<double>();
     double n2 = vm["pgta-n2"].as<double>();
     JSolverAlpha *jsa = new JSolverAlpha(P0,g0,n1,n2,Ip,grid);
-
+    
     // Elliptic solver for inner loop
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, &cd);
@@ -172,7 +172,6 @@ int main(int argc, char *argv[])
      ***********************************************/
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(psi, jphi);
-        
         // output during calculation 
         if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
             std::string partial_output_name = output_filename_base + ".m" + std::to_string(m) + "." + output_type;

@@ -31,6 +31,7 @@ class SlowBoundary : public Boundary {
    *  influence the boundary conditions for psi.
    *  Currently the affect of these coils has not been implemented.
    */
+  SlowBoundary(Grid* grid);
   SlowBoundary(Grid* grid, CoilData* cond_data);
   ~SlowBoundary();
   /*!

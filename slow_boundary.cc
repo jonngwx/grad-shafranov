@@ -1,6 +1,6 @@
 /*!
  * @file slow_boundary.cc
- * @author ???
+ * @author Peter J. Bolgert
  * @brief Implementation for the SlowBoundary class.
  */
 #include "include/slow_boundary.h"
@@ -11,14 +11,16 @@
 #include <math.h>
 #include "include/green_fcn.h"
 
-SlowBoundary::SlowBoundary(Grid* grid, CoilData* cond_data)
+SlowBoundary::SlowBoundary(Grid* grid)
     : Boundary(grid),
       R_(grid->R_),
       z_(grid->z_),
       dr_(grid->dr_),
-      dz_(grid->dz_),
-      cond_data_(cond_data) {
+      dz_(grid->dz_) {
+
   perim_ = 2 * (nr_ + nz_ - 2);
+  cond_data_ = new CoilData();
+  printf("num rows = %i \n", cond_data_->num_rows());
 
   // Initialize Green's Function Array for Plasma Response
   g_plasma_ = new double** [nr_];
@@ -31,6 +33,12 @@ SlowBoundary::SlowBoundary(Grid* grid, CoilData* cond_data)
       }
     }
   }
+}
+
+SlowBoundary::SlowBoundary(Grid* grid, CoilData* cond_data)
+    : SlowBoundary(grid) {
+
+  *cond_data_ = *cond_data;
 
   // Initialize Green's Fcn Array for Coils
   g_coils_ = new double* [cond_data_->num_rows()]; //num_rows = num of coils
@@ -65,6 +73,7 @@ SlowBoundary::~SlowBoundary() {
 int SlowBoundary::CalcB(Field* psi, Field* jphi) {
   double mu0 = 4 * M_PI * 1e-7; /* magnetic permeability of free space */
   // printf("perim_ is %d.\n",perim_);
+  int n_rows_ = cond_data_->num_rows();
   for (int l = 0; l < perim_; ++l) {
     // printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));
     psi->f_[LtoI(l)][LtoJ(l)] = 0;
@@ -77,7 +86,8 @@ int SlowBoundary::CalcB(Field* psi, Field* jphi) {
     psi->f_[LtoI(l)][LtoJ(l)] *= (dr_ * dz_);
     
     // add psi at bdy due to coils
-    for (int c = 0; c < cond_data_->num_rows(); ++c) {
+    for (int c = 0; c < n_rows_; ++c) {
+      //printf("l = %i, c = %i \n", l, c);
       psi->f_[LtoI(l)][LtoJ(l)] += mu0 * g_coils_[c][l] * cond_data_->data(c,2);
     }
   }
