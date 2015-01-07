@@ -1,3 +1,4 @@
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
@@ -39,6 +40,7 @@ def plot(filename,format):
     fig = plt.figure(1,figsize=(4,9),dpi = 80)
     cfig = plt.subplot(3,1,1)
     clist = np.linspace(np.min(F['psilo']),np.max(F['psilo']),10)
+    matplotlib.rcParams['contour.negative_linestyle']='solid'
     plt.contour(F['R'],F['z'],F['psi'],clist,colors='k')
     plt.contour(F['R'],F['z'],F['psi'],[F['psilo'][0],F['psilo'][0]],colors='r')
     plt.pcolormesh(F['R'],F['z'],F['psi'])
