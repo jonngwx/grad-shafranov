@@ -39,7 +39,17 @@ struct boundarytest {
 BOOST_FIXTURE_TEST_SUITE( suite1, boundarytest)
 
 BOOST_AUTO_TEST_CASE(LToI) {
-  BOOST_CHECK_EQUAL(b->LtoI(0),0);
+  const std::vector<int> correct_output = { 0, 1, 2, 2, 2, 1, 0, 0 };
+  for (int l = 0; l < 8; l++){
+    BOOST_CHECK_EQUAL(b->LtoI(l), correct_output[l]);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(LToJ) {
+  const std::vector<int> correct_output = { 0, 0, 0, 1, 2, 2, 2, 1 };
+  for (int l = 0; l < 8; l++){
+    BOOST_CHECK_EQUAL(b->LtoJ(l), correct_output[l]);
+  }
 }
 
 BOOST_AUTO_TEST_SUITE_END()
