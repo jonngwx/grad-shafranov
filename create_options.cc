@@ -35,9 +35,9 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
   po::options_description config("Configuration");
   config.add_options()
       ("coil-data-name,C", po::value< std::string>()->default_value("coil_data.tsv"), "coil data file name")
-      ("pgtype", po::value<std::string>(), "p and g specification type (alpha, ..., ...)")
-      ("p-filename", po::value<std::string>()->default_value("pg_data.tsv"), "p file name")
-      ("g-filename", po::value<std::string>()->default_value("pg_data.tsv"), "g file name")
+      //("pgtype", po::value<std::string>(), "p and g specification type (alpha, ..., ...)")
+      //("p-filename", po::value<std::string>()->default_value("pg_data.tsv"), "p file name")
+      //("g-filename", po::value<std::string>()->default_value("pg_data.tsv"), "g file name")
       ("grid-elems-r", po::value<int>()->default_value(10), "number of grid elements in r dimension")
       ("grid-elems-z", po::value<int>()->default_value(10), "number of grid elements in z dimension")
       ("r-min", po::value<double>()->default_value(5.0), "grid's minimum r location (meters)")
@@ -104,7 +104,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
   std::ifstream ifs(config_file.c_str());
   if (!ifs)
   {
-    // we require a config file. its abscence will be dealt with in main
+    // We require a config file. Its absence will be dealt with in main.
   }
   else
   {
