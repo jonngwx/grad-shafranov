@@ -1,10 +1,10 @@
 CXX = g++
-CXXFLAGS = -c -g -std=c++11 -Iinclude -Wall 
+CXXFLAGS = -c -g -std=c++11 -Iinclude  
 LIBS = -lboost_program_options -lboost_unit_test_framework -lboost_math_tr1
 HDF = -lhdf5_hl -lhdf5 -DHDF_MODE
 PROGS = gs_solver
 TESTDIR = test
-TESTPROGS = $(TESTDIR)/test_output $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test
+TESTPROGS = $(TESTDIR)/test_output $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test $(TESTDIR)/slow_boundary_test
 EXDIR = exampleClassUsage
 EXAMPLEPROGS = $(EXDIR)/tsv_reader_example $(EXDIR)/coil_data_example
 OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o
@@ -36,6 +36,9 @@ $(TESTDIR)/grid_test: $(TESTDIR)/grid_test.o grid.o
 $(TESTDIR)/boundary_test: $(TESTDIR)/boundary_test.o boundary.o grid.o
 	$(CXX) -o $@ $^ $(LIBS)
 
+$(TESTDIR)/slow_boundary_test: $(TESTDIR)/slow_boundary_test.o slow_boundary.o boundary.o grid.o field.o tsv_reader.o green_fcn.o
+	$(CXX) -o $@ $^ $(LIBS)
+
 $(EXDIR)/tsv_reader_example: $(EXDIR)/tsv_reader_example.o tsv_reader.o 
 	$(CXX) -o $@ $^ $(LIBS)
 
@@ -61,6 +64,10 @@ runtests:
 	# boundary_test
 	#
 	test/boundary_test
+	#
+	# slow_boundary_test
+	#
+	test/slow_boundary_test
 
 .PHONY: clean
 clean:
