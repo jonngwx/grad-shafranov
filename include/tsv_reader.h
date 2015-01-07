@@ -22,11 +22,17 @@ class Table {
   const static int kOpenFileError = 1;
   const static int kInconsistentColumnNumberError = 2;
   const static int kFileReadError = 3;
+  const static int kNoDataFoundError = 4;
   size_t num_columns_; /*!< For keeping track of the array's size. */
   size_t num_rows_;    /*!< For keeping track of the array's size. */
   std::vector<std::vector<double> > data_;
 
  public:
+  /*! 
+   * @brief Constructor for Table.
+   */
+  Table() : num_columns_(0), num_rows_(0) {};
+  ~Table() {};
   /*!
    * @brief Reads in a tsv file and populates a Table.
    *
@@ -66,7 +72,7 @@ class Table {
  */
 class CoilData : public Table {
  private:
-  const static int kNotThreeColumnsError = 4;
+  const static int kNotThreeColumnsError = 5;
 
  public:
   /*!

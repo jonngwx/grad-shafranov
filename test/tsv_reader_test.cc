@@ -45,11 +45,6 @@ BOOST_AUTO_TEST_CASE(good_example_comments){
   BOOST_REQUIRE_EQUAL(success, 0);
 }
 
-BOOST_AUTO_TEST_CASE(good_example_comments_2){
-  int success = td.load_from_tsv("test/tsvReaderExamples/good_example_comments_2.tsv");
-  BOOST_REQUIRE_EQUAL(success, 0);
-}
-
 BOOST_AUTO_TEST_CASE(bad_example_no_file){
   std::cout << "\nNext line should show an error:\n";
   int error_code = td.load_from_tsv("test/tsvReaderExamples/doesnt_exist.tsv",1);
@@ -62,6 +57,20 @@ BOOST_AUTO_TEST_CASE(bad_example_inconsistent_columns){
   BOOST_CHECK_EQUAL(error_code, 2);
 }
 
+/* What happens when there is a file of all comments */
+BOOST_AUTO_TEST_CASE(example_no_data){
+  int error_code = td.load_from_tsv("test/tsvReaderExamples/example_no_data.tsv");
+  BOOST_REQUIRE_EQUAL(error_code, 4);
+  BOOST_CHECK_EQUAL(td.num_columns(), 0);
+  BOOST_CHECK_EQUAL(td.num_rows(), 0);
+}
+
+/* Check that num_columns_ and num_rows_ are set to zero when a Table is created. */
+BOOST_AUTO_TEST_CASE(example_no_loading){
+  BOOST_CHECK_EQUAL(td.num_columns(), 0);
+  BOOST_CHECK_EQUAL(td.num_rows(), 0);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 /***************
  * Test CoilData
@@ -71,7 +80,12 @@ BOOST_FIXTURE_TEST_SUITE( suite2, cdtest)
 BOOST_AUTO_TEST_CASE(bad_example_not_three_columns){
   std::cout << "\nNext line should show an error:\n";
   int error_code = cd.load_from_tsv("test/tsvReaderExamples/good_example_2_cols.tsv",1);
-  BOOST_REQUIRE_EQUAL(error_code, 4);
+  BOOST_REQUIRE_EQUAL(error_code, 5);
 }
 
+/* Check that num_columns_ and num_rows_ are set to zero when a CoilData is created. */
+BOOST_AUTO_TEST_CASE(example_no_loading){
+  BOOST_CHECK_EQUAL(cd.num_columns(), 0);
+  BOOST_CHECK_EQUAL(cd.num_rows(), 0);
+}
 BOOST_AUTO_TEST_SUITE_END()

@@ -31,6 +31,7 @@ int Table::load_from_tsv(const std::string tsv_file_name, int header_lines) {
     lines_read_in++;
   }
   std::vector<double> doubleVector;
+  num_columns_ = 0;
   while (std::getline(filein, line)) {
     std::istringstream ss(line);
 
@@ -68,7 +69,11 @@ int Table::load_from_tsv(const std::string tsv_file_name, int header_lines) {
 
   num_rows_ = data_.size();
 
-  return 0;
+  if(num_rows_ <= 0) { 
+    return kNoDataFoundError;
+  } else {
+    return 0;
+  }
 }
 
 int CoilData::load_from_tsv(const std::string tsv_file_name, int header_lines) {
