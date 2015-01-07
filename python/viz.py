@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import sys
 #import field
 import read_data
+import re
 
 def plot(filename,format):
     """
@@ -135,7 +136,14 @@ def midplane_plot(F,x):
     return F['R'], a[nz/2,::]
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print 'wrong number of arguments'
+    if len(sys.argv) != 2:
+        print 'Format is viz <filename>'
     else:
-        plot(sys.argv[1],sys.argv[2])
+        FILE = '.*\.(hdf5|tsv)'
+        prog = re.compile(FILE)
+        result = prog.match(sys.argv[1])
+        print "Reading file %s ..."%sys.argv[1]
+        if result is None:
+            print "invalid file name %s"%sys.argv[1]
+            sys.exit()
+        plot(sys.argv[1],result.group(1))
