@@ -28,7 +28,7 @@ z0(z0) {
     Inter_.updateP(R0, z_limiter1);
   }
   catch(int i) {
-    printf("Error: limiter1 outside grid\n");
+    if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
   }
   Inter_.updateCoefficients();
   try {
@@ -44,7 +44,7 @@ z0(z0) {
     Inter_.updateP(R0, z_limiter2);
   }
   catch(int i) {
-    printf("Error: limiter2 outside grid\n");
+    if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
   }
   Inter_.updateCoefficients();
   try {
@@ -375,6 +375,3 @@ void Critical::update() {
   R0 = rcrit;
   z0 = zcrit;
 }
-
-
-
