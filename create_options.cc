@@ -61,7 +61,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
   pgtype_alpha.add_options()
       ("pgta-n1", po::value<double>()->default_value(1.0), "n1")
       ("pgta-n2",  po::value<double>()->default_value(1.0), "n2")
-      ("pgta-p0",  po::value<double>()->default_value(12000.0), "p0: pressure on axis")
+      ("pgta-p0",  po::value<double>()->default_value(12000.0), "p0: pressure on axis, measured in Pascals")
       ("pgta-g0",  po::value<double>()->default_value(7.5), "g0: R0*B0 (loc of mag axis times field at that point)")
       ;
    
