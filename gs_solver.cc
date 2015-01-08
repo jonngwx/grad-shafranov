@@ -134,7 +134,6 @@ int main(int argc, char *argv[])
     double error_tol_crit = vm["error-tol-crit"].as<double>();
     Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2, R0, z0);
 
-
     /** determine which output type: tsv or hdf5 */
     Grad_Output *grad_output;
     std::string output_type = vm["output-type"].as<string>();

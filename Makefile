@@ -6,7 +6,7 @@ PROGS = gs_solver
 TESTDIR = test
 TESTPROGS = output_test elliptic_test $(TESTDIR)/tsv_reader_test
 EXAMPLEPROGS = tsv_reader_example coil_data_example
-OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o
+OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o elliptic/interpolate.o
 
 .PHONY: all
 all: $(PROGS) $(EXAMPLEPROGS) $(TESTPROGS)
@@ -21,6 +21,12 @@ gs_solver_hdf.o: gs_solver.cc
 	$(CXX) $(CXXFLAGS) $(HDF) $^ -o $@
 
 elliptic_test: elliptic/elliptic_solver.o elliptic/elliptic_test.o elliptic/sor.o grid.o field.o elliptic/gauss_seidel.o boundary.o
+	$(CXX) -o $@ $^ $(LIBS)
+
+critical_test: elliptic/critical.o elliptic/critical_test.o grid.o field.o elliptic/interpolate.o
+	$(CXX) -o $@ $^ $(LIBS)
+
+interpolate_test: grid.o field.o elliptic/interpolate.o elliptic/interpolate_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(TESTDIR)/tsv_reader_test: tsv_reader.o $(TESTDIR)/tsv_reader_test.o

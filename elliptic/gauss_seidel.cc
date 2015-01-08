@@ -6,7 +6,6 @@
 #include "elliptic_solver.h"
 #include <stdio.h>
 
-
 /*!
  * @file gauss_seidel.cc
  * @brief Base class implementation of GaussSeidel
