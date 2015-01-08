@@ -18,6 +18,8 @@ Docs/html
 *.dSYM
 PeterTest/boost_test
 
+*.swp
+
 test/simple_test_output.tsv
 test/tsv_reader_test
 test/test_output
