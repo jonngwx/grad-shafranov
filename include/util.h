@@ -16,8 +16,9 @@
 */
 void inline linspace(double min, double max, int n, double *array){
   array[0] = min;
+  array[n-1] = max;
   const double dn = (max - min)/(n - 1.0);
-  for (int i = 1; i < n; i++){
+  for (int i = 1; i < n - 1; i++){
     array[i] = array[i-1] + (dn);
   }
 }
