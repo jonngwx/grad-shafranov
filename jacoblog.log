@@ -1,302 +1,532 @@
 c = 720537.833271 
-error norm = 0.108365 
-error norm = 0.076149 
-error norm = 0.059087 
-error norm = 0.048680 
-error norm = 0.041633 
-error norm = 0.036503 
-error norm = 0.032579 
-error norm = 0.029471 
-error norm = 0.026942 
-error norm = 0.024842 
-error norm = 0.023069 
-error norm = 0.021551 
-error norm = 0.020235 
-error norm = 0.019083 
-error norm = 0.018065 
-error norm = 0.017160 
-error norm = 0.016348 
-error norm = 0.015617 
-error norm = 0.014953 
-error norm = 0.014348 
-error norm = 0.013795 
-error norm = 0.013286 
-error norm = 0.012817 
-error norm = 0.012383 
-error norm = 0.011980 
-error norm = 0.011604 
-error norm = 0.011254 
-error norm = 0.010926 
-error norm = 0.010618 
-error norm = 0.010329 
-error norm = 0.010056 
-error norm = 0.009798 
-error norm = 0.009555 
-error norm = 0.009324 
-error norm = 0.009106 
-error norm = 0.008898 
-error norm = 0.008700 
-error norm = 0.008512 
-error norm = 0.008332 
-error norm = 0.008160 
-error norm = 0.007996 
-error norm = 0.007839 
-error norm = 0.007688 
-error norm = 0.007544 
-error norm = 0.007405 
-error norm = 0.007272 
-error norm = 0.007144 
-error norm = 0.007021 
-error norm = 0.006902 
-error norm = 0.006784 
-error norm = 0.006827 
-error norm = 0.006719 
-error norm = 0.006614 
-error norm = 0.006513 
-error norm = 0.006415 
-error norm = 0.006320 
-error norm = 0.006229 
-error norm = 0.006140 
-error norm = 0.006053 
-error norm = 0.005970 
-error norm = 0.005888 
-error norm = 0.005809 
-error norm = 0.005733 
-error norm = 0.005659 
-error norm = 0.005586 
-error norm = 0.005516 
-error norm = 0.005447 
-error norm = 0.005381 
-error norm = 0.005316 
-error norm = 0.005252 
-error norm = 0.005191 
-error norm = 0.005131 
-error norm = 0.005072 
-error norm = 0.005015 
-error norm = 0.004959 
-error norm = 0.004905 
-error norm = 0.004852 
-error norm = 0.004800 
-error norm = 0.004749 
-error norm = 0.004700 
-error norm = 0.004651 
-error norm = 0.004604 
-error norm = 0.004557 
-error norm = 0.004512 
-error norm = 0.004468 
-error norm = 0.004424 
-error norm = 0.004381 
-error norm = 0.004340 
-error norm = 0.004299 
-error norm = 0.004259 
-error norm = 0.004220 
-error norm = 0.004181 
-error norm = 0.004143 
-error norm = 0.004106 
-error norm = 0.004070 
-error norm = 0.004035 
-error norm = 0.004000 
-error norm = 0.003965 
-error norm = 0.003932 
-error norm = 0.003898 
-error norm = 0.148034 
-error norm = 0.104521 
-error norm = 0.081120 
-error norm = 0.066768 
-error norm = 0.056994 
-error norm = 0.049845 
-error norm = 0.044356 
-error norm = 0.039991 
-error norm = 0.036428 
-error norm = 0.033461 
-error norm = 0.030949 
-error norm = 0.028793 
-error norm = 0.026919 
-error norm = 0.025276 
-error norm = 0.023821 
-error norm = 0.022525 
-error norm = 0.021363 
-error norm = 0.020314 
-error norm = 0.019361 
-error norm = 0.018491 
-error norm = 0.017695 
-error norm = 0.016962 
-error norm = 0.016285 
-error norm = 0.015658 
-error norm = 0.015076 
-error norm = 0.014536 
-error norm = 0.014031 
-error norm = 0.013559 
-error norm = 0.013117 
-error norm = 0.012700 
-error norm = 0.012308 
-error norm = 0.011937 
-error norm = 0.011587 
-error norm = 0.011256 
-error norm = 0.010942 
-error norm = 0.010643 
-error norm = 0.010358 
-error norm = 0.010091 
-error norm = 0.009834 
-error norm = 0.009591 
-error norm = 0.009358 
-error norm = 0.009134 
-error norm = 0.008921 
-error norm = 0.008716 
-error norm = 0.008520 
-error norm = 0.008331 
-error norm = 0.008150 
-error norm = 0.007975 
-error norm = 0.007809 
-error norm = 0.007647 
-error norm = 0.007494 
-error norm = 0.007345 
-error norm = 0.007201 
-error norm = 0.007062 
-error norm = 0.006928 
-error norm = 0.006799 
-error norm = 0.006674 
-error norm = 0.006554 
-error norm = 0.006437 
-error norm = 0.006323 
-error norm = 0.006216 
-error norm = 0.006111 
-error norm = 0.006007 
-error norm = 0.005907 
-error norm = 0.005810 
-error norm = 0.005716 
-error norm = 0.005626 
-error norm = 0.005538 
-error norm = 0.005451 
-error norm = 0.005367 
-error norm = 0.005232 
-error norm = 0.005152 
-error norm = 0.005074 
-error norm = 0.004998 
-error norm = 0.004925 
-error norm = 0.004853 
-error norm = 0.004783 
-error norm = 0.004716 
-error norm = 0.004650 
-error norm = 0.004585 
-error norm = 0.004522 
-error norm = 0.004461 
-error norm = 0.004401 
-error norm = 0.004342 
-error norm = 0.004285 
-error norm = 0.004229 
-error norm = 0.004174 
-error norm = 0.004121 
-error norm = 0.004069 
-error norm = 0.004018 
-error norm = 0.003968 
-error norm = 0.003920 
-error norm = 0.003872 
-error norm = 0.003825 
-error norm = 0.003779 
-error norm = 0.003734 
-error norm = 0.003690 
-error norm = 0.003647 
-error norm = 0.003606 
-error norm = 0.003564 
-error norm = 0.003582 
-error norm = 0.003532 
-error norm = 0.003489 
-error norm = 0.003449 
-error norm = 0.003411 
-error norm = 0.003374 
-error norm = 0.003337 
-error norm = 0.003301 
-error norm = 0.003266 
-error norm = 0.003231 
-error norm = 0.003198 
-error norm = 0.003164 
-error norm = 0.003132 
-error norm = 0.003100 
-error norm = 0.003068 
-error norm = 0.003037 
-error norm = 0.003007 
-error norm = 0.002977 
-error norm = 0.002947 
-error norm = 0.002918 
-error norm = 0.002890 
-error norm = 0.002862 
-error norm = 0.002835 
-error norm = 0.002808 
-error norm = 0.002781 
-error norm = 0.002755 
-error norm = 0.002729 
-error norm = 0.002704 
-error norm = 0.002680 
-error norm = 0.002655 
-error norm = 0.002631 
-error norm = 0.002608 
-error norm = 0.002584 
-error norm = 0.002561 
-error norm = 0.002538 
-error norm = 0.002516 
-error norm = 0.002494 
-error norm = 0.002473 
-error norm = 0.002452 
-error norm = 0.002431 
-error norm = 0.002410 
-error norm = 0.002390 
-error norm = 0.002370 
-error norm = 0.002351 
-error norm = 0.002331 
-error norm = 0.002312 
-error norm = 0.002294 
-error norm = 0.002275 
-error norm = 0.002257 
-error norm = 0.002238 
-error norm = 0.002221 
-error norm = 0.002204 
-error norm = 0.002187 
-error norm = 0.002169 
-error norm = 0.002152 
-error norm = 0.002136 
-error norm = 0.002120 
-error norm = 0.002104 
-error norm = 0.002088 
-error norm = 0.002073 
-error norm = 0.002057 
-error norm = 0.002042 
-error norm = 0.002027 
-error norm = 0.002012 
-error norm = 0.001998 
-error norm = 0.001983 
-error norm = 0.001969 
-error norm = 0.001955 
-error norm = 0.001941 
-error norm = 0.001927 
-error norm = 0.001914 
-error norm = 0.001901 
-error norm = 0.001888 
-error norm = 0.001875 
-error norm = 0.001862 
-error norm = 0.001849 
-error norm = 0.001837 
-error norm = 0.001825 
-error norm = 0.001813 
-error norm = 0.001800 
-error norm = 0.001789 
-error norm = 0.001777 
-error norm = 0.001765 
-error norm = 0.001754 
-error norm = 0.001742 
-error norm = 0.001731 
-error norm = 0.001720 
-error norm = 0.001709 
-error norm = 0.001699 
-error norm = 0.001688 
-error norm = 0.001678 
-error norm = 0.001667 
-error norm = 0.001657 
-error norm = 0.001647 
-error norm = 0.001637 
-error norm = 0.001627 
-error norm = 0.001617 
-error norm = 0.001608 
-error norm = 0.001598 
-error norm = 0.001588 
-init time = 2.131592, solver time = 0.147158
+iteration # n = 0, m = 0
+iteration # n = 1, m = 0
+iteration # n = 2, m = 0
+iteration # n = 3, m = 0
+iteration # n = 4, m = 0
+iteration # n = 5, m = 0
+iteration # n = 6, m = 0
+iteration # n = 7, m = 0
+iteration # n = 8, m = 0
+iteration # n = 9, m = 0
+iteration # n = 10, m = 0
+iteration # n = 11, m = 0
+iteration # n = 12, m = 0
+iteration # n = 13, m = 0
+iteration # n = 14, m = 0
+iteration # n = 15, m = 0
+iteration # n = 16, m = 0
+iteration # n = 17, m = 0
+iteration # n = 18, m = 0
+iteration # n = 19, m = 0
+iteration # n = 20, m = 0
+iteration # n = 21, m = 0
+iteration # n = 22, m = 0
+iteration # n = 23, m = 0
+iteration # n = 24, m = 0
+iteration # n = 25, m = 0
+iteration # n = 26, m = 0
+iteration # n = 27, m = 0
+iteration # n = 28, m = 0
+iteration # n = 29, m = 0
+iteration # n = 30, m = 0
+iteration # n = 31, m = 0
+iteration # n = 32, m = 0
+iteration # n = 33, m = 0
+iteration # n = 34, m = 0
+iteration # n = 35, m = 0
+Psi_rr =     -0.00000014, Psi_rz =      0.00000009, D =     -0.00000000, Psi_zz =      0.00000541, Psi_z =     -0.00000162, Psi_r =      0.00001330, dr =     97.28617502, dz =     -1.26054968
+iteration # n = 36, m = 0
+Psi_rr =     -0.00000032, Psi_rz =      0.00000009, D =     -0.00000000, Psi_zz =      0.00000542, Psi_z =     -0.00000164, Psi_r =      0.00001418, dr =     44.32120719, dz =     -0.45694138
+iteration # n = 37, m = 0
+Psi_rr =     -0.00000051, Psi_rz =      0.00000010, D =     -0.00000000, Psi_zz =      0.00000543, Psi_z =     -0.00000166, Psi_r =      0.00001509, dr =     29.59338425, dz =     -0.23512492
+iteration # n = 38, m = 0
+Psi_rr =     -0.00000071, Psi_rz =      0.00000011, D =     -0.00000000, Psi_zz =      0.00000544, Psi_z =     -0.00000167, Psi_r =      0.00001603, dr =     22.69741283, dz =     -0.13251412
+iteration # n = 39, m = 0
+Psi_rr =     -0.00000091, Psi_rz =      0.00000011, D =     -0.00000000, Psi_zz =      0.00000545, Psi_z =     -0.00000169, Psi_r =      0.00001701, dr =     18.71047515, dz =     -0.07421319
+iteration # n = 40, m = 0
+Psi_rr =     -0.00000112, Psi_rz =      0.00000012, D =     -0.00000000, Psi_zz =      0.00000546, Psi_z =     -0.00000171, Psi_r =      0.00001802, dr =     16.12081059, dz =     -0.03722193
+iteration # n = 41, m = 0
+Psi_rr =     -0.00000133, Psi_rz =      0.00000013, D =     -0.00000000, Psi_zz =      0.00000547, Psi_z =     -0.00000173, Psi_r =      0.00001906, dr =     14.30948431, dz =     -0.01212328
+iteration # n = 42, m = 0
+Psi_rr =     -0.00000155, Psi_rz =      0.00000013, D =     -0.00000000, Psi_zz =      0.00000549, Psi_z =     -0.00000175, Psi_r =      0.00002013, dr =     12.97605246, dz =      0.00565465
+iteration # n = 43, m = 0
+Psi_rr =     -0.00000178, Psi_rz =      0.00000014, D =     -0.00000000, Psi_zz =      0.00000550, Psi_z =     -0.00000176, Psi_r =      0.00002124, dr =     11.95703560, dz =      0.01860042
+iteration # n = 44, m = 0
+Psi_rr =     -0.00000201, Psi_rz =      0.00000015, D =     -0.00000000, Psi_zz =      0.00000552, Psi_z =     -0.00000178, Psi_r =      0.00002238, dr =     11.15584016, dz =      0.02818550
+iteration # n = 45, m = 0
+Psi_rr =     -0.00000224, Psi_rz =      0.00000015, D =     -0.00000000, Psi_zz =      0.00000553, Psi_z =     -0.00000180, Psi_r =      0.00002355, dr =     10.51171039, dz =      0.03533674
+iteration # n = 46, m = 0
+Psi_rr =     -0.00000248, Psi_rz =      0.00000016, D =     -0.00000000, Psi_zz =      0.00000555, Psi_z =     -0.00000183, Psi_r =      0.00002475, dr =      9.98450355, dz =      0.04066809
+iteration # n = 47, m = 0
+Psi_rr =     -0.00000272, Psi_rz =      0.00000017, D =     -0.00000000, Psi_zz =      0.00000557, Psi_z =     -0.00000185, Psi_r =      0.00002598, dr =      9.54661650, dz =      0.04460349
+iteration # n = 48, m = 0
+Psi_rr =     -0.00000295, Psi_rz =      0.00000066, D =     -0.00000000, Psi_zz =      0.00000661, Psi_z =     -0.00000142, Psi_r =      0.00002684, dr =      8.93527336, dz =     -0.67079829
+iteration # n = 49, m = 0
+Psi_rr =     -0.00000249, Psi_rz =      0.00000025, D =     -0.00000000, Psi_zz =      0.00000605, Psi_z =     -0.00000149, Psi_r =      0.00002744, dr =     10.98202088, dz =     -0.19926476
+iteration # n = 50, m = 0
+Psi_rr =     -0.00000293, Psi_rz =      0.00000018, D =     -0.00000000, Psi_zz =      0.00000577, Psi_z =     -0.00000165, Psi_r =      0.00002871, dr =      9.81190323, dz =     -0.02584926
+iteration # n = 51, m = 0
+Psi_rr =     -0.00000328, Psi_rz =      0.00000017, D =     -0.00000000, Psi_zz =      0.00000566, Psi_z =     -0.00000176, Psi_r =      0.00003005, dr =      9.15408293, dz =      0.03672198
+iteration # n = 52, m = 0
+Psi_rr =     -0.00000358, Psi_rz =      0.00000016, D =     -0.00000000, Psi_zz =      0.00000558, Psi_z =     -0.00000180, Psi_r =      0.00003137, dr =      8.75990247, dz =      0.07841546
+iteration # n = 53, m = 0
+Psi_rr =     -0.00000387, Psi_rz =      0.00000017, D =     -0.00000000, Psi_zz =      0.00000558, Psi_z =     -0.00000185, Psi_r =      0.00003272, dr =      8.46776853, dz =      0.07930094
+iteration # n = 54, m = 0
+Psi_rr =     -0.00000413, Psi_rz =      0.00000018, D =     -0.00000000, Psi_zz =      0.00000558, Psi_z =     -0.00000189, Psi_r =      0.00003408, dr =      8.24670839, dz =      0.07366805
+iteration # n = 55, m = 0
+Psi_rr =     -0.00000440, Psi_rz =      0.00000018, D =     -0.00000000, Psi_zz =      0.00000561, Psi_z =     -0.00000191, Psi_r =      0.00003545, dr =      8.06580298, dz =      0.08138182
+iteration # n = 56, m = 0
+Psi_rr =     -0.00000466, Psi_rz =      0.00000020, D =     -0.00000000, Psi_zz =      0.00000562, Psi_z =     -0.00000195, Psi_r =      0.00003685, dr =      7.90464821, dz =      0.06930892
+iteration # n = 57, m = 0
+Psi_rr =     -0.00000493, Psi_rz =      0.00000021, D =     -0.00000000, Psi_zz =      0.00000563, Psi_z =     -0.00000198, Psi_r =      0.00003826, dr =      7.76399750, dz =      0.06078011
+iteration # n = 58, m = 0
+Psi_rr =     -0.00000520, Psi_rz =      0.00000022, D =     -0.00000000, Psi_zz =      0.00000566, Psi_z =     -0.00000201, Psi_r =      0.00003969, dr =      7.64047618, dz =      0.05471749
+iteration # n = 59, m = 0
+Psi_rr =     -0.00000547, Psi_rz =      0.00000023, D =     -0.00000000, Psi_zz =      0.00000568, Psi_z =     -0.00000203, Psi_r =      0.00004114, dr =      7.52882580, dz =      0.05548353
+iteration # n = 60, m = 0
+Psi_rr =     -0.00000574, Psi_rz =      0.00000024, D =     -0.00000000, Psi_zz =      0.00000571, Psi_z =     -0.00000205, Psi_r =      0.00004261, dr =      7.42512308, dz =      0.05318459
+iteration # n = 61, m = 0
+Psi_rr =     -0.00000602, Psi_rz =      0.00000024, D =     -0.00000000, Psi_zz =      0.00000574, Psi_z =     -0.00000208, Psi_r =      0.00004409, dr =      7.32910293, dz =      0.05065893
+iteration # n = 62, m = 0
+Psi_rr =     -0.00000630, Psi_rz =      0.00000025, D =     -0.00000000, Psi_zz =      0.00000577, Psi_z =     -0.00000210, Psi_r =      0.00004559, dr =      7.23982221, dz =      0.04819356
+iteration # n = 63, m = 0
+Psi_rr =     -0.00000658, Psi_rz =      0.00000026, D =     -0.00000000, Psi_zz =      0.00000580, Psi_z =     -0.00000212, Psi_r =      0.00004710, dr =      7.15623413, dz =      0.04624276
+iteration # n = 64, m = 0
+Psi_rr =     -0.00000687, Psi_rz =      0.00000027, D =     -0.00000000, Psi_zz =      0.00000583, Psi_z =     -0.00000215, Psi_r =      0.00004861, dr =      7.07733463, dz =      0.04476206
+iteration # n = 65, m = 0
+Psi_rr =     -0.00000716, Psi_rz =      0.00000027, D =     -0.00000000, Psi_zz =      0.00000586, Psi_z =     -0.00000217, Psi_r =      0.00005014, dr =      7.00195912, dz =      0.04450536
+iteration # n = 66, m = 0
+Psi_rr =     -0.00000746, Psi_rz =      0.00000028, D =     -0.00000000, Psi_zz =      0.00000590, Psi_z =     -0.00000219, Psi_r =      0.00005167, dr =      6.92820231, dz =      0.04726643
+iteration # n = 67, m = 0
+Psi_rr =     -0.00000776, Psi_rz =      0.00000028, D =     -0.00000000, Psi_zz =      0.00000593, Psi_z =     -0.00000221, Psi_r =      0.00005321, dr =      6.85576958, dz =      0.04666203
+iteration # n = 68, m = 0
+Psi_rr =     -0.00000807, Psi_rz =      0.00000029, D =     -0.00000000, Psi_zz =      0.00000596, Psi_z =     -0.00000223, Psi_r =      0.00005476, dr =      6.78414621, dz =      0.04609966
+iteration # n = 69, m = 0
+Psi_rr =     -0.00000839, Psi_rz =      0.00000030, D =     -0.00000000, Psi_zz =      0.00000599, Psi_z =     -0.00000226, Psi_r =      0.00005631, dr =      6.71300478, dz =      0.04577659
+iteration # n = 70, m = 0
+Psi_rr =     -0.00000871, Psi_rz =      0.00000030, D =     -0.00000000, Psi_zz =      0.00000602, Psi_z =     -0.00000228, Psi_r =      0.00005786, dr =      6.64202213, dz =      0.04586041
+iteration # n = 71, m = 0
+Psi_rr =     -0.00000904, Psi_rz =      0.00000031, D =     -0.00000000, Psi_zz =      0.00000605, Psi_z =     -0.00000230, Psi_r =      0.00005940, dr =      6.57089033, dz =      0.04641327
+iteration # n = 72, m = 0
+Psi_rr =     -0.00000938, Psi_rz =      0.00000031, D =     -0.00000000, Psi_zz =      0.00000608, Psi_z =     -0.00000233, Psi_r =      0.00006095, dr =      6.49930260, dz =      0.04760896
+iteration # n = 73, m = 0
+Psi_rr =     -0.00000973, Psi_rz =      0.00000032, D =     -0.00000000, Psi_zz =      0.00000612, Psi_z =     -0.00000235, Psi_r =      0.00006249, dr =      6.42701109, dz =      0.04940459
+iteration # n = 74, m = 0
+Psi_rr =     -0.00001008, Psi_rz =      0.00000032, D =     -0.00000000, Psi_zz =      0.00000615, Psi_z =     -0.00000237, Psi_r =      0.00006403, dr =      6.35372923, dz =      0.05209384
+iteration # n = 75, m = 0
+Psi_rr =     -0.00001044, Psi_rz =      0.00000033, D =     -0.00000000, Psi_zz =      0.00000618, Psi_z =     -0.00000239, Psi_r =      0.00006555, dr =      6.27932208, dz =      0.05548701
+iteration # n = 76, m = 0
+Psi_rr =     -0.00001081, Psi_rz =      0.00000033, D =     -0.00000000, Psi_zz =      0.00000622, Psi_z =     -0.00000241, Psi_r =      0.00006707, dr =      6.20352916, dz =      0.06011016
+iteration # n = 77, m = 0
+Psi_rr =     -0.00001120, Psi_rz =      0.00000033, D =     -0.00000000, Psi_zz =      0.00000626, Psi_z =     -0.00000243, Psi_r =      0.00006857, dr =      6.12607365, dz =      0.06391128
+iteration # n = 78, m = 0
+Psi_rr =     -0.00001159, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000629, Psi_z =     -0.00000245, Psi_r =      0.00007007, dr =      6.04698281, dz =      0.06789370
+iteration # n = 79, m = 0
+Psi_rr =     -0.00001200, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000633, Psi_z =     -0.00000248, Psi_r =      0.00007154, dr =      5.96631570, dz =      0.07213161
+iteration # n = 80, m = 0
+Psi_rr =     -0.00001241, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000636, Psi_z =     -0.00000250, Psi_r =      0.00007300, dr =      5.88416674, dz =      0.07667558
+iteration # n = 81, m = 0
+Psi_rr =     -0.00001284, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000640, Psi_z =     -0.00000252, Psi_r =      0.00007445, dr =      5.80063775, dz =      0.08155566
+iteration # n = 82, m = 0
+Psi_rr =     -0.00001328, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000644, Psi_z =     -0.00000254, Psi_r =      0.00007587, dr =      5.71584492, dz =      0.08680515
+iteration # n = 83, m = 0
+Psi_rr =     -0.00001373, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000648, Psi_z =     -0.00000257, Psi_r =      0.00007726, dr =      5.62990458, dz =      0.09241870
+iteration # n = 84, m = 0
+Psi_rr =     -0.00001419, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000652, Psi_z =     -0.00000259, Psi_r =      0.00007863, dr =      5.54293876, dz =      0.09838467
+iteration # n = 85, m = 0
+Psi_rr =     -0.00001467, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000656, Psi_z =     -0.00000261, Psi_r =      0.00007998, dr =      5.45506779, dz =      0.10473213
+iteration # n = 86, m = 0
+Psi_rr =     -0.00001516, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000660, Psi_z =     -0.00000264, Psi_r =      0.00008130, dr =      5.36642552, dz =      0.11141690
+iteration # n = 87, m = 0
+Psi_rr =     -0.00001566, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000664, Psi_z =     -0.00000266, Psi_r =      0.00008258, dr =      5.27714161, dz =      0.11840471
+iteration # n = 88, m = 0
+Psi_rr =     -0.00001617, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000668, Psi_z =     -0.00000268, Psi_r =      0.00008383, dr =      5.18732362, dz =      0.12574545
+iteration # n = 89, m = 0
+Psi_rr =     -0.00001670, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000672, Psi_z =     -0.00000270, Psi_r =      0.00008505, dr =      5.09710709, dz =      0.13334447
+iteration # n = 90, m = 0
+Psi_rr =     -0.00001723, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000676, Psi_z =     -0.00000272, Psi_r =      0.00008624, dr =      5.00659480, dz =      0.14124414
+iteration # n = 91, m = 0
+Psi_rr =     -0.00001779, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000680, Psi_z =     -0.00000275, Psi_r =      0.00008738, dr =      4.91590271, dz =      0.14929273
+iteration # n = 92, m = 0
+Psi_rr =     -0.00001835, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000685, Psi_z =     -0.00000277, Psi_r =      0.00008849, dr =      4.82515682, dz =      0.15714162
+iteration # n = 93, m = 0
+Psi_rr =     -0.00001893, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000689, Psi_z =     -0.00000279, Psi_r =      0.00008956, dr =      4.73447749, dz =      0.16494540
+iteration # n = 94, m = 0
+Psi_rr =     -0.00001952, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000694, Psi_z =     -0.00000281, Psi_r =      0.00009059, dr =      4.64399205, dz =      0.17271853
+iteration # n = 95, m = 0
+Psi_rr =     -0.00002012, Psi_rz =      0.00000035, D =     -0.00000000, Psi_zz =      0.00000698, Psi_z =     -0.00000284, Psi_r =      0.00009158, dr =      4.55382125, dz =      0.18047034
+iteration # n = 96, m = 0
+Psi_rr =     -0.00002074, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000702, Psi_z =     -0.00000286, Psi_r =      0.00009252, dr =      4.46407925, dz =      0.18820399
+iteration # n = 97, m = 0
+Psi_rr =     -0.00002137, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000707, Psi_z =     -0.00000288, Psi_r =      0.00009342, dr =      4.37487110, dz =      0.19591679
+iteration # n = 98, m = 0
+Psi_rr =     -0.00002201, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000712, Psi_z =     -0.00000291, Psi_r =      0.00009427, dr =      4.28629215, dz =      0.20360740
+iteration # n = 99, m = 0
+Psi_rr =     -0.00002266, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000716, Psi_z =     -0.00000293, Psi_r =      0.00009508, dr =      4.19843144, dz =      0.21126471
+iteration # n = 0, m = 1
+Psi_rr =     -0.00002333, Psi_rz =      0.00000034, D =     -0.00000000, Psi_zz =      0.00000721, Psi_z =     -0.00000296, Psi_r =      0.00009584, dr =      4.11135889, dz =      0.21887520
+iteration # n = 1, m = 1
+Psi_rr =     -0.00002400, Psi_rz =      0.00000033, D =     -0.00000000, Psi_zz =      0.00000726, Psi_z =     -0.00000298, Psi_r =      0.00009654, dr =      4.02515130, dz =      0.22642516
+iteration # n = 2, m = 1
+Psi_rr =     -0.00002469, Psi_rz =      0.00000033, D =     -0.00000000, Psi_zz =      0.00000730, Psi_z =     -0.00000300, Psi_r =      0.00009720, dr =      3.93987507, dz =      0.23390087
+iteration # n = 3, m = 1
+Psi_rr =     -0.00002539, Psi_rz =      0.00000033, D =     -0.00000000, Psi_zz =      0.00000735, Psi_z =     -0.00000303, Psi_r =      0.00009781, dr =      3.85558899, dz =      0.24128880
+iteration # n = 4, m = 1
+Psi_rr =     -0.00002609, Psi_rz =      0.00000032, D =     -0.00000000, Psi_zz =      0.00000740, Psi_z =     -0.00000305, Psi_r =      0.00009836, dr =      3.77234451, dz =      0.24857621
+iteration # n = 5, m = 1
+Psi_rr =     -0.00002681, Psi_rz =      0.00000032, D =     -0.00000000, Psi_zz =      0.00000745, Psi_z =     -0.00000308, Psi_r =      0.00009885, dr =      3.69018466, dz =      0.25574901
+iteration # n = 6, m = 1
+Psi_rr =     -0.00002753, Psi_rz =      0.00000031, D =     -0.00000000, Psi_zz =      0.00000750, Psi_z =     -0.00000310, Psi_r =      0.00009929, dr =      3.60914249, dz =      0.26279758
+iteration # n = 7, m = 1
+Psi_rr =     -0.00000803, Psi_rz =     -0.00004851, D =      0.00000000, Psi_zz =     -0.00034474, Psi_z =     -0.00099939, Psi_r =     -0.00006652, dr =     61.54563578, dz =    -11.56010101
+Psi_rr =     -0.00002827, Psi_rz =      0.00000031, D =     -0.00000000, Psi_zz =      0.00000755, Psi_z =     -0.00000313, Psi_r =      0.00009968, dr =      3.52924212, dz =      0.26971322
+iteration # n = 8, m = 1
+Psi_rr =     -0.00000837, Psi_rz =     -0.00004882, D =      0.00000000, Psi_zz =     -0.00034327, Psi_z =     -0.00100592, Psi_r =     -0.00006826, dr =     52.49121195, dz =    -10.39642282
+Psi_rr =     -0.00002901, Psi_rz =      0.00000030, D =     -0.00000000, Psi_zz =      0.00000760, Psi_z =     -0.00000315, Psi_r =      0.00010000, dr =      3.45049753, dz =      0.27648903
+iteration # n = 9, m = 1
+Psi_rr =     -0.00000871, Psi_rz =     -0.00004912, D =      0.00000000, Psi_zz =     -0.00034163, Psi_z =     -0.00101225, Psi_r =     -0.00007004, dr =     45.76518432, dz =     -9.54352369
+Psi_rr =     -0.00002975, Psi_rz =      0.00000030, D =     -0.00000000, Psi_zz =      0.00000766, Psi_z =     -0.00000317, Psi_r =      0.00010026, dr =      3.37291166, dz =      0.28311969
+iteration # n = 10, m = 1
+Psi_rr =     -0.00000906, Psi_rz =     -0.00004941, D =      0.00000000, Psi_zz =     -0.00033975, Psi_z =     -0.00101835, Psi_r =     -0.00007185, dr =     40.61902954, dz =     -8.90427191
+Psi_rr =     -0.00003050, Psi_rz =      0.00000029, D =     -0.00000000, Psi_zz =      0.00000771, Psi_z =     -0.00000320, Psi_r =      0.00010046, dr =      3.29647774, dz =      0.28960113
+iteration # n = 11, m = 1
+Psi_rr =     -0.00000942, Psi_rz =     -0.00004968, D =      0.00000000, Psi_zz =     -0.00033752, Psi_z =     -0.00102418, Psi_r =     -0.00007369, dr =     36.61477058, dz =     -8.42346545
+Psi_rr =     -0.00003125, Psi_rz =      0.00000029, D =     -0.00000000, Psi_zz =      0.00000776, Psi_z =     -0.00000322, Psi_r =      0.00010059, dr =      3.22117896, dz =      0.29593013
+iteration # n = 12, m = 1
+Psi_rr =     -0.00000977, Psi_rz =     -0.00004993, D =      0.00000000, Psi_zz =     -0.00033485, Psi_z =     -0.00102969, Psi_r =     -0.00007556, dr =     33.45608837, dz =     -8.06356963
+Psi_rr =     -0.00003201, Psi_rz =      0.00000028, D =     -0.00000000, Psi_zz =      0.00000781, Psi_z =     -0.00000324, Psi_r =      0.00010066, dr =      3.14699106, dz =      0.30213481
+iteration # n = 13, m = 1
+Psi_rr =     -0.00001014, Psi_rz =     -0.00005015, D =      0.00000000, Psi_zz =     -0.00033162, Psi_z =     -0.00103485, Psi_r =     -0.00007746, dr =     30.94455587, dz =     -7.80059077
+Psi_rr =     -0.00003277, Psi_rz =      0.00000027, D =     -0.00000000, Psi_zz =      0.00000786, Psi_z =     -0.00000327, Psi_r =      0.00010066, dr =      3.07388458, dz =      0.30817127
+iteration # n = 14, m = 1
+Psi_rr =     -0.00001051, Psi_rz =     -0.00005036, D =      0.00000000, Psi_zz =     -0.00032777, Psi_z =     -0.00103959, Psi_r =     -0.00007939, dr =     28.94141396, dz =     -7.61789248
+Psi_rr =     -0.00003354, Psi_rz =      0.00000027, D =     -0.00000000, Psi_zz =      0.00000792, Psi_z =     -0.00000329, Psi_r =      0.00010058, dr =      3.00181941, dz =      0.31404958
+iteration # n = 15, m = 1
+Psi_rr =     -0.00001089, Psi_rz =     -0.00005052, D =      0.00000000, Psi_zz =     -0.00032324, Psi_z =     -0.00104381, Psi_r =     -0.00008134, dr =     27.30565244, dz =     -7.49732182
+Psi_rr =     -0.00003430, Psi_rz =      0.00000026, D =     -0.00000000, Psi_zz =      0.00000797, Psi_z =     -0.00000331, Psi_r =      0.00010044, dr =      2.93075293, dz =      0.31976239
+iteration # n = 16, m = 1
+Psi_rr =     -0.00001131, Psi_rz =     -0.00005066, D =      0.00000000, Psi_zz =     -0.00031795, Psi_z =     -0.00104746, Psi_r =     -0.00008332, dr =     25.82140219, dz =     -7.40819367
+Psi_rr =     -0.00003506, Psi_rz =      0.00000025, D =     -0.00000000, Psi_zz =      0.00000802, Psi_z =     -0.00000333, Psi_r =      0.00010022, dr =      2.86063897, dz =      0.32530257
+iteration # n = 17, m = 1
+Psi_rr =     -0.00001181, Psi_rz =     -0.00005073, D =      0.00000000, Psi_zz =     -0.00031185, Psi_z =     -0.00105047, Psi_r =     -0.00008533, dr =     24.04971805, dz =     -7.28031586
+Psi_rr =     -0.00003583, Psi_rz =      0.00000024, D =     -0.00000000, Psi_zz =      0.00000808, Psi_z =     -0.00000335, Psi_r =      0.00009992, dr =      2.79142983, dz =      0.33065563
+iteration # n = 18, m = 1
+Psi_rr =     -0.00001253, Psi_rz =     -0.00005064, D =      0.00000000, Psi_zz =     -0.00030489, Psi_z =     -0.00105282, Psi_r =     -0.00008740, dr =     21.24159534, dz =     -6.98142540
+Psi_rr =     -0.00003659, Psi_rz =      0.00000024, D =     -0.00000000, Psi_zz =      0.00000813, Psi_z =     -0.00000337, Psi_r =      0.00009955, dr =      2.72307529, dz =      0.33582188
+iteration # n = 19, m = 1
+Psi_rr =     -0.00001271, Psi_rz =     -0.00004995, D =      0.00000000, Psi_zz =     -0.00029767, Psi_z =     -0.00105381, Psi_r =     -0.00008967, dr =     20.13930590, dz =     -6.91952314
+Psi_rr =     -0.00003735, Psi_rz =      0.00000023, D =     -0.00000000, Psi_zz =      0.00000818, Psi_z =     -0.00000339, Psi_r =      0.00009910, dr =      2.65552463, dz =      0.34079670
+iteration # n = 20, m = 1
+Psi_rr =     -0.00001295, Psi_rz =     -0.00004951, D =      0.00000000, Psi_zz =     -0.00028945, Psi_z =     -0.00105412, Psi_r =     -0.00009189, dr =     19.73813496, dz =     -7.01794623
+Psi_rr =     -0.00003810, Psi_rz =      0.00000022, D =     -0.00000000, Psi_zz =      0.00000823, Psi_z =     -0.00000341, Psi_r =      0.00009856, dr =      2.58872600, dz =      0.34557519
+iteration # n = 21, m = 1
+Psi_rr =     -0.00001331, Psi_rz =     -0.00004956, D =      0.00000000, Psi_zz =     -0.00028050, Psi_z =     -0.00105345, Psi_r =     -0.00009399, dr =     20.23835045, dz =     -7.33157339
+Psi_rr =     -0.00003886, Psi_rz =      0.00000021, D =     -0.00000000, Psi_zz =      0.00000828, Psi_z =     -0.00000342, Psi_r =      0.00009795, dr =      2.52262601, dz =      0.35015306
+iteration # n = 22, m = 1
+Psi_rr =     -0.00001367, Psi_rz =     -0.00004954, D =      0.00000000, Psi_zz =     -0.00027064, Psi_z =     -0.00105199, Psi_r =     -0.00009606, dr =     20.96235705, dz =     -7.72406805
+Psi_rr =     -0.00003961, Psi_rz =      0.00000020, D =     -0.00000000, Psi_zz =      0.00000834, Psi_z =     -0.00000344, Psi_r =      0.00009725, dr =      2.45717008, dz =      0.35452719
+iteration # n = 23, m = 1
+Psi_rr =     -0.00001403, Psi_rz =     -0.00004943, D =      0.00000000, Psi_zz =     -0.00025995, Psi_z =     -0.00104970, Psi_r =     -0.00009810, dr =     21.89896929, dz =     -8.20193881
+Psi_rr =     -0.00004035, Psi_rz =      0.00000019, D =     -0.00000000, Psi_zz =      0.00000839, Psi_z =     -0.00000346, Psi_r =      0.00009646, dr =      2.39230326, dz =      0.35869550
+iteration # n = 24, m = 1
+Psi_rr =     -0.00001439, Psi_rz =     -0.00004923, D =      0.00000000, Psi_zz =     -0.00024852, Psi_z =     -0.00104654, Psi_r =     -0.00010014, dr =     23.09689327, dz =     -8.78618632
+Psi_rr =     -0.00004109, Psi_rz =      0.00000018, D =     -0.00000000, Psi_zz =      0.00000844, Psi_z =     -0.00000347, Psi_r =      0.00009559, dr =      2.32797168, dz =      0.36265668
+iteration # n = 25, m = 1
+Psi_rr =     -0.00001475, Psi_rz =     -0.00004895, D =      0.00000000, Psi_zz =     -0.00023644, Psi_z =     -0.00104247, Psi_r =     -0.00010216, dr =     24.63782105, dz =     -9.50996277
+Psi_rr =     -0.00004183, Psi_rz =      0.00000017, D =     -0.00000000, Psi_zz =      0.00000849, Psi_z =     -0.00000349, Psi_r =      0.00009464, dr =      2.26412358, dz =      0.36640942
+iteration # n = 26, m = 1
+Psi_rr =     -0.00001511, Psi_rz =     -0.00004861, D =      0.00000000, Psi_zz =     -0.00022381, Psi_z =     -0.00103747, Psi_r =     -0.00010416, dr =     26.63390026, dz =    -10.42022701
+Psi_rr =     -0.00004256, Psi_rz =      0.00000015, D =     -0.00000000, Psi_zz =      0.00000854, Psi_z =     -0.00000350, Psi_r =      0.00009359, dr =      2.20071069, dz =      0.36995231
+iteration # n = 27, m = 1
+Psi_rr =     -0.00001547, Psi_rz =     -0.00004820, D =      0.00000000, Psi_zz =     -0.00021070, Psi_z =     -0.00103152, Psi_r =     -0.00010613, dr =     29.25341579, dz =    -11.58797768
+Psi_rr =     -0.00004328, Psi_rz =      0.00000014, D =     -0.00000000, Psi_zz =      0.00000859, Psi_z =     -0.00000351, Psi_r =      0.00009246, dr =      2.13768868, dz =      0.37328138
+iteration # n = 28, m = 1
+Psi_rr =     -0.00001583, Psi_rz =     -0.00004774, D =      0.00000000, Psi_zz =     -0.00019721, Psi_z =     -0.00102464, Psi_r =     -0.00010808, dr =     32.76684059, dz =    -13.12723688
+Psi_rr =     -0.00004400, Psi_rz =      0.00000013, D =     -0.00000000, Psi_zz =      0.00000864, Psi_z =     -0.00000352, Psi_r =      0.00009125, dr =      2.07501690, dz =      0.37639614
+iteration # n = 29, m = 1
+Psi_rr =     -0.00001619, Psi_rz =     -0.00004721, D =      0.00000000, Psi_zz =     -0.00018340, Psi_z =     -0.00101683, Psi_r =     -0.00010999, dr =     37.62911524, dz =    -15.23068924
+Psi_rr =     -0.00004471, Psi_rz =      0.00000012, D =     -0.00000000, Psi_zz =      0.00000868, Psi_z =     -0.00000353, Psi_r =      0.00008994, dr =      2.01265905, dz =      0.37929487
+iteration # n = 30, m = 1
+Psi_rr =     -0.00001655, Psi_rz =     -0.00004663, D =      0.00000000, Psi_zz =     -0.00016936, Psi_z =     -0.00100810, Psi_r =     -0.00011188, dr =     44.68740496, dz =    -18.25635623
+Psi_rr =     -0.00004541, Psi_rz =      0.00000011, D =     -0.00000000, Psi_zz =      0.00000873, Psi_z =     -0.00000354, Psi_r =      0.00008854, dr =      1.95058147, dz =      0.38197613
+iteration # n = 31, m = 1
+Psi_rr =     -0.00001691, Psi_rz =     -0.00004600, D =      0.00000000, Psi_zz =     -0.00015516, Psi_z =     -0.00099849, Psi_r =     -0.00011373, dr =     55.71441484, dz =    -22.95216838
+Psi_rr =     -0.00004611, Psi_rz =      0.00000010, D =     -0.00000000, Psi_zz =      0.00000878, Psi_z =     -0.00000355, Psi_r =      0.00008706, dr =      1.88875126, dz =      0.38443998
+iteration # n = 32, m = 1
+Psi_rr =     -0.00004680, Psi_rz =      0.00000008, D =     -0.00000000, Psi_zz =      0.00000882, Psi_z =     -0.00000356, Psi_r =      0.00008548, dr =      1.82713503, dz =      0.38668872
+iteration # n = 33, m = 1
+Psi_rr =     -0.00004749, Psi_rz =      0.00000007, D =     -0.00000000, Psi_zz =      0.00000887, Psi_z =     -0.00000357, Psi_r =      0.00008382, dr =      1.76569955, dz =      0.38872641
+iteration # n = 34, m = 1
+Psi_rr =     -0.00004816, Psi_rz =      0.00000006, D =     -0.00000000, Psi_zz =      0.00000891, Psi_z =     -0.00000358, Psi_r =      0.00008207, dr =      1.70441357, dz =      0.39055930
+iteration # n = 35, m = 1
+Psi_rr =     -0.00004883, Psi_rz =      0.00000004, D =     -0.00000000, Psi_zz =      0.00000895, Psi_z =     -0.00000358, Psi_r =      0.00008023, dr =      1.64324985, dz =      0.39219025
+iteration # n = 36, m = 1
+Psi_rr =     -0.00004950, Psi_rz =      0.00000003, D =     -0.00000000, Psi_zz =      0.00000899, Psi_z =     -0.00000359, Psi_r =      0.00007830, dr =      1.58219058, dz =      0.39361950
+iteration # n = 37, m = 1
+Psi_rr =     -0.00005015, Psi_rz =      0.00000002, D =     -0.00000000, Psi_zz =      0.00000903, Psi_z =     -0.00000359, Psi_r =      0.00007629, dr =      1.52121912, dz =      0.39485003
+iteration # n = 38, m = 1
+Psi_rr =     -0.00005080, Psi_rz =      0.00000000, D =     -0.00000000, Psi_zz =      0.00000907, Psi_z =     -0.00000360, Psi_r =      0.00007419, dr =      1.46032525, dz =      0.39588430
+iteration # n = 39, m = 1
+Psi_rr =     -0.00005145, Psi_rz =     -0.00000001, D =     -0.00000000, Psi_zz =      0.00000911, Psi_z =     -0.00000360, Psi_r =      0.00007201, dr =      1.39950270, dz =      0.39672464
+iteration # n = 40, m = 1
+Psi_rr =     -0.00005208, Psi_rz =     -0.00000002, D =     -0.00000000, Psi_zz =      0.00000914, Psi_z =     -0.00000360, Psi_r =      0.00006974, dr =      1.33874800, dz =      0.39737372
+iteration # n = 41, m = 1
+Psi_rr =     -0.00005271, Psi_rz =     -0.00000004, D =     -0.00000000, Psi_zz =      0.00000918, Psi_z =     -0.00000360, Psi_r =      0.00006739, dr =      1.27805723, dz =      0.39783540
+iteration # n = 42, m = 1
+Psi_rr =     -0.00005334, Psi_rz =     -0.00000005, D =     -0.00000000, Psi_zz =      0.00000921, Psi_z =     -0.00000361, Psi_r =      0.00006495, dr =      1.21742697, dz =      0.39811742
+iteration # n = 43, m = 1
+Psi_rr =     -0.00005395, Psi_rz =     -0.00000006, D =     -0.00000000, Psi_zz =      0.00000925, Psi_z =     -0.00000361, Psi_r =      0.00006244, dr =      1.15685732, dz =      0.39822920
+iteration # n = 44, m = 1
+Psi_rr =     -0.00005456, Psi_rz =     -0.00000008, D =     -0.00000000, Psi_zz =      0.00000928, Psi_z =     -0.00000361, Psi_r =      0.00005985, dr =      1.09635303, dz =      0.39817858
+iteration # n = 45, m = 1
+Psi_rr =     -0.00005516, Psi_rz =     -0.00000009, D =     -0.00000000, Psi_zz =      0.00000931, Psi_z =     -0.00000361, Psi_r =      0.00005718, dr =      1.03592239, dz =      0.39797078
+iteration # n = 46, m = 1
+Psi_rr =     -0.00005575, Psi_rz =     -0.00000011, D =     -0.00000000, Psi_zz =      0.00000934, Psi_z =     -0.00000361, Psi_r =      0.00005443, dr =      0.97557512, dz =      0.39760924
+iteration # n = 47, m = 1
+Psi_rr =     -0.00005634, Psi_rz =     -0.00000012, D =     -0.00000000, Psi_zz =      0.00000936, Psi_z =     -0.00000361, Psi_r =      0.00005161, dr =      0.91532033, dz =      0.39709729
+Psi_rr =      0.00039017, Psi_rz =      0.00027852, D =      0.00000006, Psi_zz =      0.00035550, Psi_z =      0.00192394, Psi_r =      0.00808710, dr =    -38.26514587, dz =     24.56755805
+iteration # n = 48, m = 1
+Psi_rr =     -0.00005691, Psi_rz =     -0.00000013, D =     -0.00000000, Psi_zz =      0.00000939, Psi_z =     -0.00000361, Psi_r =      0.00004872, dr =      0.85516604, dz =      0.39643949
+Psi_rr =      0.00138676, Psi_rz =      0.00020513, D =      0.00000006, Psi_zz =      0.00007343, Psi_z =      0.00151704, Psi_r =      0.00651844, dr =     -2.80267686, dz =    -12.82966891
+iteration # n = 49, m = 1
+Psi_rr =     -0.00005748, Psi_rz =     -0.00000015, D =     -0.00000000, Psi_zz =      0.00000941, Psi_z =     -0.00000361, Psi_r =      0.00004576, dr =      0.79511635, dz =      0.39564227
+Psi_rr =      0.00134687, Psi_rz =      0.00014864, D =     -0.00000002, Psi_zz =     -0.00000115, Psi_z =      0.00122143, Psi_r =      0.00443326, dr =     -7.89466912, dz =     41.71064343
+iteration # n = 50, m = 1
+Psi_rr =     -0.00005803, Psi_rz =     -0.00000016, D =     -0.00000000, Psi_zz =      0.00000943, Psi_z =     -0.00000361, Psi_r =      0.00004273, dr =      0.73517404, dz =      0.39471383
+Psi_rr =      0.00133770, Psi_rz =      0.00012061, D =     -0.00000003, Psi_zz =     -0.00001153, Psi_z =      0.00099526, Psi_r =      0.00226016, dr =     -4.87442805, dz =     35.32284770
+iteration # n = 51, m = 1
+Psi_rr =     -0.00005858, Psi_rz =     -0.00000017, D =     -0.00000000, Psi_zz =      0.00000946, Psi_z =     -0.00000361, Psi_r =      0.00003963, dr =      0.67534055, dz =      0.39366378
+Psi_rr =      0.00085605, Psi_rz =      0.00010786, D =     -0.00000002, Psi_zz =     -0.00000696, Psi_z =      0.00080322, Psi_r =      0.00047113, dr =     -5.11203076, dz =     36.20326054
+iteration # n = 52, m = 1
+Psi_rr =     -0.00005911, Psi_rz =     -0.00000018, D =     -0.00000000, Psi_zz =      0.00000948, Psi_z =     -0.00000361, Psi_r =      0.00003646, dr =      0.61561659, dz =      0.39250250
+Psi_rr =      0.00064195, Psi_rz =      0.00009942, D =     -0.00000001, Psi_zz =     -0.00000282, Psi_z =      0.00062948, Psi_r =     -0.00079755, dr =     -5.16013666, dz =     41.33899450
+iteration # n = 53, m = 1
+Psi_rr =     -0.00005964, Psi_rz =     -0.00000020, D =     -0.00000000, Psi_zz =      0.00000949, Psi_z =     -0.00000361, Psi_r =      0.00003324, dr =      0.55600267, dz =      0.39124071
+Psi_rr =      0.00043788, Psi_rz =      0.00008836, D =     -0.00000001, Psi_zz =     -0.00000202, Psi_z =      0.00047382, Psi_r =     -0.00142816, dr =     -4.48427537, dz =     38.38695402
+iteration # n = 54, m = 1
+Psi_rr =     -0.00006016, Psi_rz =     -0.00000021, D =     -0.00000000, Psi_zz =      0.00000951, Psi_z =     -0.00000360, Psi_r =      0.00002995, dr =      0.49649933, dz =      0.38988900
+Psi_rr =     -0.00000877, Psi_rz =      0.00007471, D =     -0.00000001, Psi_zz =     -0.00000390, Psi_z =      0.00034029, Psi_r =     -0.00165933, dr =     -3.41531319, dz =     21.80965789
+iteration # n = 55, m = 1
+Psi_rr =     -0.00006067, Psi_rz =     -0.00000022, D =     -0.00000000, Psi_zz =      0.00000953, Psi_z =     -0.00000360, Psi_r =      0.00002660, dr =      0.43710711, dz =      0.38845781
+Psi_rr =     -0.00007760, Psi_rz =      0.00005933, D =     -0.00000000, Psi_zz =     -0.00000697, Psi_z =      0.00023197, Psi_r =     -0.00156107, dr =     -0.96689807, dz =     25.04869656
+iteration # n = 56, m = 1
+Psi_rr =     -0.00006117, Psi_rz =     -0.00000023, D =     -0.00000000, Psi_zz =      0.00000954, Psi_z =     -0.00000360, Psi_r =      0.00002320, dr =      0.37782673, dz =      0.38695744
+Psi_rr =     -0.00020042, Psi_rz =      0.00004453, D =      0.00000000, Psi_zz =     -0.00001007, Psi_z =      0.00014893, Psi_r =     -0.00131232, dr =   -193.60761107, dz =   -841.84574549
+iteration # n = 57, m = 1
+Psi_rr =     -0.00006166, Psi_rz =     -0.00000025, D =     -0.00000000, Psi_zz =      0.00000955, Psi_z =     -0.00000360, Psi_r =      0.00001974, dr =      0.31865931, dz =      0.38539802
+Psi_rr =     -0.00017994, Psi_rz =      0.00003134, D =      0.00000000, Psi_zz =     -0.00001245, Psi_z =      0.00008878, Psi_r =     -0.00102286, dr =     -7.91040008, dz =    -12.78252158
+iteration # n = 58, m = 1
+Psi_rr =     -0.00006214, Psi_rz =     -0.00000026, D =     -0.00000000, Psi_zz =      0.00000956, Psi_z =     -0.00000360, Psi_r =      0.00001623, dr =      0.25960684, dz =      0.38378928
+iteration # n = 59, m = 1
+iteration # n = 60, m = 1
+iteration # n = 61, m = 1
+iteration # n = 62, m = 1
+iteration # n = 63, m = 1
+iteration # n = 64, m = 1
+iteration # n = 65, m = 1
+iteration # n = 66, m = 1
+iteration # n = 67, m = 1
+iteration # n = 68, m = 1
+iteration # n = 69, m = 1
+iteration # n = 70, m = 1
+iteration # n = 71, m = 1
+iteration # n = 72, m = 1
+iteration # n = 73, m = 1
+iteration # n = 74, m = 1
+iteration # n = 75, m = 1
+iteration # n = 76, m = 1
+iteration # n = 77, m = 1
+iteration # n = 78, m = 1
+iteration # n = 79, m = 1
+iteration # n = 80, m = 1
+iteration # n = 81, m = 1
+iteration # n = 82, m = 1
+iteration # n = 83, m = 1
+iteration # n = 84, m = 1
+iteration # n = 85, m = 1
+iteration # n = 86, m = 1
+iteration # n = 87, m = 1
+iteration # n = 88, m = 1
+iteration # n = 89, m = 1
+iteration # n = 90, m = 1
+iteration # n = 91, m = 1
+iteration # n = 92, m = 1
+iteration # n = 93, m = 1
+iteration # n = 94, m = 1
+iteration # n = 95, m = 1
+iteration # n = 96, m = 1
+iteration # n = 97, m = 1
+iteration # n = 98, m = 1
+iteration # n = 99, m = 1
+iteration # n = 0, m = 2
+iteration # n = 1, m = 2
+iteration # n = 2, m = 2
+iteration # n = 3, m = 2
+iteration # n = 4, m = 2
+iteration # n = 5, m = 2
+iteration # n = 6, m = 2
+Psi_rr =     -0.00002038, Psi_rz =      0.00002062, D =     -0.00000000, Psi_zz =     -0.00002000, Psi_z =      0.00002868, Psi_r =     -0.00062572, dr =    673.68452963, dz =    696.00914356
+iteration # n = 7, m = 2
+Psi_rr =     -0.00001756, Psi_rz =      0.00002054, D =     -0.00000000, Psi_zz =     -0.00001989, Psi_z =      0.00002835, Psi_r =     -0.00061846, dr =    161.11983253, dz =    167.83265534
+iteration # n = 8, m = 2
+Psi_rr =     -0.00001479, Psi_rz =      0.00002047, D =     -0.00000000, Psi_zz =     -0.00001977, Psi_z =      0.00002805, Psi_r =     -0.00061112, dr =     91.05552691, dz =     95.67304124
+iteration # n = 9, m = 2
+Psi_rr =     -0.00001207, Psi_rz =      0.00002038, D =     -0.00000000, Psi_zz =     -0.00001964, Psi_z =      0.00002775, Psi_r =     -0.00060371, dr =     63.23503596, dz =     67.04576887
+iteration # n = 10, m = 2
+Psi_rr =     -0.00000939, Psi_rz =      0.00002032, D =     -0.00000000, Psi_zz =     -0.00001951, Psi_z =      0.00002746, Psi_r =     -0.00059622, dr =     48.23006286, dz =     51.62714020
+iteration # n = 11, m = 2
+Psi_rr =     -0.00000676, Psi_rz =      0.00002024, D =     -0.00000000, Psi_zz =     -0.00001936, Psi_z =      0.00002719, Psi_r =     -0.00058865, dr =     38.91726379, dz =     42.08243045
+iteration # n = 12, m = 2
+Psi_rr =     -0.00000418, Psi_rz =      0.00002016, D =     -0.00000000, Psi_zz =     -0.00001920, Psi_z =      0.00002694, Psi_r =     -0.00058102, dr =     32.54611016, dz =     35.57026238
+iteration # n = 13, m = 2
+Psi_rr =     -0.00000165, Psi_rz =      0.00002008, D =     -0.00000000, Psi_zz =     -0.00001903, Psi_z =      0.00002671, Psi_r =     -0.00057333, dr =     27.90726225, dz =     30.84487194
+iteration # n = 14, m = 2
+Psi_rr =      0.00000084, Psi_rz =      0.00002000, D =     -0.00000000, Psi_zz =     -0.00001885, Psi_z =      0.00002649, Psi_r =     -0.00056559, dr =     24.37511301, dz =     27.26172117
+iteration # n = 15, m = 2
+Psi_rr =      0.00000328, Psi_rz =      0.00001992, D =     -0.00000000, Psi_zz =     -0.00001866, Psi_z =      0.00002630, Psi_r =     -0.00055781, dr =     21.59319098, dz =     24.45352359
+iteration # n = 16, m = 2
+Psi_rr =      0.00000567, Psi_rz =      0.00001983, D =     -0.00000000, Psi_zz =     -0.00001846, Psi_z =      0.00002612, Psi_r =     -0.00054998, dr =     19.34356892, dz =     22.19562775
+iteration # n = 17, m = 2
+Psi_rr =      0.00000802, Psi_rz =      0.00001975, D =     -0.00000000, Psi_zz =     -0.00001825, Psi_z =      0.00002596, Psi_r =     -0.00054211, dr =     17.48543855, dz =     20.34268038
+iteration # n = 18, m = 2
+Psi_rr =      0.00001033, Psi_rz =      0.00001967, D =     -0.00000000, Psi_zz =     -0.00001804, Psi_z =      0.00002582, Psi_r =     -0.00053420, dr =     15.92251122, dz =     18.79570085
+iteration # n = 19, m = 2
+Psi_rr =      0.00001259, Psi_rz =      0.00001959, D =     -0.00000000, Psi_zz =     -0.00001781, Psi_z =      0.00002569, Psi_r =     -0.00052626, dr =     14.58704511, dz =     17.48663717
+iteration # n = 20, m = 2
+Psi_rr =      0.00001480, Psi_rz =      0.00001951, D =     -0.00000000, Psi_zz =     -0.00001758, Psi_z =      0.00002558, Psi_r =     -0.00051829, dr =     13.43536288, dz =     16.36828904
+iteration # n = 21, m = 2
+Psi_rr =      0.00001697, Psi_rz =      0.00001943, D =     -0.00000000, Psi_zz =     -0.00001734, Psi_z =      0.00002549, Psi_r =     -0.00051029, dr =     12.42978444, dz =     15.40297305
+iteration # n = 22, m = 2
+Psi_rr =      0.00001910, Psi_rz =      0.00001935, D =     -0.00000000, Psi_zz =     -0.00001709, Psi_z =      0.00002542, Psi_r =     -0.00050227, dr =     11.54316492, dz =     14.56278850
+iteration # n = 23, m = 2
+Psi_rr =      0.00002118, Psi_rz =      0.00001927, D =     -0.00000000, Psi_zz =     -0.00001683, Psi_z =      0.00002537, Psi_r =     -0.00049424, dr =     10.75469885, dz =     13.82638155
+iteration # n = 24, m = 2
+Psi_rr =      0.00002322, Psi_rz =      0.00001919, D =     -0.00000000, Psi_zz =     -0.00001656, Psi_z =      0.00002534, Psi_r =     -0.00048619, dr =     10.04818582, dz =     13.17713285
+iteration # n = 25, m = 2
+Psi_rr =      0.00002521, Psi_rz =      0.00001911, D =     -0.00000000, Psi_zz =     -0.00001628, Psi_z =      0.00002534, Psi_r =     -0.00047813, dr =      9.41081134, dz =     12.60186716
+iteration # n = 26, m = 2
+Psi_rr =      0.00002717, Psi_rz =      0.00001903, D =     -0.00000000, Psi_zz =     -0.00001600, Psi_z =      0.00002535, Psi_r =     -0.00047006, dr =      8.83213455, dz =     12.08989734
+iteration # n = 27, m = 2
+Psi_rr =      0.00002908, Psi_rz =      0.00001896, D =     -0.00000000, Psi_zz =     -0.00001571, Psi_z =      0.00002537, Psi_r =     -0.00046199, dr =      8.30347119, dz =     11.63296805
+iteration # n = 28, m = 2
+Psi_rr =      0.00003095, Psi_rz =      0.00001888, D =     -0.00000000, Psi_zz =     -0.00001542, Psi_z =      0.00002542, Psi_r =     -0.00045391, dr =      7.81874641, dz =     11.22448566
+iteration # n = 29, m = 2
+Psi_rr =      0.00003278, Psi_rz =      0.00001880, D =     -0.00000000, Psi_zz =     -0.00001511, Psi_z =      0.00002549, Psi_r =     -0.00044583, dr =      7.37198717, dz =     10.85869819
+iteration # n = 30, m = 2
+Psi_rr =      0.00003457, Psi_rz =      0.00001872, D =     -0.00000000, Psi_zz =     -0.00001480, Psi_z =      0.00002558, Psi_r =     -0.00043775, dr =      6.95838396, dz =     10.53084377
+iteration # n = 31, m = 2
+Psi_rr =      0.00003632, Psi_rz =      0.00001865, D =     -0.00000000, Psi_zz =     -0.00001448, Psi_z =      0.00002569, Psi_r =     -0.00042968, dr =      6.57388924, dz =     10.23695658
+iteration # n = 32, m = 2
+Psi_rr =      0.00003804, Psi_rz =      0.00001857, D =     -0.00000000, Psi_zz =     -0.00001416, Psi_z =      0.00002582, Psi_r =     -0.00042162, dr =      6.21506749, dz =      9.97369604
+iteration # n = 33, m = 2
+Psi_rr =      0.00003971, Psi_rz =      0.00001849, D =     -0.00000000, Psi_zz =     -0.00001383, Psi_z =      0.00002597, Psi_r =     -0.00041357, dr =      5.87894820, dz =      9.73820223
+iteration # n = 34, m = 2
+Psi_rr =      0.00004135, Psi_rz =      0.00001842, D =     -0.00000000, Psi_zz =     -0.00001350, Psi_z =      0.00002613, Psi_r =     -0.00040553, dr =      5.56296399, dz =      9.52804071
+iteration # n = 35, m = 2
+Psi_rr =      0.00004295, Psi_rz =      0.00001835, D =     -0.00000000, Psi_zz =     -0.00001316, Psi_z =      0.00002632, Psi_r =     -0.00039750, dr =      5.26490655, dz =      9.34177117
+iteration # n = 36, m = 2
+Psi_rr =      0.00004451, Psi_rz =      0.00001827, D =     -0.00000000, Psi_zz =     -0.00001281, Psi_z =      0.00002653, Psi_r =     -0.00038949, dr =      4.98296156, dz =      9.17756283
+iteration # n = 37, m = 2
+Psi_rr =      0.00004604, Psi_rz =      0.00001820, D =     -0.00000000, Psi_zz =     -0.00001246, Psi_z =      0.00002675, Psi_r =     -0.00038149, dr =      4.71540500, dz =      9.03410433
+iteration # n = 38, m = 2
+Psi_rr =      0.00004753, Psi_rz =      0.00001813, D =     -0.00000000, Psi_zz =     -0.00001210, Psi_z =      0.00002700, Psi_r =     -0.00037352, dr =      4.46073705, dz =      8.91029489
+iteration # n = 39, m = 2
+Psi_rr =      0.00004898, Psi_rz =      0.00001805, D =     -0.00000000, Psi_zz =     -0.00001174, Psi_z =      0.00002727, Psi_r =     -0.00036556, dr =      4.21762334, dz =      8.80523751
+iteration # n = 40, m = 2
+Psi_rr =      0.00005041, Psi_rz =      0.00001798, D =     -0.00000000, Psi_zz =     -0.00001138, Psi_z =      0.00002755, Psi_r =     -0.00035763, dr =      3.98486271, dz =      8.71820002
+iteration # n = 41, m = 2
+Psi_rr =      0.00005180, Psi_rz =      0.00001791, D =     -0.00000000, Psi_zz =     -0.00001101, Psi_z =      0.00002785, Psi_r =     -0.00034973, dr =      3.76137098, dz =      8.64862086
+iteration # n = 42, m = 2
+Psi_rr =      0.00005315, Psi_rz =      0.00001784, D =     -0.00000000, Psi_zz =     -0.00001064, Psi_z =      0.00002817, Psi_r =     -0.00034185, dr =      3.54614063, dz =      8.59638937
+iteration # n = 43, m = 2
+Psi_rr =      0.00005448, Psi_rz =      0.00001777, D =     -0.00000000, Psi_zz =     -0.00001026, Psi_z =      0.00002851, Psi_r =     -0.00033399, dr =      3.33830937, dz =      8.56128816
+iteration # n = 44, m = 2
+Psi_rr =      0.00005577, Psi_rz =      0.00001770, D =     -0.00000000, Psi_zz =     -0.00000988, Psi_z =      0.00002887, Psi_r =     -0.00032617, dr =      3.13703589, dz =      8.54334513
+iteration # n = 45, m = 2
+Psi_rr =      0.00005703, Psi_rz =      0.00001763, D =     -0.00000000, Psi_zz =     -0.00000950, Psi_z =      0.00002925, Psi_r =     -0.00031837, dr =      2.94153842, dz =      8.54273589
+iteration # n = 46, m = 2
+Psi_rr =      0.00005826, Psi_rz =      0.00001756, D =     -0.00000000, Psi_zz =     -0.00000911, Psi_z =      0.00002964, Psi_r =     -0.00031061, dr =      2.75107588, dz =      8.55981511
+iteration # n = 47, m = 2
+Psi_rr =      0.00005946, Psi_rz =      0.00001750, D =     -0.00000000, Psi_zz =     -0.00000872, Psi_z =      0.00003006, Psi_r =     -0.00030288, dr =      2.56493751, dz =      8.59505983
+iteration # n = 48, m = 2
+Psi_rr =      0.00006063, Psi_rz =      0.00001743, D =     -0.00000000, Psi_zz =     -0.00000833, Psi_z =      0.00003048, Psi_r =     -0.00029518, dr =      2.38241357, dz =      8.64929604
+iteration # n = 49, m = 2
+Psi_rr =      0.00006177, Psi_rz =      0.00001736, D =     -0.00000000, Psi_zz =     -0.00000793, Psi_z =      0.00003093, Psi_r =     -0.00028752, dr =      2.20281357, dz =      8.72354136
+iteration # n = 50, m = 2
+Psi_rr =      0.00006288, Psi_rz =      0.00001730, D =     -0.00000000, Psi_zz =     -0.00000753, Psi_z =      0.00003139, Psi_r =     -0.00027989, dr =      2.02545151, dz =      8.81903668
+iteration # n = 51, m = 2
+Psi_rr =      0.00006396, Psi_rz =      0.00001723, D =     -0.00000000, Psi_zz =     -0.00000713, Psi_z =      0.00003187, Psi_r =     -0.00027230, dr =      1.84961348, dz =      8.93734272
+iteration # n = 52, m = 2
+Psi_rr =      0.00006502, Psi_rz =      0.00001717, D =     -0.00000000, Psi_zz =     -0.00000673, Psi_z =      0.00003237, Psi_r =     -0.00026475, dr =      1.67455798, dz =      9.08036243
+iteration # n = 53, m = 2
+Psi_rr =      0.00006605, Psi_rz =      0.00001710, D =     -0.00000000, Psi_zz =     -0.00000633, Psi_z =      0.00003288, Psi_r =     -0.00025724, dr =      1.49949865, dz =      9.25040004
+iteration # n = 54, m = 2
+Psi_rr =      0.00006705, Psi_rz =      0.00001704, D =     -0.00000000, Psi_zz =     -0.00000592, Psi_z =      0.00003341, Psi_r =     -0.00024976, dr =      1.32358512, dz =      9.45025502
+iteration # n = 55, m = 2
+Psi_rr =      0.00006803, Psi_rz =      0.00001697, D =     -0.00000000, Psi_zz =     -0.00000552, Psi_z =      0.00003396, Psi_r =     -0.00024232, dr =      1.14586796, dz =      9.68340276
+iteration # n = 56, m = 2
+Psi_rr =      0.00006898, Psi_rz =      0.00001691, D =     -0.00000000, Psi_zz =     -0.00000511, Psi_z =      0.00003452, Psi_r =     -0.00023493, dr =      0.96528140, dz =      9.95408427
+iteration # n = 57, m = 2
+Psi_rr =      0.00006990, Psi_rz =      0.00001685, D =     -0.00000000, Psi_zz =     -0.00000470, Psi_z =      0.00003509, Psi_r =     -0.00022757, dr =      0.78060691, dz =     10.26746170
+iteration # n = 58, m = 2
+Psi_rr =      0.00007081, Psi_rz =      0.00001679, D =     -0.00000000, Psi_zz =     -0.00000429, Psi_z =      0.00003568, Psi_r =     -0.00022026, dr =      0.59040977, dz =     10.62993207
+iteration # n = 59, m = 2
+Psi_rr =      0.00007168, Psi_rz =      0.00001673, D =     -0.00000000, Psi_zz =     -0.00000388, Psi_z =      0.00003628, Psi_r =     -0.00021299, dr =      0.39297404, dz =     11.04946443
+iteration # n = 60, m = 2
+Psi_rr =      0.00007254, Psi_rz =      0.00001667, D =     -0.00000000, Psi_zz =     -0.00000347, Psi_z =      0.00003690, Psi_r =     -0.00020576, dr =      0.18620974, dz =     11.53606792
+iteration # n = 61, m = 2
+Psi_rr =      0.00007337, Psi_rz =      0.00001660, D =     -0.00000000, Psi_zz =     -0.00000306, Psi_z =      0.00003753, Psi_r =     -0.00019857, dr =     -0.03249284, dz =     12.10256913
+iteration # n = 62, m = 2
+Psi_rr =      0.00007417, Psi_rz =      0.00001654, D =     -0.00000000, Psi_zz =     -0.00000265, Psi_z =      0.00003818, Psi_r =     -0.00019143, dr =     -0.26645165, dz =     12.76558754
+iteration # n = 63, m = 2
+Psi_rr =      0.00007496, Psi_rz =      0.00001648, D =     -0.00000000, Psi_zz =     -0.00000223, Psi_z =      0.00003884, Psi_r =     -0.00018434, dr =     -0.51996583, dz =     13.54699009
+iteration # n = 64, m = 2
+Psi_rr =      0.00007572, Psi_rz =      0.00001642, D =     -0.00000000, Psi_zz =     -0.00000182, Psi_z =      0.00003951, Psi_r =     -0.00017728, dr =     -0.79873910, dz =     14.47610712
+iteration # n = 65, m = 2
+Psi_rr =      0.00007646, Psi_rz =      0.00001637, D =     -0.00000000, Psi_zz =     -0.00000141, Psi_z =      0.00004019, Psi_r =     -0.00017028, dr =     -1.11053535, dz =     15.59319416
+iteration # n = 66, m = 2
+Psi_rr =      0.00007718, Psi_rz =      0.00001631, D =     -0.00000000, Psi_zz =     -0.00000100, Psi_z =      0.00004088, Psi_r =     -0.00016332, dr =     -1.46622840, dz =     16.95497752
+iteration # n = 67, m = 2
+Psi_rr =      0.00007788, Psi_rz =      0.00001625, D =     -0.00000000, Psi_zz =     -0.00000059, Psi_z =      0.00004159, Psi_r =     -0.00015640, dr =     -1.88156372, dz =     18.64395489
+iteration # n = 68, m = 2
+Psi_rr =      0.00007856, Psi_rz =      0.00001619, D =     -0.00000000, Psi_zz =     -0.00000018, Psi_z =      0.00004231, Psi_r =     -0.00014953, dr =     -2.38029692, dz =     20.78498200
+iteration # n = 69, m = 2
+Psi_rr =      0.00007922, Psi_rz =      0.00001613, D =     -0.00000000, Psi_zz =      0.00000023, Psi_z =      0.00004304, Psi_r =     -0.00014271, dr =     -3.00006699, dz =     23.57630664
+iteration # n = 70, m = 2
+Psi_rr =      0.00007986, Psi_rz =      0.00001608, D =     -0.00000000, Psi_zz =      0.00000064, Psi_z =      0.00004378, Psi_r =     -0.00013593, dr =     -3.80433756, dz =     27.35265600
+iteration # n = 71, m = 2
+Psi_rr =      0.00008048, Psi_rz =      0.00001602, D =     -0.00000000, Psi_zz =      0.00000104, Psi_z =      0.00004453, Psi_r =     -0.00012920, dr =     -4.90923193, dz =     32.72699500
+iteration # n = 72, m = 2
+Psi_rr =      0.00008108, Psi_rz =      0.00001596, D =     -0.00000000, Psi_zz =      0.00000145, Psi_z =      0.00004529, Psi_r =     -0.00012252, dr =     -6.55260093, dz =     40.95539588
+iteration # n = 73, m = 2
+Psi_rr =      0.00008167, Psi_rz =      0.00001591, D =     -0.00000000, Psi_zz =      0.00000185, Psi_z =      0.00004607, Psi_r =     -0.00011588, dr =     -9.31041400, dz =     55.08016900
+iteration # n = 74, m = 2
+Psi_rr =      0.00008223, Psi_rz =      0.00001585, D =     -0.00000000, Psi_zz =      0.00000226, Psi_z =      0.00004685, Psi_r =     -0.00010929, dr =    -15.02932288, dz =     84.85631825
+iteration # n = 75, m = 2
+Psi_rr =      0.00008278, Psi_rz =      0.00001580, D =     -0.00000000, Psi_zz =      0.00000266, Psi_z =      0.00004764, Psi_r =     -0.00010275, dr =    -34.64386649, dz =    188.04759987
+iteration # n = 76, m = 2
+iteration # n = 77, m = 2
+iteration # n = 78, m = 2
+iteration # n = 79, m = 2
+iteration # n = 80, m = 2
+iteration # n = 81, m = 2
+iteration # n = 82, m = 2
+iteration # n = 83, m = 2
+iteration # n = 84, m = 2
+iteration # n = 85, m = 2
+iteration # n = 86, m = 2
+iteration # n = 87, m = 2
+iteration # n = 88, m = 2
+iteration # n = 89, m = 2
+iteration # n = 90, m = 2
+iteration # n = 91, m = 2
+iteration # n = 92, m = 2
+iteration # n = 93, m = 2
+iteration # n = 94, m = 2
+iteration # n = 95, m = 2
+iteration # n = 96, m = 2
+iteration # n = 97, m = 2
+iteration # n = 98, m = 2
+iteration # n = 99, m = 2
+init time = 2.217679, solver time = 0.142776
