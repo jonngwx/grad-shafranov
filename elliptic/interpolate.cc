@@ -101,10 +101,10 @@ double Interpolate::Psirr_interp(double r, double z) {
     z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     double z3 = z2*z_;
-    return (2*a20 + 6*a30*r) +
-    (2*a21 + 6*a31*r)*z_ +
-    (2*a22 + 6*a32*r)*z2 +
-    (2*a23 + 6*a33*r)*z3;
+    return (2*a20 + 6*a30*r_) +
+    (2*a21 + 6*a31*r_)*z_ +
+    (2*a22 + 6*a32*r_)*z2 +
+    (2*a23 + 6*a33*r_)*z3;
 }
 
 double Interpolate::Psirz_interp(double r, double z) {
