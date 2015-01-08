@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
             printf("Interpolation outside of current gridcell\n");
         }
     }
-    BOOST_CHECK_CLOSE(0.005, psi_interp, 5);
+    BOOST_CHECK_CLOSE(0.005, psi_interp, .5);
     
     inter->updateCoefficients();
     double psi2_interp;
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
             printf("Interpolation outside of current gridcell\n");
         }
     }
-    BOOST_CHECK_CLOSE(0.0002, psi2_interp, 5);
+    BOOST_CHECK_CLOSE(0.0002, psi2_interp, .5);
     
     double psir2_interp;
     try {
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
     }
-    BOOST_CHECK_CLOSE(0.02, psir2_interp, 5);
+    BOOST_CHECK_CLOSE(0.02, psir2_interp, .5);
     
     double psiz_interp;
     try {
@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
     }
-    BOOST_CHECK_CLOSE(0.1, psiz_interp, 5);
+    BOOST_CHECK_CLOSE(0.1, psiz_interp, .5);
     
     double psiz2_interp;
     try {
@@ -115,5 +115,26 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
     }
-    BOOST_CHECK_CLOSE(0.02, psiz2_interp, 5);
+    BOOST_CHECK_CLOSE(0.02, psiz2_interp, .5);
+
+
+    double psizz_interp;
+    try {
+        psizz_interp = inter->Psizz_interp(0.01, 0.01);
+    }
+    catch(int i) {
+        if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
+    }
+    BOOST_CHECK_CLOSE(2, psizz_interp, .005);
+
+    double psirr_interp;
+    try {
+        psirr_interp = inter->Psirr_interp(0.01, 0.01);
+    }
+    catch(int i) {
+        if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
+    }
+    BOOST_CHECK_CLOSE(2, psirr_interp, .005);
+
+
 }
