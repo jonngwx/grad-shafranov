@@ -36,12 +36,12 @@ double Interpolate::Psi_interp(double r, double z) {
     if ((r - r_curr) == 0) r_ = 0;
     if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
-        printf("dr = %f\n", dr);
-        printf("r_curr = %f\n", r_curr);
-        printf("r = %f\n", r);
-        printf("dz = %f\n", dz);
-        printf("z_curr = %f\n", z_curr);
-        printf("z = %f\n", z);
+//        printf("dr = %f\n", dr);
+//        printf("r_curr = %f\n", r_curr);
+//        printf("r = %f\n", r);
+//        printf("dz = %f\n", dz);
+//        printf("z_curr = %f\n", z_curr);
+//        printf("z = %f\n", z);
         throw OutsideInterp;
     }
     r_ = (r - r_curr)/dr;
@@ -63,12 +63,12 @@ double Interpolate::Psir_interp(double r, double z) {
     if ((r - r_curr) == 0) r_ = 0;
     if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
-        printf("dr = %f\n", dr);
-        printf("r_curr = %f\n", r_curr);
-        printf("r = %f\n", r);
-        printf("dz = %f\n", dz);
-        printf("z_curr = %f\n", z_curr);
-        printf("z = %f\n", z);
+//        printf("dr = %f\n", dr);
+//        printf("r_curr = %f\n", r_curr);
+//        printf("r = %f\n", r);
+//        printf("dz = %f\n", dz);
+//        printf("z_curr = %f\n", z_curr);
+//        printf("z = %f\n", z);
         throw OutsideInterp;
     }
     r_ = (r - r_curr)/dr;
@@ -89,12 +89,12 @@ double Interpolate::Psirr_interp(double r, double z) {
     if ((r - r_curr) == 0) r_ = 0;
     if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
-        printf("dr = %f\n", dr);
-        printf("r_curr = %f\n", r_curr);
-        printf("r = %f\n", r);
-        printf("dz = %f\n", dz);
-        printf("z_curr = %f\n", z_curr);
-        printf("z = %f\n", z);
+//        printf("dr = %f\n", dr);
+//        printf("r_curr = %f\n", r_curr);
+//        printf("r = %f\n", r);
+//        printf("dz = %f\n", dz);
+//        printf("z_curr = %f\n", z_curr);
+//        printf("z = %f\n", z);
         throw OutsideInterp;
     }
     r_ = (r - r_curr)/dr;
@@ -114,12 +114,12 @@ double Interpolate::Psirz_interp(double r, double z) {
     if ((r - r_curr) == 0) r_ = 0;
     if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
-        printf("dr = %f\n", dr);
-        printf("r_curr = %f\n", r_curr);
-        printf("r = %f\n", r);
-        printf("dz = %f\n", dz);
-        printf("z_curr = %f\n", z_curr);
-        printf("z = %f\n", z);
+//        printf("dr = %f\n", dr);
+//        printf("r_curr = %f\n", r_curr);
+//        printf("r = %f\n", r);
+//        printf("dz = %f\n", dz);
+//        printf("z_curr = %f\n", z_curr);
+//        printf("z = %f\n", z);
         throw OutsideInterp;
     }
     r_ = (r - r_curr)/dr;
@@ -138,12 +138,12 @@ double Interpolate::Psiz_interp(double r, double z) {
     if ((r - r_curr) == 0) r_ = 0;
     if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
-        printf("dr = %f\n", dr);
-        printf("r_curr = %f\n", r_curr);
-        printf("r = %f\n", r);
-        printf("dz = %f\n", dz);
-        printf("z_curr = %f\n", z_curr);
-        printf("z = %f\n", z);
+//        printf("dr = %f\n", dr);
+//        printf("r_curr = %f\n", r_curr);
+//        printf("r = %f\n", r);
+//        printf("dz = %f\n", dz);
+//        printf("z_curr = %f\n", z_curr);
+//        printf("z = %f\n", z);
         throw OutsideInterp;
     }
     r_ = (r - r_curr)/dr;
@@ -163,12 +163,12 @@ double Interpolate::Psizz_interp(double r, double z) {
     if ((r - r_curr) == 0) r_ = 0;
     if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
-        printf("dr = %f\n", dr);
-        printf("r_curr = %f\n", r_curr);
-        printf("r = %f\n", r);
-        printf("dz = %f\n", dz);
-        printf("z_curr = %f\n", z_curr);
-        printf("z = %f\n", z);
+//        printf("dr = %f\n", dr);
+//        printf("r_curr = %f\n", r_curr);
+//        printf("r = %f\n", r);
+//        printf("dz = %f\n", dz);
+//        printf("z_curr = %f\n", z_curr);
+//        printf("z = %f\n", z);
         throw OutsideInterp;
     }
     r_ = (r - r_curr)/dr;
@@ -213,11 +213,11 @@ void Interpolate::updateP(double r, double z) {
     }
 
     r_curr = is*dr + (Grid_.R_[0]);
-    printf("R0 = %f\n", Grid_.R_[0]);
-    printf("r_curr = %f\n", r_curr);
+//    printf("R0 = %f\n", Grid_.R_[0]);
+//    printf("r_curr = %f\n", r_curr);
     z_curr = js*dz + (Grid_.z_[0]);
-    printf("z0 = %f\n", Grid_.z_[0]);
-    printf("z_curr = %f\n", z_curr);
+//    printf("z0 = %f\n", Grid_.z_[0]);
+//    printf("z_curr = %f\n", z_curr);
     // Fill in P
     P[0][0] = Psi_.f_[is-1][js-1];
     P[0][1] = Psi_.f_[is-1][js];

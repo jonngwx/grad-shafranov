@@ -25,7 +25,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
     double psi_s = 0; /* "psi-squiggle": a normalized psi equal to
     0 at the plasma-vacuum boundary and 1 on the magnetic axis.*/
 
-    printf("psi_l = %f, psi_0 = %f \n", psi->f_l, psi->f_0);
+//    printf("psi_l = %f, psi_0 = %f \n", psi->f_l, psi->f_0);
     /* delta_psi: The difference between the value of psi at the
      * plasma-vacuum boundary and the value on axis. */
     double delta_psi = psi->f_l - psi->f_0;
@@ -48,8 +48,8 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
         }
     }
     double alpha_g = mu0*(-P0_*temp1 + Ip_*delta_psi/(dr_*dz_))/(0.5*g0_*g0_*temp2);
-    printf("alpha_g = %f \n", alpha_g);
-    printf("summed jphi before update = %f\n", jtot1);
+//    printf("alpha_g = %f \n", alpha_g);
+//    printf("summed jphi before update = %f\n", jtot1);
 
     // update fields g, and jphi
     for (int i=0; i < nr_; ++i) {
@@ -79,7 +79,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
         }
     }
     jtot *= (dr_*dz_);
-    printf("Ip = %f ...... summed jphi = %f\n", Ip_, jtot);
+//    printf("Ip = %f ...... summed jphi = %f\n", Ip_, jtot);
 
 }
 

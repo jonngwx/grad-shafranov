@@ -21,7 +21,7 @@ SlowBoundary::SlowBoundary(Grid* grid)
 
   perim_ = 2 * (nr_ + nz_ - 2);
   cond_data_ = new CoilData();
-  printf("num rows = %i \n", cond_data_->num_rows());
+//  printf("num rows = %i \n", cond_data_->num_rows());
 
   // Initialize Green's Function Array for Plasma Response
   g_plasma_ = new double** [nr_];
