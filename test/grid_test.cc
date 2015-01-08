@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 /*!
- * Tests grid celli
+ * Tests Grid::celli
  */
 BOOST_AUTO_TEST_CASE (test_celli) {
     double R0 = 0;
@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE (test_celli) {
 
 
 /*!
- * Tests grid cellj
+ * Tests Grid::cellj
  */
 BOOST_AUTO_TEST_CASE (test_cellj) {
     double R0 = 0;
@@ -52,10 +52,10 @@ BOOST_AUTO_TEST_CASE (test_cellj) {
 
     // check that upper bound is working
     double b = grid.cellj(50);
-    BOOST_CHECK_CLOSE(b,nr-1,0.01);
+    BOOST_CHECK_CLOSE(b,nz-1,0.01);
 
     // check interpolation
     double c = grid.cellj(2.5);
-    BOOST_CHECK_CLOSE(c,6.7568,0.01);
+    BOOST_CHECK_CLOSE(c,6.75,0.01);
 }
 
