@@ -1,6 +1,6 @@
 /*!
  * @file boundary.h
- * @author ???
+ * @author Peter J. Bolgert 
  * @brief Header file for the Boundary class.
  */
 #ifndef BOUNDARY_H_
@@ -8,6 +8,11 @@
 
 #include "field.h"
 
+/*!
+ * @brief Contains a method to update the boundary values of Psi.
+ *
+ * This class is meant to be subclassed so that different types of boundary-value calculating methods can be implemented.
+ */
 class Boundary {
   public:
     Boundary(Grid *grid);
