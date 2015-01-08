@@ -21,15 +21,15 @@ BOOST_AUTO_TEST_CASE (test_celli) {
     
     // check that lower bound is working
     double a = grid.celli(-10);
-    BOOST_CHECK_CLOSE(a,0,6);
+    BOOST_CHECK_CLOSE(a,0,0.01);
 
     // check that upper bound is working
     double b = grid.celli(50);
-    BOOST_CHECK_CLOSE(b,nr-1,6);
+    BOOST_CHECK_CLOSE(b,nr-1,0.01);
 
     // check interpolation
     double c = grid.celli(2.5);
-    BOOST_CHECK_CLOSE(c,2.25,.5);
+    BOOST_CHECK_CLOSE(c,2.25,0.01);
 }
 
 
@@ -48,14 +48,14 @@ BOOST_AUTO_TEST_CASE (test_cellj) {
     
     // check that lower bound is working
     double a = grid.cellj(-10);
-    BOOST_CHECK_CLOSE(a,0,6);
+    BOOST_CHECK_CLOSE(a,0,0.01);
 
     // check that upper bound is working
     double b = grid.cellj(50);
-    BOOST_CHECK_CLOSE(b,nr-1,6);
+    BOOST_CHECK_CLOSE(b,nr-1,0.01);
 
     // check interpolation
     double c = grid.cellj(2.5);
-    BOOST_CHECK_CLOSE(c,6.7568,.5);
+    BOOST_CHECK_CLOSE(c,6.7568,0.01);
 }
 
