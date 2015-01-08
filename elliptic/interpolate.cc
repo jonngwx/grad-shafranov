@@ -76,10 +76,15 @@ double Interpolate::Psir_interp(double r, double z) {
     z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     double z3 = z2*z_;
-    return (a10 + 2*a20*r_ + 3*a30*r2) +
+    return ((a10 + 2*a20*r_ + 3*a30*r2) +
     (a11 + 2*a21*r_ + 3*a31*r2)*z_ +
     (a12 + 2*a22*r_ + 3*a32*r2)*z2 +
-    (a13 + 2*a23*r_ + 3*a33*r2)*z3;
+	    (a13 + 2*a23*r_ + 3*a33*r2)*z3)/dr;
+    
+    /*    return a10+ 3*a33*r2*z3 + (2*a23*r_*z3+3*a32*r2*z2)
+      + (a13*z3 + 2*a22*r_*z2 + 3*a31*r2*z_) + 
+      (a12*z2 + 2*a21*r_*z + 3*a30*r2) + 
+      (a11*z_ + 2*a20*r); */
 }
 
 double Interpolate::Psirr_interp(double r, double z) {
@@ -101,10 +106,10 @@ double Interpolate::Psirr_interp(double r, double z) {
     z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     double z3 = z2*z_;
-    return (2*a20 + 6*a30*r_) +
+    return ((2*a20 + 6*a30*r_) +
     (2*a21 + 6*a31*r_)*z_ +
     (2*a22 + 6*a32*r_)*z2 +
-    (2*a23 + 6*a33*r_)*z3;
+	    (2*a23 + 6*a33*r_)*z3)/dr/dr;
 }
 
 double Interpolate::Psirz_interp(double r, double z) {
@@ -126,9 +131,9 @@ double Interpolate::Psirz_interp(double r, double z) {
     double r2 = r_*r_;
     z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
-    return (a11 + 2*a21*r_ + 3*a31*r2) +
+    return ((a11 + 2*a21*r_ + 3*a31*r2) +
     2*(a12 + 2*a22*r_ + 3*a32*r2)*z_ +
-    3*(a13 + 2*a23*r_ + 3*a33*r2)*z2;
+	    3*(a13 + 2*a23*r_ + 3*a33*r2)*z2)/dr/dz;
 }
 
 double Interpolate::Psiz_interp(double r, double z) {
@@ -151,9 +156,9 @@ double Interpolate::Psiz_interp(double r, double z) {
     double r3 = r2*r_;
     z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
-    return (a01 + a11*r_ + a21*r2 + a31*r3) +
+    return ((a01 + a11*r_ + a21*r2 + a31*r3) +
     2*(a02 + a12*r_ + a22*r2 + a32*r3)*z_ +
-    3*(a03 + a13*r_ + a23*r2 + a33*r3)*z2;
+      3*(a03 + a13*r_ + a23*r2 + a33*r3)*z2)/dz;
 }
 
 double Interpolate::Psizz_interp(double r, double z) {
@@ -176,8 +181,8 @@ double Interpolate::Psizz_interp(double r, double z) {
     double r3 = r2*r_;
     z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
-    return 2*(a02 + a12*r_ + a22*r2 + a32*r3) +
-    6*(a03 + a13*r_ + a23*r2 + a33*r3)*z2;
+    return (2*(a02 + a12*r_ + a22*r2 + a32*r3) +
+	    6*(a03 + a13*r_ + a23*r2 + a33*r3)*z2)/dz/dz;
 }
 
 void Interpolate::updateCoefficients() {
