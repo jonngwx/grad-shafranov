@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     }
     double z0;
     if (vm.count("j-phi-z0")) {
-      R0 = vm["j-phi-z0"].as<double>();
+      z0 = vm["j-phi-z0"].as<double>();
     } else {
       // not necessarily true. Just for now...
       z0 = (zmax + zmin)/2.0; 
