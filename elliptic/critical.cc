@@ -115,7 +115,7 @@ void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   assert(D != 0);
   *dr = (-Psi_zz*Psi_r + Psi_rz*Psi_z)*(1.0/D);
   *dz = (Psi_rz*Psi_r - Psi_rr*Psi_z)*(1.0/D);
-//  printf("Psi_rr = %f, Psi_rz = %f, D = %f, Psi_zz = %f, Psi_z = %f, Psi_r = %f, dr = %f, dz = %f\n", Psi_rr, Psi_rz, D, Psi_zz, Psi_z, Psi_r ,*dr, *dz);
+  printf("Psi_rr = %f, Psi_rz = %f, D = %f, Psi_zz = %f, Psi_z = %f, Psi_r = %f, dr = %f, dz = %f\n", Psi_rr, Psi_rz, D, Psi_zz, Psi_z, Psi_r ,*dr, *dz);
 }
 
 /*!

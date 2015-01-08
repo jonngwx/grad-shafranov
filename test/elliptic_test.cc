@@ -234,11 +234,6 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
     for (int l = 0; l < perim; ++l) {
         psi->f_[psib->LtoI(l)][psib->LtoJ(l)] = psi_old->f_[psib->LtoI(l)][psib->LtoJ(l)];
     }
-    
-    // Initialize psi boundary using exact solution
-    for (int l = 0; l < perim; ++l) {
-        psi->f_[psib->LtoI(l)][psib->LtoJ(l)] = psi_old->f_[psib->LtoI(l)][psib->LtoJ(l)];
-    }
        
     /* 
     printf("\n SOLUTION \n");
@@ -256,13 +251,13 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
     for (int n = 0; n < max_iter; ++n) {
         if (n==0) solver->step_1(*jphi);
         else solver->step(*jphi);
-	printf("n = %d\n, norm = %f\n",n,solver->norm());
+	//	printf("n = %d\n, norm = %f\n",n,solver->norm());
         if (solver->norm() < epsilon) {
 	  break;
 
 	}
     }
-    printf("\n FINAL \n");
+    //    printf("\n FINAL \n");
     for (int i = 0; i < nr; ++i) {
         for (int j = 0; j < nz; ++j) {
             //printf("%f\t", psi->f_[i][j]);
