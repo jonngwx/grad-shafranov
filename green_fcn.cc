@@ -1,6 +1,6 @@
 /*! 
  * @file green_fcn.cc
- * @author ???
+ * @author Peter J. Bolgert
 * @brief implements green_fcn()
  */
 #include <math.h>
@@ -15,8 +15,8 @@ double green_fcn(double R1, double Z1, double R2, double Z2) {
   } else {
     double k =
         sqrt(4.0 * R1 * R2 / ((R1 + R2) * (R1 + R2) + (Z1 - Z2) * (Z1 - Z2)));
-    /*Oh gosh what is that number?*/
-    double g = (1.0 / 6.28318530718) * (sqrt(R1 * R2) / k) *
+    /*Numerical coefficient below is 1 over 2 pi */
+    double g = -(1.0 / 6.28318530718) * (sqrt(R1 * R2) / k) *
                ((2 - k * k) * ellint_1(k) - 2 * ellint_2(k));
     return g;
   }

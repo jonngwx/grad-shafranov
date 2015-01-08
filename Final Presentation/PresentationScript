@@ -1,0 +1,36 @@
+Jacob's presentation script:
+
+The most difficult part about running COUGAR is finding the required input data:
+
+locations and currents through the external coils
+appropriate guesses for the pressure on the magnetic axis 
+and for the current distribution,
+determining the best size of the computational domain...
+
+we have not actually succeeded yet...
+
+We used boost_program_options to manage the configuration options such as those above.
+they can be specified in a file or on the command line. Unspecified options have defaults as well.
+
+If you'd like to know what options are available and what the defaults are, consult
+
+./gs_solver --help
+
+.
+
+The program looks for a config file called grad-shafranov.cfg,
+so to run the program one needs only to type
+
+[does command]
+./gs_solver
+
+This outputs cougar.out.tsv, a text file.
+In this file are the final values of psi on the solution grid.
+Also are grids for the helper functions p and g, for diagnostic purposes.
+
+We can view these by using a plot command:
+
+[does command]
+python python/viz.py cougar.out.tsv tsv
+
+

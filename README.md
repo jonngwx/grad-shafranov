@@ -30,8 +30,14 @@ Of course, if you specify an illegal value for an option, or a file which does n
 
 To plot the output, type
 
-    python python/viz.py cougar.out.tsv tsv
+    python python/viz.py cougar.out.tsv 
     
 if the default output filename is used.  More generally, type
 
-    python python/viz.py <filename> <tsv|hdf>
+    python python/viz.py <filename> 
+    
+To access the data in python, import viz, then use
+
+    F = viz.plot(filename, format)
+
+F will be a dictionary of the grid and data arrays.

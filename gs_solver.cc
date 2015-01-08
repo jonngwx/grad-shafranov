@@ -1,7 +1,14 @@
+/*! 
+ * @file gs_solver.cc
+ * @author The COUGAR Team
+ * @brief The main program for COUGAR
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
 #include <math.h>
+#include <time.h>
 #include "include/grid.h"
 #include "include/field.h"
 #include "include/grad_output.h"
@@ -22,7 +29,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-
+  
+    clock_t time0 = clock();
     /*********************************************************
      * Load options from config file and command line into vm
      ********************************************************/
@@ -91,8 +99,20 @@ int main(int argc, char *argv[])
      * I'm not sure where this psi initialization comes from. -JAS
      ***************************************************************/
     double r_squared;
-    double R0 = (Rmax + Rmin)/2.0; // not necessarily true.  just for now           /*What's not true??? -JAS*/ 
-    double z0 = (zmax + zmin)/2.0; // see above comment
+    double R0;
+    if (vm.count("j-phi-R0")) {
+      R0 = vm["j-phi-R0"].as<double>();
+    } else {
+      // not necessarily true. Just for now...
+      R0 = (Rmax + Rmin)/2.0;
+    }
+    double z0;
+    if (vm.count("j-phi-z0")) {
+      z0 = vm["j-phi-z0"].as<double>();
+    } else {
+      // not necessarily true. Just for now...
+      z0 = (zmax + zmin)/2.0; 
+    }
     double D = vm["j-phi-D"].as<double>();
     double Ip = vm["j-phi-Ip"].as<double>();
 
@@ -122,7 +142,7 @@ int main(int argc, char *argv[])
     double n1 = vm["pgta-n1"].as<double>();
     double n2 = vm["pgta-n2"].as<double>();
     JSolverAlpha *jsa = new JSolverAlpha(P0,g0,n1,n2,Ip,grid);
-
+    
     // Elliptic solver for inner loop
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
     Boundary *psib = new SlowBoundary(grid, &cd);
@@ -145,12 +165,16 @@ int main(int argc, char *argv[])
         grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,output_list.c_str());
         #else 
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
+	output_type = "tsv";
         printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
         #endif 
     } else {
         printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
+        output_type = "tsv";
         grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
     }
+    clock_t time1 = clock();
+    std::string output_filename_base = vm["output-name"].as<string>();
 
     // solve stuff   "What???" -JAS
     solver->coeff();
@@ -159,10 +183,9 @@ int main(int argc, char *argv[])
      ***********************************************/
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(psi, jphi);
-        
         // output during calculation 
         if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
-            std::string partial_output_name = vm["output-name"].as<string>()+ ".m" + std::to_string(m) + "." +output_type;
+            std::string partial_output_name = output_filename_base + ".m" + std::to_string(m) + "." + output_type;
             grad_output->write_output(partial_output_name.c_str());
             printf("Writing output for m = %d\n",m);
         }
@@ -184,7 +207,7 @@ int main(int argc, char *argv[])
 
             // output during calculation
             if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
-                std::string partial_output_name = vm["output-name"].as<string>()+".n" + std::to_string(n) + ".m" + std::to_string(m) + "." +output_type;
+                std::string partial_output_name = output_filename_base + std::to_string(n) + ".m" + std::to_string(m) + "." + output_type;
                 grad_output->write_output(partial_output_name.c_str());
                 printf("Writing output for n = %d, m = %d\n",n,m);
             }
@@ -193,13 +216,16 @@ int main(int argc, char *argv[])
             }
         }//end inner loop
     }//end outer loop
-
+    clock_t time2 = clock();
   /************************************************
    * Write final output and close 
    ***********************************************/
-  std::string full_output_name = vm["output-name"].as<string>()+"."+output_type;
+  std::string full_output_name = output_filename_base + "." + output_type;
   grad_output->write_output(full_output_name.c_str());
   
+  float t1 = ((float)(time1-time0))/CLOCKS_PER_SEC;
+  float t2 = ((float)(time2-time1))/CLOCKS_PER_SEC;
+  printf("init time = %f, solver time = %f\n",t1,t2);
   delete grad_output;
   delete crit;
   delete psi;

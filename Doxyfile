@@ -819,7 +819,8 @@ EXCLUDE                = Docs\html \
                          cougar.out.hdf5 \
                          cougar.out.tsv \
                          pg_data_example.cc \
-                         tsv_reader_example.cc
+                         tsv_reader_example.cc \
+                         test
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded

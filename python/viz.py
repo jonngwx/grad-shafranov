@@ -1,13 +1,15 @@
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
 #import field
 import read_data
+import re
 
 def plot(filename,format):
-    """Please describe this function
-
-    in some detail.
+    """
+    This is a function which plots things. It takes two strings, one of which is the filename, followed by the format.
+    @return F a dict containing all the data in the file.
     """
     try:
         if format == "txt" or format == "tsv":
@@ -35,9 +37,12 @@ def plot(filename,format):
     nz = F['z'].shape[0]
     dr = (Rend-R0)/(nR-1)
     dz = (zend-z0)/(nz-1)
-    plt.figure(1)
-    cfig = plt.subplot(3,1,1)
-    plt.contour(F['R'],F['z'],F['psi'],colors='k')
+    fig = plt.figure(1,figsize=(16,9),dpi = 80)
+    cfig = plt.subplot(1,3,1)
+    clist = np.linspace(np.min(F['psilo']),np.max(F['psilo']),10)
+    matplotlib.rcParams['contour.negative_linestyle']='solid'
+    plt.contour(F['R'],F['z'],F['psi'],clist,colors='k')
+    plt.contour(F['R'],F['z'],F['psi'],[F['psilo'][0],F['psilo'][0]],colors='r')
     plt.pcolormesh(F['R'],F['z'],F['psi'])
     def format_coord_psi(x,y):
         col = int((x-R0)/dr)
@@ -49,12 +54,15 @@ def plot(filename,format):
             return 'R = %1.4f, z = %1.4f'%(x,y)
 
     cfig.format_coord = format_coord_psi
+    cb = plt.colorbar()
     plt.title('$\Psi$')
-    plt.xticks([])
-    plt.ylabel('z')
-#    plt.colorbar()
-    pfig = plt.subplot(3,1,2)
-    plt.pcolormesh(F['R'],F['z'],F['p'],shading='gouraud')
+    plt.xlabel('$R$ (m)')
+    plt.ylabel('z (m)')
+    #plt.xticks([])
+    cfig.set_aspect('equal')
+
+    pfig = plt.subplot(1,3,2)
+    plt.pcolormesh(F['R'],F['z'],F['p'])#,shading='gouraud')
     def format_coord_p(x,y):
         col = int((x-R0)/dr)
         row = int((y-z0)/dz)
@@ -65,11 +73,15 @@ def plot(filename,format):
             return 'R = %1.4f, z = %1.4f'%(x,y)
     pfig.format_coord = format_coord_p
     plt.title('p')
-#    plt.xlabel('$R$')
-    plt.ylabel('z')
+    plt.xlabel('$R$ (m)')
+    plt.xlim([R0,Rend])
+    plt.ylim([z0,zend])
     plt.colorbar()
-    gfig = plt.subplot(3,1,3)
-    plt.pcolormesh(F['R'],F['z'],F['g'],shading='gouraud')
+    pfig.set_aspect('equal')
+
+
+    gfig = plt.subplot(1,3,3)
+    plt.pcolormesh(F['R'],F['z'],F['g'])#,shading='gouraud')
     plt.title('g')
     def format_coord_g(x,y):
         col = int((x-R0)/dr)
@@ -80,21 +92,60 @@ def plot(filename,format):
         else:
             return 'R = %1.4f, z = %1.4f'%(x,y)
     gfig.format_coord = format_coord_g
-    plt.xlabel('$R$')
-    plt.ylabel('z')
+    plt.xlabel('$R$ (m)')
+    plt.xlim([R0,Rend])
+    plt.ylim([z0,zend])
     plt.colorbar()
+    gfig.set_aspect('equal')
     #positional hackery
     cpos = cfig.get_position().get_points()
     gpos = gfig.get_position().get_points()
+   # print cpos
+   # print gpos
+    cpos[0,0] = gpos[0,0]
     cpos[1,0] = gpos[1,0]-gpos[0,0]
     cpos[1,1] = cpos[1,1]-cpos[0,1]
-    cfig.set_position(np.ndarray.flatten(cpos))
+   # print cpos
+   # cfig.set_position(np.ndarray.flatten(cpos))
+   # print cfig.get_position().get_points()
+   # print gfig.get_position().get_points()
+    fig.delaxes(fig.axes[1])
     plt.show()
     return F
 
 
+def midplane_plot(F,x):
+    """
+    A radial plot of a quantity along the midplane of the tokamak
+    @param F container holding fields and grid
+    @param x the quantity to plot
+    @return R the grid in the radial direction
+    @return a the field x along the midplane, or None if invalid
+    """
+    if x not in F.keys():
+        print "The specified quantity is not available"
+        return F['R'],None
+    a = F[x]
+    if np.array(a.shape).shape[0] != 2:
+        print "The specified quantity is not a 2d array"
+        return F['R'],None
+    nz = a.shape[0]
+    plt.close(1)
+    plt.figure(1)
+    plt.clf()
+    plt.plot(F['R'],a[nz/2,::])
+    plt.show()
+    return F['R'], a[nz/2,::]
+
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print 'wrong number of arguments'
+    if len(sys.argv) != 2:
+        print 'Format is viz <filename>'
     else:
-        plot(sys.argv[1],sys.argv[2])
+        FILE = '.*\.(hdf5|tsv)'
+        prog = re.compile(FILE)
+        result = prog.match(sys.argv[1])
+        print "Reading file %s ..."%sys.argv[1]
+        if result is None:
+            print "invalid file name %s"%sys.argv[1]
+            sys.exit()
+        plot(sys.argv[1],result.group(1))

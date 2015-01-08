@@ -1,5 +1,6 @@
 /*!
  * @file grad_output_hdf.h
+ * @author Catamount
  * @brief Header file for grad_output_hdf.
  */
 
@@ -38,10 +39,10 @@ class Grad_Output_Hdf : public Grad_Output {
  private:
   /**
    * @brief Converts an array of pointers to a 1d array
-   * @param f array of pointers to convert
-   * @param x 1d array to write to
-   * @param nx dimensions of 2d array in x
-   * @param ny dimensions of 2d array in y
+   * @param[in] f array of pointers to convert
+   * @param[out] x 1d array to write to
+   * @param[in] nx dimensions of 2d array in x
+   * @param[in] ny dimensions of 2d array in y
    * */
   void twod_to_oned(const double* const* f, double* x, int nx, int ny);
 

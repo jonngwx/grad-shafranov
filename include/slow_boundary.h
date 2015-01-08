@@ -31,6 +31,7 @@ class SlowBoundary : public Boundary {
    *  influence the boundary conditions for psi.
    *  Currently the affect of these coils has not been implemented.
    */
+  SlowBoundary(Grid* grid);
   SlowBoundary(Grid* grid, CoilData* cond_data);
   ~SlowBoundary();
   /*!
@@ -59,6 +60,7 @@ class SlowBoundary : public Boundary {
    * due to a unit current at point [i][j] in the plasma.
    * Note that for cells on the boundary,
    * g_plasma[ce,ll][corresponding cell] = 0. */
+  double** g_coils_;  
 };
 
 #endif  // SLOWBOUNDARY_H_
