@@ -37,8 +37,8 @@ def plot(filename,format):
     nz = F['z'].shape[0]
     dr = (Rend-R0)/(nR-1)
     dz = (zend-z0)/(nz-1)
-    fig = plt.figure(1,figsize=(4,9),dpi = 80)
-    cfig = plt.subplot(3,1,1)
+    fig = plt.figure(1,figsize=(16,9),dpi = 80)
+    cfig = plt.subplot(1,3,1)
     clist = np.linspace(np.min(F['psilo']),np.max(F['psilo']),10)
     matplotlib.rcParams['contour.negative_linestyle']='solid'
     plt.contour(F['R'],F['z'],F['psi'],clist,colors='k')
@@ -56,11 +56,12 @@ def plot(filename,format):
     cfig.format_coord = format_coord_psi
     cb = plt.colorbar()
     plt.title('$\Psi$')
-    plt.xticks([])
-    plt.ylabel('z')
+    plt.xlabel('$R$ (m)')
+    plt.ylabel('z (m)')
+    #plt.xticks([])
     cfig.set_aspect('equal')
 
-    pfig = plt.subplot(3,1,2)
+    pfig = plt.subplot(1,3,2)
     plt.pcolormesh(F['R'],F['z'],F['p'])#,shading='gouraud')
     def format_coord_p(x,y):
         col = int((x-R0)/dr)
@@ -72,27 +73,26 @@ def plot(filename,format):
             return 'R = %1.4f, z = %1.4f'%(x,y)
     pfig.format_coord = format_coord_p
     plt.title('p')
-    plt.ylabel('z')
+    plt.xlabel('$R$ (m)')
     plt.xlim([R0,Rend])
     plt.ylim([z0,zend])
     plt.colorbar()
     pfig.set_aspect('equal')
 
 
-    gfig = plt.subplot(3,1,3)
+    gfig = plt.subplot(1,3,3)
     plt.pcolormesh(F['R'],F['z'],F['g'])#,shading='gouraud')
     plt.title('g')
     def format_coord_g(x,y):
         col = int((x-R0)/dr)
         row = int((y-z0)/dz)
         if (col >=0 and col < nR and row >= 0 and row < nz):
-            z = F['psi'][row,col]
+            z = F['g'][row,col]
             return 'R = %1.4f, z = %1.4f, g = %1.4f'%(x,y,z)
         else:
             return 'R = %1.4f, z = %1.4f'%(x,y)
     gfig.format_coord = format_coord_g
-    plt.xlabel('$R$')
-    plt.ylabel('z')
+    plt.xlabel('$R$ (m)')
     plt.xlim([R0,Rend])
     plt.ylim([z0,zend])
     plt.colorbar()
@@ -106,7 +106,7 @@ def plot(filename,format):
     cpos[1,0] = gpos[1,0]-gpos[0,0]
     cpos[1,1] = cpos[1,1]-cpos[0,1]
    # print cpos
-    cfig.set_position(np.ndarray.flatten(cpos))
+   # cfig.set_position(np.ndarray.flatten(cpos))
    # print cfig.get_position().get_points()
    # print gfig.get_position().get_points()
     fig.delaxes(fig.axes[1])

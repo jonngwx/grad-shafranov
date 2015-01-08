@@ -1,6 +1,6 @@
 /*!
  * @file boundary.cc
- * @author ???
+ * @author Peter J. Bolgert 
  * @brief Implementation for the Boundary class.
  */
 #include "include/boundary.h"

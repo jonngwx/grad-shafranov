@@ -99,8 +99,20 @@ int main(int argc, char *argv[])
      * I'm not sure where this psi initialization comes from. -JAS
      ***************************************************************/
     double r_squared;
-    double R0 = (Rmax + Rmin)/2.0; // not necessarily true.  just for now           /*What's not true??? -JAS*/ 
-    double z0 = (zmax + zmin)/2.0; // see above comment
+    double R0;
+    if (vm.count("j-phi-R0")) {
+      R0 = vm["j-phi-R0"].as<double>();
+    } else {
+      // not necessarily true. Just for now...
+      R0 = (Rmax + Rmin)/2.0;
+    }
+    double z0;
+    if (vm.count("j-phi-z0")) {
+      z0 = vm["j-phi-z0"].as<double>();
+    } else {
+      // not necessarily true. Just for now...
+      z0 = (zmax + zmin)/2.0; 
+    }
     double D = vm["j-phi-D"].as<double>();
     double Ip = vm["j-phi-Ip"].as<double>();
 
@@ -142,7 +154,6 @@ int main(int argc, char *argv[])
     double error_tol_crit = vm["error-tol-crit"].as<double>();
     Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2, R0, z0);
 
-
     /** determine which output type: tsv or hdf5 */
     Grad_Output *grad_output;
     std::string output_type = vm["output-type"].as<string>();
@@ -181,7 +192,7 @@ int main(int argc, char *argv[])
         // test convergence
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
-            printf("n = %i \n", n);
+//            printf("n = %i \n", n);
             if (n == 0) {
               solver->step_1(*jphi);
             } else {
@@ -201,7 +212,7 @@ int main(int argc, char *argv[])
                 printf("Writing output for n = %d, m = %d\n",n,m);
             }
             if (n == maxIterN-1) {
-                printf(" Elliptic solver reached maxIterN without convergence\n");
+//                printf(" Elliptic solver reached maxIterN without convergence\n");
             }
         }//end inner loop
     }//end outer loop
