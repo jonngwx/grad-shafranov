@@ -99,8 +99,20 @@ int main(int argc, char *argv[])
      * I'm not sure where this psi initialization comes from. -JAS
      ***************************************************************/
     double r_squared;
-    double R0 = (Rmax + Rmin)/2.0; // not necessarily true.  just for now           /*What's not true??? -JAS*/ 
-    double z0 = (zmax + zmin)/2.0; // see above comment
+    double R0;
+    if (vm.count("j-phi-R0")) {
+      R0 = vm["j-phi-R0"].as<double>();
+    } else {
+      // not necessarily true. Just for now...
+      R0 = (Rmax + Rmin)/2.0;
+    }
+    double z0;
+    if (vm.count("j-phi-z0")) {
+      R0 = vm["j-phi-z0"].as<double>();
+    } else {
+      // not necessarily true. Just for now...
+      z0 = (zmax + zmin)/2.0; 
+    }
     double D = vm["j-phi-D"].as<double>();
     double Ip = vm["j-phi-Ip"].as<double>();
 
