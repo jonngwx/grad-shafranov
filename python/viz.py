@@ -87,7 +87,7 @@ def plot(filename,format):
         col = int((x-R0)/dr)
         row = int((y-z0)/dz)
         if (col >=0 and col < nR and row >= 0 and row < nz):
-            z = F['psi'][row,col]
+            z = F['g'][row,col]
             return 'R = %1.4f, z = %1.4f, g = %1.4f'%(x,y,z)
         else:
             return 'R = %1.4f, z = %1.4f'%(x,y)
