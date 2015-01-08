@@ -10,6 +10,7 @@ var annotated =
     [ "Grad_Output_Hdf", "class_grad___output___hdf.html", "class_grad___output___hdf" ],
     [ "Grad_Output_Txt", "class_grad___output___txt.html", "class_grad___output___txt" ],
     [ "Grid", "class_grid.html", "class_grid" ],
+    [ "Interpolate", "class_interpolate.html", "class_interpolate" ],
     [ "JSolverAlpha", "class_j_solver_alpha.html", "class_j_solver_alpha" ],
     [ "PGData", "class_p_g_data.html", "class_p_g_data" ],
     [ "SlowBoundary", "class_slow_boundary.html", "class_slow_boundary" ],

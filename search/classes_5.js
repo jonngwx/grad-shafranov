@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jsolveralpha',['JSolverAlpha',['../class_j_solver_alpha.html',1,'']]]
+  ['interpolate',['Interpolate',['../class_interpolate.html',1,'']]]
 ];

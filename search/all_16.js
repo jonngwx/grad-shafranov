@@ -8,6 +8,7 @@ var searchData=
   ['_7egrad_5foutput_5fhdf',['~Grad_Output_Hdf',['../class_grad___output___hdf.html#a30103a05a2fcd5126b7cbe70fb4f95a5',1,'Grad_Output_Hdf']]],
   ['_7egrad_5foutput_5ftxt',['~Grad_Output_Txt',['../class_grad___output___txt.html#a75f9f6c049cc47daa42d55954bb5f638',1,'Grad_Output_Txt']]],
   ['_7egrid',['~Grid',['../class_grid.html#a3661d0a7f998caaaf8627d7a67072116',1,'Grid']]],
+  ['_7einterpolate',['~Interpolate',['../class_interpolate.html#a5721b044c124afc7d9816a1bcc2f49c2',1,'Interpolate']]],
   ['_7ejsolveralpha',['~JSolverAlpha',['../class_j_solver_alpha.html#a63d8403c3729b9797d8aeb65785692b8',1,'JSolverAlpha']]],
   ['_7eslowboundary',['~SlowBoundary',['../class_slow_boundary.html#aa4f5c6cfe4e7637c4ec43435b6a71422',1,'SlowBoundary']]],
   ['_7esor',['~SOR',['../class_s_o_r.html#aa3db8b4840076358adc037034dd566bf',1,'SOR']]],

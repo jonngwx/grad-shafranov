@@ -14,6 +14,10 @@ var searchData=
   ['critical',['Critical',['../class_critical.html',1,'Critical'],['../class_critical.html#ab5cb459e9d3fe114fa320abfc1f69677',1,'Critical::Critical()']]],
   ['critical_2ecc',['critical.cc',['../critical_8cc.html',1,'']]],
   ['critical_2eh',['critical.h',['../critical_8h.html',1,'']]],
+  ['critical_5ftest_2ecc',['critical_test.cc',['../critical__test_8cc.html',1,'']]],
+  ['cubicinterpolate',['cubicInterpolate',['../class_interpolate.html#a0c89f4aca37f57475264b81f1e10fb93',1,'Interpolate']]],
+  ['cubicinterpolate_5fr',['cubicInterpolate_r',['../class_interpolate.html#aaf2eeb6a3b2d053c7d65d99f285b6c86',1,'Interpolate']]],
+  ['cubicinterpolate_5frr',['cubicInterpolate_rr',['../class_interpolate.html#a34d91e1998fbbd79427b3c72d6226399',1,'Interpolate']]],
   ['current',['current',['../class_coil_data.html#af79bedb38b95e5f563190266988a6494',1,'CoilData::current()'],['../class_grad___output.html#af76e38da8114d0f8f33966b8b60f8fe8ab24cf58ec6f711a0304e976b258fe3ac',1,'Grad_Output::CURRENT()']]],
   ['cougar_20readme',['COUGAR README',['../md__r_e_a_d_m_e.html',1,'']]]
 ];

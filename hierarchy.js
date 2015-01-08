@@ -14,6 +14,7 @@ var hierarchy =
       [ "Grad_Output_Txt", "class_grad___output___txt.html", null ]
     ] ],
     [ "Grid", "class_grid.html", null ],
+    [ "Interpolate", "class_interpolate.html", null ],
     [ "JSolverAlpha", "class_j_solver_alpha.html", null ],
     [ "Table", "class_table.html", [
       [ "CoilData", "class_coil_data.html", null ],
