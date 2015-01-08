@@ -24,4 +24,6 @@ test/test_output
 test/grid_test
 test/boundary_test
 test/slow_boundary_test
+test/interpolate_test
+test/util_test
 exampleClassUsage/boostEllipticIntegralExample/ellint_ex

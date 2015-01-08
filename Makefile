@@ -4,7 +4,7 @@ LIBS = -lboost_program_options -lboost_unit_test_framework -lboost_math_tr1
 HDF = -lhdf5_hl -lhdf5 -DHDF_MODE
 PROGS = gs_solver
 TESTDIR = test
-TESTPROGS = $(TESTDIR)/test_output $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test $(TESTDIR)/slow_boundary_test
+TESTPROGS = $(TESTDIR)/test_output $(TESTDIR)/util_test $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test $(TESTDIR)/slow_boundary_test $(TESTDIR)/interpolate_test
 EXDIR = exampleClassUsage
 EXAMPLEPROGS = $(EXDIR)/tsv_reader_example $(EXDIR)/coil_data_example
 OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o elliptic/interpolate.o
@@ -27,13 +27,16 @@ $(TESTDIR)/elliptic_test: elliptic/elliptic_solver.o test/elliptic_test.o ellipt
 critical_test: elliptic/critical.o elliptic/critical_test.o grid.o field.o elliptic/interpolate.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-interpolate_test: grid.o field.o elliptic/interpolate.o elliptic/interpolate_test.o
+$(TESTDIR)/interpolate_test: grid.o field.o elliptic/interpolate.o elliptic/interpolate_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(TESTDIR)/tsv_reader_test: tsv_reader.o $(TESTDIR)/tsv_reader_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(TESTDIR)/test_output: $(TESTDIR)/test_output.o grad_output.o grad_output_txt.o field.o grid.o
+	$(CXX) -o $@ $^ $(LIBS)
+
+$(TESTDIR)/util_test: $(TESTDIR)/util_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(TESTDIR)/grid_test: $(TESTDIR)/grid_test.o grid.o
@@ -63,17 +66,29 @@ runtests:
 	#
 	test/test_output
 	#
+	# test_util (linspace)
+	#
+	test/util_test
+	#
 	# elliptic_test
 	#
 	test/elliptic_test
+	#
+	# grid_test
+	#
+	test/grid_test
 	#
 	# boundary_test
 	#
 	test/boundary_test
 	#
+	# interpolate_test
+	#
+	test/interpolate_test
+	#
 	# slow_boundary_test
 	#
-	test/slow_boundary_test
+#	test/slow_boundary_test
 
 .PHONY: clean
 clean:
