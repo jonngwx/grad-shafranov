@@ -200,7 +200,7 @@ int main(int argc, char *argv[])
             }
             crit->update();
             jsa->update(jphi, psi, p, g);
-            printf("error norm = %f \n", solver->norm());
+	    //            printf("error norm = %f \n", solver->norm());
             if (solver->norm() < error_epsilon){ 
               break;
             }
