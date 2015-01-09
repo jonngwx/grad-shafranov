@@ -116,9 +116,27 @@ int main(int argc, char *argv[])
     double D = vm["j-phi-D"].as<double>();
     double Ip = vm["j-phi-Ip"].as<double>();
 
-    // calc constant c to be consistent with specified Ip
+    /* The initial plasma current profile is this parabola-like 
+     *
+     * J_phi = c/(R0 + r Cos[theta]) ( 1 - (r/D)^2 ) 
+     *
+     * where R0 is the radius of the magnetic axis,
+     * r is the minor radius,
+     * D is the half-diameter (seriously why have we named it D??)
+     * and c is a normalization factor so that the sum of the plasma current
+     * is Ip. c has units of Amps/meter.
+     *
+     * In order to figure out this normalization factor, integrate J_phi:
+     *
+     * In Mathematica, 
+     *
+     * Integrate[
+      c/(R0 + r Cos[\[Theta]]) (1 - r^2/D0^2) r, {r, 0, D0}, {\[Theta], 0, 
+        2 \[Pi]}, Assumptions -> {R0 > 0, r > 0, r < R0, 0 < D0, D0 < R0}]
+     *
+     * should work, then solve for (the output) = Ip.
+     */
     double a = pow(D/R0,2); // just for convenience.  should be less than 1
-    /* what is the number 1.5 for? */
     double c = Ip*a/((4.0*M_PI/3.0) * R0 * (pow(1-a,1.5) - (1 - 1.5*a)));
     printf("c = %f \n", c);
 
