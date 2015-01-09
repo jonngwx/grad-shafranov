@@ -27,7 +27,7 @@ $(TESTDIR)/elliptic_test: elliptic/elliptic_solver.o test/elliptic_test.o ellipt
 critical_test: elliptic/critical.o elliptic/critical_test.o grid.o field.o elliptic/interpolate.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/interpolate_test: grid.o field.o elliptic/interpolate.o elliptic/interpolate_test.o
+$(TESTDIR)/interpolate_test: grid.o field.o elliptic/interpolate.o $(TESTDIR)/interpolate_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(TESTDIR)/tsv_reader_test: tsv_reader.o $(TESTDIR)/tsv_reader_test.o
