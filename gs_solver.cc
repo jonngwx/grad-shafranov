@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
         // test convergence
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
-//            printf("n = %i \n", n);
+            //printf("n = %i \n", n);
             if (n == 0) {
               solver->step_1(*jphi);
             } else {
@@ -218,8 +218,8 @@ int main(int argc, char *argv[])
             }
             crit->update();
             jsa->update(jphi, psi, p, g);
-	    //            printf("error norm = %f \n", solver->norm());
-	    printf("iteration # n = %d, m = %d\n", n, m);
+            //printf("error norm = %f \n", solver->norm());
+            //printf("iteration # n = %d, m = %d\n", n, m);
             if (solver->norm() < error_epsilon){ 
               break;
             }
@@ -231,7 +231,7 @@ int main(int argc, char *argv[])
                 printf("Writing output for n = %d, m = %d\n",n,m);
             }
             if (n == maxIterN-1) {
-//                printf(" Elliptic solver reached maxIterN without convergence\n");
+              //printf(" Elliptic solver reached maxIterN without convergence\n");
             }
         }//end inner loop
     }//end outer loop
