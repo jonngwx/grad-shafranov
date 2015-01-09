@@ -61,7 +61,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
                 // printf("g = %f \n", g->f_[i][j]);
                 // jphi = - p'*R - gg'/mu0/R
                 // if gg' = .5 g0^2 alphag g_s'
-                jphi->f_[i][j] = -n1_*P0_*pow(psi_s,n1_-1)*R_[i] - .5*g0_*g0_ / (mu0 * R_[i]) * alpha_g*pow(psi_s,n2_-1)*n2_;
+                jphi->f_[i][j] = (n1_*P0_*pow(psi_s,n1_-1)*R_[i] + .5*g0_*g0_ / (mu0 * R_[i]) * alpha_g*pow(psi_s,n2_-1)*n2_)/delta_psi;
 
                 //P0_*temp1/delta_psi + g0_*g0_*alpha_g*temp2/(2*mu0*delta_psi); //update jphi
             } else {
@@ -79,7 +79,7 @@ void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
         }
     }
     jtot *= (dr_*dz_);
-    //printf("Ip = %f ...... summed jphi = %f\n", Ip_, jtot);
+    printf("Ip = %f ...... summed jphi = %f\n", Ip_, jtot);
 
 }
 
