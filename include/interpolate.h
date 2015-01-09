@@ -43,6 +43,15 @@ public:
      */
     void updateCoefficients();
 private:
+
+    /*!
+     * @brief Checks that the target point is within the region
+     * that has currently-loaded coefficients, or throws an error.
+     * @param[in] r The target point's radial location in meters.
+     * @param[in] z The target point's vertical location in meters.
+     */
+    void CorrectCellBoundsCheck(double r, double z);
+
     double r_curr; //!< i coordinate of center of current interpolation.
     double z_curr; //!< j coordinate of center of current interpolation.
     Field &Psi_; //!<

@@ -20,6 +20,19 @@ P(4, std::vector<double>(4)) {}
 
 Interpolate::~Interpolate() {}
 
+void Interpolate::CorrectCellBoundsCheck(double r, double z) {
+  if ((r - r_curr) > dr_ || (z - z_curr) > dz_ || (r - r_curr) < 0 || (z - z_curr) < 0) {
+    /* 
+    printf("dr_ = %f\n", dr_);
+    printf("r_curr = %f\n", r_curr);
+    printf("r = %f\n", r);
+    printf("dz_ = %f\n", dz_);
+    printf("z_curr = %f\n", z_curr);
+    printf("z = %f\n", z);
+    */
+    throw OutsideInterp;
+  }
+}
 /*!
  * @brief Bivariate interpolation of Psi
  *
@@ -28,15 +41,7 @@ Interpolate::~Interpolate() {}
  * Determines Psi = sum(a_ij*r^i z^j) inside rectangle defined by (r[i], r[i+1])x(z[i], z[i+1])
  */
 double Interpolate::Psi_interp(double r, double z) {
-    if ((r - r_curr) > dr_ || (z - z_curr) > dz_ || (r - r_curr) < 0 || (z - z_curr) < 0) {
-//        printf("dr_ = %f\n", dr_);
-//        printf("r_curr = %f\n", r_curr);
-//        printf("r = %f\n", r);
-//        printf("dz_ = %f\n", dz_);
-//        printf("z_curr = %f\n", z_curr);
-//        printf("z = %f\n", z);
-        throw OutsideInterp;
-    }
+    CorrectCellBoundsCheck(r,z);
     double r_ = (r - r_curr)/dr_;
     double r2 = r_*r_;
     double r3 = r2*r_;
@@ -50,15 +55,7 @@ double Interpolate::Psi_interp(double r, double z) {
 }
 
 double Interpolate::Psir_interp(double r, double z) {
-    if ((r - r_curr) > dr_ || (z - z_curr) > dz_ || (r - r_curr) < 0 || (z - z_curr) < 0) {
-//        printf("dr_ = %f\n", dr_);
-//        printf("r_curr = %f\n", r_curr);
-//        printf("r = %f\n", r);
-//        printf("dz_ = %f\n", dz_);
-//        printf("z_curr = %f\n", z_curr);
-//        printf("z = %f\n", z);
-        throw OutsideInterp;
-    }
+    CorrectCellBoundsCheck(r,z);
     double r_ = (r - r_curr)/dr_;
     double r2 = r_*r_;
     double z_ = (z - z_curr)/dz_;
@@ -76,15 +73,7 @@ double Interpolate::Psir_interp(double r, double z) {
 }
 
 double Interpolate::Psirr_interp(double r, double z) {
-    if ((r - r_curr) > dr_ || (z - z_curr) > dz_ || (r - r_curr) < 0 || (z - z_curr) < 0) {
-//        printf("dr_ = %f\n", dr_);
-//        printf("r_curr = %f\n", r_curr);
-//        printf("r = %f\n", r);
-//        printf("dz_ = %f\n", dz_);
-//        printf("z_curr = %f\n", z_curr);
-//        printf("z = %f\n", z);
-        throw OutsideInterp;
-    }
+    CorrectCellBoundsCheck(r,z);
     double r_ = (r - r_curr)/dr_;
     double z_ = (z - z_curr)/dz_;
     double z2 = z_*z_;
@@ -96,15 +85,7 @@ double Interpolate::Psirr_interp(double r, double z) {
 }
 
 double Interpolate::Psirz_interp(double r, double z) {
-    if ((r - r_curr) > dr_ || (z - z_curr) > dz_ || (r - r_curr) < 0 || (z - z_curr) < 0) {
-//        printf("dr_ = %f\n", dr_);
-//        printf("r_curr = %f\n", r_curr);
-//        printf("r = %f\n", r);
-//        printf("dz_ = %f\n", dz_);
-//        printf("z_curr = %f\n", z_curr);
-//        printf("z = %f\n", z);
-        throw OutsideInterp;
-    }
+    CorrectCellBoundsCheck(r,z);
     double r_ = (r - r_curr)/dr_;
     double r2 = r_*r_;
     double z_ = (z - z_curr)/dz_;
@@ -115,15 +96,7 @@ double Interpolate::Psirz_interp(double r, double z) {
 }
 
 double Interpolate::Psiz_interp(double r, double z) {
-    if ((r - r_curr) > dr_ || (z - z_curr) > dz_ || (r - r_curr) < 0 || (z - z_curr) < 0) {
-//        printf("dr_ = %f\n", dr_);
-//        printf("r_curr = %f\n", r_curr);
-//        printf("r = %f\n", r);
-//        printf("dz_ = %f\n", dz_);
-//        printf("z_curr = %f\n", z_curr);
-//        printf("z = %f\n", z);
-        throw OutsideInterp;
-    }
+    CorrectCellBoundsCheck(r,z);
     double r_ = (r - r_curr)/dr_;
     double r2 = r_*r_;
     double r3 = r2*r_;
@@ -135,15 +108,7 @@ double Interpolate::Psiz_interp(double r, double z) {
 }
 
 double Interpolate::Psizz_interp(double r, double z) {
-    if ((r - r_curr) > dr_ || (z - z_curr) > dz_ || (r - r_curr) < 0 || (z - z_curr) < 0) {
-//        printf("dr_ = %f\n", dr_);
-//        printf("r_curr = %f\n", r_curr);
-//        printf("r = %f\n", r);
-//        printf("dz_ = %f\n", dz_);
-//        printf("z_curr = %f\n", z_curr);
-//        printf("z = %f\n", z);
-        throw OutsideInterp;
-    }
+    CorrectCellBoundsCheck(r,z);
     double r_ = (r - r_curr)/dr_;
     double r2 = r_*r_;
     double r3 = r2*r_;
