@@ -20,7 +20,7 @@ P(4, std::vector<double>(4)) {}
 
 Interpolate::~Interpolate() {}
 
-void Interpolate::CorrectCellBoundsCheck(double r, double z) {
+void Interpolate::CorrectCellBoundsCheck(double r, double z) const {
   if ((r - r_curr) > dr_ || (z - z_curr) > dz_ || (r - r_curr) < 0 || (z - z_curr) < 0) {
     /* 
     printf("dr_ = %f\n", dr_);
@@ -34,7 +34,7 @@ void Interpolate::CorrectCellBoundsCheck(double r, double z) {
   }
 }
 
-double Interpolate::Psi_interp(double r, double z) {
+double Interpolate::Psi_interp(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -48,7 +48,7 @@ double Interpolate::Psi_interp(double r, double z) {
          (a03 + a13*r_ + a23*r2 + a33*r3)*z3;
 }
 
-double Interpolate::Psir_interp(double r, double z) {
+double Interpolate::Psir_interp(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -61,7 +61,7 @@ double Interpolate::Psir_interp(double r, double z) {
           (a13 + 2*a23*r_ + 3*a33*r2)*z3)/dr_;
 }
 
-double Interpolate::Psirr_interp(double r, double z) {
+double Interpolate::Psirr_interp(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double z_ = (z - z_curr)/dz_;
@@ -73,7 +73,7 @@ double Interpolate::Psirr_interp(double r, double z) {
           (2*a23 + 6*a33*r_)*z3)/(dr_*dr_);
 }
 
-double Interpolate::Psirz_interp(double r, double z) {
+double Interpolate::Psirz_interp(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -84,7 +84,7 @@ double Interpolate::Psirz_interp(double r, double z) {
         3*(a13 + 2*a23*r_ + 3*a33*r2)*z2)/(dr_*dz_);
 }
 
-double Interpolate::Psiz_interp(double r, double z) {
+double Interpolate::Psiz_interp(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -96,7 +96,7 @@ double Interpolate::Psiz_interp(double r, double z) {
         3*(a03 + a13*r_ + a23*r2 + a33*r3)*z2)/dz_;
 }
 
-double Interpolate::Psizz_interp(double r, double z) {
+double Interpolate::Psizz_interp(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;

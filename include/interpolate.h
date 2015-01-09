@@ -12,12 +12,12 @@ public:
     Interpolate(Grid &GridS, Field &Psi);
     ~Interpolate();
     
-    double Psi_interp(double r, double z);
-    double Psir_interp(double r, double z);
-    double Psirr_interp(double r, double z);
-    double Psirz_interp(double r, double z);
-    double Psizz_interp(double r, double z);
-    double Psiz_interp(double r, double z);
+    double Psi_interp(double r, double z) const;
+    double Psir_interp(double r, double z) const;
+    double Psirr_interp(double r, double z) const;
+    double Psirz_interp(double r, double z) const;
+    double Psizz_interp(double r, double z) const;
+    double Psiz_interp(double r, double z) const;
     /*!
      * @brief Loads the 16 main array grid points surrounding the target point into P.
      * @param[in] r The target point's radial location in meters.
@@ -50,7 +50,7 @@ private:
      * @param[in] r The target point's radial location in meters.
      * @param[in] z The target point's vertical location in meters.
      */
-    void CorrectCellBoundsCheck(double r, double z);
+    void CorrectCellBoundsCheck(double r, double z) const;
 
     double r_curr; //!< i coordinate of center of current interpolation.
     double z_curr; //!< j coordinate of center of current interpolation.
