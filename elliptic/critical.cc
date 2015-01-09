@@ -183,7 +183,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
       // Second derivative test
       D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
       // If critical point corresponds to a minimum
-      if (D > 0) {
+      if (D > 0 && Psi_rr > 0) {
         try {
           Psi_min_ = Inter_.Psi_interp(r,z);
         }
