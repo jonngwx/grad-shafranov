@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
 
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
     
-    // Initialize Psi as paraboloid
+    // Initialize Psi as some polynomial function
     Field *psi = new Field(*grid);
     for (int i=0; i < nr; ++i) {
         for (int j=0; j < nz; ++j) {
