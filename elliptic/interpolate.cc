@@ -33,8 +33,6 @@ double Interpolate::Psi_interp(double r, double z) {
     double r_, z_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
-    if ((r - r_curr) == 0) r_ = 0;
-    if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
 //        printf("dr = %f\n", dr);
 //        printf("r_curr = %f\n", r_curr);
@@ -60,8 +58,6 @@ double Interpolate::Psir_interp(double r, double z) {
     double r_, z_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
-    if ((r - r_curr) == 0) r_ = 0;
-    if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
 //        printf("dr = %f\n", dr);
 //        printf("r_curr = %f\n", r_curr);
@@ -91,8 +87,6 @@ double Interpolate::Psirr_interp(double r, double z) {
     double z_, r_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
-    if ((r - r_curr) == 0) r_ = 0;
-    if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
 //        printf("dr = %f\n", dr);
 //        printf("r_curr = %f\n", r_curr);
@@ -116,8 +110,6 @@ double Interpolate::Psirz_interp(double r, double z) {
     double r_, z_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
-    if ((r - r_curr) == 0) r_ = 0;
-    if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
 //        printf("dr = %f\n", dr);
 //        printf("r_curr = %f\n", r_curr);
@@ -140,8 +132,6 @@ double Interpolate::Psiz_interp(double r, double z) {
     double z_, r_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
-    if ((r - r_curr) == 0) r_ = 0;
-    if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
 //        printf("dr = %f\n", dr);
 //        printf("r_curr = %f\n", r_curr);
@@ -165,8 +155,6 @@ double Interpolate::Psizz_interp(double r, double z) {
     double r_, z_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
-    if ((r - r_curr) == 0) r_ = 0;
-    if ((z - z_curr) == 0) z_ = 0;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
 //        printf("dr = %f\n", dr);
 //        printf("r_curr = %f\n", r_curr);
