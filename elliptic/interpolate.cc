@@ -23,14 +23,9 @@ Interpolate::~Interpolate() {}
  *
  * preserves smoothness as described in Akima, 1974
  *
- * Do you mean "A Method of Bivariate Interpolation and Smooth Surface Fitting Based on Local Procedures", Communications of the ACM, Volume 17 Issue 1, Jan. 1974 ? I will assume that this is the paper you were referring to. I will call that paper [[Akima 1974]] with the double [[]].
- * I'm not quite sure why you chose variable names here which are different from those in the paper... I will do my best to annotate this method. -JAS
- *
- * Calculates Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
  * Determines Psi = sum(a_ij*r^i z^j) inside rectangle defined by (r[i], r[i+1])x(z[i], z[i+1])
  */
 double Interpolate::Psi_interp(double r, double z) {
-    double r_, z_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
@@ -42,10 +37,10 @@ double Interpolate::Psi_interp(double r, double z) {
 //        printf("z = %f\n", z);
         throw OutsideInterp;
     }
-    r_ = (r - r_curr)/dr;
+    double r_ = (r - r_curr)/dr;
     double r2 = r_*r_;
     double r3 = r2*r_;
-    z_ = (z - z_curr)/dz;
+    double z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     double z3 = z2*z_;
     return (a00 + a10*r_ + a20*r2 + a30*r3) +
@@ -55,7 +50,6 @@ double Interpolate::Psi_interp(double r, double z) {
 }
 
 double Interpolate::Psir_interp(double r, double z) {
-    double r_, z_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
@@ -67,9 +61,9 @@ double Interpolate::Psir_interp(double r, double z) {
 //        printf("z = %f\n", z);
         throw OutsideInterp;
     }
-    r_ = (r - r_curr)/dr;
+    double r_ = (r - r_curr)/dr;
     double r2 = r_*r_;
-    z_ = (z - z_curr)/dz;
+    double z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     double z3 = z2*z_;
     return ((a10 + 2*a20*r_ + 3*a30*r2) +
@@ -84,7 +78,6 @@ double Interpolate::Psir_interp(double r, double z) {
 }
 
 double Interpolate::Psirr_interp(double r, double z) {
-    double z_, r_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
@@ -96,8 +89,8 @@ double Interpolate::Psirr_interp(double r, double z) {
 //        printf("z = %f\n", z);
         throw OutsideInterp;
     }
-    r_ = (r - r_curr)/dr;
-    z_ = (z - z_curr)/dz;
+    double r_ = (r - r_curr)/dr;
+    double z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     double z3 = z2*z_;
     return ((2*a20 + 6*a30*r_) +
@@ -107,7 +100,6 @@ double Interpolate::Psirr_interp(double r, double z) {
 }
 
 double Interpolate::Psirz_interp(double r, double z) {
-    double r_, z_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
@@ -119,9 +111,9 @@ double Interpolate::Psirz_interp(double r, double z) {
 //        printf("z = %f\n", z);
         throw OutsideInterp;
     }
-    r_ = (r - r_curr)/dr;
+    double r_ = (r - r_curr)/dr;
     double r2 = r_*r_;
-    z_ = (z - z_curr)/dz;
+    double z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     return ((a11 + 2*a21*r_ + 3*a31*r2) +
     2*(a12 + 2*a22*r_ + 3*a32*r2)*z_ +
@@ -129,7 +121,6 @@ double Interpolate::Psirz_interp(double r, double z) {
 }
 
 double Interpolate::Psiz_interp(double r, double z) {
-    double z_, r_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
@@ -141,10 +132,10 @@ double Interpolate::Psiz_interp(double r, double z) {
 //        printf("z = %f\n", z);
         throw OutsideInterp;
     }
-    r_ = (r - r_curr)/dr;
+    double r_ = (r - r_curr)/dr;
     double r2 = r_*r_;
     double r3 = r2*r_;
-    z_ = (z - z_curr)/dz;
+    double z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     return ((a01 + a11*r_ + a21*r2 + a31*r3) +
     2*(a02 + a12*r_ + a22*r2 + a32*r3)*z_ +
@@ -152,7 +143,6 @@ double Interpolate::Psiz_interp(double r, double z) {
 }
 
 double Interpolate::Psizz_interp(double r, double z) {
-    double r_, z_;
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
     if ((r - r_curr) > dr || (z - z_curr) > dz || (r - r_curr) < 0 || (z - z_curr) < 0) {
@@ -164,10 +154,10 @@ double Interpolate::Psizz_interp(double r, double z) {
 //        printf("z = %f\n", z);
         throw OutsideInterp;
     }
-    r_ = (r - r_curr)/dr;
+    double r_ = (r - r_curr)/dr;
     double r2 = r_*r_;
     double r3 = r2*r_;
-    z_ = (z - z_curr)/dz;
+    double z_ = (z - z_curr)/dz;
     return (2*(a02 + a12*r_ + a22*r2 + a32*r3) +
 	    6*(a03 + a13*r_ + a23*r2 + a33*r3)*z_)/dz/dz;
 }
@@ -201,7 +191,6 @@ void Interpolate::updateP(double r, double z) {
     
     if (is-1 < 0 || is+2 >= nr || js-1 < 0 || js+2 >=nz) {
         throw OutsideGrid;
-
     }
 
     r_curr = is*dr + (Grid_.R_[0]);
