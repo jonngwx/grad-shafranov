@@ -223,20 +223,9 @@ void Interpolate::updateP(double r, double z) {
 //    printf("z0 = %f\n", Grid_.z_[0]);
 //    printf("z_curr = %f\n", z_curr);
     // Fill in P
-    P[0][0] = Psi_.f_[is-1][js-1];
-    P[0][1] = Psi_.f_[is-1][js];
-    P[0][2] = Psi_.f_[is-1][js+1];
-    P[0][3] = Psi_.f_[is-1][js+2];
-    P[1][0] = Psi_.f_[is][js-1];
-    P[1][1] = Psi_.f_[is][js];
-    P[1][2] = Psi_.f_[is][js+1];
-    P[1][3] = Psi_.f_[is][js+2];
-    P[2][0] = Psi_.f_[is+1][js-1];
-    P[2][1] = Psi_.f_[is+1][js];
-    P[2][2] = Psi_.f_[is+1][js+1];
-    P[2][3] = Psi_.f_[is+1][js+2];
-    P[3][0] = Psi_.f_[is+2][js-1];
-    P[3][1] = Psi_.f_[is+2][js];
-    P[3][2] = Psi_.f_[is+2][js+1];
-    P[3][3] = Psi_.f_[is+2][js+2];
+    for (int i = 0; i <4 ; i++) {
+      for (int j = 0; j <4 ; j++) {
+        P[i][j] = Psi_.f_[is + i - 1][js + j - 1];
+      }
+    }
 }
