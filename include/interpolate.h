@@ -12,13 +12,6 @@ public:
     Interpolate(Grid &GridS, Field &Psi);
     ~Interpolate();
     
-    double bicubicInterpolate(double r, double z);
-    double bicubicInterpolate_r(double r, double z);
-    double bicubicInterpolate_rr (double r, double z);
-    double cubicInterpolate(std::vector<double>, double x);
-    double cubicInterpolate_r(std::vector<double> arr, double x);
-    double cubicInterpolate_rr(std::vector<double> arr, double x);
-    
     double Psi_interp(double r, double z);
     double Psir_interp(double r, double z);
     double Psirr_interp(double r, double z);
