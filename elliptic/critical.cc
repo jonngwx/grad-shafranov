@@ -31,30 +31,17 @@ z0(z0) {
 //    if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
   }
   Inter_.updateCoefficients();
-  try {
     Psi_lim1 = Inter_.Psi_interp(R0, z_limiter1);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
   // Interpolate Psi_ at (R0, z_limiter2)
   try {
     Inter_.updateP(R0, z_limiter2);
   }
   catch(int i) {
-//    if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
+    if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
   }
   Inter_.updateCoefficients();
-  try {
     Psi_lim1 = Inter_.Psi_interp(R0, z_limiter2);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
+
 //  printf("INITIAL\n");
 //  printf("Rl = %f\n", Rl);
 //  printf("zl = %f\n", zl);
@@ -70,47 +57,13 @@ Critical::~Critical() {}
 void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   double D;
   double Psi_rr, Psi_rz, Psi_zz, Psi_z, Psi_r;
-  try {
-    Psi_rr = Inter_.Psirr_interp(r, z);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
-  try {
-    Psi_rz = Inter_.Psirz_interp(r, z);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
-  try {
-    Psi_zz = Inter_.Psizz_interp(r, z);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
-  try {
-    Psi_z = Inter_.Psiz_interp(r, z);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
-  try {
-    Psi_r = Inter_.Psir_interp(r, z);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
-  // Update Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
+  Psi_rr = Inter_.Psirr_interp(r, z);
+
+  Psi_rz = Inter_.Psirz_interp(r, z);
+  
+  Psi_zz = Inter_.Psizz_interp(r, z);
+  Psi_z = Inter_.Psiz_interp(r, z);
+  Psi_r = Inter_.Psir_interp(r, z);
   D = Psi_rr*Psi_zz - pow(Psi_rz,2);
   assert(D != 0);
   *dr = (-Psi_zz*Psi_r + Psi_rz*Psi_z)*(1.0/D);
@@ -135,63 +88,24 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     }
     // If r or z outside grid, use original coordinates
     catch(int i) {
-      if (i == OutsideGrid) break;
+      if (i == OutsideGrid) {
+	printf("Interpolation outside grid\n");
+	break;
+      }
     }
     Inter_.updateCoefficients();
-    try {
       Psi_r = Inter_.Psir_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-        // printf("Interpolation outside of current gridcell\n");
-      }
-    }
-    try {
       Psi_z = Inter_.Psiz_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-        // printf("Interpolation outside of current gridcell\n");
-      }
-    }
-    try {
       Psi_rz = Inter_.Psirz_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-        // printf("Interpolation outside of current gridcell\n");
-      }
-    }
-    try {
       Psi_zz = Inter_.Psizz_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-        // printf("Interpolation outside of current gridcell\n");
-      }
-    }
-    try {
       Psi_rr = Inter_.Psirr_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-        // printf("Interpolation outside of current gridcell\n");
-      }
-    }
     // Calculate |del Psi(r,z)| - if within tolerence
     if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
       // Second derivative test
       D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
       // If critical point corresponds to a minimum
       if (D > 0 && Psi_rr > 0) {
-        try {
-          Psi_min_ = Inter_.Psi_interp(r,z);
-        }
-        catch(int i) {
-          if (i == OutsideInterp) {
-//            printf("Interpolation outside of current gridcell\n");
-          }
-        }
+	Psi_min_ = Inter_.Psi_interp(r,z);
         *Psi_min = Psi_min_;
         *rcrit = r;
         *zcrit = z;
@@ -209,14 +123,8 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
   // If search failed, use original coordinates of magnetic axis
-  try {
-    Psi_min_ = Inter_.Psi_interp(R0, z0);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
+  Psi_min_ = Inter_.Psi_interp(R0, z0);
+
   *Psi_min = Psi_min_;
   *rcrit = R0;
   *zcrit = z0;
@@ -233,22 +141,9 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D, Psi_crit;
   
   // Calculate minimum over limiters
-  try {
-    Psi_lim1 = Inter_.Psi_interp(Rl, z_limiter1);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
-  try {
-    Psi_lim2 = Inter_.Psi_interp(Rl, z_limiter2);
-  }
-  catch(int i) {
-    if (i == OutsideInterp) {
-//      printf("Interpolation outside of current gridcell\n");
-    }
-  }
+  Psi_lim1 = Inter_.Psi_interp(Rl, z_limiter1);
+  Psi_lim2 = Inter_.Psi_interp(Rl, z_limiter2);
+  
   if(Psi_lim1 < Psi_lim2) {
     *rcrit = Rl;
     *zcrit = z_limiter1;
@@ -272,61 +167,20 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
     // Calculate |del Psi(r,z)|
     // Update Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
     Inter_.updateCoefficients();
-    try {
       Psi_r = Inter_.Psir_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-//        printf("Interpolation outside of current gridcell\n");
-      }
-    }
-    try {
       Psi_z = Inter_.Psiz_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-//        printf("Interpolation outside of current gridcell\n");
-      }
-    }
-    try {
       Psi_rz = Inter_.Psirz_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-//        printf("Interpolation outside of current gridcell\n");
-      }
-    }
-    try {
+
       Psi_zz = Inter_.Psizz_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-//        printf("Interpolation outside of current gridcell\n");
-      }
-    }
-    try {
       Psi_rr = Inter_.Psirr_interp(r,z);
-    }
-    catch(int i) {
-      if (i == OutsideInterp) {
-//        printf("Interpolation outside of current gridcell\n");
-      }
-    }
     // If within tolerence
     if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
       D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
       // If critical point corresponds to a saddle point
       // compare with limiters and return
       if (D < 0) {
-//        printf("D < 0\n");
-        try {
           Psi_crit = Inter_.Psi_interp(r, z);
-        }
-        catch(int i) {
-          if (i == OutsideInterp) {
-//            printf("Interpolation outside of current gridcell\n");
-          }
-        }
+
         if(Psi_crit < *Psi_min) {
           *rcrit = r;
           *zcrit = z;
