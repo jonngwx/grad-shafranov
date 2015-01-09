@@ -166,7 +166,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     
     Interpolate *inter = new Interpolate(*grid, *psi);
     double R0 = 2.3;
-    double z0 = 1.3;
+    double z0 = 1.;
 
  
     inter->updateP(R0,z0);
@@ -189,7 +189,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
     }
-    BOOST_CHECK_CLOSE(3*R0*R0 + 8*R0*z0*z0 + 3*z0*z0, psir2_interp, .5);
+    BOOST_CHECK_CLOSE(3*R0*R0 + 8*R0*z0*z0 + 3*z0*z0, psir2_interp, .05);
     
     double psiz_interp;
     try {
@@ -198,7 +198,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
     }
-    BOOST_CHECK_CLOSE(6*z0*z0+ 8*R0*R0*z0 + 6*R0*z0, psiz_interp, .5);
+    BOOST_CHECK_CLOSE(6*z0*z0+ 8*R0*R0*z0 + 6*R0*z0, psiz_interp, .05);
     
     double psizz_interp;
     try {
@@ -207,7 +207,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
     }
-    BOOST_CHECK_CLOSE(12*z0 + 8*R0*R0 + 6*R0, psizz_interp, .005);
+    BOOST_CHECK_CLOSE(12*z0 + 8*R0*R0 + 6*R0, psizz_interp, .05);
 
     double psirz_interp;
     try {
@@ -216,7 +216,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
     }
-   BOOST_CHECK_CLOSE( 16*R0*z0 + 6*z0, psirz_interp, .005);
+   BOOST_CHECK_CLOSE( 16*R0*z0 + 6*z0, psirz_interp, .05);
 
 
 }

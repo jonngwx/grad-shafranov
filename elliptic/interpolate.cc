@@ -182,7 +182,7 @@ double Interpolate::Psizz_interp(double r, double z) {
     z_ = (z - z_curr)/dz;
     double z2 = z_*z_;
     return (2*(a02 + a12*r_ + a22*r2 + a32*r3) +
-	    6*(a03 + a13*r_ + a23*r2 + a33*r3)*z2)/dz/dz;
+	    6*(a03 + a13*r_ + a23*r2 + a33*r3)*z_)/dz/dz;
 }
 
 void Interpolate::updateCoefficients() {
