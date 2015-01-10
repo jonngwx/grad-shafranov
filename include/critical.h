@@ -42,6 +42,10 @@ private:
     double z0; /** < Z coordinate of magnetic axis */
     double Rl; /** < R coordinate of limiter */
     double zl; /** < Z coordinate of limiter */
+
+    const double phys_lim_R;
+    const double phys_lim_zup;
+    const double phys_lim_zdown;
 };
 
 #endif

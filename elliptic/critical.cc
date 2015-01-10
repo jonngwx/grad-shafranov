@@ -20,9 +20,13 @@ epsilon(epsilon),
 z_limiter1(z_limiter1),
 z_limiter2(z_limiter2),
 R0(R0),
-z0(z0) {
+z0(z0),
+phys_lim_R(R0),
+phys_lim_zup(z_limiter1),
+phys_lim_zdown(z_limiter2) {
   Rl = R0;
   zl = z_limiter1;
+  assert(phys_lim_zup > phys_lim_zdown);
   // Interpolate Psi_ at (R0, z_limiter1)
   try {
     Inter_.updateInterpolation(R0, z_limiter1);
@@ -112,6 +116,10 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     Psi_search(r, z, &dr, &dz);
 //    printf("dr = %f\n", dr);
 //    printf("dz = %f\n", dz);
+    if (abs(dr/r) > 1 || abs(dz) > z_limiter1){
+        dr = dr/(dr/r)/(dr/r);
+        dz = dz/(dr/r)/(dr/r);
+    }
     r += dr;
     z += dz;
     // Check if outside limiters
@@ -135,7 +143,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
  */
 void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, double *Psi_min) {
   double dr, dz;
-  double Psi_lim1, Psi_lim2;
+  double Psi_lim1, Psi_lim2, Psi_phys_up, Psi_phys_down, Psi_phys;
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D, Psi_crit;
   
   // Calculate minimum over limiters
@@ -144,15 +152,32 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
   Inter_.updateInterpolation(Rl,z_limiter2);
   Psi_lim2 = Inter_.Psi_interp(Rl, z_limiter2);
   
-  if(Psi_lim1 < Psi_lim2) {
-    *rcrit = Rl;
-    *zcrit = z_limiter1;
-    *Psi_min = Psi_lim1;
-  }
-  else {
-    *rcrit = R0;
-    *zcrit = z_limiter2;
-    *Psi_min = Psi_lim2;
+  Inter_.updateInterpolation(phys_lim_R,phys_lim_zup);
+  Psi_phys_up = Inter_.Psi_interp(phys_lim_R, phys_lim_zup);
+  Inter_.updateInterpolation(phys_lim_R,phys_lim_zdown);
+  Psi_phys_down = Inter_.Psi_interp(phys_lim_R, phys_lim_zdown);
+  // find min physical liimiter
+  Psi_phys = fmin(Psi_phys_up, Psi_phys_down);
+  
+  if (Psi_phys < Psi_lim1 || Psi_phys < Psi_lim2) {
+      // physical limiter is innermost
+      *rcrit = phys_lim_R;
+      *zcrit = (Psi_phys_up < Psi_phys_down)? phys_lim_zup : phys_lim_zdown;
+      //   Psi_phys = Inter_.Psi_interp(1,-1);
+      *Psi_min = Psi_phys;
+      printf("physical, %f, %f!, psi=%f\n",*rcrit,*zcrit, Psi_phys);
+      return;
+  } else {
+      if(Psi_lim1 < Psi_lim2) {
+          *rcrit = Rl;
+          *zcrit = z_limiter1;
+          *Psi_min = Psi_lim1;
+      }
+      else {
+          *rcrit = Rl;
+          *zcrit = z_limiter2;
+          *Psi_min = Psi_lim2;
+      }
   }
   for (int i = 0; i < max_iter; ++i) {
     assert(!isnan(r));
