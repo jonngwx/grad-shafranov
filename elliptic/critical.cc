@@ -31,7 +31,7 @@ z0(z0) {
 //    if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
   }
   Inter_.updateCoefficients();
-    Psi_lim1 = Inter_.Psi_interp(R0, z_limiter1);
+  Psi_lim1 = Inter_.Psi_interp(R0, z_limiter1);
   // Interpolate Psi_ at (R0, z_limiter2)
   try {
     Inter_.updateP(R0, z_limiter2);
@@ -40,7 +40,7 @@ z0(z0) {
     if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
   }
   Inter_.updateCoefficients();
-    Psi_lim1 = Inter_.Psi_interp(R0, z_limiter2);
+  Psi_lim2 = Inter_.Psi_interp(R0, z_limiter2);
 
 //  printf("INITIAL\n");
 //  printf("Rl = %f\n", Rl);
