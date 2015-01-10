@@ -50,8 +50,14 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("error-tol-M", po::value<double>()->default_value(1.0e-4), "error tolerance outer loop")
       ("max-iter-crit", po::value<int>()->default_value(100), "max iterations for solving for the critical points")
       ("error-tol-crit",po::value<double>()->default_value(1.0e-3), "converge criterion for finding critical points")
-      ("z_limiter1",po::value<double>()->default_value(.75), "Horizontal limiter point for calculating critical points")
-      ("z_limiter2",po::value<double>()->default_value(-.75), "Horizontal limiter point for calculating critical points")
+      ("phys_lim_z_up",po::value<double>()->default_value(.416), "z position for physical limiter in top half of tokamak")
+      ("phys_lim_z_down",po::value<double>()->default_value(-.416), "z position for physical limiter in top half of tokamak")
+      ("phys_lim_R_up",po::value<double>()->default_value(1.5), "R position for physical limiter in top half of tokamak")
+      ("phys_lim_R_down",po::value<double>()->default_value(1.5), "R position for physical limiter in bottom half of tokamak")
+      ("R_stag_down",po::value<double>()->default_value(.5), "R position for stagnation point in bottom half of tokamak")
+      ("z_stag_down",po::value<double>()->default_value(-1.4), "z position for stagnation point in bottom half of tokamak")
+      ("R_stag_up",po::value<double>()->default_value(.5), "R position for stagnation point in top half of tokamak")
+      ("z_stag_up",po::value<double>()->default_value(1.5), "z position for stagnation point in top half of tokamak")
      ;
 
   /* For pgtype = "alpha"

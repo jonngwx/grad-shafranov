@@ -10,7 +10,7 @@
  */
 class Critical {
 public:
-    Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2, double R0, double z0);
+    Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double phys_lim_R_up, double phys_lim_z_up, double phys_lim_R_down, double phys_lim_z_down, double R_stag_up, double z_stag_up, double R_stag_down, double z_stag_down, double R0, double z0);
     ~Critical();
     
     /*!
@@ -45,9 +45,10 @@ private:
     double R_stag_down;
     double z_stag_down;
 
-    const double phys_lim_R;
-    const double phys_lim_zup;
-    const double phys_lim_zdown;
+    const double phys_lim_R_up;
+    const double phys_lim_z_up;
+    const double phys_lim_R_down;
+    const double phys_lim_z_down;
 };
 
 #endif
