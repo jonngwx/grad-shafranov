@@ -141,6 +141,7 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
   // Calculate minimum over limiters
   Inter_.updateInterpolation(Rl,z_limiter1);
   Psi_lim1 = Inter_.Psi_interp(Rl, z_limiter1);
+  Inter_.updateInterpolation(Rl,z_limiter2);
   Psi_lim2 = Inter_.Psi_interp(Rl, z_limiter2);
   
   if(Psi_lim1 < Psi_lim2) {
