@@ -36,7 +36,7 @@ class Boundary {
        0 1 2                0 1 2
        \endverbatim
      */
-    int LtoI(int l);
+    int LtoI(int l) const;
 
     /*! 
      * @brief Gets the vertical index of the l'th boundary cell
@@ -51,7 +51,7 @@ class Boundary {
        0 1 2                0 0 0
        \endverbatim
      */
-    int LtoJ(int l);
+    int LtoJ(int l) const;
   protected:
     int nr_; //!< Number of grid cells in the r direction.
     int nz_; //!< Number of grid cells in the z direction.

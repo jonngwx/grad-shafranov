@@ -35,7 +35,7 @@ class Grid {
    * @return The (floating-point-) number of cells in the radial direction 
    * out from the 0th cell that this location corresponds to. The returned value is clamped between 0.0 and (nr_ - 1.0).
    */
-  double celli(double r);
+  double celli(double r) const;
 
   /*!
    * @brief Converts z position in meters to j-coordinate in grid-cell-space
@@ -44,7 +44,7 @@ class Grid {
    * @return The (floating-point-) number of cells in the vertical direction 
    * up from the 0th cell that this location corresponds to. The returned value is clamped between 0.0 and (nz_ - 1.0).
    */
-  double cellj(double z);
+  double cellj(double z) const;
 
   const int nr_; //!< Number of cells in R direction.
   const int nz_; //!< Number of cells in z direction.

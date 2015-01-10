@@ -26,13 +26,13 @@ Grid::~Grid(){
     delete [] R_;
 }
 
-double Grid::celli(double r) {
+double Grid::celli(double r) const {
     double i = (r - R_[0])*(1.0/dr_);
     //ensure that the returned position is between 0 and nr_-1.
     return fmin(nr_-1,fmax(i,0));
 }
 
-double Grid::cellj(double z) {
+double Grid::cellj(double z) const  {
     double j = (z - z_[0])*(1.0/dz_);
     return fmin(nz_-1,fmax(j,0));
 }
