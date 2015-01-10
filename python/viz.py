@@ -64,7 +64,7 @@ def plot(filename,format):
     ind = np.where(abs(F['psi'] - F['psilo'][1]) - a == 0)
     if ind is not None:
         try:
-            plt.plot(F['R'][ind[1]], F['z'][ind[0]],'+',markersize=10,mew=5.0)
+            plt.plot(F['R'][ind[1]], F['z'][ind[0]],'+',markersize=10,mew=5.0,color='k')
         except:
             print "Cannot find magnetic axis"
     pfig = plt.subplot(1,3,2)
