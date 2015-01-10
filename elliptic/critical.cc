@@ -17,15 +17,15 @@ max_iter(max_iter),
 Grid_(GridS),
 Inter_(Grid_, Psi_),
 epsilon(epsilon),
-z_limiter1(z_limiter1),
-z_limiter2(z_limiter2),
 R0(R0),
 z0(z0),
 phys_lim_R(R0),
 phys_lim_zup(z_limiter1),
 phys_lim_zdown(z_limiter2) {
-  Rl = R0;
-  zl = z_limiter1;
+  R_stag_up = R0;
+  z_stag_up = z_limiter1;
+  R_stag_down = R0;
+  z_stag_down = z_limiter2;
   assert(phys_lim_zup > phys_lim_zdown);
   // Interpolate Psi_ at (R0, z_limiter1)
   try {
@@ -34,7 +34,7 @@ phys_lim_zdown(z_limiter2) {
   catch(int i) {
     if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
   }
-  Psi_lim1 = Inter_.Psi_interp(R0, z_limiter1);
+  Psi_stag_up = Inter_.Psi_interp(R0, z_limiter1);
   // Interpolate Psi_ at (R0, z_limiter2)
   try {
     Inter_.updateInterpolation(R0, z_limiter2);
@@ -42,7 +42,7 @@ phys_lim_zdown(z_limiter2) {
   catch(int i) {
     if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
   }
-  Psi_lim2 = Inter_.Psi_interp(R0, z_limiter2);
+  Psi_stag_down = Inter_.Psi_interp(R0, z_limiter2);
 
 //  printf("INITIAL\n");
 //  printf("Rl = %f\n", Rl);
@@ -116,14 +116,10 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     Psi_search(r, z, &dr, &dz);
 //    printf("dr = %f\n", dr);
 //    printf("dz = %f\n", dz);
-    if (abs(dr/r) > 1 || abs(dz) > z_limiter1){
-        dr = dr/(dr/r)/(dr/r);
-        dz = dz/(dr/r)/(dr/r);
-    }
     r += dr;
     z += dz;
     // Check if outside limiters
-    if (z >= z_limiter1 || z <= z_limiter2) break;
+    if (z >= phys_lim_zup || z <= phys_lim_zdown) break;
     // Check if outside grid boundaries
     if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
@@ -141,44 +137,65 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
  * @brief Perform search for critical points beginning with initial
  * guess r, z
  */
-void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, double *Psi_min) {
-  double dr, dz;
-  double Psi_lim1, Psi_lim2, Psi_phys_up, Psi_phys_down, Psi_phys;
-  double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D, Psi_crit;
-  
-  // Calculate minimum over limiters
-  Inter_.updateInterpolation(Rl,z_limiter1);
-  Psi_lim1 = Inter_.Psi_interp(Rl, z_limiter1);
-  Inter_.updateInterpolation(Rl,z_limiter2);
-  Psi_lim2 = Inter_.Psi_interp(Rl, z_limiter2);
-  
+double Critical::Psi_limiter() {
+  double Psi_phys_up, Psi_phys_down, Psi_phys;
+
   Inter_.updateInterpolation(phys_lim_R,phys_lim_zup);
   Psi_phys_up = Inter_.Psi_interp(phys_lim_R, phys_lim_zup);
   Inter_.updateInterpolation(phys_lim_R,phys_lim_zdown);
-  Psi_phys_down = Inter_.Psi_interp(phys_lim_R, phys_lim_zdown);
-  // find min physical liimiter
+  Psi_phys_down = Inter_.Psi_interp(phys_lim_R, phys_lim_zdown);  
+
   Psi_phys = fmin(Psi_phys_up, Psi_phys_down);
   
-  if (Psi_phys < Psi_lim1 || Psi_phys < Psi_lim2) {
-      // physical limiter is innermost
-      *rcrit = phys_lim_R;
-      *zcrit = (Psi_phys_up < Psi_phys_down)? phys_lim_zup : phys_lim_zdown;
-      //   Psi_phys = Inter_.Psi_interp(1,-1);
-      *Psi_min = Psi_phys;
-      printf("physical, %f, %f!, psi=%f\n",*rcrit,*zcrit, Psi_phys);
-      return;
+  double r = R_stag_down; double z = z_stag_down;
+  if (find_saddle(r,z)){
+      R_stag_down = r;
+      z_stag_down = z;
+      Inter_.updateInterpolation(R_stag_down,z_stag_down);
+      Psi_stag_down = Inter_.Psi_interp(R_stag_down,z_stag_down);
   } else {
-      if(Psi_lim1 < Psi_lim2) {
-          *rcrit = Rl;
-          *zcrit = z_limiter1;
-          *Psi_min = Psi_lim1;
-      }
-      else {
-          *rcrit = Rl;
-          *zcrit = z_limiter2;
-          *Psi_min = Psi_lim2;
-      }
+      Psi_stag_down = Psi_phys + 1;
   }
+  r = R_stag_up; z = z_stag_up;
+  if (find_saddle(r,z)){
+      R_stag_up = r;
+      z_stag_up = z;
+      Inter_.updateInterpolation(R_stag_up,z_stag_up);
+      Psi_stag_up = Inter_.Psi_interp(R_stag_up,z_stag_up);
+  } else {
+      Psi_stag_up = Psi_phys + 1;
+  }
+
+  if (Psi_phys < Psi_stag_up && Psi_phys < Psi_stag_down) {
+      // physical limiter is innermost
+      printf("physical!, psi=%f\n", Psi_phys);
+      return Psi_phys;
+  } else {
+      printf("stagnation\n");
+      return fmin(Psi_stag_up, Psi_stag_down);
+  }
+}
+
+/*!
+ * @brief Performs critical point search; updates Psi_l and Psi_o
+ */
+void Critical::update() {
+  double rcrit, zcrit, Psi_min;
+  // Calculate Psi_l using previous coordinates for limiter
+
+  // Update Psi_l, r_l, and z_l
+  Psi_.f_l = Psi_limiter();
+  // Calculate Psi_o using previous coordinates
+  Psi_magnetic(R0, z0, &rcrit, &zcrit, &Psi_min);
+  Psi_.f_0 = Psi_min;
+  R0 = rcrit;
+  z0 = zcrit;
+}
+
+bool Critical::find_saddle(double &r, double &z){
+    double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D;
+    double dr =0;
+    double dz=0;
   for (int i = 0; i < max_iter; ++i) {
     assert(!isnan(r));
     assert(!isnan(z));
@@ -197,59 +214,24 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
 
       Psi_zz = Inter_.Psizz_interp(r,z);
       Psi_rr = Inter_.Psirr_interp(r,z);
-    // If within tolerence
-    if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
-      D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
-      // If critical point corresponds to a saddle point
-      // compare with limiters and return
-      if (D < 0) {
-          Psi_crit = Inter_.Psi_interp(r, z);
-
-        if(Psi_crit < *Psi_min) {
-          *rcrit = r;
-          *zcrit = z;
-          *Psi_min = Psi_crit;
-        }
-        return;
+      // If within tolerence
+      if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
+          D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
+          // If critical point corresponds to a saddle point
+          if (D < 0) {
+              return true;
+          }
+          break;
       }
-      // If not a saddle point, use limiters
-      break;
-    }
-    Psi_search(r, z, &dr, &dz);
-    assert(!isnan(dr));
-    assert(!isnan(dz));
-    r += dr;
-    z += dz;
-    // Check if outside limiters
-    if (z >= z_limiter1 || z <= z_limiter2) break;
-    // Check if outside grid boundaries
-    if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
+      Psi_search(r, z, &dr, &dz);
+      assert(!isnan(dr));
+      assert(!isnan(dz));
+      r += dr;
+      z += dz;
+      // Check if outside limiters
+      if (z >= Grid_.z_[Grid_.nz_-1] || z <= Grid_.z_[0]) break;
+      // Check if outside grid boundaries
+      if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
-  // Alternate case - use previous value of limiter
-  *rcrit = Rl;
-  *zcrit = zl;
-  *Psi_min = Psi_.f_l;
-  return;
-}
-
-/*!
- * @brief Performs critical point search; updates Psi_l and Psi_o
- */
-void Critical::update() {
-  double rcrit, zcrit, Psi_min;
-  // Calculate Psi_l using previous coordinates for limiter
-  assert(!isnan(Rl));
-  assert(!isnan(zl));
-  if (Psi_lim1 < Psi_lim2) Psi_min = Psi_lim1;
-  else Psi_min = Psi_lim2;
-  Psi_limiter(Rl, zl, &rcrit, &zcrit, &Psi_min);
-  // Update Psi_l, r_l, and z_l
-  Psi_.f_l = Psi_min;
-  Rl = rcrit;
-  zl = zcrit;
-  // Calculate Psi_o using previous coordinates
-  Psi_magnetic(R0, z0, &rcrit, &zcrit, &Psi_min);
-  Psi_.f_0 = Psi_min;
-  R0 = rcrit;
-  z0 = zcrit;
+  return false;
 }

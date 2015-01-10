@@ -231,7 +231,7 @@ int main(int argc, char *argv[])
                 printf("Writing output for n = %d, m = %d\n",n,m);
             }
             if (n == maxIterN-1) {
-              //printf(" Elliptic solver reached maxIterN without convergence\n");
+              printf(" Elliptic solver reached maxIterN without convergence\n");
             }
         }//end inner loop
     }//end outer loop
