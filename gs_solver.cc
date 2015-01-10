@@ -234,6 +234,9 @@ int main(int argc, char *argv[])
               printf(" Elliptic solver reached maxIterN without convergence\n");
             }
         }//end inner loop
+        if (m == maxIterM-1){
+            printf("boundary reached max iter M without convergence\n");
+        }
     }//end outer loop
     clock_t time2 = clock();
   /************************************************
