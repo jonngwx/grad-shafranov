@@ -10,12 +10,12 @@
 
 Grid::Grid(double R0, double Rend, double z0, double zend, int nr, int nz)
    : nr_(nr),
-     nz_(nz) {
+     nz_(nz),
+     dr_((Rend - R0)/(nr - 1.0)),
+     dz_((zend - z0)/(nz - 1.0)) {
     
     R_ = new double[nr_]();
     z_ = new double[nz_]();
-    dr_ = (Rend - R0)/(nr - 1.0);
-    dz_ = (zend - z0)/(nz - 1.0);
     //Fill up R and Z
     linspace(R0,Rend,nr,R_);
     linspace(z0,zend,nz,z_);

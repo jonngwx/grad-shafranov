@@ -53,8 +53,8 @@ class Boundary {
      */
     int LtoJ(int l) const;
   protected:
-    int nr_; //!< Number of grid cells in the r direction.
-    int nz_; //!< Number of grid cells in the z direction.
+    const int nr_; //!< Number of grid cells in the r direction.
+    const int nz_; //!< Number of grid cells in the z direction.
 };
 
 #endif // BOUNDARY_H_

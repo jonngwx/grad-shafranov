@@ -46,12 +46,12 @@ class Grid {
    */
   double cellj(double z) const;
 
-  const int nr_; //!< Number of cells in R direction.
-  const int nz_; //!< Number of cells in z direction.
-  double *R_;    //!< Array of grid cell radial locations in meters.
-  double *z_;    //!< Array of grid cell vertical locations in meters.
-  double dr_;    //!< Size of a grid cell in the r direction.
-  double dz_;    //!< Size of a grid cell in the z direction.
+  const int nr_;     //!< Number of cells in R direction.
+  const int nz_;     //!< Number of cells in z direction.
+  const double dr_;  //!< Size of a grid cell in the r direction.
+  const double dz_;  //!< Size of a grid cell in the z direction.
+  double *R_;        //!< Array of grid cell radial locations in meters.
+  double *z_;        //!< Array of grid cell vertical locations in meters.
 };
 
 #endif
