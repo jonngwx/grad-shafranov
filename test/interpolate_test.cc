@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     }
     
     Interpolate *inter = new Interpolate(*grid, *psi);
-    inter->updateP(0,0);
+    inter->updateInterpolation(0,0);
     
 //    double psi_interp;
 //    try {
@@ -66,7 +66,6 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
 //    }
 //    BOOST_CHECK_CLOSE(2, psi_interp_rr, 10);
     
-    inter->updateCoefficients();
     double psi_interp;
     try {
         psi_interp = inter->Psi_interp(0.05,0.05);
@@ -78,7 +77,6 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     }
     BOOST_CHECK_CLOSE(0.005, psi_interp, .5);
     
-    inter->updateCoefficients();
     double psi2_interp;
     try {
         psi2_interp = inter->Psi_interp(0.01,0.01);
@@ -169,8 +167,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     double z0 = 1.;
 
  
-    inter->updateP(R0,z0);
-    inter->updateCoefficients();
+    inter->updateInterpolation(R0,z0);
     double psi_interp;
     try {
         psi_interp = inter->Psi_interp(R0,z0);

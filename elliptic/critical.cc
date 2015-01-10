@@ -25,21 +25,19 @@ z0(z0) {
   zl = z_limiter1;
   // Interpolate Psi_ at (R0, z_limiter1)
   try {
-    Inter_.updateP(R0, z_limiter1);
+    Inter_.updateInterpolation(R0, z_limiter1);
   }
   catch(int i) {
-//    if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
+    if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
   }
-  Inter_.updateCoefficients();
   Psi_lim1 = Inter_.Psi_interp(R0, z_limiter1);
   // Interpolate Psi_ at (R0, z_limiter2)
   try {
-    Inter_.updateP(R0, z_limiter2);
+    Inter_.updateInterpolation(R0, z_limiter2);
   }
   catch(int i) {
     if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
   }
-  Inter_.updateCoefficients();
   Psi_lim2 = Inter_.Psi_interp(R0, z_limiter2);
 
 //  printf("INITIAL\n");
@@ -84,7 +82,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
 //      printf("PSI_MAGNETIC\n");
 //      printf("r = %f\n", r);
 //      printf("z = %f\n", z);
-      Inter_.updateP(r,z);
+      Inter_.updateInterpolation(r,z);
     }
     // If r or z outside grid, use original coordinates
     catch(int i) {
@@ -93,12 +91,11 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
 	break;
       }
     }
-    Inter_.updateCoefficients();
-      Psi_r = Inter_.Psir_interp(r,z);
-      Psi_z = Inter_.Psiz_interp(r,z);
-      Psi_rz = Inter_.Psirz_interp(r,z);
-      Psi_zz = Inter_.Psizz_interp(r,z);
-      Psi_rr = Inter_.Psirr_interp(r,z);
+    Psi_r = Inter_.Psir_interp(r,z);
+    Psi_z = Inter_.Psiz_interp(r,z);
+    Psi_rz = Inter_.Psirz_interp(r,z);
+    Psi_zz = Inter_.Psizz_interp(r,z);
+    Psi_rr = Inter_.Psirr_interp(r,z);
     // Calculate |del Psi(r,z)| - if within tolerence
     if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
       // Second derivative test
@@ -123,6 +120,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
   // If search failed, use original coordinates of magnetic axis
+  Inter_.updateInterpolation(R0,z0);
   Psi_min_ = Inter_.Psi_interp(R0, z0);
 
   *Psi_min = Psi_min_;
@@ -141,6 +139,7 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D, Psi_crit;
   
   // Calculate minimum over limiters
+  Inter_.updateInterpolation(Rl,z_limiter1);
   Psi_lim1 = Inter_.Psi_interp(Rl, z_limiter1);
   Psi_lim2 = Inter_.Psi_interp(Rl, z_limiter2);
   
@@ -158,7 +157,7 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
     assert(!isnan(r));
     assert(!isnan(z));
     try {
-      Inter_.updateP(r,z);
+      Inter_.updateInterpolation(r,z);
     }
     // If r or z outside grid, use limiters
     catch(int i) {
@@ -166,7 +165,6 @@ void Critical::Psi_limiter(double r, double z, double *rcrit, double *zcrit, dou
     }
     // Calculate |del Psi(r,z)|
     // Update Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
-    Inter_.updateCoefficients();
       Psi_r = Inter_.Psir_interp(r,z);
       Psi_z = Inter_.Psiz_interp(r,z);
       Psi_rz = Inter_.Psirz_interp(r,z);
