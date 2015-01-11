@@ -60,7 +60,13 @@ def plot(filename,format):
     plt.ylabel('z (m)')
     #plt.xticks([])
     cfig.set_aspect('equal')
-
+    a = np.amin(np.abs(F['psi'] - F['psilo'][1]))
+    ind = np.where(abs(F['psi'] - F['psilo'][1]) - a == 0)
+    if ind is not None:
+        try:
+            plt.plot(F['R'][ind[1]], F['z'][ind[0]],'+',markersize=10,mew=5.0,color='k')
+        except:
+            print "Cannot find magnetic axis"
     pfig = plt.subplot(1,3,2)
     plt.pcolormesh(F['R'],F['z'],F['p'])#,shading='gouraud')
     def format_coord_p(x,y):

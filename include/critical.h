@@ -1,18 +1,25 @@
+/*!
+ * @file critical.h
+ * @author Elizabeth J. Paul
+ * @brief Header file for the Critical class.
+ */
+
 #ifndef CRITICAL_H
 #define CRITICAL_H
 #include "field.h"
 #include "grid.h"
 #include "interpolate.h"
 #include <vector>
+#include "tsv_reader.h"
 
 /*! 
- * @brief The cougar (Puma concolor), also commonly known as the
+ * @brief Contains methods to search for the critical points of Psi and update the 
+ * limiters and magnetic axis.
  */
 class Critical {
 public:
-    Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double z_limiter1, double z_limiter2, double R0, double z0);
+    Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, Table &limiters, double R_stag_up, double z_stag_up, double R_stag_down, double z_stag_down, double R0, double z0);
     ~Critical();
-    
     /*!
      * @brief returns dr, dz to progress toward critical point search 
      * in Psi
@@ -23,25 +30,42 @@ public:
      * with initial guess r, z
      */
     void Psi_magnetic(double r, double z,double *rcrit, double *zcrit, double *Psi_min);
-    void Psi_limiter(double r, double z,double *rcrit, double *zcrit, double *Psi_min);
+    /*!
+     * @brief Perform search for critical point of magnetic axis beginning with 
+     */
+    double Psi_limiter();
     /*! 
      * @brief Performs critical point search; updates Psi_i and Psi_o
      */
     void update();
+    /*!
+     * @brief Finds saddle point using critical point search starting with r and z.
+     *
+     * Returns false if search lands outside of horizontal limiters or grid
+     * boundaries.
+     */
+    bool find_saddle(double &r, double &z);
 private:
     Field &Psi_;
     const int max_iter; /** < maximum number of iterations for critical search */
     Grid &Grid_; /** < Underlying grid */
-    Interpolate Inter_;
+    Interpolate Inter_; /** < Instance of interpolation class */
     const double epsilon; /** < convergence criterion for critical point search */
-    double z_limiter1; /** < z coordinate of limiter 1 */
-    double z_limiter2; /** < z coordinate of limiter 2 */
-    double Psi_lim1; /** < Psi at first limiter */
-    double Psi_lim2; /** < Psi at second limiter */
+    double Psi_stag_up; /** < Psi at first limiter */
+    double Psi_stag_down; /** < Psi at second limiter */
     double R0; /** < R coordinate of magnetic axis */
     double z0; /** < Z coordinate of magnetic axis */
-    double Rl; /** < R coordinate of limiter */
-    double zl; /** < Z coordinate of limiter */
+    const double R_stag_up_orig;
+    const double z_stag_up_orig;
+    double R_stag_up; /** < R coordinate of stagnation point */
+    double z_stag_up; /** < Z coordinate of limiter */
+    const double R_stag_down_orig;
+    const double z_stag_down_orig;
+    double R_stag_down;
+    double z_stag_down;
+
+    Table &limiters_;
+    std::vector<double> Psi_phys_lim;
 };
 
 #endif

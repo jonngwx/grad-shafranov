@@ -1,3 +1,8 @@
+/*!
+ * @file interpolate.h
+ * @author Elizabeth J. Paul
+ * @brief Header file for the Interpolate class.
+ */
 #ifndef INTERPOLATE_H
 #define INTERPOLATE_H
 #include "field.h"
@@ -5,7 +10,8 @@
 #include <vector>
 
 /*!
- * @brief The cougar (Puma concolor), also commonly known as the
+ * @brief Contains methods for bivariate polynomial interpolation for use by Critical class
+ *
  */
 class Interpolate {
 public:
@@ -18,6 +24,21 @@ public:
     double Psirz_interp(double r, double z) const;
     double Psizz_interp(double r, double z) const;
     double Psiz_interp(double r, double z) const;
+    
+    /*!
+     *@brief calls updateP and updateCoefficients(). This prevents errors as both need to be updated each step.
+     */
+    void updateInterpolation(double r, double z);
+private:
+
+    /*!
+     * @brief Checks that the target point is within the region
+     * that has currently-loaded coefficients, or throws an error.
+     * @param[in] r The target point's radial location in meters.
+     * @param[in] z The target point's vertical location in meters.
+     */
+    void CorrectCellBoundsCheck(double r, double z) const;
+
     /*!
      * @brief Loads the 16 main array grid points surrounding the target point into P.
      * @param[in] r The target point's radial location in meters.
@@ -42,16 +63,6 @@ public:
      * www.paulinternet.nl/?page=bicubic
      */
     void updateCoefficients();
-private:
-
-    /*!
-     * @brief Checks that the target point is within the region
-     * that has currently-loaded coefficients, or throws an error.
-     * @param[in] r The target point's radial location in meters.
-     * @param[in] z The target point's vertical location in meters.
-     */
-    void CorrectCellBoundsCheck(double r, double z) const;
-
     double r_curr; //!< i coordinate of center of current interpolation.
     double z_curr; //!< j coordinate of center of current interpolation.
     Field &Psi_; //!<

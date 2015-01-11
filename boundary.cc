@@ -11,15 +11,7 @@ Boundary::~Boundary() {}
 //so this gets called in elliptic_test. The compiler gives a warning that there's no 'return' statement for this nonvoid function. Since this is not implemented, should I assume that our actual program will ever only call SlowBoundary's CalcB???
 int Boundary::CalcB(Field* psi, Field* jphi) {}
 
-/* L is numbered like:  This function will return:
- *
- * 6 5 4                0 1 2
- * 7   3                0   2
- * 0 1 2                0 1 2
- *
- * -helpful comment by JAS
- */
-int Boundary::LtoI(int l) {
+int Boundary::LtoI(int l) const {
   int i = 0;
 
   if (l >= 0 && l <= (nr_ - 2)) {
@@ -34,15 +26,7 @@ int Boundary::LtoI(int l) {
   return i;
 }
 
-/* L is numbered like:  This function will return:
- *
- * 6 5 4                2 2 2
- * 7   3                1   1
- * 0 1 2                0 0 0
- *
- * -helpful comment by JAS
- */
-int Boundary::LtoJ(int l) {
+int Boundary::LtoJ(int l) const {
   int j = 0;
 
   if (l >= 0 && l <= (nr_ - 2)) {
