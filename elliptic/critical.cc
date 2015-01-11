@@ -38,21 +38,25 @@ limiters_(limiters) {
     }
   try {
       Inter_.updateInterpolation(R_stag_up, z_stag_up);
+      Psi_stag_up = Inter_.Psi_interp(R_stag_up, z_stag_up);
   }
   catch(int i) {
-    if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
+      if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
+      if (i == OutsideInterp) printf("Error: outside Interp\n");
+      throw i;
   }
-  Psi_stag_up = Inter_.Psi_interp(R_stag_up, z_stag_up);
+
   // Interpolate Psi_ at (R0, z_limiter2)
   try {
       Inter_.updateInterpolation(R_stag_down, z_stag_down);
+      Psi_stag_down = Inter_.Psi_interp(R_stag_down, z_stag_down);
   }
   catch(int i) {
-    if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
+      if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
+      if (i == OutsideInterp) printf("Error: outside Interp\n");
+      throw i;
   }
-  Psi_stag_down = Inter_.Psi_interp(R_stag_down, z_stag_down);
 
-//  printf("INITIAL\n");
 //  printf("Rl = %f\n", Rl);
 //  printf("zl = %f\n", zl);
 //  printf("R0 = %f\n", R0);
@@ -101,6 +105,10 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
       if (i == OutsideGrid) {
 	printf("Interpolation outside grid\n");
 	break;
+      }
+      if (i == OutsideInterp) {
+          printf("Interpolation failed\n");
+          break;
       }
     }
     Psi_r = Inter_.Psir_interp(r,z);
@@ -219,7 +227,7 @@ bool Critical::find_saddle(double &r, double &z){
     }
     // If r or z outside grid, use limiters
     catch(int i) {
-      if (i == OutsideGrid) break;
+        break;
     }
     // Calculate |del Psi(r,z)|
     // Update Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz

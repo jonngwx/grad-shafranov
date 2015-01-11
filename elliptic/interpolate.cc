@@ -130,7 +130,7 @@ void Interpolate::updateP(double r, double z) {
   double nz = Grid_.nz_;
   int is = (int)(Grid_.celli(r));
   int js = (int)(Grid_.cellj(z));
-  
+
   if (is-1 < 0 || is+2 >= nr || js-1 < 0 || js+2 >=nz) {
       throw OutsideGrid;
   }
