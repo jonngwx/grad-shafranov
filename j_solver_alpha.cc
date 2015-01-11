@@ -3,23 +3,24 @@
 #include <stdio.h>
 #include <math.h>
 
-JSolverAlpha::JSolverAlpha(double P0, double g0, double n1, double n2, double Ip, Grid *grid)
-    : P0_(P0),
-      g0_(g0),
-      n1_(n1),
-      n2_(n2),
-      Ip_(Ip),
-      R_(grid->R_),
-      dr_(grid->dr_),
-      dz_(grid->dz_),
-      nr_(grid->nr_),
-      nz_(grid->nz_)
+J_Solver_Alpha::J_Solver_Alpha(double P0, double g0, double n1, double n2, double Ip, Grid *grid)
+    : n1_(n1),
+      n2_(n2)
+{   
+    P0_ = P0;
+    g0_ = g0;
+    Ip_ = Ip;
+    R_ = grid->R_;
+    dr_ = grid->dr_;
+    dz_ = grid->dz_;
+    nr_ = grid->nr_;
+    nz_ = grid->nz_;
+}
+
+J_Solver_Alpha::~J_Solver_Alpha()
 {}
 
-JSolverAlpha::~JSolverAlpha()
-{}
-
-void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
+void J_Solver_Alpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
     const double mu0 = 4 * M_PI * 1e-7; // the permeability of free space
     double temp1 = 0;
     double temp2 = 0;
