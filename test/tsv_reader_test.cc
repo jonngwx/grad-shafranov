@@ -83,9 +83,26 @@ BOOST_AUTO_TEST_CASE(bad_example_not_three_columns){
   BOOST_REQUIRE_EQUAL(error_code, 5);
 }
 
-/* Check that num_columns_ and num_rows_ are set to zero when a CoilData is created. */
+BOOST_AUTO_TEST_CASE(good_example_get_data_simple){
+  int success = cd.load_from_tsv("test/tsvReaderExamples/good_example_3_cols.tsv",1);
+  BOOST_REQUIRE_EQUAL(success, 0);
+  BOOST_CHECK_EQUAL(cd.r(1), 3.4);
+  BOOST_CHECK_EQUAL(cd.z(1), 5);
+  BOOST_CHECK_EQUAL(cd.current(1), 1);
+}
+
+BOOST_AUTO_TEST_CASE(coil_regions_good_test){
+  int success = cd.load_from_tsv("test/tsvReaderExamples/coil_regions_test.tsv",1);
+  BOOST_REQUIRE_EQUAL(success, 0);
+  BOOST_CHECK_EQUAL(cd.r(1), 3.4);
+  BOOST_CHECK_EQUAL(cd.z(1), 5);
+  BOOST_CHECK_EQUAL(cd.current(1), 1);
+}
+
+/* Check that num_columns_ and num_coil_subregions_ are set to zero when a CoilData is created. */
 BOOST_AUTO_TEST_CASE(example_no_loading){
   BOOST_CHECK_EQUAL(cd.num_columns(), 0);
   BOOST_CHECK_EQUAL(cd.num_rows(), 0);
+  BOOST_CHECK_EQUAL(cd.num_coil_subregions(), 0);
 }
 BOOST_AUTO_TEST_SUITE_END()

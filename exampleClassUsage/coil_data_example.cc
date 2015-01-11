@@ -27,11 +27,8 @@ int main(int argc, char* argv[]) {
   }
 
   // Print out the data.
-  for (int i = 0; i < cd.num_rows(); ++i) {
-    for (int j = 0; j < cd.num_columns(); ++j) {
-      std::cout << cd.data(i, j) << " ";
-    }
-    std::cout << "\n";
+  for (int i = 0; i < cd.num_coil_subregions(); ++i) {
+    std::cout << cd.r(i) << "\t" << cd.z(i) << "\t" << cd.current(i) << "\n";
   }
   return 0;
 }
