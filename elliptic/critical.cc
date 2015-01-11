@@ -7,11 +7,13 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
+#include "tsv_reader.h"
+#include <algorithm>
 
 const int OutsideGrid = -1;
 const int OutsideInterp = -2;
 
-Critical::Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double phys_lim_R_up, double phys_lim_z_up, double phys_lim_R_down, double phys_lim_z_down, double R_stag_up, double z_stag_up, double R_stag_down, double z_stag_down, double R0, double z0) :
+Critical::Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, Table &limiters, double R_stag_up, double z_stag_up, double R_stag_down, double z_stag_down, double R0, double z0) :
 Psi_(Psi),
 max_iter(max_iter),
 Grid_(GridS),
@@ -23,12 +25,13 @@ R_stag_up(R_stag_up),
 z_stag_up(z_stag_up),
 R_stag_down(R_stag_down),
 z_stag_down(z_stag_down),
-phys_lim_R_up(phys_lim_R_up),
-phys_lim_z_up(phys_lim_z_up),
-phys_lim_R_down(phys_lim_R_down),
-phys_lim_z_down(phys_lim_z_down) {
-  assert(phys_lim_z_up > phys_lim_z_down);
-  // Interpolate Psi_ at (R0, z_limiter1)
+limiters_(limiters) {
+    // interpolate at stag point
+    assert(limiters.num_rows()>0);
+    assert(limiters.num_columns() == 2);
+    for (int i = 0; i < limiters.num_rows();++i){
+        Psi_phys_lim.push_back(0);
+    }
   try {
       Inter_.updateInterpolation(R_stag_up, z_stag_up);
   }
@@ -139,15 +142,16 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
  * guess r, z
  */
 double Critical::Psi_limiter() {
-  double Psi_phys_up, Psi_phys_down, Psi_phys;
+  double Psi_phys;
 
-  Inter_.updateInterpolation(phys_lim_R_up,phys_lim_z_up);
-  Psi_phys_up = Inter_.Psi_interp(phys_lim_R_up, phys_lim_z_up);
-  Inter_.updateInterpolation(phys_lim_R_down,phys_lim_z_down);
-  Psi_phys_down = Inter_.Psi_interp(phys_lim_R_down, phys_lim_z_down);  
+  for (int i = 0; i < limiters_.num_rows(); ++i){
+      Inter_.updateInterpolation(limiters_.data(i,0), limiters_.data(i,1));
+      Psi_phys_lim[i] = Inter_.Psi_interp(limiters_.data(i,0), limiters_.data(i,1));
+      printf("limiter %d at R = %f, z = %f \n", i+1, limiters_.data(i,0), limiters_.data(i,1));
+  }
 
-  Psi_phys = fmin(Psi_phys_up, Psi_phys_down);
-  
+  Psi_phys = *std::min_element(Psi_phys_lim.begin(), Psi_phys_lim.end());
+
   double r = R_stag_down; double z = z_stag_down;
   if (find_saddle(r,z)){
       R_stag_down = r;

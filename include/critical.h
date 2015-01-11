@@ -4,13 +4,14 @@
 #include "grid.h"
 #include "interpolate.h"
 #include <vector>
+#include "tsv_reader.h"
 
 /*! 
  * @brief The cougar (Puma concolor), also commonly known as the
  */
 class Critical {
 public:
-    Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, double phys_lim_R_up, double phys_lim_z_up, double phys_lim_R_down, double phys_lim_z_down, double R_stag_up, double z_stag_up, double R_stag_down, double z_stag_down, double R0, double z0);
+    Critical(Grid &GridS, Field &Psi, int max_iter, double epsilon, Table &limiters, double R_stag_up, double z_stag_up, double R_stag_down, double z_stag_down, double R0, double z0);
     ~Critical();
     
     /*!
@@ -45,10 +46,8 @@ private:
     double R_stag_down;
     double z_stag_down;
 
-    const double phys_lim_R_up;
-    const double phys_lim_z_up;
-    const double phys_lim_R_down;
-    const double phys_lim_z_down;
+    Table &limiters_;
+    std::vector<double> Psi_phys_lim;
 };
 
 #endif
