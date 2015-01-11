@@ -55,6 +55,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("z_stag_down",po::value<double>()->default_value(-1.4), "z position for stagnation point in bottom half of tokamak")
       ("R_stag_up",po::value<double>()->default_value(.5), "R position for stagnation point in top half of tokamak")
       ("z_stag_up",po::value<double>()->default_value(1.5), "z position for stagnation point in top half of tokamak")
+      ("J-solver-name", po::value< std::string>()->default_value("alpha"), "Which solver to use to determine current density. Options nstx, alpha")
      ;
 
   /* For pgtype = "alpha"

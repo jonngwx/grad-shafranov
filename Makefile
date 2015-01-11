@@ -7,7 +7,7 @@ TESTDIR = test
 TESTPROGS = $(TESTDIR)/test_output $(TESTDIR)/util_test $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test $(TESTDIR)/slow_boundary_test $(TESTDIR)/interpolate_test
 EXDIR = exampleClassUsage
 EXAMPLEPROGS = $(EXDIR)/tsv_reader_example $(EXDIR)/coil_data_example
-OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o elliptic/interpolate.o
+OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o elliptic/interpolate.o j_solver_nstx.o
 
 .PHONY: all
 all: $(PROGS) $(EXAMPLEPROGS) $(TESTPROGS)

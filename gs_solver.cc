@@ -20,6 +20,8 @@
 #include "include/create_options.h"
 #include "include/j_solver_alpha.h"
 #include "include/critical.h"
+#include "j_solver.h"
+#include "j_solver_nstx.h"
 
 #ifdef HDF_MODE
 #include "grad_output_hdf.h"
@@ -158,9 +160,15 @@ int main(int argc, char *argv[])
     // set up JSolverAlpha class
     double P0 = vm["pgta-p0"].as<double>();
     double g0 = vm["pgta-g0"].as<double>();
-    double n1 = vm["pgta-n1"].as<double>();
-    double n2 = vm["pgta-n2"].as<double>();
-    JSolverAlpha *jsa = new JSolverAlpha(P0,g0,n1,n2,Ip,grid);
+    J_Solver *js;
+    std::string jname = vm["J-solver-name"].as<string>();
+    if (jname == "nstx"){
+        js= new J_Solver_NSTX(P0,g0,Ip,grid);
+    } else {
+        double n1 = vm["pgta-n1"].as<double>();
+        double n2 = vm["pgta-n2"].as<double>();
+        js = new J_Solver_Alpha(P0,g0,n1,n2,Ip,grid);
+    }
     
     // Elliptic solver for inner loop
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
@@ -175,8 +183,14 @@ int main(int argc, char *argv[])
 
     int max_iter_crit = vm["max-iter-crit"].as<int>();
     double error_tol_crit = vm["error-tol-crit"].as<double>();
-    Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, limiters, R_stag_up, z_stag_up, R_stag_down,  z_stag_down, R0, z0);
+    Critical *crit;
 
+    try{
+        crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, limiters, R_stag_up, z_stag_up, R_stag_down,  z_stag_down, R0, z0);
+    } catch (int i) {
+        printf("Failed to setup critical! Abort!\n");
+        return 1;
+    }
     /** determine which output type: tsv or hdf5 */
     Grad_Output *grad_output;
     std::string output_type = vm["output-type"].as<string>();
@@ -222,7 +236,7 @@ int main(int argc, char *argv[])
               solver->step(*jphi);
             }
             crit->update();
-            jsa->update(jphi, psi, p, g);
+            js->update(jphi, psi, p, g);
             //printf("error norm = %f \n", solver->norm());
             //printf("iteration # n = %d, m = %d\n", n, m);
             if (solver->norm() < error_epsilon){ 
@@ -261,7 +275,7 @@ int main(int argc, char *argv[])
   delete solver;
   delete p;
   delete g;
-  delete jsa;
+  delete js;
   delete grid;
 }
 
