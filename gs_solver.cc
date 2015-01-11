@@ -86,7 +86,8 @@ int main(int argc, char *argv[])
     }*/
   
     CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
-
+    Table limiters; limiters.load_from_tsv(vm["limiter-name"].as<string>(),1);
+    
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
@@ -166,11 +167,15 @@ int main(int argc, char *argv[])
     Boundary *psib = new SlowBoundary(grid, &cd);
 
     // set up Critical
-    double z_limiter1 = vm["z_limiter1"].as<double>();
-    double z_limiter2 = vm["z_limiter2"].as<double>();
+
+    double R_stag_up = vm["R_stag_up"].as<double>();
+    double z_stag_up = vm["z_stag_up"].as<double>();
+    double R_stag_down = vm["R_stag_down"].as<double>();
+    double z_stag_down = vm["z_stag_down"].as<double>();
+
     int max_iter_crit = vm["max-iter-crit"].as<int>();
     double error_tol_crit = vm["error-tol-crit"].as<double>();
-    Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, z_limiter1, z_limiter2, R0, z0);
+    Critical *crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, limiters, R_stag_up, z_stag_up, R_stag_down,  z_stag_down, R0, z0);
 
     /** determine which output type: tsv or hdf5 */
     Grad_Output *grad_output;
