@@ -147,7 +147,7 @@ double Critical::Psi_limiter() {
   for (int i = 0; i < limiters_.num_rows(); ++i){
       Inter_.updateInterpolation(limiters_.data(i,0), limiters_.data(i,1));
       Psi_phys_lim[i] = Inter_.Psi_interp(limiters_.data(i,0), limiters_.data(i,1));
-      printf("limiter %d at R = %f, z = %f \n", i+1, limiters_.data(i,0), limiters_.data(i,1));
+      //printf("limiter %d at R = %f, z = %f \n", i+1, limiters_.data(i,0), limiters_.data(i,1));
   }
 
   Psi_phys = *std::min_element(Psi_phys_lim.begin(), Psi_phys_lim.end());
