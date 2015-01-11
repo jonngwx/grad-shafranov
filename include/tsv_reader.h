@@ -67,13 +67,55 @@ class Table {
  * @brief A container for the r and z location (m) and currents (A) of external
  *coils.
  *
- * Load from a (3-column) tsv of doubles like Table does. Can access the data in
- * the same way or use getter functions r(i) z(i) and current(i)
+ * Load from a (3-column) tsv of doubles like Table does. 
+ * Alternately, load from a tsv of 14 columns in order to specify the geometry
+ * in a more compressed and general way: (from EFIT I guess) in column order:
+ * \verbatim
+ * [reserved:0]
+ *
+ * R = the major radius location of the region (meters)
+ *
+ * Z = the vertical location of the region (meters)
+ *
+ * W = full width of the region (meters)
+ *
+ * H = full height of the region (meters)
+ *
+ * [reserved:5]
+ *
+ * [reserved:6]
+ *
+ * [reserved:7]
+ *
+ * NR = number of radial rectangular subdivisions in the region
+ *
+ * NZ = number of vertical rectangular subdivisions in the region
+ *
+ * [reserved:10]
+ * 
+ * [reserved:11]
+ *
+ * [reserved:12]
+ *
+ * Current: the current flowing through the region.
+ \endverbatim
+ * Can access the by using getter functions r(i) z(i) and current(i)
  */
 class CoilData : public Table {
  private:
-  const static int kNotThreeColumnsError = 5;
-
+  const static int kNotCorrectNumColumnsError = 5;
+  int num_coil_subregions_; /*!< There are in general multiple coil subregions 
+                        for each coil, each of which is a turn(?) and 
+                        carries the same current in series. */
+  std::vector<std::vector<double> > coil_data_; //!< A 2D-vector that holds generated (r,z) and amperage info.
+  int GenerateCoilData(); 
+  inline double CoilRegionR(int i) { return data_[i][1]; }
+  inline double CoilRegionZ(int i) { return data_[i][2]; }
+  inline double CoilRegionW(int i) { return data_[i][3]; }
+  inline double CoilRegionH(int i) { return data_[i][4]; }
+  inline int CoilRegionNR(int i) { return static_cast<int>(0.5 + data_[i][8]); }
+  inline int CoilRegionNZ(int i) { return static_cast<int>(0.5 + data_[i][9]); }
+  inline double CoilRegionCurrent(int i) { return data_[i][13]; }
  public:
   /*!
    * @brief Reads in a tsv file and populates a CoilData.
@@ -91,21 +133,29 @@ class CoilData : public Table {
    * @param [in] i the number of the coil
    * @return r location of the coil from the axis (meters)
    */
-  double r(int i) const { return data_[i][0]; }
+  double r(int i) const { return coil_data_[i][0]; }
 
   /*!
    * @brief Getter for z location (meters) of i'th coil
    * @param [in] i the number of the coil
    * @return z location of the coil above the midplane (meters)
   */
-  double z(int i) const { return data_[i][1]; }
+  double z(int i) const { return coil_data_[i][1]; }
 
   /*!
    * @brief Getter for current (Amps) of i'th coil
    * @param [in] i the number of the coil
    * @return current in amps of the coil
    */
-  double current(int i) const { return data_[i][2]; }
+  double current(int i) const { return coil_data_[i][2]; }
+  
+  /*!
+   * @brief Getter for the total number of coil subregions.
+   * @return The total number of coil subregions.
+   * Should be used instead of num_rows()
+   * in order to iterate over all the coil subregion locations and currents. 
+   */
+  int num_coil_subregions() const { return num_coil_subregions_; }
 };
 
 /*!

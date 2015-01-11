@@ -78,16 +78,43 @@ int Table::load_from_tsv(const std::string tsv_file_name, int header_lines) {
 
 int CoilData::load_from_tsv(const std::string tsv_file_name, int header_lines) {
   int status = Table::load_from_tsv(tsv_file_name, header_lines);
+  num_coil_subregions_ = 0;
   if (status != 0) {
     return status;
   } else {
-    if (num_columns_ != 3) {
-      std::cout << "Error: CoilData must have three columns.\n";
-      return kNotThreeColumnsError;
-    } else {
+    if (num_columns_ == 3) { //simple coil_data.tsv format
+      coil_data_ = data_;
       return 0;
+    } else if (num_columns_ == 14) { //compressed coil_data.tsv format
+      return GenerateCoilData();
+    } else {
+      std::cout << "Error: CoilData must have three columns for the simple format or fourteen columns for the 'compressed' format.\n";
+      return kNotCorrectNumColumnsError;
     }
   }
+}
+
+int CoilData::GenerateCoilData(){
+  std::vector<double> one_coil_subregion;
+  double coil_dr, coil_dz; // The sub-coil-spacing in r and z.
+  double temp_r, temp_z; // One sub-coil center location.
+  num_coil_subregions_ = 0;
+  for (size_t i = 0; i < num_rows_; i++){
+
+    coil_dr = CoilRegionW(i)/CoilRegionNR(i);
+    coil_dz = CoilRegionH(i)/CoilRegionNZ(i);
+
+    for (int nr = 0; nr < CoilRegionNR(i); nr++) {
+      temp_r = CoilRegionR(i) - CoilRegionW(i)/2 + (nr + 0.5) * coil_dr;
+      for (int nz = 0; nz < CoilRegionNZ(i); nz++) {
+        temp_z = CoilRegionZ(i) - CoilRegionH(i)/2 + (nz + 0.5) * coil_dz;
+        one_coil_subregion = {temp_r, temp_z, CoilRegionCurrent(i)};
+        coil_data_.push_back(one_coil_subregion);
+        num_coil_subregions_++;
+      }
+    }
+  }
+  return 0; // May have nonzero returns in the future (to indicate an error) in case of bad input. 
 }
 
 int PGData::load_from_tsv(const std::string tsv_file_name, int header_lines) {

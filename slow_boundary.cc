@@ -21,7 +21,7 @@ SlowBoundary::SlowBoundary(Grid* grid)
 
   perim_ = 2 * (nr_ + nz_ - 2);
   cond_data_ = new CoilData();
-//  printf("num rows = %i \n", cond_data_->num_rows());
+//  printf("num rows = %i \n", cond_data_->num_coil_subregions());
 
   // Initialize Green's Function Array for Plasma Response
   g_plasma_ = new double** [nr_];
@@ -42,11 +42,11 @@ SlowBoundary::SlowBoundary(Grid* grid, CoilData* cond_data)
   *cond_data_ = *cond_data;
 
   // Initialize Green's Fcn Array for Coils
-  g_coils_ = new double* [cond_data_->num_rows()]; //num_rows = num of coils
-  for (int c = 0; c < cond_data_->num_rows(); ++c) {
+  g_coils_ = new double* [cond_data_->num_coil_subregions()]; //num_coil_subregions = num of coils
+  for (int c = 0; c < cond_data_->num_coil_subregions(); ++c) {
     g_coils_[c] = new double[perim_]();
     for (int l = 0; l < perim_; ++l) {
-      g_coils_[c][l] = green_fcn(cond_data_->data(c,0),cond_data_->data(c,1), R_[LtoI(l)], z_[LtoJ(l)]);
+      g_coils_[c][l] = green_fcn(cond_data_->r(c),cond_data_->z(c), R_[LtoI(l)], z_[LtoJ(l)]);
     }
   }
   
@@ -64,7 +64,7 @@ SlowBoundary::~SlowBoundary() {
   delete[] g_plasma_;
 
   // Delete g_coils_
-  for (int c = 0; c < cond_data_->num_rows(); ++c) {
+  for (int c = 0; c < cond_data_->num_coil_subregions(); ++c) {
     delete[] g_coils_[c];
   }
   delete[] g_coils_;
@@ -74,7 +74,7 @@ SlowBoundary::~SlowBoundary() {
 int SlowBoundary::CalcB(Field* psi, Field* jphi) {
   double mu0 = 4 * M_PI * 1e-7; /* magnetic permeability of free space */
   // printf("perim_ is %d.\n",perim_);
-  int n_rows_ = cond_data_->num_rows();
+  int n_rows_ = cond_data_->num_coil_subregions();
   for (int l = 0; l < perim_; ++l) {
     // printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));
     psi->f_[LtoI(l)][LtoJ(l)] = 0;
@@ -89,7 +89,7 @@ int SlowBoundary::CalcB(Field* psi, Field* jphi) {
     // add psi at bdy due to coils
     for (int c = 0; c < n_rows_; ++c) {
       //printf("l = %i, c = %i \n", l, c);
-      psi->f_[LtoI(l)][LtoJ(l)] += mu0 * g_coils_[c][l] * cond_data_->data(c,2);
+      psi->f_[LtoI(l)][LtoJ(l)] += mu0 * g_coils_[c][l] * cond_data_->current(c);
     }
   }
 
