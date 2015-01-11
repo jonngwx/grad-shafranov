@@ -21,8 +21,12 @@ Inter_(Grid_, Psi_),
 epsilon(epsilon),
 R0(R0),
 z0(z0),
+R_stag_up_orig(R_stag_up),
+z_stag_up_orig(z_stag_up),
 R_stag_up(R_stag_up),
 z_stag_up(z_stag_up),
+R_stag_down_orig(R_stag_down),
+z_stag_down_orig(z_stag_down),
 R_stag_down(R_stag_down),
 z_stag_down(z_stag_down),
 limiters_(limiters) {
@@ -159,6 +163,9 @@ double Critical::Psi_limiter() {
       Inter_.updateInterpolation(R_stag_down,z_stag_down);
       Psi_stag_down = Inter_.Psi_interp(R_stag_down,z_stag_down);
   } else {
+      //reset the search
+      R_stag_down = R_stag_down_orig;
+      z_stag_down = z_stag_down_orig;
       Psi_stag_down = Psi_phys + 1;
   }
   r = R_stag_up; z = z_stag_up;
@@ -168,6 +175,9 @@ double Critical::Psi_limiter() {
       Inter_.updateInterpolation(R_stag_up,z_stag_up);
       Psi_stag_up = Inter_.Psi_interp(R_stag_up,z_stag_up);
   } else {
+      //reset the search
+      R_stag_up = R_stag_up_orig;
+      z_stag_up = z_stag_up_orig;
       Psi_stag_up = Psi_phys + 1;
   }
 

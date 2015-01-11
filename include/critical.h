@@ -40,9 +40,14 @@ private:
     double Psi_stag_down; /** < Psi at second limiter */
     double R0; /** < R coordinate of magnetic axis */
     double z0; /** < Z coordinate of magnetic axis */
+    
+    const double R_stag_up_orig;
+    const double z_stag_up_orig;
     double R_stag_up; /** < R coordinate of stagnation point */
     double z_stag_up; /** < Z coordinate of limiter */
-
+    
+    const double R_stag_down_orig;
+    const double z_stag_down_orig;
     double R_stag_down;
     double z_stag_down;
 
