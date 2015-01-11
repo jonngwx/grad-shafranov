@@ -222,7 +222,7 @@ void Critical::update() {
   // Update Psi_l, r_l, and z_l
   Psi_.f_l = Psi_min;
   Rl = rcrit;
-  zl = zcrit;
+  zl = zcrit; 
   // Calculate Psi_o using previous coordinates
   Psi_magnetic(R0, z0, &rcrit, &zcrit, &Psi_min);
   Psi_.f_0 = Psi_min;
