@@ -114,36 +114,37 @@ $(document).ready(function(){initNavTree('util_8h_source.html','');});
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="util_8h.html#a183dd3fbaba2f4a05a355cbc0a69cf70">   17</a></span>&#160;<span class="keywordtype">void</span> <span class="keyword">inline</span> <a class="code" href="util_8h.html#a183dd3fbaba2f4a05a355cbc0a69cf70">linspace</a>(<span class="keywordtype">double</span> min, <span class="keywordtype">double</span> max, <span class="keywordtype">int</span> n, <span class="keywordtype">double</span> *array){</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  array[0] = min;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> dn = (max - min)/(n - 1.0);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; n; i++){</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    array[i] = array[i-1] + (dn);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="util_8h.html#a7c0c0ae1f9954aba5436f46251e699bb">   33</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="util_8h.html#a7c0c0ae1f9954aba5436f46251e699bb">print1d</a>(<a class="code" href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">FILE</a> *file, <span class="keyword">const</span> <span class="keywordtype">double</span> *data, <span class="keywordtype">int</span> n){</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; ++i){</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        fprintf(file, <span class="stringliteral">&quot;%15.8f &quot;</span>, data[i]);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="util_8h.html#a6ea94a39aada539ca87fd10afcb31ad0">   48</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="util_8h.html#a6ea94a39aada539ca87fd10afcb31ad0">print2d</a>(<a class="code" href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">FILE</a> *file, <span class="keyword">const</span> <span class="keywordtype">double</span> * <span class="keyword">const</span> * data, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> ny){</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nx; ++i){</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ny; ++j){</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            fprintf(file, <span class="stringliteral">&quot;%15.8f &quot;</span>, data[i][j]);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="ttc" id="util_8h_html_a7c0c0ae1f9954aba5436f46251e699bb"><div class="ttname"><a href="util_8h.html#a7c0c0ae1f9954aba5436f46251e699bb">print1d</a></div><div class="ttdeci">void print1d(FILE *file, const double *data, int n)</div><div class="ttdoc">prints a 1d array </div><div class="ttdef"><b>Definition:</b> util.h:33</div></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  array[n-1] = max;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> dn = (max - min)/(n - 1.0);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; n - 1; i++){</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    array[i] = array[i-1] + (dn);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="util_8h.html#a7c0c0ae1f9954aba5436f46251e699bb">   34</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="util_8h.html#a7c0c0ae1f9954aba5436f46251e699bb">print1d</a>(<a class="code" href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">FILE</a> *file, <span class="keyword">const</span> <span class="keywordtype">double</span> *data, <span class="keywordtype">int</span> n){</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; ++i){</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        fprintf(file, <span class="stringliteral">&quot;%15.8f &quot;</span>, data[i]);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="util_8h.html#a6ea94a39aada539ca87fd10afcb31ad0">   49</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="util_8h.html#a6ea94a39aada539ca87fd10afcb31ad0">print2d</a>(<a class="code" href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">FILE</a> *file, <span class="keyword">const</span> <span class="keywordtype">double</span> * <span class="keyword">const</span> * data, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> ny){</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nx; ++i){</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ny; ++j){</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            fprintf(file, <span class="stringliteral">&quot;%15.8f &quot;</span>, data[i][j]);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="ttc" id="util_8h_html_a7c0c0ae1f9954aba5436f46251e699bb"><div class="ttname"><a href="util_8h.html#a7c0c0ae1f9954aba5436f46251e699bb">print1d</a></div><div class="ttdeci">void print1d(FILE *file, const double *data, int n)</div><div class="ttdoc">prints a 1d array </div><div class="ttdef"><b>Definition:</b> util.h:34</div></div>
 <div class="ttc" id="util_8h_html_a183dd3fbaba2f4a05a355cbc0a69cf70"><div class="ttname"><a href="util_8h.html#a183dd3fbaba2f4a05a355cbc0a69cf70">linspace</a></div><div class="ttdeci">void linspace(double min, double max, int n, double *array)</div><div class="ttdef"><b>Definition:</b> util.h:17</div></div>
-<div class="ttc" id="namespaceviz_html_aee89f5626ecd7b8bb421426c98a58593"><div class="ttname"><a href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">viz.FILE</a></div><div class="ttdeci">string FILE</div><div class="ttdef"><b>Definition:</b> viz.py:144</div></div>
-<div class="ttc" id="util_8h_html_a6ea94a39aada539ca87fd10afcb31ad0"><div class="ttname"><a href="util_8h.html#a6ea94a39aada539ca87fd10afcb31ad0">print2d</a></div><div class="ttdeci">void print2d(FILE *file, const double *const *data, int nx, int ny)</div><div class="ttdoc">prints a 2d array to a single line </div><div class="ttdef"><b>Definition:</b> util.h:48</div></div>
+<div class="ttc" id="namespaceviz_html_aee89f5626ecd7b8bb421426c98a58593"><div class="ttname"><a href="namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593">viz.FILE</a></div><div class="ttdeci">string FILE</div><div class="ttdef"><b>Definition:</b> viz.py:150</div></div>
+<div class="ttc" id="util_8h_html_a6ea94a39aada539ca87fd10afcb31ad0"><div class="ttname"><a href="util_8h.html#a6ea94a39aada539ca87fd10afcb31ad0">print2d</a></div><div class="ttdeci">void print2d(FILE *file, const double *const *data, int nx, int ny)</div><div class="ttdoc">prints a 2d array to a single line </div><div class="ttdef"><b>Definition:</b> util.h:49</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_04551c75b1b1df3df3c1f86f11f16b64.html">include</a></li><li class="navelem"><a class="el" href="util_8h.html">util.h</a></li>
-    <li class="footer">Generated on Thu Jan 8 2015 11:33:01 for COUGAR by
+    <li class="footer">Generated on Sun Jan 11 2015 01:37:18 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

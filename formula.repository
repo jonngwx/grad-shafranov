@@ -7,3 +7,7 @@
 \form#6:$\del/\del\phi = 0$
 \form#7:$\partial/\partial\phi = 0$
 \form#8:$ \nabla p = J \times B $
+\form#9:$a_{m,n}$\f for the bicubic polynomial where m and n are indicies ranging from 0 to 3. The bicubic polynomial is $
+\form#10:$ a_{m,n}$\f for the bicubic polynomial where m and n are indicies ranging from 0 to 3. The bicubic polynomial is $
+\form#11:$ a_{m,n}$
+\form#12:$ \Sigma a_{m,n} x^m y^n$

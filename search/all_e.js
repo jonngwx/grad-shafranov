@@ -9,14 +9,14 @@ var searchData=
   ['prog',['prog',['../namespaceviz.html#a3da7a6bab2793b7f33abb9342eda9ffc',1,'viz']]],
   ['psi',['psi',['../class_p_g_data.html#a47c35a80fc4eb366f7619d55a3ae751d',1,'PGData']]],
   ['psi_5f',['Psi_',['../class_elliptic_solver.html#af6db7ea29804907c1f89bddb6237f8ba',1,'EllipticSolver']]],
-  ['psi_5finterp',['Psi_interp',['../class_interpolate.html#a85b1dfdf8eaf02ccfcd71352307ae2aa',1,'Interpolate']]],
-  ['psi_5flimiter',['Psi_limiter',['../class_critical.html#adb72caedf3bfec539fb60febe5282041',1,'Critical']]],
+  ['psi_5finterp',['Psi_interp',['../class_interpolate.html#a94dcec197a0783b22b764f6b9f579c27',1,'Interpolate']]],
+  ['psi_5flimiter',['Psi_limiter',['../class_critical.html#a8e14cfe2341aa27bfe08542bbbd10b07',1,'Critical']]],
   ['psi_5fmagnetic',['Psi_magnetic',['../class_critical.html#ac563838d656ee8e76c6dec699070992e',1,'Critical']]],
   ['psi_5fprev_5f',['Psi_prev_',['../class_elliptic_solver.html#ae38679a91ac8d0bb3238ab6c13b1f0d2',1,'EllipticSolver']]],
   ['psi_5fsearch',['Psi_search',['../class_critical.html#ab2a1f95baf227877f32dcba9e8fcbb46',1,'Critical']]],
-  ['psir_5finterp',['Psir_interp',['../class_interpolate.html#a88d141131d19b8d0b23ee8249a205606',1,'Interpolate']]],
-  ['psirr_5finterp',['Psirr_interp',['../class_interpolate.html#aff60154ae025655f2d50883d5bebe6ff',1,'Interpolate']]],
-  ['psirz_5finterp',['Psirz_interp',['../class_interpolate.html#aa4fa242e37099be57fb61c60f5f3f828',1,'Interpolate']]],
-  ['psiz_5finterp',['Psiz_interp',['../class_interpolate.html#a45741f8d59ef591d465e4c87e3436365',1,'Interpolate']]],
-  ['psizz_5finterp',['Psizz_interp',['../class_interpolate.html#aae01428ce059db9052b99ab0903d654f',1,'Interpolate']]]
+  ['psir_5finterp',['Psir_interp',['../class_interpolate.html#a5e3be35fb9007ae2ea8a8fee8b046b7c',1,'Interpolate']]],
+  ['psirr_5finterp',['Psirr_interp',['../class_interpolate.html#a35dbd0ae10cbda544c132f8f592fba58',1,'Interpolate']]],
+  ['psirz_5finterp',['Psirz_interp',['../class_interpolate.html#ac94d64f3e9f6cefca9840f5d893858c6',1,'Interpolate']]],
+  ['psiz_5finterp',['Psiz_interp',['../class_interpolate.html#a9ca9abbb45c94efcab0a47379b390dc8',1,'Interpolate']]],
+  ['psizz_5finterp',['Psizz_interp',['../class_interpolate.html#a4050c07969b4f20ff881667d5bfae85d',1,'Interpolate']]]
 ];

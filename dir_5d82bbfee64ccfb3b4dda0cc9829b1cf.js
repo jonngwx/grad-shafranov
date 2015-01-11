@@ -5,6 +5,5 @@ var dir_5d82bbfee64ccfb3b4dda0cc9829b1cf =
     [ "elliptic_solver.cc", "elliptic__solver_8cc.html", null ],
     [ "gauss_seidel.cc", "gauss__seidel_8cc.html", null ],
     [ "interpolate.cc", "interpolate_8cc.html", "interpolate_8cc" ],
-    [ "interpolate_test.cc", "interpolate__test_8cc.html", "interpolate__test_8cc" ],
     [ "sor.cc", "sor_8cc.html", null ]
 ];

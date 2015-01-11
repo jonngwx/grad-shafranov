@@ -9,5 +9,6 @@ var searchData=
   ['field_2eh',['field.h',['../field_8h.html',1,'']]],
   ['file',['FILE',['../namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593',1,'viz']]],
   ['find',['find',['../class_grad___output.html#aac4baaf3bcc96a439da4cd40f36a3811',1,'Grad_Output']]],
+  ['find_5fsaddle',['find_saddle',['../class_critical.html#a395d22919c8b2a2ec2f63231ef63c802',1,'Critical']]],
   ['float',['FLOAT',['../namespaceread__data.html#a8f985b40003517df0c58b692217e53b7',1,'read_data']]]
 ];

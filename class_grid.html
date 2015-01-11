@@ -127,12 +127,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab78d3cef00ffeaf870bcbb19921aec0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3661d0a7f998caaaf8627d7a67072116"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a3661d0a7f998caaaf8627d7a67072116">~Grid</a> ()</td></tr>
 <tr class="separator:a3661d0a7f998caaaf8627d7a67072116"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72bdd582877557a2a249b2f4c9005f8a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a72bdd582877557a2a249b2f4c9005f8a">celli</a> (double r)</td></tr>
-<tr class="memdesc:a72bdd582877557a2a249b2f4c9005f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts radial position in meters to i-coordinate in grid-cell-space which ranges from 0. to (nr_ - 1.0).  <a href="#a72bdd582877557a2a249b2f4c9005f8a">More...</a><br /></td></tr>
-<tr class="separator:a72bdd582877557a2a249b2f4c9005f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50647d1af982fad71c90614198adf874"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a50647d1af982fad71c90614198adf874">cellj</a> (double z)</td></tr>
-<tr class="memdesc:a50647d1af982fad71c90614198adf874"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts z position in meters to j-coordinate in grid-cell-space which ranges from 0. to (nz_ - 1.0).  <a href="#a50647d1af982fad71c90614198adf874">More...</a><br /></td></tr>
-<tr class="separator:a50647d1af982fad71c90614198adf874"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dfb18eb410dc118e989f81a507afd46"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a7dfb18eb410dc118e989f81a507afd46">celli</a> (double r) const </td></tr>
+<tr class="memdesc:a7dfb18eb410dc118e989f81a507afd46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts radial position in meters to i-coordinate in grid-cell-space which ranges from 0. to (nr_ - 1.0).  <a href="#a7dfb18eb410dc118e989f81a507afd46">More...</a><br /></td></tr>
+<tr class="separator:a7dfb18eb410dc118e989f81a507afd46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb76c90369202c5bf6f7d94467b6afa9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#afb76c90369202c5bf6f7d94467b6afa9">cellj</a> (double z) const </td></tr>
+<tr class="memdesc:afb76c90369202c5bf6f7d94467b6afa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts z position in meters to j-coordinate in grid-cell-space which ranges from 0. to (nz_ - 1.0).  <a href="#afb76c90369202c5bf6f7d94467b6afa9">More...</a><br /></td></tr>
+<tr class="separator:afb76c90369202c5bf6f7d94467b6afa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -142,18 +142,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:af66fb5b609dbae6a5c47db6a3726a109"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#af66fb5b609dbae6a5c47db6a3726a109">nz_</a></td></tr>
 <tr class="memdesc:af66fb5b609dbae6a5c47db6a3726a109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cells in z direction.  <a href="#af66fb5b609dbae6a5c47db6a3726a109">More...</a><br /></td></tr>
 <tr class="separator:af66fb5b609dbae6a5c47db6a3726a109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34e0121c449db998cde2c74553820de6"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a34e0121c449db998cde2c74553820de6">dr_</a></td></tr>
+<tr class="memdesc:a34e0121c449db998cde2c74553820de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of a grid cell in the r direction.  <a href="#a34e0121c449db998cde2c74553820de6">More...</a><br /></td></tr>
+<tr class="separator:a34e0121c449db998cde2c74553820de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88975e0c193ba200d3bb20d1b7f5aa08"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a88975e0c193ba200d3bb20d1b7f5aa08">dz_</a></td></tr>
+<tr class="memdesc:a88975e0c193ba200d3bb20d1b7f5aa08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of a grid cell in the z direction.  <a href="#a88975e0c193ba200d3bb20d1b7f5aa08">More...</a><br /></td></tr>
+<tr class="separator:a88975e0c193ba200d3bb20d1b7f5aa08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f0c628fee6a43d8d50afa4ee9fb4f19"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a5f0c628fee6a43d8d50afa4ee9fb4f19">R_</a></td></tr>
 <tr class="memdesc:a5f0c628fee6a43d8d50afa4ee9fb4f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of grid cell radial locations in meters.  <a href="#a5f0c628fee6a43d8d50afa4ee9fb4f19">More...</a><br /></td></tr>
 <tr class="separator:a5f0c628fee6a43d8d50afa4ee9fb4f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfe207b9f2596238018440ba4e29c25e"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#acfe207b9f2596238018440ba4e29c25e">z_</a></td></tr>
 <tr class="memdesc:acfe207b9f2596238018440ba4e29c25e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of grid cell vertical locations in meters.  <a href="#acfe207b9f2596238018440ba4e29c25e">More...</a><br /></td></tr>
 <tr class="separator:acfe207b9f2596238018440ba4e29c25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c4119dd6b39f882beca90d71e6b11a2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a9c4119dd6b39f882beca90d71e6b11a2">dr_</a></td></tr>
-<tr class="memdesc:a9c4119dd6b39f882beca90d71e6b11a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of a grid cell in the r direction.  <a href="#a9c4119dd6b39f882beca90d71e6b11a2">More...</a><br /></td></tr>
-<tr class="separator:a9c4119dd6b39f882beca90d71e6b11a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdd9642e0544eaf666eaed1458147f35"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#afdd9642e0544eaf666eaed1458147f35">dz_</a></td></tr>
-<tr class="memdesc:afdd9642e0544eaf666eaed1458147f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of a grid cell in the z direction.  <a href="#afdd9642e0544eaf666eaed1458147f35">More...</a><br /></td></tr>
-<tr class="separator:afdd9642e0544eaf666eaed1458147f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores information about the solution grid. </p>
@@ -236,7 +236,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a72bdd582877557a2a249b2f4c9005f8a"></a>
+<a class="anchor" id="a7dfb18eb410dc118e989f81a507afd46"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -245,7 +245,7 @@ Public Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>r</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -261,7 +261,7 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a50647d1af982fad71c90614198adf874"></a>
+<a class="anchor" id="afb76c90369202c5bf6f7d94467b6afa9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -270,7 +270,7 @@ Public Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>z</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -287,12 +287,12 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a9c4119dd6b39f882beca90d71e6b11a2"></a>
+<a class="anchor" id="a34e0121c449db998cde2c74553820de6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double Grid::dr_</td>
+          <td class="memname">const double Grid::dr_</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -301,12 +301,12 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afdd9642e0544eaf666eaed1458147f35"></a>
+<a class="anchor" id="a88975e0c193ba200d3bb20d1b7f5aa08"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double Grid::dz_</td>
+          <td class="memname">const double Grid::dz_</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -381,7 +381,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_grid.html">Grid</a></li>
-    <li class="footer">Generated on Thu Jan 8 2015 11:33:01 for COUGAR by
+    <li class="footer">Generated on Sun Jan 11 2015 01:37:18 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
