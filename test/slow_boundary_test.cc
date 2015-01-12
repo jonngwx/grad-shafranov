@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE (Shaf_Sol_Very_Slow) {
   
     double max_iter = 1000000;
     double epsilon = 1e-8;
-    double perim = 2.0*(nr + nz -2.0);
+  //  double perim = 2.0*(nr + nz -2.0);
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
     Field *psi = new Field(*grid);
     Field *psi_old = new Field(*grid);
