@@ -69,8 +69,9 @@ BOOST_AUTO_TEST_CASE (Shaf_Sol_Very_Slow) {
     psib->CalcB(psi); // updates the boundary grid points of psi
 
     
-    // Solve for psi given the proper boundary conditions
-    EllipticSolver *solver = new GaussSeidel(*grid, *psi);
+    // Solve for psi given the proper boundary conditionsi
+    double error_ES = 0.01;
+    EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
     solver->coeff();
     for (int n = 0; n < max_iter; ++n) {
         if (n==0) solver->step_1(*jphi);

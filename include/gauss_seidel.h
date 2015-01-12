@@ -11,7 +11,7 @@
  */
 class GaussSeidel : public EllipticSolver {
 public:
-  GaussSeidel(const Grid &GridS, Field &Psi);
+  GaussSeidel(const Grid &GridS, Field &Psi, double error_ES);
 /*!
  * Perform one iteration
  */
@@ -21,6 +21,8 @@ public:
  * Calculate coefficients for iteration from grid parameters
  */
   void coeff();
+private:
+  double error_;
 };
 
 #endif

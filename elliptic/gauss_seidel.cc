@@ -11,8 +11,9 @@
  * @brief Base class implementation of GaussSeidel
  * @section DESCRIPTION
  */
-GaussSeidel::GaussSeidel(const Grid &GridS, Field &Psi) :
-  EllipticSolver(GridS, Psi) { }
+GaussSeidel::GaussSeidel(const Grid &GridS, Field &Psi, double error_ES) :
+  EllipticSolver(GridS, Psi),
+  error_(error_ES) { }
 
 /*!
  * @brief Calculates coefficients for iteration

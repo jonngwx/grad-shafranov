@@ -106,6 +106,7 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
     double nz = 10;
     double max_iter = 100;
     double epsilon = 0.1;
+    double error_ES = 0.1;
     double perim = 2.0*(nr + nz -2.0);
     Grid *grid = new Grid(R0, Rend, Z0, Zend, nr, nz);
     Field *psi = new Field(*grid);
@@ -154,7 +155,7 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
     */
     
     // Solve for psi given the proper boundary conditions
-    EllipticSolver *solver = new GaussSeidel(*grid, *psi);
+    EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
     solver->coeff();
     for (int n = 0; n < max_iter; ++n) {
         if (n==0) solver->step_1(*jphi);
@@ -185,6 +186,7 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
   
     double max_iter = 1000;
     double epsilon = 1e-8;
+    double error_ES = 0.01;
     double perim = 2.0*(nr + nz -2.0);
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
     Field *psi = new Field(*grid);
@@ -234,7 +236,7 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
     */
     
     // Solve for psi given the proper boundary conditions
-    EllipticSolver *solver = new GaussSeidel(*grid, *psi);
+    EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
     solver->coeff();
     for (int n = 0; n < max_iter; ++n) {
         if (n==0) solver->step_1(*jphi);

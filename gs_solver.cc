@@ -171,7 +171,8 @@ int main(int argc, char *argv[])
     }
     
     // Elliptic solver for inner loop
-    EllipticSolver *solver = new GaussSeidel(*grid, *psi);
+    double error_ES = vm["error-tol-ES"].as<double>();
+    EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
     Boundary *psib = new SlowBoundary(psi, grid, &cd);
 
     // set up Critical
