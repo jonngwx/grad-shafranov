@@ -117,6 +117,8 @@ class CoilData : public Table {
   inline int CoilRegionNZ(int i) { return static_cast<int>(0.5 + data_[i][9]); }
   inline double CoilRegionCurrent(int i) { return data_[i][13]; }
  public:
+  CoilData() : num_coil_subregions_(0) {};
+  ~CoilData() {};
   /*!
    * @brief Reads in a tsv file and populates a CoilData.
    *
@@ -129,21 +131,21 @@ class CoilData : public Table {
   int load_from_tsv(const std::string filename, int header_lines = 0) override;
 
   /*!
-   * @brief Getter for r location (meters) of i'th coil
+   * @brief Getter for r location (meters) of i'th coil subregion
    * @param [in] i the number of the coil
    * @return r location of the coil from the axis (meters)
    */
   double r(int i) const { return coil_data_[i][0]; }
 
   /*!
-   * @brief Getter for z location (meters) of i'th coil
+   * @brief Getter for z location (meters) of i'th coil subregion
    * @param [in] i the number of the coil
    * @return z location of the coil above the midplane (meters)
   */
   double z(int i) const { return coil_data_[i][1]; }
 
   /*!
-   * @brief Getter for current (Amps) of i'th coil
+   * @brief Getter for current (Amps) of i'th coil subregion
    * @param [in] i the number of the coil
    * @return current in amps of the coil
    */
@@ -152,7 +154,7 @@ class CoilData : public Table {
   /*!
    * @brief Getter for the total number of coil subregions.
    * @return The total number of coil subregions.
-   * Should be used instead of num_rows()
+   * Should be used instead of num_rows() which gets the number of coil regions.
    * in order to iterate over all the coil subregion locations and currents. 
    */
   int num_coil_subregions() const { return num_coil_subregions_; }

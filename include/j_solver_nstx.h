@@ -1,7 +1,7 @@
 /*!
  * @file j_solver.h
  * @author Phillin LeBlanc
- * @brief Header declarations for JSolverAlpha.
+ * @brief Header declarations for J_Solver_NSTX.
  */
 
 
@@ -10,6 +10,7 @@
 
 #include "grid.h"
 #include "field.h"
+#include "j_solver.h"
 
 /*! 
  * @brief Calculates current in NSTX. Assumes p' = Ax(1-x), gg' = c x 
