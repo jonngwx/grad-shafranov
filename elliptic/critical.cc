@@ -95,9 +95,6 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D;
   for (int i = 0; i < max_iter; ++i) {
     try {
-//      printf("PSI_MAGNETIC\n");
-//      printf("r = %f\n", r);
-        //    printf("z = %f\n", z);
         Inter_.updateInterpolation(r,z);
         Psi_r = Inter_.Psir_interp(r,z);
         Psi_z = Inter_.Psiz_interp(r,z);
@@ -106,8 +103,9 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
         Psi_rr = Inter_.Psirr_interp(r,z);
 
     }
-    // If r or z outside grid, use original coordinates
     catch(int i) {
+    // If r or z outside grid, use original coordinates
+
       if (i == OutsideGrid) {
           printf("Interpolation outside grid\n");
           break;
@@ -140,17 +138,15 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     // Check if outside grid boundaries
     if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
-  // If search failed, do this manually
-  //  R0 = Grid_.R_[0]/2 + Grid_.R_[Grid_.nr_-1]/2;
-  //  z0 = 0;
+
+  // If search fails, brute force it.
   Psi_min_ = Psi_.f_[0][0];
-  //  Inter_.updateInterpolation(R0,z0);
   for (int i = 0; i < Grid_.nr_; ++i){
       for (int j = 0; j < Grid_.nz_; ++j){
           if (Psi_.f_[i][j] < Psi_min_){
               Psi_min_ = Psi_.f_[i][j];
-              R0 = Grid_.R_[i];
-              z0 = Grid_.z_[j];
+              R0 = Grid_.R_[i]+1e-14; //to avoid numerical issues
+              z0 = Grid_.z_[j]+1e-14;
           }
       }
   }
