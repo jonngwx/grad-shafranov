@@ -28,7 +28,7 @@ void J_Solver_NSTX::update(Field *jphi, Field *psi, Field *p, Field *g) {
     0 at the plasma-vacuum boundary and 1 on the magnetic axis.*/
 
     double delta_psi = psi->f_l - psi->f_0;
-    double n2 = 1.5;
+    double n2 = 2;
     double jtot_old=0;
     // calc temps, then alpha g
     for (int i=0; i < nr_; ++i) {
@@ -46,15 +46,18 @@ void J_Solver_NSTX::update(Field *jphi, Field *psi, Field *p, Field *g) {
         }
     }
     double alpha_g = mu0*(-temp1 + Ip_*delta_psi/(dr_*dz_))/(temp2);
-
+    // ggprime = -0.0140 (1-psi)^2 + .0258 (1-psi) +- .01114;
     // update fields g, and jphi
     for (int i=0; i < nr_; ++i) {
         for (int j=0; j < nz_; ++j) {
             psi_s = (psi->f_l - psi->f_[i][j])/delta_psi;
+	    double ompsi = 1-psi_s;
             if (psi_s > 0 && psi_s <=1) {
                 
                 g->f_[i][j] = sqrt(g0_*g0_ + 2./n2*alpha_g*pow(psi_s,n2)); //update g field
-                jphi->f_[i][j] = (P1_*psi_s*(1-psi_s)*R_[i] + 1/mu0/R_[i]*alpha_g*pow(psi_s,n2))/delta_psi;
+		//		double ggprime = -.0140*pow(ompsi,2) + .00258*ompsi -.01114;
+		double ggprime = alpha_g*pow(psi_s,n2);
+                jphi->f_[i][j] = (P1_*psi_s*(1-psi_s)*R_[i] + 1/mu0/R_[i]*ggprime)/delta_psi;
 
             } else {
                 g->f_[i][j] = g0_;
@@ -71,7 +74,7 @@ void J_Solver_NSTX::update(Field *jphi, Field *psi, Field *p, Field *g) {
     }
     jtot *= (dr_*dz_);
     //    if (abs(Ip_ - jtot) >1) {
-      printf("Ip = %f . summed jphi = %f\n, a_g = %f, dpsi = %f, psil = %f, psi0 = %f, temp1 = %f\n", Ip_, jtot, alpha_g, delta_psi, psi->f_l, psi->f_0, temp1);
+    //  printf("Ip = %f . summed jphi = %f\n, a_g = %f, dpsi = %f, psil = %f, psi0 = %f, temp1 = %f\n", Ip_, jtot, alpha_g, delta_psi, psi->f_l, psi->f_0, temp1);
       //    }
 
 }
