@@ -56,7 +56,8 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
       ("R_stag_up",po::value<double>()->default_value(.5), "R position for stagnation point in top half of tokamak")
       ("z_stag_up",po::value<double>()->default_value(1.5), "z position for stagnation point in top half of tokamak")
       ("J-solver-name", po::value< std::string>()->default_value("alpha"), "Which solver to use to determine current density. Options nstx, alpha")
-     ;
+      ("error-tol-ES", po::value<double>()->default_value(1.0e-4), "error tolerance for internal iter. in GaussSeidel")
+    ;
 
   /* For pgtype = "alpha"
    * n1, n2, p0 (pressure at magnetic axis), and g0 (R0*B0)
