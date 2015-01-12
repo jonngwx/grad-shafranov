@@ -17,13 +17,14 @@
  */
 class J_Solver_NSTX : public J_Solver {
  public:
-    J_Solver_NSTX(double P0, double g0, double Ip, Grid *grid);
+    J_Solver_NSTX(double P0, double g0, double Ip, double n2, Grid *grid);
     ~J_Solver_NSTX();
     /*! which variables are 'in' and which are 'out' ? */
     void update(Field *jphi, Field *psi, Field *p, Field *g);
     
  private:
     double P1_;
+    double n2_;
     
 };
 

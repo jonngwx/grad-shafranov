@@ -162,7 +162,8 @@ int main(int argc, char *argv[])
     J_Solver *js;
     std::string jname = vm["J-solver-name"].as<string>();
     if (jname == "nstx"){
-        js= new J_Solver_NSTX(P0,g0,Ip,grid);
+        double n2 = vm["pgta-n2"].as<double>();
+        js= new J_Solver_NSTX(P0,g0,Ip,n2,grid);
     } else {
         double n1 = vm["pgta-n1"].as<double>();
         double n2 = vm["pgta-n2"].as<double>();
@@ -219,15 +220,15 @@ int main(int argc, char *argv[])
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(jphi);
         // output during calculation 
-        if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
+        if (m > 0 && outputEveryM > 0 && ((m % outputEveryM) == 0)){
             std::string partial_output_name = output_filename_base + ".m" + std::to_string(m) + "." + output_type;
             grad_output->write_output(partial_output_name.c_str());
             printf("Writing output for m = %d\n",m);
         }
         // test convergence
         if (m>0) {
+	  printf("Error for outer loop is %f \n", psib->norm());
           if (psib->norm() < error_epsilon_M){
-	    printf("Error for outer loop is %f \n", psib->norm());
 	    break;
 	  }
         }
@@ -244,6 +245,7 @@ int main(int argc, char *argv[])
             //printf("error norm = %f \n", solver->norm());
             //printf("iteration # n = %d, m = %d\n", n, m);
             if (solver->norm() < error_epsilon_N){ 
+	      printf("Inner loop converged at N = %d\n", n);
               break;
             }
 
