@@ -135,10 +135,10 @@ void Interpolate::updateP(double r, double z) {
       throw OutsideGrid;
   }
 
-  r_curr = is*dr_ + (Grid_.R_[0]);
+  r_curr = (Grid_.R_[is]);
   //printf("R0 = %f\n", Grid_.R_[0]);
   //printf("r_curr = %f\n", r_curr);
-  z_curr = js*dz_ + (Grid_.z_[0]);
+  z_curr = (Grid_.z_[js]);
   //printf("z0 = %f\n", Grid_.z_[0]);
   //printf("z_curr = %f\n", z_curr);
   // Fill in P

@@ -127,16 +127,25 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
         *zcrit = z;
         return;
       }
+      //      printf("not a minimum at R = %f, z = %f, D = %f, Psirr = %f, Psizz = %f, Psi = %f\n", r, z, D, Psi_rr, Psi_zz, Inter_.Psi_interp(r,z));
+      // if this fails, we are at a stationary point, but it's not a minimum so searching will keep bringing us back here and we break.
+      break;
     }
     Psi_search(r, z, &dr, &dz);
-//    printf("dr = %f\n", dr);
-//    printf("dz = %f\n", dz);
+    //    printf("dr = %f\n", dr);
+    //    printf("dz = %f\n", dz);
     r += dr;
     z += dz;
     // Check if outside boundaries
-    if (z >= Grid_.z_[Grid_.nz_-1]|| z <= Grid_.z_[0]) break;
+    if (z >= Grid_.z_[Grid_.nz_-1]|| z <= Grid_.z_[0]) {
+      printf("z outside boundaries %f\n",z);
+      break;
+    }
     // Check if outside grid boundaries
-    if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
+    if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) {
+      printf("R outside boundaries %f\n",r);
+      break;
+    }
   }
 
   // If search fails, brute force it.
@@ -145,13 +154,13 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
       for (int j = 0; j < Grid_.nz_; ++j){
           if (Psi_.f_[i][j] < Psi_min_){
               Psi_min_ = Psi_.f_[i][j];
-              R0 = Grid_.R_[i]+1e-14; //to avoid numerical issues
-              z0 = Grid_.z_[j]+1e-14;
+              R0 = Grid_.R_[i]; 
+              z0 = Grid_.z_[j];
           }
       }
   }
   //  Psi_min_ = Inter_.Psi_interp(R0, z0);
-  printf("o point critical search failed, new min at %f, %f\n",R0,z0);
+  printf("o point critical search failed, new min at %f, %f, psi = %f\n",R0,z0, Psi_min_);
   *Psi_min = Psi_min_;
   *rcrit = R0;
   *zcrit = z0;
