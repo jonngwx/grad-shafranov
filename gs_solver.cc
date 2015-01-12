@@ -67,7 +67,8 @@ int main(int argc, char *argv[])
     int maxIterN = vm["max-iter-N"].as<int>();
     int outputEveryN = vm["output-every-n"].as<int>();
     int outputEveryM = vm["output-every-m"].as<int>();
-    double error_epsilon = vm["error-tol-N"].as<double>();
+    double error_epsilon_N = vm["error-tol-N"].as<double>();
+    double error_epsilon_M = vm["error-tol-M"].as<double>();
 
     /* commented out because pgtype is not used anywhere else in main
      * so this block is useless. If we're not planning
@@ -225,8 +226,10 @@ int main(int argc, char *argv[])
         }
         // test convergence
         if (m>0) {
-          psib->norm();
-          printf("Error for outer loop is %f \n", psib->norm());
+          if (psib->norm() < error_epsilon_M){
+	    printf("Error for outer loop is %f \n", psib->norm());
+	    break;
+	  }
         }
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
@@ -240,7 +243,7 @@ int main(int argc, char *argv[])
             js->update(jphi, psi, p, g);
             //printf("error norm = %f \n", solver->norm());
             //printf("iteration # n = %d, m = %d\n", n, m);
-            if (solver->norm() < error_epsilon){ 
+            if (solver->norm() < error_epsilon_N){ 
               break;
             }
 
