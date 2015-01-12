@@ -97,25 +97,26 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     try {
 //      printf("PSI_MAGNETIC\n");
 //      printf("r = %f\n", r);
-//      printf("z = %f\n", z);
-      Inter_.updateInterpolation(r,z);
+        //    printf("z = %f\n", z);
+        Inter_.updateInterpolation(r,z);
+        Psi_r = Inter_.Psir_interp(r,z);
+        Psi_z = Inter_.Psiz_interp(r,z);
+        Psi_rz = Inter_.Psirz_interp(r,z);
+        Psi_zz = Inter_.Psizz_interp(r,z);
+        Psi_rr = Inter_.Psirr_interp(r,z);
+
     }
     // If r or z outside grid, use original coordinates
     catch(int i) {
       if (i == OutsideGrid) {
-	printf("Interpolation outside grid\n");
-	break;
+          printf("Interpolation outside grid\n");
+          break;
       }
       if (i == OutsideInterp) {
           printf("Interpolation failed\n");
           break;
       }
     }
-    Psi_r = Inter_.Psir_interp(r,z);
-    Psi_z = Inter_.Psiz_interp(r,z);
-    Psi_rz = Inter_.Psirz_interp(r,z);
-    Psi_zz = Inter_.Psizz_interp(r,z);
-    Psi_rr = Inter_.Psirr_interp(r,z);
     // Calculate |del Psi(r,z)| - if within tolerence
     if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
       // Second derivative test
@@ -139,10 +140,22 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
     // Check if outside grid boundaries
     if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
   }
-  // If search failed, use original coordinates of magnetic axis
-  Inter_.updateInterpolation(R0,z0);
-  Psi_min_ = Inter_.Psi_interp(R0, z0);
-
+  // If search failed, do this manually
+  //  R0 = Grid_.R_[0]/2 + Grid_.R_[Grid_.nr_-1]/2;
+  //  z0 = 0;
+  Psi_min_ = Psi_.f_[0][0];
+  //  Inter_.updateInterpolation(R0,z0);
+  for (int i = 0; i < Grid_.nr_; ++i){
+      for (int j = 0; j < Grid_.nz_; ++j){
+          if (Psi_.f_[i][j] < Psi_min_){
+              Psi_min_ = Psi_.f_[i][j];
+              R0 = Grid_.R_[i];
+              z0 = Grid_.z_[j];
+          }
+      }
+  }
+  //  Psi_min_ = Inter_.Psi_interp(R0, z0);
+  printf("o point critical search failed, new min at %f, %f\n",R0,z0);
   *Psi_min = Psi_min_;
   *rcrit = R0;
   *zcrit = z0;
