@@ -152,12 +152,10 @@ int main(int argc, char *argv[])
             else {
                 jphi->f_[i][j] = 0;
             } 
-            //What does the number 10 mean?
-            //            psi->f_[i][j] = 10*exp(-pow(grid->R_[i] - R0,2))*exp(-pow(grid->z_[j],2)/10.);
         }
     }
 
-    // set up JSolverAlpha class
+    // set up J_Solver class
     double P0 = vm["pgta-p0"].as<double>();
     double g0 = vm["pgta-g0"].as<double>();
     J_Solver *js;
@@ -175,7 +173,6 @@ int main(int argc, char *argv[])
     Boundary *psib = new SlowBoundary(psi, grid, &cd);
 
     // set up Critical
-
     double R_stag_up = vm["R_stag_up"].as<double>();
     double z_stag_up = vm["z_stag_up"].as<double>();
     double R_stag_down = vm["R_stag_down"].as<double>();
@@ -191,6 +188,7 @@ int main(int argc, char *argv[])
         printf("Failed to setup critical! Abort!\n");
         return 1;
     }
+
     /** determine which output type: tsv or hdf5 */
     Grad_Output *grad_output;
     std::string output_type = vm["output-type"].as<string>();
@@ -213,11 +211,10 @@ int main(int argc, char *argv[])
     clock_t time1 = clock();
     std::string output_filename_base = vm["output-name"].as<string>();
 
-    // solve stuff   "What???" -JAS
-    solver->coeff();
     /************************************************
      * Main program loop 
      ***********************************************/
+    solver->coeff();
     for (int m = 0; m < maxIterM; ++m) {
         psib->CalcB(jphi);
         // output during calculation 
@@ -262,6 +259,7 @@ int main(int argc, char *argv[])
         }
     }//end outer loop
     clock_t time2 = clock();
+
   /************************************************
    * Write final output and close 
    ***********************************************/
