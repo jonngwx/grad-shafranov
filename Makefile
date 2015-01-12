@@ -42,7 +42,7 @@ $(TESTDIR)/util_test: $(TESTDIR)/util_test.o
 $(TESTDIR)/grid_test: $(TESTDIR)/grid_test.o grid.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/boundary_test: $(TESTDIR)/boundary_test.o boundary.o grid.o
+$(TESTDIR)/boundary_test: $(TESTDIR)/boundary_test.o boundary.o grid.o field.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(TESTDIR)/slow_boundary_test: $(TESTDIR)/slow_boundary_test.o slow_boundary.o boundary.o grid.o field.o tsv_reader.o green_fcn.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o

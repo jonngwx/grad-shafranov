@@ -24,7 +24,7 @@ struct cdtest {
   CoilData cd;  
 };
 
-BOOST_FIXTURE_TEST_SUITE( suite1, tbtest)
+BOOST_FIXTURE_TEST_SUITE( tb_suite, tbtest)
 
 BOOST_AUTO_TEST_CASE(two_good_cols) {
   int success = td.load_from_tsv("test/tsvReaderExamples/good_example_2_cols.tsv",1);
@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_SUITE_END()
 /***************
  * Test CoilData
  **************/
-BOOST_FIXTURE_TEST_SUITE( suite2, cdtest)
+BOOST_FIXTURE_TEST_SUITE( cd_suite, cdtest)
 
 BOOST_AUTO_TEST_CASE(bad_example_not_three_columns){
   std::cout << "\nNext line should show an error:\n";

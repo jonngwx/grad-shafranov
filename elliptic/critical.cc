@@ -191,10 +191,10 @@ double Critical::Psi_limiter() {
 
   if (Psi_phys < Psi_stag_up && Psi_phys < Psi_stag_down) {
       // physical limiter is innermost
-      printf("physical!, psi=%f\n", Psi_phys);
+      // printf("physical!, psi=%f\n", Psi_phys);
       return Psi_phys;
   } else {
-      printf("stagnation\n");
+      // printf("stagnation\n");
       return fmin(Psi_stag_up, Psi_stag_down);
   }
 }

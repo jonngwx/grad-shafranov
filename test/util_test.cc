@@ -29,7 +29,7 @@ struct linsptest {
 };
 
 
-BOOST_FIXTURE_TEST_SUITE( suite1, linsptest)
+BOOST_FIXTURE_TEST_SUITE(util_suite, linsptest)
 
   BOOST_AUTO_TEST_CASE(test_low_bound){
     BOOST_CHECK_EQUAL(arr[0],low_bound);

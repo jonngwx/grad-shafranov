@@ -80,9 +80,10 @@ void J_Solver_Alpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
     }
   }
   jtot *= (dr_*dz_);
-  // if (abs(Ip_ - jtot) >1) {
-  printf("Ip = %f . summed jphi = %f\n, a_g = %f, dpsi = %f, psil = %f, psi0 = %f, temp2 = %f\n", Ip_, jtot, alpha_g, delta_psi, psi->f_l, psi->f_0, temp2);
-  // }
+  //    if (abs(Ip_ - jtot) >1) {
+  //  printf("Ip = %f . summed jphi = %f\n, a_g = %f, dpsi = %f, psil = %f, psi0 = %f, temp2 = %f\n", Ip_, jtot, alpha_g, delta_psi, psi->f_l, psi->f_0, temp2);
+  //    }
 
-  // assert(abs(Ip_-jtot) < 1);
+  //    assert(abs(Ip_-jtot) < 1);
+
 }

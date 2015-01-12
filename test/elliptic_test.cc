@@ -16,7 +16,7 @@ struct elliptictester {
   double R0;
 };
 
-BOOST_FIXTURE_TEST_SUITE(suite1 , elliptictester)
+BOOST_FIXTURE_TEST_SUITE(ell_suite, elliptictester)
 /*!
  * Tests SOR elliptic solver by comparison to vacuum
  * solution constrained to be even about the Z = 0
@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
     Grid *grid = new Grid(R0, Rend, Z0, Zend, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
-    Boundary *psib = new Boundary(grid);
+    Boundary *psib = new Boundary(psi,grid);
     
     // Initialize psi and jphi
     for (int i = 0; i < nr; ++i) {
@@ -55,11 +55,6 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
             psi_sol->f_[i][j] += 1/(8*Rc*Rc)*((R*R-Rc*Rc)*(R*R-Rc*Rc) - 4*R*R*Z*Z);
             psi_sol->f_[i][j] += 1/(24*pow(Rc,4))*(pow((R*R-Rc*Rc),3) - 12*R*R*Z*Z*(R*R - Rc*Rc) + 8*R*R*pow(Z,4));
         }
-    }
-    
-    // Initialize psi boundary using exact solution
-    for (int l = 0; l < perim; ++l) {
-        psi->f_[psib->LtoI(l)][psib->LtoJ(l)] = psi_sol->f_[psib->LtoI(l)][psib->LtoJ(l)];
     }
     
     // Initialize psi boundary using exact solution
@@ -115,7 +110,7 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
     Grid *grid = new Grid(R0, Rend, Z0, Zend, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
-    Boundary *psib = new Boundary(grid);
+    Boundary *psib = new Boundary(psi, grid);
     
     // Initialize psi and jphi
     for (int i = 0; i < nr; ++i) {
@@ -195,7 +190,7 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
     Field *psi = new Field(*grid);
     Field *psi_old = new Field(*grid);
     Field *jphi = new Field(*grid);
-    Boundary *psib = new Boundary(grid);
+    Boundary *psib = new Boundary(psi, grid);
     /*********************************
      * Specify parameters for SS model
      *********************************/
@@ -222,13 +217,6 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
 	} 
       }
     }
-
-    /*********************************
-     * Calculate new boundary for psi
-     *********************************/
-    //    psib->CalcB(psi, jphi); // updates the boundary grid points of psi
-
-    
      
     // Initialize psi boundary using exact solution
     for (int l = 0; l < perim; ++l) {

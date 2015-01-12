@@ -31,8 +31,8 @@ class SlowBoundary : public Boundary {
    *  influence the boundary conditions for psi.
    *  Currently the affect of these coils has not been implemented.
    */
-  SlowBoundary(Grid* grid);
-  SlowBoundary(Grid* grid, CoilData* cond_data);
+  SlowBoundary(Field* psi, Grid* grid);
+  SlowBoundary(Field* psi, Grid* grid, CoilData* cond_data);
   ~SlowBoundary();
   /*!
    * @brief Calculate the updated boundary values for psi based on the plasma
@@ -45,7 +45,7 @@ class SlowBoundary : public Boundary {
    * @param[in] jphi The plasma current.
    * @return The number 0 to indicate success.
    */
-  int CalcB(Field* psi, Field* jphi);
+  int CalcB(Field* jphi);
 
  private:
   double* R_;
@@ -53,7 +53,6 @@ class SlowBoundary : public Boundary {
   double dr_;            // Size of a grid cell in the r direction
   double dz_;            // Size of a grid cell in the z direction
   CoilData* cond_data_;  // Contains data on the external coil currents
-  int perim_;            // The number of perimeter cells of the grid
   double*** g_plasma_;   /*  A three dimensional array.
    * The value g_plasma[i][j][l]
    * represents how much psi is at a given boundary point l

@@ -4,12 +4,18 @@
  * @brief Implementation for the Boundary class.
  */
 #include "include/boundary.h"
-Boundary::Boundary(Grid* grid) : nr_(grid->nr_), nz_(grid->nz_) {}
+#include <math.h>
+#include <stdio.h>
+#include <grid.h>
+#include "include/field.h"
+
+Boundary::Boundary(Field *psi, Grid* grid) : psi_(psi), nr_(grid->nr_), nz_(grid->nz_) {
+  perim_ = 2*(nr_ + nz_ - 2);
+}
 
 Boundary::~Boundary() {}
 
-//so this gets called in elliptic_test. The compiler gives a warning that there's no 'return' statement for this nonvoid function. Since this is not implemented, should I assume that our actual program will ever only call SlowBoundary's CalcB???
-int Boundary::CalcB(Field* psi, Field* jphi) {}
+int Boundary::CalcB(Field* jphi) { return 0; }
 
 int Boundary::LtoI(int l) const {
   int i = 0;
@@ -39,4 +45,16 @@ int Boundary::LtoJ(int l) const {
     j = (2 * nr_ + 2 * nz_ - 4) - l;
   }
   return j;
+}
+
+double Boundary::norm() {
+  double sum = 0;
+  
+  for (int l = 0; l<perim_; ++l) {
+    sum += pow((psi_->f_[LtoI(l)][LtoJ(l)]-psib_old[l]),2);
+  }
+  
+  return sqrt(sum);
+
+
 }

@@ -172,7 +172,7 @@ int main(int argc, char *argv[])
     
     // Elliptic solver for inner loop
     EllipticSolver *solver = new GaussSeidel(*grid, *psi);
-    Boundary *psib = new SlowBoundary(grid, &cd);
+    Boundary *psib = new SlowBoundary(psi, grid, &cd);
 
     // set up Critical
 
@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
      * Main program loop 
      ***********************************************/
     for (int m = 0; m < maxIterM; ++m) {
-        psib->CalcB(psi, jphi);
+        psib->CalcB(jphi);
         // output during calculation 
         if (outputEveryM > 0 && ((m % outputEveryM) == 0)){
             std::string partial_output_name = output_filename_base + ".m" + std::to_string(m) + "." + output_type;
@@ -227,6 +227,10 @@ int main(int argc, char *argv[])
             printf("Writing output for m = %d\n",m);
         }
         // test convergence
+        if (m>0) {
+          psib->norm();
+          printf("Error for outer loop is %f \n", psib->norm());
+        }
         // Iterate through elliptic solver
         for (int n = 0; n < maxIterN; ++n) {
             //printf("n = %i \n", n);
