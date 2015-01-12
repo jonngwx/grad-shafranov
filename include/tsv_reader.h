@@ -117,6 +117,8 @@ class CoilData : public Table {
   inline int CoilRegionNZ(int i) { return static_cast<int>(0.5 + data_[i][9]); }
   inline double CoilRegionCurrent(int i) { return data_[i][13]; }
  public:
+  CoilData() : num_coil_subregions_(0) {};
+  ~CoilData() {};
   /*!
    * @brief Reads in a tsv file and populates a CoilData.
    *
