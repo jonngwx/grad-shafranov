@@ -42,14 +42,14 @@ struct boundarytest {
 
 BOOST_FIXTURE_TEST_SUITE( bdy_suite, boundarytest)
 
-BOOST_AUTO_TEST_CASE(LToI) {
+BOOST_AUTO_TEST_CASE(LToI_test) {
   const std::vector<int> correct_output = { 0, 1, 2, 2, 2, 1, 0, 0 };
   for (int l = 0; l < 8; l++){
     BOOST_CHECK_EQUAL(b->LtoI(l), correct_output[l]);
   }
 }
 
-BOOST_AUTO_TEST_CASE(LToJ) {
+BOOST_AUTO_TEST_CASE(LToJ_test) {
   const std::vector<int> correct_output = { 0, 0, 0, 1, 2, 2, 2, 1 };
   for (int l = 0; l < 8; l++){
     BOOST_CHECK_EQUAL(b->LtoJ(l), correct_output[l]);
