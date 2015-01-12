@@ -1,7 +1,7 @@
 /*!
  * @file j_solver.h
  * @author Phillin LeBlanc
- * @brief Header declarations for JSolverAlpha.
+ * @brief Header declarations for J_Solver.
  */
 
 
@@ -24,7 +24,7 @@ class J_Solver {
   /*! What the heck are all these variables???? -JAS */
   double P0_;
   double g0_;
-  double Ip_;
+  double Ip_; //!< Total plasma current (A)
   double *R_;
   double dr_;
   double dz_;
