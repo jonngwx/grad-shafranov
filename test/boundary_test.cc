@@ -28,11 +28,12 @@ struct boundarytest {
   }
   ~boundarytest(){ 
     BOOST_TEST_MESSAGE( "Teardown fixture boundarytest"); 
-    delete gr;
-    delete f;
     delete b;
+    delete f;
+    delete gr;
   }
 
+  
   Grid * gr;
   Field * f;
   Boundary * b;
@@ -44,7 +45,6 @@ BOOST_FIXTURE_TEST_SUITE( bdy_suite, boundarytest)
 BOOST_AUTO_TEST_CASE(LToI) {
   const std::vector<int> correct_output = { 0, 1, 2, 2, 2, 1, 0, 0 };
   for (int l = 0; l < 8; l++){
-    printf("hellp! l = %i \n", l);
     BOOST_CHECK_EQUAL(b->LtoI(l), correct_output[l]);
   }
 }
