@@ -147,8 +147,7 @@ void Interpolate::updateP(double r, double z) {
   }
 }
 
-
 void Interpolate::updateInterpolation(double r, double z){
-    updateP(r,z);
-    updateCoefficients();
+  updateP(r,z);
+  updateCoefficients();
 }
