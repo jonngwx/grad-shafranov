@@ -247,7 +247,7 @@ int main(int argc, char *argv[])
 
       // output during calculation
       if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
-        std::string partial_output_name = output_filename_base + std::to_string(n) + ".m" + std::to_string(m) + "." + output_type;
+        std::string partial_output_name = output_filename_base + ".n" + std::to_string(n) + ".m" + std::to_string(m) + "." + output_type;
         grad_output->write_output(partial_output_name.c_str());
         printf("Writing output for n = %d, m = %d\n",n,m);
       }
