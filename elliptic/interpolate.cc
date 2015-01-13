@@ -1,3 +1,7 @@
+/*
+ * @file interpolate.cc
+ * @brief Implementation for class Interpolate.
+ */
 #include "interpolate.h"
 #include <math.h>
 #include "field.h"
@@ -106,6 +110,7 @@ double Interpolate::F_zz(double r, double z) const {
           6*(a03 + a13*rc + a23*r2 + a33*r3)*z_)/(dz_*dz_);
 }
 
+//These coefficients come from www.paulinternet.nl/?page=bicubic.
 void Interpolate::updateCoefficients() {
   a00 = P_[1][1];
   a01 = -.5*P_[1][0] + .5*P_[1][2];
@@ -136,11 +141,7 @@ void Interpolate::updateP(double r, double z) {
   }
 
   r_curr_ = (Grid_.R_[is]);
-  //printf("R0 = %f\n", Grid_.R_[0]);
-  //printf("r_curr_ = %f\n", r_curr_);
   z_curr_ = (Grid_.z_[js]);
-  //printf("z0 = %f\n", Grid_.z_[0]);
-  //printf("z_curr_ = %f\n", z_curr_);
   // Fill in P_
   for (int i = 0; i < 4 ; i++) {
     for (int j = 0; j < 4 ; j++) {
