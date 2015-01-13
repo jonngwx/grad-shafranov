@@ -1,6 +1,6 @@
 /*!
  * @file slow_boundary.h
- * @author ???
+ * @author Peter J. Bolgert 
  * @brief Header declarations the SlowBoundary class.
  */
 

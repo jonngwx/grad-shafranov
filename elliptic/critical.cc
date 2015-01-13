@@ -38,7 +38,7 @@ limiters_(limiters) {
     }
   try {
       Inter_.updateInterpolation(R_stag_up, z_stag_up);
-      Psi_stag_up = Inter_.Psi_interp(R_stag_up, z_stag_up);
+      Psi_stag_up = Inter_.F(R_stag_up, z_stag_up);
   }
   catch(int i) {
       if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
@@ -49,7 +49,7 @@ limiters_(limiters) {
   // Interpolate Psi_ at (R0, z_limiter2)
   try {
       Inter_.updateInterpolation(R_stag_down, z_stag_down);
-      Psi_stag_down = Inter_.Psi_interp(R_stag_down, z_stag_down);
+      Psi_stag_down = Inter_.F(R_stag_down, z_stag_down);
   }
   catch(int i) {
       if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
@@ -71,13 +71,13 @@ Critical::~Critical() {}
 void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   double D;
   double Psi_rr, Psi_rz, Psi_zz, Psi_z, Psi_r;
-  Psi_rr = Inter_.Psirr_interp(r, z);
+  Psi_rr = Inter_.F_rr(r, z);
 
-  Psi_rz = Inter_.Psirz_interp(r, z);
+  Psi_rz = Inter_.F_rz(r, z);
   
-  Psi_zz = Inter_.Psizz_interp(r, z);
-  Psi_z = Inter_.Psiz_interp(r, z);
-  Psi_r = Inter_.Psir_interp(r, z);
+  Psi_zz = Inter_.F_zz(r, z);
+  Psi_z = Inter_.F_z(r, z);
+  Psi_r = Inter_.F_r(r, z);
   D = Psi_rr*Psi_zz - pow(Psi_rz,2);
   assert(D != 0);
   *dr = (-Psi_zz*Psi_r + Psi_rz*Psi_z)*(1.0/D);
@@ -96,11 +96,11 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
   for (int i = 0; i < max_iter; ++i) {
     try {
         Inter_.updateInterpolation(r,z);
-        Psi_r = Inter_.Psir_interp(r,z);
-        Psi_z = Inter_.Psiz_interp(r,z);
-        Psi_rz = Inter_.Psirz_interp(r,z);
-        Psi_zz = Inter_.Psizz_interp(r,z);
-        Psi_rr = Inter_.Psirr_interp(r,z);
+        Psi_r = Inter_.F_r(r,z);
+        Psi_z = Inter_.F_z(r,z);
+        Psi_rz = Inter_.F_rz(r,z);
+        Psi_zz = Inter_.F_zz(r,z);
+        Psi_rr = Inter_.F_rr(r,z);
 
     }
     catch(int i) {
@@ -121,13 +121,13 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
       D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
       // If critical point corresponds to a minimum
       if (D > 0 && Psi_rr > 0) {
-	Psi_min_ = Inter_.Psi_interp(r,z);
+	Psi_min_ = Inter_.F(r,z);
         *Psi_min = Psi_min_;
         *rcrit = r;
         *zcrit = z;
         return;
       }
-      //      printf("not a minimum at R = %f, z = %f, D = %f, Psirr = %f, Psizz = %f, Psi = %f\n", r, z, D, Psi_rr, Psi_zz, Inter_.Psi_interp(r,z));
+      //      printf("not a minimum at R = %f, z = %f, D = %f, Psirr = %f, Psizz = %f, Psi = %f\n", r, z, D, Psi_rr, Psi_zz, Inter_.F(r,z));
       // if this fails, we are at a stationary point, but it's not a minimum so searching will keep bringing us back here and we break.
       break;
     }
@@ -159,7 +159,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
           }
       }
   }
-  //  Psi_min_ = Inter_.Psi_interp(R0, z0);
+  //  Psi_min_ = Inter_.F(R0, z0);
   printf("o point critical search failed, new min at %f, %f, psi = %f\n",R0,z0, Psi_min_);
   *Psi_min = Psi_min_;
   *rcrit = R0;
@@ -176,7 +176,7 @@ double Critical::Psi_limiter() {
 
   for (int i = 0; i < limiters_.num_rows(); ++i){
       Inter_.updateInterpolation(limiters_.data(i,0), limiters_.data(i,1));
-      Psi_phys_lim[i] = Inter_.Psi_interp(limiters_.data(i,0), limiters_.data(i,1));
+      Psi_phys_lim[i] = Inter_.F(limiters_.data(i,0), limiters_.data(i,1));
       //printf("limiter %d at R = %f, z = %f \n", i+1, limiters_.data(i,0), limiters_.data(i,1));
   }
 
@@ -187,7 +187,7 @@ double Critical::Psi_limiter() {
       R_stag_down = r;
       z_stag_down = z;
       Inter_.updateInterpolation(R_stag_down,z_stag_down);
-      Psi_stag_down = Inter_.Psi_interp(R_stag_down,z_stag_down);
+      Psi_stag_down = Inter_.F(R_stag_down,z_stag_down);
   } else {
       //reset the search
       R_stag_down = R_stag_down_orig;
@@ -199,7 +199,7 @@ double Critical::Psi_limiter() {
       R_stag_up = r;
       z_stag_up = z;
       Inter_.updateInterpolation(R_stag_up,z_stag_up);
-      Psi_stag_up = Inter_.Psi_interp(R_stag_up,z_stag_up);
+      Psi_stag_up = Inter_.F(R_stag_up,z_stag_up);
   } else {
       //reset the search
       R_stag_up = R_stag_up_orig;
@@ -249,12 +249,12 @@ bool Critical::find_saddle(double &r, double &z){
     }
     // Calculate |del Psi(r,z)|
     // Update Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
-      Psi_r = Inter_.Psir_interp(r,z);
-      Psi_z = Inter_.Psiz_interp(r,z);
-      Psi_rz = Inter_.Psirz_interp(r,z);
+      Psi_r = Inter_.F_r(r,z);
+      Psi_z = Inter_.F_z(r,z);
+      Psi_rz = Inter_.F_rz(r,z);
 
-      Psi_zz = Inter_.Psizz_interp(r,z);
-      Psi_rr = Inter_.Psirr_interp(r,z);
+      Psi_zz = Inter_.F_zz(r,z);
+      Psi_rr = Inter_.F_rr(r,z);
       // If within tolerence
       if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
           D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;

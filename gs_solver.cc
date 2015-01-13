@@ -29,121 +29,30 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
-{
-  
-    clock_t time0 = clock();
-    /*********************************************************
-     * Load options from config file and command line into vm
-     ********************************************************/
-    po::options_description visible_options("Allowed options");
-    po::variables_map vm;
-    int return_value = CreateOptions(argc, argv, visible_options, vm);
-    if( return_value != 0 ) {
-        exit(return_value);
-    }
-
-    /************************************************
-     * Process options that would print and then end
-     * the program before any computation
-     ***********************************************/
-    if (vm.count("help")) {
-        std::cout << visible_options << "\n";
-        return 0;
-    }
-
-    if (vm.count("version")) {
-        std::cout << "Grad Shafranov solver, version alpha\n";
-        return 0;
-    }
-
-    int nr = vm["grid-elems-r"].as<int>();
-    int nz = vm["grid-elems-z"].as<int>();
-    double Rmin =   vm["r-min"].as<double>();
-    double Rmax = vm["r-max"].as<double>();
-    double zmin =   vm["z-min"].as<double>();
-    double zmax = vm["z-max"].as<double>();
-    int maxIterM = vm["max-iter-M"].as<int>();
-    int maxIterN = vm["max-iter-N"].as<int>();
-    int outputEveryN = vm["output-every-n"].as<int>();
-    int outputEveryM = vm["output-every-m"].as<int>();
-    double error_epsilon_N = vm["error-tol-N"].as<double>();
-    double error_epsilon_M = vm["error-tol-M"].as<double>();
-
-    /* commented out because pgtype is not used anywhere else in main
-     * so this block is useless. If we're not planning
-     * to use it we should delete it.
-    std::string pgtype;
-    if (!vm.count("pgtype")) {
-        std::cout << "Must specify pgtype: (array, choice2, choice 3)  \n";
-        exit(1);
-    } else {
-        pgtype = vm["pgtype"].as<string>();
-        if (pgtype == "array") {
-        } else if (pgtype == "choice2") {}
-        else if (pgtype == "choice3") {}
-        else {
-            std::cout << "Error: pgtype unrecognized; exiting\n";
-            exit(2);
-        }
-    }*/
-  
-    CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
-    Table limiters; limiters.load_from_tsv(vm["limiter-name"].as<string>(),1);
-    
-    Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
-    Field *psi = new Field(*grid);
-    Field *jphi = new Field(*grid);
-    Field *p = new Field(*grid);
-    Field *g = new Field(*grid);
-
-    /****************************************************************
-     * Initialize the plasma current (jphi) and psi.
-     * The initialization for current looks the same as Johnson 1979 Step A.
-     * I'm not sure where this psi initialization comes from. -JAS
-     ***************************************************************/
-    double r_squared;
-    double R0;
-    if (vm.count("j-phi-R0")) {
-      R0 = vm["j-phi-R0"].as<double>();
-    } else {
-      // not necessarily true. Just for now...
-      R0 = (Rmax + Rmin)/2.0;
-    }
-    double z0;
-    if (vm.count("j-phi-z0")) {
-      z0 = vm["j-phi-z0"].as<double>();
-    } else {
-      // not necessarily true. Just for now...
-      z0 = (zmax + zmin)/2.0; 
-    }
-    double D = vm["j-phi-D"].as<double>();
-    double Ip = vm["j-phi-Ip"].as<double>();
-
-    /* The initial plasma current profile is this parabola-like 
-     *
-     * J_phi = c/(R0 + r Cos[theta]) ( 1 - (r/D)^2 ) 
-     *
-     * where R0 is the radius of the magnetic axis,
-     * r is the minor radius,
-     * D is the half-diameter (seriously why have we named it D??)
-     * and c is a normalization factor so that the sum of the plasma current
-     * is Ip. c has units of Amps/meter.
-     *
-     * In order to figure out this normalization factor, integrate J_phi:
-     *
-     * In Mathematica, 
-     *
-     * Integrate[
-      c/(R0 + r Cos[\[Theta]]) (1 - r^2/D0^2) r, {r, 0, D0}, {\[Theta], 0, 
-        2 \[Pi]}, Assumptions -> {R0 > 0, r > 0, r < R0, 0 < D0, D0 < R0}]
-     *
-     * should work, then solve for (the output) = Ip.
-     */
+/* This function writes a paraboloid-like initial current profile to jphi. 
+ *
+ * J_phi = c/(R0 + r Cos[theta]) ( 1 - (r/D)^2 ) 
+ *
+ * where R0 is the radial location of the magnetic axis,
+ * r is the minor radius (distance from (R0, z0)),
+ * theta the angle as measured from the magnetic axis location (R0, z0),
+ * D is the half-diameter,
+ * and c is a normalization factor so that the total plasma current
+ * is Ip. c has units of Amps/meter.
+ *
+ * In order to figure out this normalization factor, integrate J_phi:
+ * In Mathematica, 
+ * Integrate[
+  c/(R0 + r Cos[\[Theta]]) (1 - r^2/D0^2) r, {r, 0, D0}, {\[Theta], 0, 
+    2 \[Pi]}, Assumptions -> {R0 > 0, r > 0, r < R0, 0 < D0, D0 < R0}]
+ *
+ * should work, then solve for (the output) = Ip.
+ */
+void InitializeCurrentDensity(double Ip, double R0, double z0, double D, Field * jphi){
+    const Grid * grid = jphi->grid_;
     double a = pow(D/R0,2); // just for convenience.  should be less than 1
     double c = Ip*a/((4.0*M_PI/3.0) * R0 * (pow(1-a,1.5) - (1 - 1.5*a)));
-    printf("c = %f \n", c);
-
+    double r_squared;
     for (int i = 0; i < grid->nr_; ++i) {
         for (int j = 0; j < grid->nz_; ++j) {
             r_squared = pow(grid->R_[i] - R0,2) + pow(grid->z_[j] - z0,2);
@@ -155,116 +64,198 @@ int main(int argc, char *argv[])
             } 
         }
     }
+}
 
-    // set up J_Solver class
-    double P0 = vm["pgta-p0"].as<double>();
-    double g0 = vm["pgta-g0"].as<double>();
-    J_Solver *js;
-    std::string jname = vm["J-solver-name"].as<string>();
-    if (jname == "nstx"){
-        double n2 = vm["pgta-n2"].as<double>();
-        js= new J_Solver_NSTX(P0,g0,Ip,n2,grid);
-    } else {
-        double n1 = vm["pgta-n1"].as<double>();
-        double n2 = vm["pgta-n2"].as<double>();
-        js = new J_Solver_Alpha(P0,g0,n1,n2,Ip,grid);
+/* 
+ * This function creates a Grad_Output of the correct type based on whether HDF is used and what the output_type is specified as.
+ */
+Grad_Output * DetermineGradOutput(Field * psi, Field * jphi, Grid * grid, Field * p, Field * g, std::string & output_type, std::string & output_list){
+  Grad_Output * grad_output;
+  if (output_type == "tsv") {
+    grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
+  } else if (output_type == "hdf5") {
+    #ifdef HDF_MODE
+    grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,output_list.c_str());
+    #else 
+    grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
+    output_type = "tsv";
+    printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
+    #endif 
+  } else {
+    printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
+    output_type = "tsv";
+    grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
+  }
+  return grad_output;
+}
+
+int main(int argc, char *argv[])
+{
+  clock_t time0 = clock();
+  /*********************************************************
+   * Load options from config file and command line into vm
+   ********************************************************/
+  po::options_description visible_options("Allowed options");
+  po::variables_map vm;
+  int return_value = CreateOptions(argc, argv, visible_options, vm);
+  if( return_value != 0 ) {
+      exit(return_value);
+  }
+
+  /************************************************
+   * Process options that would print and then end
+   * the program before any computation
+   ***********************************************/
+  if (vm.count("help")) {
+      std::cout << visible_options << "\n";
+      return 0;
+  }
+
+  if (vm.count("version")) {
+      std::cout << "Grad Shafranov solver, version alpha\n";
+      return 0;
+  }
+
+  int nr = vm["grid-elems-r"].as<int>();
+  int nz = vm["grid-elems-z"].as<int>();
+  double Rmin =   vm["r-min"].as<double>();
+  double Rmax = vm["r-max"].as<double>();
+  double zmin =   vm["z-min"].as<double>();
+  double zmax = vm["z-max"].as<double>();
+  int maxIterM = vm["max-iter-M"].as<int>();
+  int maxIterN = vm["max-iter-N"].as<int>();
+  int outputEveryN = vm["output-every-n"].as<int>();
+  int outputEveryM = vm["output-every-m"].as<int>();
+  double error_epsilon_N = vm["error-tol-N"].as<double>();
+  double error_epsilon_M = vm["error-tol-M"].as<double>();
+
+  CoilData cd; cd.load_from_tsv(vm["coil-data-name"].as<string>(),1);
+  Table limiters; limiters.load_from_tsv(vm["limiter-name"].as<string>(),1);
+  
+  Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
+  Field *psi = new Field(*grid);
+  Field *jphi = new Field(*grid);
+  Field *p = new Field(*grid);
+  Field *g = new Field(*grid);
+
+  /****************************************************************
+   * Initialize the plasma current (jphi) and psi.
+   * The initialization for current looks the same as Johnson 1979 Step A.
+   * I'm not sure where this psi initialization comes from. -JAS
+   ***************************************************************/
+  double R0;
+  if (vm.count("j-phi-R0")) {
+    R0 = vm["j-phi-R0"].as<double>();
+  } else {
+    // not necessarily true. Just for now...
+    R0 = (Rmax + Rmin)/2.0;
+  }
+  double z0;
+  if (vm.count("j-phi-z0")) {
+    z0 = vm["j-phi-z0"].as<double>();
+  } else {
+    // not necessarily true. Just for now...
+    z0 = (zmax + zmin)/2.0; 
+  }
+
+  double Ip = vm["j-phi-Ip"].as<double>();
+  //See above subroutine.
+  InitializeCurrentDensity(Ip,                          // Total plasma current
+                           R0,                          // Plasma current r-center
+                           z0,                          // Plasma current z-center
+                           vm["j-phi-D"].as<double>(),  //The plasma current half-diameter
+                           jphi);
+
+  // set up J_Solver class
+  double P0 = vm["pgta-p0"].as<double>();
+  double g0 = vm["pgta-g0"].as<double>();
+  J_Solver *js;
+  std::string jname = vm["J-solver-name"].as<string>();
+  if (jname == "nstx"){
+    double n2 = vm["pgta-n2"].as<double>();
+    js= new J_Solver_NSTX(P0,g0,Ip,n2,grid);
+  } else {
+    double n1 = vm["pgta-n1"].as<double>();
+    double n2 = vm["pgta-n2"].as<double>();
+    js = new J_Solver_Alpha(P0,g0,n1,n2,Ip,grid);
+  }
+  
+  // Elliptic solver for inner loop
+  double error_ES = vm["error-tol-ES"].as<double>();
+  EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
+  Boundary *psib = new SlowBoundary(psi, grid, &cd);
+
+  // set up Critical
+
+  Critical *crit;
+  try{
+    crit = new Critical(*grid, *psi, vm["max-iter-crit"].as<int>(),
+                                     vm["error-tol-crit"].as<double>(), 
+                                     limiters,
+                                     vm["R_stag_up"].as<double>(),
+                                     vm["z_stag_up"].as<double>(),
+                                     vm["R_stag_down"].as<double>(),
+                                     vm["z_stag_down"].as<double>(),
+                                     R0, z0);
+  } catch (int i) {
+    printf("Failed to setup critical! Abort!\n");
+    return 1;
+  }
+
+  /** determine which output type: tsv or hdf5 */
+  std::string output_type = vm["output-type"].as<string>();
+  std::string output_list = vm["output-fields"].as<string>();
+  Grad_Output *grad_output = DetermineGradOutput(psi, jphi, grid, p, g, output_type, output_list);
+  std::string output_filename_base = vm["output-name"].as<string>();
+  clock_t time1 = clock();
+
+  /************************************************
+   * Main program loop 
+   ***********************************************/
+  solver->coeff();
+  for (int m = 0; m < maxIterM; ++m) {
+    psib->CalcB(jphi);
+    // output during calculation 
+    if (m > 0 && outputEveryM > 0 && ((m % outputEveryM) == 0)){
+      std::string partial_output_name = output_filename_base + ".m" + std::to_string(m) + "." + output_type;
+      grad_output->write_output(partial_output_name.c_str());
+      printf("Writing output for m = %d\n",m);
     }
-    
-    // Elliptic solver for inner loop
-    double error_ES = vm["error-tol-ES"].as<double>();
-    EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
-    Boundary *psib = new SlowBoundary(psi, grid, &cd);
-
-    // set up Critical
-    double R_stag_up = vm["R_stag_up"].as<double>();
-    double z_stag_up = vm["z_stag_up"].as<double>();
-    double R_stag_down = vm["R_stag_down"].as<double>();
-    double z_stag_down = vm["z_stag_down"].as<double>();
-
-    int max_iter_crit = vm["max-iter-crit"].as<int>();
-    double error_tol_crit = vm["error-tol-crit"].as<double>();
-    Critical *crit;
-
-    try{
-        crit = new Critical(*grid, *psi, max_iter_crit, error_tol_crit, limiters, R_stag_up, z_stag_up, R_stag_down,  z_stag_down, R0, z0);
-    } catch (int i) {
-        printf("Failed to setup critical! Abort!\n");
-        return 1;
+    // test convergence
+    if (m>0) {
+      printf("Error for outer loop is %f \n", psib->norm());
+      if (psib->norm() < error_epsilon_M){
+        break;
+      }
     }
+    // Iterate through elliptic solver
+    for (int n = 0; n < maxIterN; ++n) {
+      //printf("n = %i \n", n);
+      if (n == 0) {
+        solver->step_1(*jphi);
+      } else {
+        solver->step(*jphi);
+      }
+      crit->update();
+      js->update(jphi, psi, p, g);
+      //printf("error norm = %f \n", solver->norm());
+      //printf("iteration # n = %d, m = %d\n", n, m);
+      if (solver->norm() < error_epsilon_N){ 
+        printf("Inner loop converged at N = %d\n", n);
+        break;
+      }
 
-    /** determine which output type: tsv or hdf5 */
-    Grad_Output *grad_output;
-    std::string output_type = vm["output-type"].as<string>();
-    std::string output_list = vm["output-fields"].as<string>();
-    if (output_type == "tsv") {
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
-    } else if (output_type == "hdf5") {
-        #ifdef HDF_MODE
-        grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,output_list.c_str());
-        #else 
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
-	output_type = "tsv";
-        printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
-        #endif 
-    } else {
-        printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
-        output_type = "tsv";
-        grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
-    }
-    clock_t time1 = clock();
-    std::string output_filename_base = vm["output-name"].as<string>();
-
-    /************************************************
-     * Main program loop 
-     ***********************************************/
-    solver->coeff();
-    for (int m = 0; m < maxIterM; ++m) {
-        psib->CalcB(jphi);
-        // output during calculation 
-        if (m > 0 && outputEveryM > 0 && ((m % outputEveryM) == 0)){
-            std::string partial_output_name = output_filename_base + ".m" + std::to_string(m) + "." + output_type;
-            grad_output->write_output(partial_output_name.c_str());
-            printf("Writing output for m = %d\n",m);
-        }
-        // test convergence
-        if (m>0) {
-	  printf("Error for outer loop is %f \n", psib->norm());
-          if (psib->norm() < error_epsilon_M){
-	    break;
-	  }
-        }
-        // Iterate through elliptic solver
-        for (int n = 0; n < maxIterN; ++n) {
-            //printf("n = %i \n", n);
-            if (n == 0) {
-              solver->step_1(*jphi);
-            } else {
-              solver->step(*jphi);
-            }
-            crit->update();
-            js->update(jphi, psi, p, g);
-            //printf("error norm = %f \n", solver->norm());
-            //printf("iteration # n = %d, m = %d\n", n, m);
-            if (solver->norm() < error_epsilon_N){ 
-	      printf("Inner loop converged at N = %d\n", n);
-              break;
-            }
-
-            // output during calculation
-            if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
-                std::string partial_output_name = output_filename_base + std::to_string(n) + ".m" + std::to_string(m) + "." + output_type;
-                grad_output->write_output(partial_output_name.c_str());
-                printf("Writing output for n = %d, m = %d\n",n,m);
-            }
-            if (n == maxIterN-1) {
-              printf(" Elliptic solver reached maxIterN without convergence\n");
-            }
-        }//end inner loop
-        if (m == maxIterM-1){
-            printf("boundary reached max iter M without convergence\n");
-        }
-    }//end outer loop
-    clock_t time2 = clock();
+      // output during calculation
+      if (outputEveryN > 0 && ((n % outputEveryN) == 0)){
+        std::string partial_output_name = output_filename_base + ".n" + std::to_string(n) + ".m" + std::to_string(m) + "." + output_type;
+        grad_output->write_output(partial_output_name.c_str());
+        printf("Writing output for n = %d, m = %d\n",n,m);
+      }
+      if (n == maxIterN-1) { printf(" Elliptic solver reached maxIterN without convergence"); }
+    }//end inner loop
+    if (m == maxIterM-1){ printf("boundary reached max iter M without convergence\n"); }
+  }//end outer loop
+  clock_t time2 = clock();
 
   /************************************************
    * Write final output and close 
