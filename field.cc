@@ -1,6 +1,5 @@
 /*!
  * @file field.cc
- * @author ??
  * @brief Implementation for class Field
  */
 

@@ -12,11 +12,47 @@ public:
     Interpolate(Grid &GridS, Field &F);
     ~Interpolate();
     
+    /*
+     * @brief Interpolate the value of the field F at the given point.
+     * @param r The radial location to interpolate F at.
+     * @param z The vertical location to interpolate F at.
+     * @return The interpolated value of the field F at that point.
+     */
     double F(double r, double z) const;
+    /*
+     * @brief Interpolate the value of dF/dr at the given point.
+     * @param r The radial location to interpolate at.
+     * @param z The vertical location to interpolate at.
+     * @return The interpolated value of the derivative of the field dF/dr at that point.
+     */
     double F_r(double r, double z) const;
+    /*
+     * @brief Interpolate the value of d^2F/dr^2 at the given point.
+     * @param r The radial location to interpolate at.
+     * @param z The vertical location to interpolate at.
+     * @return The interpolated value of the second derivative of the field d^2F/dr^2 at that point.
+     */
     double F_rr(double r, double z) const;
-    double F_rz(double r, double z) const;
+    /*
+     * @brief Interpolate the value of d^2F/drdz at the given point.
+     * @param r The radial location to interpolate at.
+     * @param z The vertical location to interpolate at.
+     * @return The interpolated value of the second derivative of the field d^2F/drdz at that point.
+     */
+    double F_rz(double r, double z) const; 
+    /*
+     * @brief Interpolate the value of d^2F/dz^2 at the given point.
+     * @param r The radial location to interpolate at.
+     * @param z The vertical location to interpolate at.
+     * @return The interpolated value of the second derivative of the field d^2F/dz^2 at that point.
+     */
     double F_zz(double r, double z) const;
+    /*
+     * @brief Interpolate the value of dF/dz at the given point.
+     * @param r The radial location to interpolate at.
+     * @param z The vertical location to interpolate at.
+     * @return The interpolated value of the derivative of the field dF/dz at that point.
+     */
     double F_z(double r, double z) const;
     
     /*!
