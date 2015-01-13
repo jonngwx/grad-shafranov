@@ -49,6 +49,7 @@ protected:
   const Grid &Grid_;
   Field &Psi_;
   Field Psi_prev_;
+  Field Psi_temp_;
 // Coefficients
   std::vector<double> A;
   std::vector<double> C;

@@ -5,6 +5,7 @@
 #include <vector>
 #include "elliptic_solver.h"
 #include <stdio.h>
+#include <math.h>
 
 /*!
  * @file gauss_seidel.cc
@@ -14,6 +15,8 @@
 GaussSeidel::GaussSeidel(const Grid &GridS, Field &Psi, double error_ES) :
   EllipticSolver(GridS, Psi),
   error_(error_ES) { }
+
+GaussSeidel::~GaussSeidel(){}
 
 /*!
  * @brief Calculates coefficients for iteration
@@ -39,21 +42,42 @@ void GaussSeidel::step_1(const Field &jphi){
  */
 void GaussSeidel::step(const Field &jphi){
   const double mu0 = 0.0000012566370614; // in SI units
-  
-// Save Psi_ to Psi_prev
   double nr = Grid_.nr_;
   double nz = Grid_.nz_;
+  
+  // Copy psi to psi_prev
   for (int i = 0; i < nr; ++i) {
-    for(int j = 0; j < nz; ++j) {
+    for (int j = 0; j < nz; ++j) {
       Psi_prev_.f_[i][j] = Psi_.f_[i][j];
     }
   }
-// Copy over boundary values
-//  boundary(Psi_prev_, Psi_);
-  for (int i = 1; i < nr-1; ++i) {
-    for (int j = 1;j < nz-1; ++j) {
-      Psi_.f_[i][j] = B*(jphi.f_[i][j]*mu0*Grid_.R_[i] + A[i]*Psi_prev_.f_[i+1][j] + C[i]*Psi_.f_[i-1][j] + D*Psi_.f_[i][j-1] + D*Psi_prev_.f_[i][j+1]);
+
+  // Gauss seidel algorithm
+  for (int k = 0; k < 1000; ++k) {
+    // Save Psi_ to Psi_temp
+    for (int i = 0; i < nr; ++i) {
+      for(int j = 0; j < nz; ++j) {
+        Psi_temp_.f_[i][j] = Psi_.f_[i][j];
+      }
     }
-  }
-  iter(0.5);
+    // Copy over boundary values
+    //  boundary(Psi_prev_, Psi_);
+    for (int i = 1; i < nr-1; ++i) {
+      for (int j = 1;j < nz-1; ++j) {
+        Psi_.f_[i][j] = B*(jphi.f_[i][j]*mu0*Grid_.R_[i] + A[i]*Psi_temp_.f_[i+1][j] + C[i]*Psi_.f_[i-1][j] + D*Psi_.f_[i][j-1] + D*Psi_temp_.f_[i][j+1]);
+      }
+    } 
+    // Check convergence
+    double sum = 0.0;
+    for(int i = 0; i < nr; ++i) {
+      for(int j = 0; j < nz; ++j) {
+        sum += (Psi_.f_[i][j]-Psi_temp_.f_[i][j])*(Psi_.f_[i][j]-Psi_temp_.f_[i][j]);
+      }
+    }
+    if (sqrt(sum) < error_) {break;}
+    if (k == 999) {printf("Gauss-Seidel algorithm reached end without converging\n");}  
+  }  // end Gauss seidel algorithm
+  //iter(0.5);
+ 
 }
+
