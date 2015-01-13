@@ -93,13 +93,13 @@ private:
      * www.paulinternet.nl/?page=bicubic
      */
     void updateCoefficients();
-    double r_curr; //!< i coordinate of center of current interpolation.
-    double z_curr; //!< j coordinate of center of current interpolation.
+    double r_curr_; //!< i coordinate of center of current interpolation.
+    double z_curr_; //!< j coordinate of center of current interpolation.
     Field &F_;   //!< The Field being interpolated over.
     Grid &Grid_; //!< Underlying grid.
     const double dr_; //!< Radial grid spacing. From Grid.
     const double dz_; //!< Vertical grid spacing. From Grid.
-    std::vector<std::vector<double>> P; //!< 4x4 points that are the values at the grid nodes around the point being interpolated.
+    std::vector<std::vector<double>> P_; //!< 4x4 points that are the values at the grid nodes around the point being interpolated.
     double a00, a01, a02, a03, a10, a11, a12, a13, a20, a21, a22, a23, a30, a31, a32, a33;
 };
 
