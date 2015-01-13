@@ -5,6 +5,7 @@
 #include <vector>
 #include "elliptic_solver.h"
 #include <stdio.h>
+#include <math.h>
 
 /*!
  * @file gauss_seidel.cc
@@ -66,8 +67,17 @@ void GaussSeidel::step(const Field &jphi){
         Psi_.f_[i][j] = B*(jphi.f_[i][j]*mu0*Grid_.R_[i] + A[i]*Psi_temp_.f_[i+1][j] + C[i]*Psi_.f_[i-1][j] + D*Psi_.f_[i][j-1] + D*Psi_temp_.f_[i][j+1]);
       }
     } 
-   // iter(0.5);
-  }
-
+    // Check convergence
+    double sum = 0.0;
+    for(int i = 0; i < nr; ++i) {
+      for(int j = 0; j < nz; ++j) {
+        sum += (Psi_.f_[i][j]-Psi_temp_.f_[i][j])*(Psi_.f_[i][j]-Psi_temp_.f_[i][j]);
+      }
+    }
+    if (sqrt(sum) < error_) {break;}
+    if (k == 999) {printf("Gauss-Seidel algorithm reached end without converging\n");}  
+  }  // end Gauss seidel algorithm
+  //iter(0.5);
+ 
 }
 
