@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jphi',['jphi',['../class_grad___output.html#ae2dc342d62b7014ccfaaf8e3e647cbbe',1,'Grad_Output']]]
+  ['ip_5f',['Ip_',['../class_j___solver.html#a759e33fa84fddb077f7d128ec3773ef3',1,'J_Solver']]]
 ];

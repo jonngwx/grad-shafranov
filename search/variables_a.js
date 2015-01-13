@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['p',['p',['../class_grad___output.html#a55d0e1f76ad585ffdeed6b1f8b608652',1,'Grad_Output']]],
-  ['prog',['prog',['../namespaceviz.html#a3da7a6bab2793b7f33abb9342eda9ffc',1,'viz']]],
-  ['psi_5f',['Psi_',['../class_elliptic_solver.html#af6db7ea29804907c1f89bddb6237f8ba',1,'EllipticSolver']]],
-  ['psi_5fprev_5f',['Psi_prev_',['../class_elliptic_solver.html#ae38679a91ac8d0bb3238ab6c13b1f0d2',1,'EllipticSolver']]]
+  ['output_5flist',['output_list',['../class_grad___output.html#a11e5232f4ed770d169fb07dd30a92973',1,'Grad_Output']]],
+  ['outsidegrid',['OutsideGrid',['../critical_8cc.html#a9ece0f0b56b9b3397dbf7ad009c8914f',1,'OutsideGrid():&#160;critical.cc'],['../interpolate_8cc.html#a9ece0f0b56b9b3397dbf7ad009c8914f',1,'OutsideGrid():&#160;interpolate.cc']]],
+  ['outsideinterp',['OutsideInterp',['../critical_8cc.html#a0e1a7e820daae14d5579d64895824874',1,'OutsideInterp():&#160;critical.cc'],['../interpolate_8cc.html#a0e1a7e820daae14d5579d64895824874',1,'OutsideInterp():&#160;interpolate.cc']]]
 ];

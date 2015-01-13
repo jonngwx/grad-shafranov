@@ -15,7 +15,10 @@ var hierarchy =
     ] ],
     [ "Grid", "class_grid.html", null ],
     [ "Interpolate", "class_interpolate.html", null ],
-    [ "JSolverAlpha", "class_j_solver_alpha.html", null ],
+    [ "J_Solver", "class_j___solver.html", [
+      [ "J_Solver_Alpha", "class_j___solver___alpha.html", null ],
+      [ "J_Solver_NSTX", "class_j___solver___n_s_t_x.html", null ]
+    ] ],
     [ "Table", "class_table.html", [
       [ "CoilData", "class_coil_data.html", null ],
       [ "PGData", "class_p_g_data.html", null ]

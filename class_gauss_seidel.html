@@ -131,8 +131,10 @@ Inheritance diagram for GaussSeidel:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a99115adeeceef0cfaa0616354c71f59f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gauss_seidel.html#a99115adeeceef0cfaa0616354c71f59f">GaussSeidel</a> (const <a class="el" href="class_grid.html">Grid</a> &amp;GridS, <a class="el" href="class_field.html">Field</a> &amp;Psi)</td></tr>
-<tr class="separator:a99115adeeceef0cfaa0616354c71f59f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a691d533b27493dbd2a3b1dbf68bb7bc6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gauss_seidel.html#a691d533b27493dbd2a3b1dbf68bb7bc6">GaussSeidel</a> (const <a class="el" href="class_grid.html">Grid</a> &amp;GridS, <a class="el" href="class_field.html">Field</a> &amp;Psi, double error_ES)</td></tr>
+<tr class="separator:a691d533b27493dbd2a3b1dbf68bb7bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ef440c6ac2801c03bb9508655c1a31b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gauss_seidel.html#a2ef440c6ac2801c03bb9508655c1a31b">~GaussSeidel</a> ()</td></tr>
+<tr class="separator:a2ef440c6ac2801c03bb9508655c1a31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a60a6be55e3a822fffe1e5ad3ff62a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gauss_seidel.html#a0a60a6be55e3a822fffe1e5ad3ff62a7">step</a> (const <a class="el" href="class_field.html">Field</a> &amp;jphi)</td></tr>
 <tr class="memdesc:a0a60a6be55e3a822fffe1e5ad3ff62a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">For first iteration - use Gauss Seidel with blending.  <a href="#a0a60a6be55e3a822fffe1e5ad3ff62a7">More...</a><br /></td></tr>
 <tr class="separator:a0a60a6be55e3a822fffe1e5ad3ff62a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,6 +173,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:af6db7ea29804907c1f89bddb6237f8ba inherit pro_attribs_class_elliptic_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae38679a91ac8d0bb3238ab6c13b1f0d2 inherit pro_attribs_class_elliptic_solver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_field.html">Field</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_elliptic_solver.html#ae38679a91ac8d0bb3238ab6c13b1f0d2">Psi_prev_</a></td></tr>
 <tr class="separator:ae38679a91ac8d0bb3238ab6c13b1f0d2 inherit pro_attribs_class_elliptic_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4ac9bf9eb48e043da78611b9a07991a inherit pro_attribs_class_elliptic_solver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_field.html">Field</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_elliptic_solver.html#af4ac9bf9eb48e043da78611b9a07991a">Psi_temp_</a></td></tr>
+<tr class="separator:af4ac9bf9eb48e043da78611b9a07991a inherit pro_attribs_class_elliptic_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a137987c9dc835c6fa5ef25ecbd3d48 inherit pro_attribs_class_elliptic_solver"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_elliptic_solver.html#a4a137987c9dc835c6fa5ef25ecbd3d48">A</a></td></tr>
 <tr class="separator:a4a137987c9dc835c6fa5ef25ecbd3d48 inherit pro_attribs_class_elliptic_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ca6e2f51afd9a2a770b2c8da11a1889 inherit pro_attribs_class_elliptic_solver"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_elliptic_solver.html#a7ca6e2f51afd9a2a770b2c8da11a1889">C</a></td></tr>
@@ -183,7 +187,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Its range, from the Canadian Yukon to the southern. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a99115adeeceef0cfaa0616354c71f59f"></a>
+<a class="anchor" id="a691d533b27493dbd2a3b1dbf68bb7bc6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -197,12 +201,33 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_field.html">Field</a> &amp;&#160;</td>
-          <td class="paramname"><em>Psi</em>&#160;</td>
+          <td class="paramname"><em>Psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>error_ES</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2ef440c6ac2801c03bb9508655c1a31b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GaussSeidel::~GaussSeidel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -310,7 +335,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_gauss_seidel.html">GaussSeidel</a></li>
-    <li class="footer">Generated on Sun Jan 11 2015 01:37:18 for COUGAR by
+    <li class="footer">Generated on Mon Jan 12 2015 22:07:43 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

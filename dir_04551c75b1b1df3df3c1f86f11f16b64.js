@@ -32,8 +32,14 @@ var dir_04551c75b1b1df3df3c1f86f11f16b64 =
     [ "interpolate.h", "interpolate_8h.html", [
       [ "Interpolate", "class_interpolate.html", "class_interpolate" ]
     ] ],
+    [ "j_solver.h", "j__solver_8h.html", [
+      [ "J_Solver", "class_j___solver.html", "class_j___solver" ]
+    ] ],
     [ "j_solver_alpha.h", "j__solver__alpha_8h.html", [
-      [ "JSolverAlpha", "class_j_solver_alpha.html", "class_j_solver_alpha" ]
+      [ "J_Solver_Alpha", "class_j___solver___alpha.html", "class_j___solver___alpha" ]
+    ] ],
+    [ "j_solver_nstx.h", "j__solver__nstx_8h.html", [
+      [ "J_Solver_NSTX", "class_j___solver___n_s_t_x.html", "class_j___solver___n_s_t_x" ]
     ] ],
     [ "slow_boundary.h", "slow__boundary_8h.html", [
       [ "SlowBoundary", "class_slow_boundary.html", "class_slow_boundary" ]

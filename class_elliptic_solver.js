@@ -16,5 +16,6 @@ var class_elliptic_solver =
     [ "D", "class_elliptic_solver.html#a34ee086d9b3ed0d2c4683e4ebdee9db7", null ],
     [ "Grid_", "class_elliptic_solver.html#a62b303889cb865c2b26e5f8ffd86fa4a", null ],
     [ "Psi_", "class_elliptic_solver.html#af6db7ea29804907c1f89bddb6237f8ba", null ],
-    [ "Psi_prev_", "class_elliptic_solver.html#ae38679a91ac8d0bb3238ab6c13b1f0d2", null ]
+    [ "Psi_prev_", "class_elliptic_solver.html#ae38679a91ac8d0bb3238ab6c13b1f0d2", null ],
+    [ "Psi_temp_", "class_elliptic_solver.html#af4ac9bf9eb48e043da78611b9a07991a", null ]
 ];

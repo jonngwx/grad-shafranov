@@ -14,6 +14,7 @@ var files =
     [ "grid.cc", "grid_8cc.html", null ],
     [ "gs_solver.cc", "gs__solver_8cc.html", "gs__solver_8cc" ],
     [ "j_solver_alpha.cc", "j__solver__alpha_8cc.html", null ],
+    [ "j_solver_nstx.cc", "j__solver__nstx_8cc.html", null ],
     [ "slow_boundary.cc", "slow__boundary_8cc.html", null ],
     [ "tsv_reader.cc", "tsv__reader_8cc.html", null ]
 ];

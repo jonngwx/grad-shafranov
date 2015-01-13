@@ -130,9 +130,15 @@ $(document).ready(function(){initNavTree('gs__solver_8cc.html','');});
 <code>#include &quot;<a class="el" href="create__options_8h_source.html">include/create_options.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="j__solver__alpha_8h_source.html">include/j_solver_alpha.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="critical_8h_source.html">include/critical.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="j__solver_8h_source.html">j_solver.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="j__solver__nstx_8h_source.html">j_solver_nstx.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a3dd2d0492c4dd0714b764efb8bb9cd8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gs__solver_8cc.html#a3dd2d0492c4dd0714b764efb8bb9cd8d">InitializeCurrentDensity</a> (double Ip, double R0, double z0, double D, <a class="el" href="class_field.html">Field</a> *jphi)</td></tr>
+<tr class="separator:a3dd2d0492c4dd0714b764efb8bb9cd8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab13fd92785e875c7015f733f3dccd2c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_grad___output.html">Grad_Output</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gs__solver_8cc.html#ab13fd92785e875c7015f733f3dccd2c6">DetermineGradOutput</a> (<a class="el" href="class_field.html">Field</a> *psi, <a class="el" href="class_field.html">Field</a> *jphi, <a class="el" href="class_grid.html">Grid</a> *grid, <a class="el" href="class_field.html">Field</a> *p, <a class="el" href="class_field.html">Field</a> *g, std::string &amp;output_type, std::string &amp;output_list)</td></tr>
+<tr class="separator:ab13fd92785e875c7015f733f3dccd2c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gs__solver_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -140,6 +146,106 @@ Functions</h2></td></tr>
 <div class="textblock"><p>The main program for COUGAR. </p>
 <dl class="section author"><dt>Author</dt><dd>The COUGAR Team </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ab13fd92785e875c7015f733f3dccd2c6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_grad___output.html">Grad_Output</a>* DetermineGradOutput </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_field.html">Field</a> *&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_field.html">Field</a> *&#160;</td>
+          <td class="paramname"><em>jphi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_grid.html">Grid</a> *&#160;</td>
+          <td class="paramname"><em>grid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_field.html">Field</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_field.html">Field</a> *&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>output_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>output_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3dd2d0492c4dd0714b764efb8bb9cd8d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InitializeCurrentDensity </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Ip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>R0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>z0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_field.html">Field</a> *&#160;</td>
+          <td class="paramname"><em>jphi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <div class="memitem">
 <div class="memproto">
@@ -173,7 +279,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="gs__solver_8cc.html">gs_solver.cc</a></li>
-    <li class="footer">Generated on Sun Jan 11 2015 01:37:18 for COUGAR by
+    <li class="footer">Generated on Mon Jan 12 2015 22:07:43 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

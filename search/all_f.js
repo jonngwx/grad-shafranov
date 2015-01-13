@@ -1,7 +1,7 @@
 var searchData=
 [
   ['r',['r',['../class_coil_data.html#a30af24e40804ffae9c977ae261262e47',1,'CoilData']]],
-  ['r_5f',['R_',['../class_grid.html#a5f0c628fee6a43d8d50afa4ee9fb4f19',1,'Grid']]],
+  ['r_5f',['R_',['../class_grid.html#a5f0c628fee6a43d8d50afa4ee9fb4f19',1,'Grid::R_()'],['../class_j___solver.html#aa27c351a6c08f4ac16d630efa8a4a62e',1,'J_Solver::R_()']]],
   ['read_5fdata',['read_data',['../namespaceread__data.html',1,'']]],
   ['read_5fdata_2epy',['read_data.py',['../read__data_8py.html',1,'']]],
   ['read_5fhdf5',['read_hdf5',['../namespaceread__data.html#a405adbeeec6780370946ffee037fe6de',1,'read_data']]],
