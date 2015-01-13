@@ -12,6 +12,7 @@
 class GaussSeidel : public EllipticSolver {
 public:
   GaussSeidel(const Grid &GridS, Field &Psi, double error_ES);
+  ~GaussSeidel();
 /*!
  * Perform one iteration
  */
