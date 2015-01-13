@@ -9,15 +9,15 @@
  */
 class Interpolate {
 public:
-    Interpolate(Grid &GridS, Field &Psi);
+    Interpolate(Grid &GridS, Field &F);
     ~Interpolate();
     
-    double Psi_interp(double r, double z) const;
-    double Psir_interp(double r, double z) const;
-    double Psirr_interp(double r, double z) const;
-    double Psirz_interp(double r, double z) const;
-    double Psizz_interp(double r, double z) const;
-    double Psiz_interp(double r, double z) const;
+    double F(double r, double z) const;
+    double F_r(double r, double z) const;
+    double F_rr(double r, double z) const;
+    double F_rz(double r, double z) const;
+    double F_zz(double r, double z) const;
+    double F_z(double r, double z) const;
     
     /*!
      *@brief calls updateP and updateCoefficients(). This prevents errors as both need to be updated each step.
@@ -59,7 +59,7 @@ private:
     void updateCoefficients();
     double r_curr; //!< i coordinate of center of current interpolation.
     double z_curr; //!< j coordinate of center of current interpolation.
-    Field &Psi_; //!<
+    Field &F_;   //!< The Field being interpolated over.
     Grid &Grid_; //!< Underlying grid.
     const double dr_; //!< Radial grid spacing. From Grid.
     const double dz_; //!< Vertical grid spacing. From Grid.

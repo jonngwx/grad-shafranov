@@ -10,7 +10,7 @@
 const int OutsideInterp = -2;
 
 /*!
- * Tests Critical::Psi_interp functions using paraboloid
+ * Tests Interpolate::F functions using paraboloid
  */
 BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     int nr = 50;
@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     
     double psi_interp;
     try {
-        psi_interp = inter->Psi_interp(0.05,0.05);
+        psi_interp = inter->F(0.05,0.05);
     }
     catch(int i) {
         if (i == OutsideInterp) {
@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     
     double psi2_interp;
     try {
-        psi2_interp = inter->Psi_interp(0.01,0.01);
+        psi2_interp = inter->F(0.01,0.01);
     }
     catch(int i) {
         if (i == OutsideInterp) {
@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     
     double psir2_interp;
     try {
-        psir2_interp = inter->Psir_interp(0.01, 0.01);
+        psir2_interp = inter->F_r(0.01, 0.01);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     
     double psiz_interp;
     try {
-        psiz_interp = inter->Psiz_interp(0.05, 0.05);
+        psiz_interp = inter->F_z(0.05, 0.05);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
     
     double psiz2_interp;
     try {
-        psiz2_interp = inter->Psiz_interp(0.01, 0.01);
+        psiz2_interp = inter->F_z(0.01, 0.01);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
 
     double psizz_interp;
     try {
-        psizz_interp = inter->Psizz_interp(0.01, 0.01);
+        psizz_interp = inter->F_zz(0.01, 0.01);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
 
     double psirr_interp;
     try {
-        psirr_interp = inter->Psirr_interp(0.01, 0.01);
+        psirr_interp = inter->F_rr(0.01, 0.01);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
 
 
 /*!
- * Tests Critical::Psi_interp functions using a cubic function
+* Tests Interpolate::F functions using a cubic function
  */
 BOOST_AUTO_TEST_CASE (cubic_interp) {
     int nr = 50;
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     inter->updateInterpolation(R0,z0);
     double psi_interp;
     try {
-        psi_interp = inter->Psi_interp(R0,z0);
+        psi_interp = inter->F(R0,z0);
     }
     catch(int i) {
         if (i == OutsideInterp) {
@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     
     double psir2_interp;
     try {
-        psir2_interp = inter->Psir_interp(R0,z0);
+        psir2_interp = inter->F_r(R0,z0);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
@@ -190,7 +190,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     
     double psiz_interp;
     try {
-        psiz_interp = inter->Psiz_interp(R0,z0);
+        psiz_interp = inter->F_z(R0,z0);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     
     double psizz_interp;
     try {
-        psizz_interp = inter->Psizz_interp(R0,z0);
+        psizz_interp = inter->F_zz(R0,z0);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
 
     double psirz_interp;
     try {
-        psirz_interp = inter->Psirz_interp(R0,z0);
+        psirz_interp = inter->F_rz(R0,z0);
     }
     catch(int i) {
         if (i == OutsideInterp) printf("Interpolation outside of current gridcell\n");

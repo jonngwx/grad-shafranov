@@ -11,8 +11,8 @@
 const int OutsideInterp = -2;
 const int OutsideGrid = -1;
 
-Interpolate::Interpolate(Grid &GridS, Field &Psi) :
-Psi_(Psi),
+Interpolate::Interpolate(Grid &GridS, Field &F) :
+F_(F),
 Grid_(GridS),
 dr_(Grid_.dr_),
 dz_(Grid_.dz_),
@@ -34,7 +34,7 @@ void Interpolate::CorrectCellBoundsCheck(double r, double z) const {
   }
 }
 
-double Interpolate::Psi_interp(double r, double z) const {
+double Interpolate::F(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -48,7 +48,7 @@ double Interpolate::Psi_interp(double r, double z) const {
          (a03 + a13*r_ + a23*r2 + a33*r3)*z3;
 }
 
-double Interpolate::Psir_interp(double r, double z) const {
+double Interpolate::F_r(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -61,7 +61,7 @@ double Interpolate::Psir_interp(double r, double z) const {
           (a13 + 2*a23*r_ + 3*a33*r2)*z3)/dr_;
 }
 
-double Interpolate::Psirr_interp(double r, double z) const {
+double Interpolate::F_rr(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double z_ = (z - z_curr)/dz_;
@@ -73,7 +73,7 @@ double Interpolate::Psirr_interp(double r, double z) const {
           (2*a23 + 6*a33*r_)*z3)/(dr_*dr_);
 }
 
-double Interpolate::Psirz_interp(double r, double z) const {
+double Interpolate::F_rz(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -84,7 +84,7 @@ double Interpolate::Psirz_interp(double r, double z) const {
         3*(a13 + 2*a23*r_ + 3*a33*r2)*z2)/(dr_*dz_);
 }
 
-double Interpolate::Psiz_interp(double r, double z) const {
+double Interpolate::F_z(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -96,7 +96,7 @@ double Interpolate::Psiz_interp(double r, double z) const {
         3*(a03 + a13*r_ + a23*r2 + a33*r3)*z2)/dz_;
 }
 
-double Interpolate::Psizz_interp(double r, double z) const {
+double Interpolate::F_zz(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
   double r2 = r_*r_;
@@ -144,7 +144,7 @@ void Interpolate::updateP(double r, double z) {
   // Fill in P
   for (int i = 0; i < 4 ; i++) {
     for (int j = 0; j < 4 ; j++) {
-      P[i][j] = Psi_.f_[is + i - 1][js + j - 1];
+      P[i][j] = F_.f_[is + i - 1][js + j - 1];
     }
   }
 }
