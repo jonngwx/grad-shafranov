@@ -4,9 +4,6 @@
  */
 #include "interpolate.h"
 #include <math.h>
-#include "field.h"
-#include "grid.h"
-#include <vector>
 #include <stdio.h>
 #include <assert.h>
 #include <iostream>
