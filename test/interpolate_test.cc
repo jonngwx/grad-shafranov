@@ -9,29 +9,47 @@
 
 const int OutsideInterp = -2;
 
-/*!
- * Tests Interpolate::F functions using a flat function = 0
- */
-BOOST_AUTO_TEST_CASE (flat_interp) {
-  int nr = 50;
-  int nz = 50;
-  double Rmin = -5;
-  double Rmax = 5;
-  double zmin = -3;
-  double zmax = 3;
+struct poly_test {
+  poly_test() { BOOST_TEST_MESSAGE( "Setup fixture poly_test"); 
+    nr = 50;
+    nz = 50;
+    Rmin = -5;
+    Rmax = 5;
+    zmin = -3;
+    zmax = 3;
 
-  Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
-  
-  Field *psi = new Field(*grid);
+    grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
+    psi = new Field(*grid);
+    inter = new Interpolate(*grid, *psi);
+    R0 = 2.301;
+    z0 = 1.01;
+  }
+
+  ~poly_test(){ BOOST_TEST_MESSAGE( "Teardown fixture poly_test"); 
+    delete psi;
+    delete grid; 
+  }
+
+  int nr, nz;
+  double Rmin, Rmax;
+  double zmin, zmax;
+
+  double R0, z0;
+  Grid * grid;
+  Field * psi;
+  Interpolate * inter;
+};
+
+BOOST_FIXTURE_TEST_SUITE( suite1, poly_test)
+  /*!
+   * Tests Interpolate::F functions using a flat function = 0
+   */
+BOOST_AUTO_TEST_CASE (flat_interp) {
   for (int i=0; i < nr; ++i) {
     for (int j=0; j < nz; ++j) {
       psi->f_[i][j] = 0;
     }
   }
-  
-  Interpolate *inter = new Interpolate(*grid, *psi);
-  double R0 = 2.301;
-  double z0 = 1.01;
 
   inter->updateInterpolation(R0,z0);
   try {
@@ -59,16 +77,6 @@ BOOST_AUTO_TEST_CASE (flat_interp) {
  * Tests Interpolate::F functions using a linear function z = r + z
  */
 BOOST_AUTO_TEST_CASE (linear_interp) {
-  int nr = 50;
-  int nz = 50;
-  double Rmin = -5;
-  double Rmax = 5;
-  double zmin = -3;
-  double zmax = 3;
-
-  Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
-  
-  Field *psi = new Field(*grid);
   for (int i=0; i < nr; ++i) {
     for (int j=0; j < nz; ++j) {
       double R = grid->R_[i];
@@ -76,10 +84,6 @@ BOOST_AUTO_TEST_CASE (linear_interp) {
       psi->f_[i][j] = R + z;
     }
   }
-  
-  Interpolate *inter = new Interpolate(*grid, *psi);
-  double R0 = 2.301;
-  double z0 = 1.01;
 
   inter->updateInterpolation(R0,z0);
   try {
@@ -107,26 +111,14 @@ BOOST_AUTO_TEST_CASE (linear_interp) {
  * Tests Interpolate::F functions using paraboloid
  */
 BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
-  int nr = 50;
-  int nz = 50;
-  double Rmin = -5;
-  double Rmax = 5;
-  double zmin = -3;
-  double zmax = 3;
-
-  Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
-  
-  // Initialize Psi as paraboloid
-  Field *psi = new Field(*grid);
   for (int i=0; i < nr; ++i) {
     for (int j=0; j < nz; ++j) {
       psi->f_[i][j] = grid->R_[i]*grid->R_[i] + grid->z_[j]*grid->z_[j];
     }
   }
-  
-  Interpolate *inter = new Interpolate(*grid, *psi);
+
   inter->updateInterpolation(0,0);
-  
+
   try {
     double psi_interp = inter->F(0.05,0.05);
     double psi2_interp = inter->F(0.01,0.01);
@@ -154,17 +146,6 @@ BOOST_AUTO_TEST_CASE (Paraboloid_interp) {
  * Tests Interpolate::F functions using a bicubic function
  */
 BOOST_AUTO_TEST_CASE (cubic_interp) {
-  int nr = 50;
-  int nz = 50;
-  double Rmin = -5;
-  double Rmax = 5;
-  double zmin = -3;
-  double zmax = 3;
-
-  Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
-  
-  // Initialize Psi as some bicubic function
-  Field *psi = new Field(*grid);
   for (int i=0; i < nr; ++i) {
     for (int j=0; j < nz; ++j) {
       double R = grid->R_[i];
@@ -173,10 +154,6 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     }
   }
   
-  Interpolate *inter = new Interpolate(*grid, *psi);
-  double R0 = 2.301;
-  double z0 = 1.01;
-
   inter->updateInterpolation(R0,z0);
   try {
     double psi_interp = inter->F(R0,z0);
@@ -198,3 +175,5 @@ BOOST_AUTO_TEST_CASE (cubic_interp) {
     }
   }
 }
+
+BOOST_AUTO_TEST_SUITE_END()
