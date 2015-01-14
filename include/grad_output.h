@@ -16,9 +16,9 @@
 /*! 
  * @brief Interface for writing the output of the solver to file. 
  */
-class Grad_Output{
+class GradOutput{
   public:
-  virtual ~Grad_Output(){};
+  virtual ~GradOutput(){};
   virtual void write_output(const char* filename)=0;
   
 protected:

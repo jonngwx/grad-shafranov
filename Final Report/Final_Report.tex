@@ -34,7 +34,7 @@
 \usepackage{sectsty} % Allows customizing section commands
 \allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
 
-
+\usepackage{hyperref}
 
 
 %\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
@@ -54,7 +54,7 @@
 \normalfont \normalsize 
 %\textsc{APC 524} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction), \\ \Large An MHD Equilibrium Reconstruction Code:  Design Document\\ % The assignment title
+\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction), \\ \Large An MHD Equilibrium Reconstruction Code: Final Report\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -76,7 +76,7 @@
 
 In magnetohydrodynamic (MHD) theory, a plasma equilibrium is described by the equation $\mathbf{\nabla} p = \mathbf{J} \times \mathbf{B}$, where $p$ is the scalar plasma pressure, $\mathbf{J}$ is the current density, $\mathbf{B} = \mathbf{\nabla} \times \mathbf{A}$ is the magnetic field, and $\mathbf{A}$ is the vector potential for the magnetic field.  We work in cylindrical coordinates $(R, \phi, Z)$, and the plasma is assumed to be axisymmetric, i.e., $\partial / \partial \phi = 0$.
 
-By introducing new functions $\Psi(R,Z) \equiv -R A_{\phi}$ (called the flux function) and $g(R,Z) \equiv R \big(\frac{\partial A_R}{\partial Z} - \frac{\partial A_Z}{\partial R}\big)$, we can rewrite the equilibrium equation in the following form, known as the Grad-Shafranov equation:
+By introducing new functions $\Psi(R,Z) \equiv -R A_{\phi}$ (called the flux function) and $g(R,Z) \equiv R B_{\phi}$, we can rewrite the equilibrium equation in the following form, known as the Grad-Shafranov equation:
 \begin{equation}
 \Delta^{*} \Psi + \mu_0 R^2 \frac{dp}{d\Psi} + g \frac{dg}{d\Psi} = 0,
 \end{equation}
@@ -91,7 +91,7 @@ where $\Delta^{*} \equiv R^2 \mathbf{\nabla} \cdot \frac{1}{R^2} \mathbf{\nabla}
 
 \end{figure}
 
-Without going into too much detail, it should be stated that the best MHD equilibria for confining plasmas are those which contain nested surfaces of constant $\Psi$ (known as flux surfaces), as in Figure 1.  It can be shown that a magnetic field line will always point tangentially to a given flux surface.  Since charged particles in the plasma follow field lines, the particles will stay on constant flux surfaces, resulting in good confinement.    
+Without going into too much detail, it should be stated that the best MHD equilibria for confining plasmas are those which contain nested surfaces of constant $\Psi$ (known as flux surfaces), as in Figure 1.  It can be shown that a magnetic field line will always point tangentially to a given flux surface.  Since charged particles in the plasma follow field lines, the particles will stay on constant flux surfaces, resulting in good confinement.    --
 
 
 
@@ -101,7 +101,7 @@ In a tokamak experiment, one of the researchers' primary goals is to calculate t
 
 Equilibrium reconstruction is crucial for interpreting the results of experiments. In addition, the reconstructed equilibria are often used as inputs to other codes, such as stability codes or transport codes.  
 
-Our program will be able to solve the Grad-Shafranov equation 1) when $p(\Psi)$ and $g(\Psi)$ are specified, and 2) when only experimental measurements are available.
+
 
 \subsection{Algorithm when $p(\Psi)$ and $g(\Psi)$ are specified}
 
@@ -142,7 +142,7 @@ Given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.
 
 In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the source function, the location of external coils $(R_i^c,Z_i^c)$ and their currents $I_i$, and the functional forms of $p(\Psi)$ and $g(\Psi)$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-Z$ plane.  
 
-\subsection{Algorithm using Experimental Measurements}
+\subsection{Algorithm using Experimental Measurements (for the future)}
 
 In an experiment, $p(\Psi)$ and $g(\Psi)$ are unknown, but suppose we have $N_l$ measurements of the flux function $\Psi_l^{meas}$ near the plasma boundary (but within the computational boundary).  
 
@@ -164,12 +164,40 @@ Thus, the algorithm described in Section 1.4 is identical to that described in S
 %	Section 2
 %----------------------------------------------------------------------------------------
 
-\section{Code Organization}
+\section{Code Organization / Class Structure}
 
-The program will be written in C++ with the visualization carried out separately using Python. The solver would be called from the command line, with options to set the parameters of the simulation. Input data, such as the locations of external coils, will be contained in text files. 
-\\
+The program is written in C++ with the visualization carried out separately using Python. The solver is called from the command line.  Options/parameters can be set on the command line or in a configuration file.  The location of external magnetic coils will also be contained in text files. Output will be written to text files or hdf5 files, which will require installation of the hdf5 library.  By default, the output consists of the flux function $\psi$, the pressure, and $g = R\,B_{\phi}$.  Other quantities, such as the toroidal current density, can be selected in the input file.
 
-Output will be written to hdf5 files, which will require installation of the hdf5 library.  By default, the output consists of the grid and flux function.  Other quantities, such as the toroidal current density, can be selected in the input file.\\
+The class structure of our code is explained below.  For more information, see the documentation website at \href{http://jonngwx.github.io/grad-shafranov/index.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/index.html}}.
+\begin{center}
+    \begin{tabular}{ | l | l | p{5cm} |}
+    \hline
+    Class Name & Methods & Brief Description \\ \hline
+    Grid & 11C & Stores information about the computational grid. \\ \hline
+    Field & 9C & Cloudy with rain, across many northern regions. Clear spells
+    across most of Scotland and Northern Ireland,
+    but rain reaching the far northwest. \\ \hline
+    EllipticSolver &  21C & Rain will still linger for the morning.
+    Conditions will improve by early afternoon and continue
+    throughout the evening. \\ \hline
+    GaussSeidel & 345 & 345345345345345345345 \\ \hline
+    SOR & hello & hello \\ \hline
+    JSolver & hello & hello \\ \hline
+    JSolverAlpha & hello & hello \\ \hline
+    JSolverNSTX & ertertetr & ertertert \\ \hline
+    Boundary & rtfhgfgh & dffghfgh \\ \hline
+    SlowBoundary & gdfg dfg & dfgdgf \\ \hline
+    Table & dfgdfgdg & dfgdfgdfg \\ \hline
+    CoilData & dfgdfgdfg & dfgdfgdfg \\ \hline
+    Critical & dfgdfgdfgdfg & dfgdfgdg \\ \hline
+    Interpolate & sdfsdfsdfsdf & fsdfsdfsdf \\ \hline
+    GradOutput & dfgdfgdfg & dfgdfgd \\ \hline
+    GradOutputHdf & fsdfsdfsdf & dfgfdfgdf \\ \hline
+    GradOutputTxt & dfgdfgdfg & dfgdfgdf \\ 
+    \hline
+    \end{tabular}
+\end{center}
+
 
 The following C++ interfaces will be required and should be self-contained
 \begin{itemize}
@@ -226,54 +254,20 @@ In order to read the hdf5 files, a Python visualizer using matplotlib will be wr
 %	Section 4
 %----------------------------------------------------------------------------------------
 
-\section{Schedule and Division of Labor}
+\section{Testing}
 
-\subsection{Schedule}
-
-\textbf{November 28, 2014 - Detailed Project Map}
-\begin{itemize}
-\item Illustrate the code organization through a visual map showing the connection between each of our major classes. 
-\item Set up documentation browser of project with Doxygen.
-\item Clearly define algorithms used: basis functions for reconstruction, finite difference solver, boundary condition solver.
-\item Finalize libraries needed.
-\end{itemize}
-
-\textbf{December 5, 2014 - Prototype}
-\begin{itemize}
-\item Implement user interface. 
-\item Implement input with text file. User defines output type along with algorithms used, number of iterations, etc.  The initial current approximation, $J^0_{\phi}$, is specified along with $p(\Psi)$ and $g(\Psi)$ or experimental measurements of $\Psi$. 
-\item Implement output to a file and/or matplotlib: output is dumped to files and user can implement our plotting modules to generate plots of $\Psi$ as well as related quantities and convergence data. 
-\item Implement main loop with empty function calls. Outline which functions need to be written and what libraries are used. 
-\end{itemize}
-
-\textbf{December 19, 2014 - Alpha Version}
-\begin{itemize}
-\item Implementation of main loop with testing: comparison with analytic solution, convergence testing, and performance testing. 
-\item Implementation of finite difference method elliptic solver.
-\item Implementation of boundary flux ($\Psi_b$) solver using Von Hagenow's method. 
-\end{itemize}
-
-\textbf{January 15, 2015 - Final Version}
-\begin{itemize}
-\item Reconstruction of $p(\Psi)$ and $g(\Psi)$ from magnetic data. 
-\item Implement multi-grid method or other alternate elliptic solver. 
-\item Parallelization with MPI.
-\end{itemize}
-
-\subsection{Division of Labor}
-\begin{itemize}
-\item Peter: Boundary condition solver, calculation of $(\alpha_j,\beta_j)$ from experimental data.
-\item Jonathan: Output, Python visualization program.
-\item Elizabeth: Elliptic solver
-\item Jacob: Input, Testing, Grad-Shafranov solver
-\end{itemize}
+testing
 
 %----------------------------------------------------------------------------------------
 %	Section 5
 %----------------------------------------------------------------------------------------
 
-\section{Risks}
+\section{Profiling}
 
-Although the scope of the project we have outlined is rather large, it should be modularized such that each portion of the project can be fully implemented and tested independently - elliptic solver, boundary solver, possible multi-grid, etc. One of our greatest risks may be realizing that we were overly ambitious. In this case, we may decide that implementation of the multi-grid method is not feasible within our time frame. While our performance may be reduced in this case, we would still have produced a fairly substantial MHD equilibrium solver. We could additionally decide that it may be more realistic to implement another elliptic solver, such as an alternative finite difference method, rather than a multi-grid. Additionally, depending on our performance concerns, it may be important to implement parallelization earlier than described in the schedule. 
+profiling
+
+\section{Lessons Learned}
+
+lessons learned
 
 \end{document}

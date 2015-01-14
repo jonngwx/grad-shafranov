@@ -67,24 +67,24 @@ void InitializeCurrentDensity(double Ip, double R0, double z0, double D, Field *
 }
 
 /* 
- * This function creates a Grad_Output of the correct type based on whether HDF is used and what the output_type is specified as.
+ * This function creates a GradOutput of the correct type based on whether HDF is used and what the output_type is specified as.
  */
-Grad_Output * DetermineGradOutput(Field * psi, Field * jphi, Grid * grid, Field * p, Field * g, std::string & output_type, std::string & output_list){
-  Grad_Output * grad_output;
+GradOutput * DetermineGradOutput(Field * psi, Field * jphi, Grid * grid, Field * p, Field * g, std::string & output_type, std::string & output_list){
+  GradOutput * grad_output;
   if (output_type == "tsv") {
-    grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
+    grad_output = new GradOutputTxt(psi,jphi,grid,p,g,output_list.c_str());
   } else if (output_type == "hdf5") {
     #ifdef HDF_MODE
-    grad_output = new Grad_Output_Hdf(psi,jphi,grid,p,g,output_list.c_str());
+    grad_output = new GradOutputHdf(psi,jphi,grid,p,g,output_list.c_str());
     #else 
-    grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
+    grad_output = new GradOutputTxt(psi,jphi,grid,p,g,output_list.c_str());
     output_type = "tsv";
     printf("Output type hdf not supported. Recompile with hdf libraries to enable. Defaulting to tsv. \n");
     #endif 
   } else {
     printf("Output type %s is not supported, use tsv or hdf5. Defaulting to tsv. \n", output_type.c_str());
     output_type = "tsv";
-    grad_output = new Grad_Output_Txt(psi,jphi,grid,p,g,output_list.c_str());
+    grad_output = new GradOutputTxt(psi,jphi,grid,p,g,output_list.c_str());
   }
   return grad_output;
 }
@@ -186,7 +186,6 @@ int main(int argc, char *argv[])
   Boundary *psib = new SlowBoundary(psi, grid, &cd);
 
   // set up Critical
-
   Critical *crit;
   try{
     crit = new Critical(*grid, *psi, vm["max-iter-crit"].as<int>(),
@@ -205,7 +204,7 @@ int main(int argc, char *argv[])
   /** determine which output type: tsv or hdf5 */
   std::string output_type = vm["output-type"].as<string>();
   std::string output_list = vm["output-fields"].as<string>();
-  Grad_Output *grad_output = DetermineGradOutput(psi, jphi, grid, p, g, output_type, output_list);
+  GradOutput *grad_output = DetermineGradOutput(psi, jphi, grid, p, g, output_type, output_list);
   std::string output_filename_base = vm["output-name"].as<string>();
   clock_t time1 = clock();
 
