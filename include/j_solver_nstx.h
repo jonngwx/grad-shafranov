@@ -4,7 +4,6 @@
  * @brief Header declarations for JSolverNSTX.
  */
 
-
 #ifndef J_SOLVER_NSTX_H_
 #define J_SOLVER_NSTX_H_
 
@@ -17,15 +16,14 @@
  */
 class JSolverNSTX : public JSolver {
  public:
-    JSolverNSTX(double P0, double g0, double Ip, double n2, Grid *grid);
-    ~JSolverNSTX();
-    /*! which variables are 'in' and which are 'out' ? */
-    void update(Field *jphi, Field *psi, Field *p, Field *g);
+  JSolverNSTX(double P0, double g0, double Ip, double n2, Grid *grid);
+  ~JSolverNSTX();
+  /*! which variables are 'in' and which are 'out' ? */
+  void update(Field *jphi, Field *psi, Field *p, Field *g);
     
  private:
-    double P1_;
-    double n2_;
-    
+  double P1_;
+  double n2_;
 };
 
 #endif  // J_SOLVER_NSTX_H_

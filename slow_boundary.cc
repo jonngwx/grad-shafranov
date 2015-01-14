@@ -3,14 +3,15 @@
  * @author Peter J. Bolgert
  * @brief Implementation for the SlowBoundary class.
  */
-#include "include/slow_boundary.h"
+#include <stdio.h>
+#include <math.h>
+
 #include "include/boundary.h"
 #include "include/tsv_reader.h"
 #include "include/grid.h"
 #include "include/field.h"
-#include <stdio.h>
-#include <math.h>
 #include "include/green_fcn.h"
+#include "include/slow_boundary.h"
 
 SlowBoundary::SlowBoundary(Field* psi, Grid* grid)
     : Boundary(psi, grid),
