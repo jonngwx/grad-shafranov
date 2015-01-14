@@ -1,10 +1,10 @@
 /*!
-@brief Explanation of coil_data.tsv format.
+@file coil_data_format.dox
 @author Jacob Schwartz
-@file Coil_data_format.dox
+@brief Explanation of coil_data.tsv format.
 */
 /*!
-\page Coil-Data-Format Format for magnetic coil input.
+\page Coil-Data-Format Input of magnetic coil data
 
 In order to describe the fields of the poloidal-field and shaping coils we need information on their geometry and on the currents flowing through them.
 
