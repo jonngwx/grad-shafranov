@@ -1,7 +1,7 @@
 /*!
  * @file tsv_reader.h
  * @author Jacob Schwartz
- * @brief Header declarations for Table, CoilData, and PGData.
+ * @brief Header declarations for Table and CoilData.
  */
 #ifndef TSV_DATA_H_
 #define TSV_DATA_H_
@@ -169,37 +169,5 @@ class CoilData : public Table {
  * and a value of p-or-g.
  *
  */
-class PGData : public Table {
- private:
-  const static int kNotTwoColumnsError = 4;
-
- public:
-  /*!
-  * @brief Reads in a tsv file and populates a PGData.
-  *
-  * Inherits from Table, then checks that there is the proper number of columns.
-  * @param [in] filename the filename, as a string
-  * @param [in] header_lines how many inital lines to skip
-  * @return 0 if successful, nonzero if error.
-  */
-  int load_from_tsv(const std::string filename, int header_lines = 0) override;
-
-  /*!
-   * @brief Get the i'th value of psi
-   * @param [in] i which value of psi (starting from 0)
-   * @return the i'th value of psi
-   */
-  double psi(int i) const { return data_[i][0]; }
-
-  /*!
-   * @brief Get the i'th value of (p or g)
-   * @param [in] i which value of psi (starting from 0)
-   * @return the i'th value of (p or g)
-   *
-   * Since this PGTable stores either p or g it can only return the
-   * corresponding value of course...
-   */
-  double value(int i) const { return data_[i][1]; }
-};
 
 #endif
