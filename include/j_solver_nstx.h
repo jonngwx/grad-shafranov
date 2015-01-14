@@ -1,7 +1,7 @@
 /*!
  * @file j_solver.h
- * @author Phillin LeBlanc
- * @brief Header declarations for J_Solver_NSTX.
+ * @author Jonathan Ng
+ * @brief Header declarations for JSolverNSTX.
  */
 
 
@@ -15,10 +15,10 @@
 /*! 
  * @brief Calculates current in NSTX. Assumes p' = Ax(1-x), gg' = c x 
  */
-class J_Solver_NSTX : public J_Solver {
+class JSolverNSTX : public JSolver {
  public:
-    J_Solver_NSTX(double P0, double g0, double Ip, double n2, Grid *grid);
-    ~J_Solver_NSTX();
+    JSolverNSTX(double P0, double g0, double Ip, double n2, Grid *grid);
+    ~JSolverNSTX();
     /*! which variables are 'in' and which are 'out' ? */
     void update(Field *jphi, Field *psi, Field *p, Field *g);
     

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
-J_Solver_NSTX::J_Solver_NSTX(double P0, double g0, double Ip, double n2, Grid *grid) : n2_(n2)
+JSolverNSTX::JSolverNSTX(double P0, double g0, double Ip, double n2, Grid *grid) : n2_(n2)
 { // enforce boundary conditions on P
     P0_ = P0;
     g0_ = g0;
@@ -17,10 +17,10 @@ J_Solver_NSTX::J_Solver_NSTX(double P0, double g0, double Ip, double n2, Grid *g
     P1_ = 6*P0;
 }
 
-J_Solver_NSTX::~J_Solver_NSTX()
+JSolverNSTX::~JSolverNSTX()
 {}
 
-void J_Solver_NSTX::update(Field *jphi, Field *psi, Field *p, Field *g) {
+void JSolverNSTX::update(Field *jphi, Field *psi, Field *p, Field *g) {
     const double mu0 = 4 * M_PI * 1e-7; // the permeability of free space
     double temp1 = 0;
     double temp2 = 0;

@@ -1,7 +1,7 @@
 /*!
  * @file j_solver.h
  * @author Phillin LeBlanc
- * @brief Header declarations for J_Solver.
+ * @brief Header declarations for JSolver.
  */
 
 
@@ -12,11 +12,11 @@
 #include "field.h"
 
 /*! 
- * @brief Interface for J_solver!
+ * @brief Interface for JSolver
  */
-class J_Solver {
+class JSolver {
  public:
-    virtual ~J_Solver(){};
+    virtual ~JSolver(){};
     /*! which variables are 'in' and which are 'out' ? */
     virtual void update(Field *jphi, Field *psi, Field *p, Field *g)=0;
     

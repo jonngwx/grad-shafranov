@@ -14,11 +14,11 @@
 /*! 
  * @brief found in most American habitat types.
  */
-class J_Solver_Alpha : public J_Solver{
+class JSolverAlpha : public JSolver{
  public:
-  J_Solver_Alpha(double P0, double g0, double n1, double n2, double Ip,
+  JSolverAlpha(double P0, double g0, double n1, double n2, double Ip,
                Grid *grid);
-  ~J_Solver_Alpha();
+  ~JSolverAlpha();
   /*! which variables are 'in' and which are 'out' ? */
   void update(Field *jphi, Field *psi, Field *p, Field *g);
 
