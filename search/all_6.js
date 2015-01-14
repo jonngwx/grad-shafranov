@@ -1,7 +1,7 @@
 var searchData=
 [
   ['g',['g',['../class_grad_output.html#a837d6f8d534323f4599955ae8f612680',1,'GradOutput']]],
-  ['g0_5f',['g0_',['../class_j___solver.html#ae06e1c40d61cdc18aa8f71eb4594dd9d',1,'J_Solver']]],
+  ['g0_5f',['g0_',['../class_j_solver.html#af55fb543cac41029e454cea08a82881d',1,'JSolver']]],
   ['gauss_5fseidel_2ecc',['gauss_seidel.cc',['../gauss__seidel_8cc.html',1,'']]],
   ['gauss_5fseidel_2eh',['gauss_seidel.h',['../gauss__seidel_8h.html',1,'']]],
   ['gaussseidel',['GaussSeidel',['../class_gauss_seidel.html',1,'GaussSeidel'],['../class_gauss_seidel.html#a691d533b27493dbd2a3b1dbf68bb7bc6',1,'GaussSeidel::GaussSeidel()']]],

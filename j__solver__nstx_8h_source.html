@@ -110,43 +110,42 @@ $(document).ready(function(){initNavTree('j__solver__nstx_8h_source.html','');})
 </div><!--header-->
 <div class="contents">
 <a href="j__solver__nstx_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef J_SOLVER_NSTX_H_</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define J_SOLVER_NSTX_H_</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grid_8h.html">grid.h</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="field_8h.html">field.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="j__solver_8h.html">j_solver.h</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_j___solver___n_s_t_x.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_j___solver___n_s_t_x.html">J_Solver_NSTX</a> : <span class="keyword">public</span> <a class="code" href="class_j___solver.html">J_Solver</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_j___solver___n_s_t_x.html#aacea4e68f901991e1ccd3cbf2260d4d9">J_Solver_NSTX</a>(<span class="keywordtype">double</span> P0, <span class="keywordtype">double</span> g0, <span class="keywordtype">double</span> Ip, <span class="keywordtype">double</span> n2, <a class="code" href="class_grid.html">Grid</a> *grid);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_j___solver___n_s_t_x.html#a1996bc9428d95e21c0879cf64843f53d">~J_Solver_NSTX</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_j___solver___n_s_t_x.html#a1fb05e7f5b085a66a2b74877c9a57c6c">update</a>(<a class="code" href="class_field.html">Field</a> *jphi, <a class="code" href="class_field.html">Field</a> *psi, <a class="code" href="class_field.html">Field</a> *p, <a class="code" href="class_field.html">Field</a> *g);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">double</span> P1_;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">double</span> n2_;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif  // J_SOLVER_NSTX_H_</span></div>
-<div class="ttc" id="class_j___solver___n_s_t_x_html"><div class="ttname"><a href="class_j___solver___n_s_t_x.html">J_Solver_NSTX</a></div><div class="ttdoc">Calculates current in NSTX. Assumes p&#39; = Ax(1-x), gg&#39; = c x. </div><div class="ttdef"><b>Definition:</b> j_solver_nstx.h:18</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef J_SOLVER_NSTX_H_</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define J_SOLVER_NSTX_H_</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grid_8h.html">grid.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="field_8h.html">field.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="j__solver_8h.html">j_solver.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_j_solver_n_s_t_x.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_j_solver_n_s_t_x.html">JSolverNSTX</a> : <span class="keyword">public</span> <a class="code" href="class_j_solver.html">JSolver</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="class_j_solver_n_s_t_x.html#adb3250b9b61cdf6d7c8131d79c7cf0c2">JSolverNSTX</a>(<span class="keywordtype">double</span> P0, <span class="keywordtype">double</span> g0, <span class="keywordtype">double</span> Ip, <span class="keywordtype">double</span> n2, <a class="code" href="class_grid.html">Grid</a> *grid);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="class_j_solver_n_s_t_x.html#a0931ee555005a308a85a48fee9e91d79">~JSolverNSTX</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_j_solver_n_s_t_x.html#a8bcdd6a2cd9d60677e46e6bc77038bbf">update</a>(<a class="code" href="class_field.html">Field</a> *jphi, <a class="code" href="class_field.html">Field</a> *psi, <a class="code" href="class_field.html">Field</a> *p, <a class="code" href="class_field.html">Field</a> *g);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordtype">double</span> P1_;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">double</span> n2_;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif  // J_SOLVER_NSTX_H_</span></div>
+<div class="ttc" id="class_j_solver_n_s_t_x_html_a8bcdd6a2cd9d60677e46e6bc77038bbf"><div class="ttname"><a href="class_j_solver_n_s_t_x.html#a8bcdd6a2cd9d60677e46e6bc77038bbf">JSolverNSTX::update</a></div><div class="ttdeci">void update(Field *jphi, Field *psi, Field *p, Field *g)</div><div class="ttdef"><b>Definition:</b> j_solver_nstx.cc:26</div></div>
+<div class="ttc" id="class_j_solver_html"><div class="ttname"><a href="class_j_solver.html">JSolver</a></div><div class="ttdoc">Interface for JSolver. </div><div class="ttdef"><b>Definition:</b> j_solver.h:17</div></div>
 <div class="ttc" id="class_field_html"><div class="ttname"><a href="class_field.html">Field</a></div><div class="ttdoc">Container for 2d data and grid used in the solver. </div><div class="ttdef"><b>Definition:</b> field.h:15</div></div>
-<div class="ttc" id="class_j___solver___n_s_t_x_html_a1fb05e7f5b085a66a2b74877c9a57c6c"><div class="ttname"><a href="class_j___solver___n_s_t_x.html#a1fb05e7f5b085a66a2b74877c9a57c6c">J_Solver_NSTX::update</a></div><div class="ttdeci">void update(Field *jphi, Field *psi, Field *p, Field *g)</div><div class="ttdef"><b>Definition:</b> j_solver_nstx.cc:23</div></div>
-<div class="ttc" id="class_j___solver___n_s_t_x_html_aacea4e68f901991e1ccd3cbf2260d4d9"><div class="ttname"><a href="class_j___solver___n_s_t_x.html#aacea4e68f901991e1ccd3cbf2260d4d9">J_Solver_NSTX::J_Solver_NSTX</a></div><div class="ttdeci">J_Solver_NSTX(double P0, double g0, double Ip, double n2, Grid *grid)</div><div class="ttdef"><b>Definition:</b> j_solver_nstx.cc:7</div></div>
+<div class="ttc" id="class_j_solver_n_s_t_x_html"><div class="ttname"><a href="class_j_solver_n_s_t_x.html">JSolverNSTX</a></div><div class="ttdoc">Calculates current in NSTX. Assumes p&#39; = Ax(1-x), gg&#39; = c x. </div><div class="ttdef"><b>Definition:</b> j_solver_nstx.h:17</div></div>
+<div class="ttc" id="class_j_solver_n_s_t_x_html_a0931ee555005a308a85a48fee9e91d79"><div class="ttname"><a href="class_j_solver_n_s_t_x.html#a0931ee555005a308a85a48fee9e91d79">JSolverNSTX::~JSolverNSTX</a></div><div class="ttdeci">~JSolverNSTX()</div><div class="ttdef"><b>Definition:</b> j_solver_nstx.cc:24</div></div>
 <div class="ttc" id="grid_8h_html"><div class="ttname"><a href="grid_8h.html">grid.h</a></div><div class="ttdoc">Header declarations for Grid. </div></div>
 <div class="ttc" id="field_8h_html"><div class="ttname"><a href="field_8h.html">field.h</a></div><div class="ttdoc">Header file for class Field. </div></div>
-<div class="ttc" id="class_j___solver_html"><div class="ttname"><a href="class_j___solver.html">J_Solver</a></div><div class="ttdoc">Interface for J_solver! </div><div class="ttdef"><b>Definition:</b> j_solver.h:17</div></div>
+<div class="ttc" id="class_j_solver_n_s_t_x_html_adb3250b9b61cdf6d7c8131d79c7cf0c2"><div class="ttname"><a href="class_j_solver_n_s_t_x.html#adb3250b9b61cdf6d7c8131d79c7cf0c2">JSolverNSTX::JSolverNSTX</a></div><div class="ttdeci">JSolverNSTX(double P0, double g0, double Ip, double n2, Grid *grid)</div><div class="ttdef"><b>Definition:</b> j_solver_nstx.cc:11</div></div>
 <div class="ttc" id="class_grid_html"><div class="ttname"><a href="class_grid.html">Grid</a></div><div class="ttdoc">Stores information about the solution grid. </div><div class="ttdef"><b>Definition:</b> grid.h:16</div></div>
-<div class="ttc" id="j__solver_8h_html"><div class="ttname"><a href="j__solver_8h.html">j_solver.h</a></div><div class="ttdoc">Header declarations for J_Solver. </div></div>
-<div class="ttc" id="class_j___solver___n_s_t_x_html_a1996bc9428d95e21c0879cf64843f53d"><div class="ttname"><a href="class_j___solver___n_s_t_x.html#a1996bc9428d95e21c0879cf64843f53d">J_Solver_NSTX::~J_Solver_NSTX</a></div><div class="ttdeci">~J_Solver_NSTX()</div><div class="ttdef"><b>Definition:</b> j_solver_nstx.cc:20</div></div>
+<div class="ttc" id="j__solver_8h_html"><div class="ttname"><a href="j__solver_8h.html">j_solver.h</a></div><div class="ttdoc">Header declarations for JSolver. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_04551c75b1b1df3df3c1f86f11f16b64.html">include</a></li><li class="navelem"><a class="el" href="j__solver__nstx_8h.html">j_solver_nstx.h</a></li>
-    <li class="footer">Generated on Wed Jan 14 2015 12:50:25 for COUGAR by
+    <li class="footer">Generated on Wed Jan 14 2015 17:36:59 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

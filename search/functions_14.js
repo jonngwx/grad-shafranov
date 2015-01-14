@@ -11,9 +11,9 @@ var searchData=
   ['_7egradoutputtxt',['~GradOutputTxt',['../class_grad_output_txt.html#a05703a8a9be6dfed93d04cceba883979',1,'GradOutputTxt']]],
   ['_7egrid',['~Grid',['../class_grid.html#a3661d0a7f998caaaf8627d7a67072116',1,'Grid']]],
   ['_7einterpolate',['~Interpolate',['../class_interpolate.html#a5721b044c124afc7d9816a1bcc2f49c2',1,'Interpolate']]],
-  ['_7ej_5fsolver',['~J_Solver',['../class_j___solver.html#a5917d48629af85333ce9a99393b02d97',1,'J_Solver']]],
-  ['_7ej_5fsolver_5falpha',['~J_Solver_Alpha',['../class_j___solver___alpha.html#a1cc90ccf02e54d9d5919f72540ede9fc',1,'J_Solver_Alpha']]],
-  ['_7ej_5fsolver_5fnstx',['~J_Solver_NSTX',['../class_j___solver___n_s_t_x.html#a1996bc9428d95e21c0879cf64843f53d',1,'J_Solver_NSTX']]],
+  ['_7ejsolver',['~JSolver',['../class_j_solver.html#a87d205916426438ae8fdc2c7ef8842eb',1,'JSolver']]],
+  ['_7ejsolveralpha',['~JSolverAlpha',['../class_j_solver_alpha.html#a63d8403c3729b9797d8aeb65785692b8',1,'JSolverAlpha']]],
+  ['_7ejsolvernstx',['~JSolverNSTX',['../class_j_solver_n_s_t_x.html#a0931ee555005a308a85a48fee9e91d79',1,'JSolverNSTX']]],
   ['_7eslowboundary',['~SlowBoundary',['../class_slow_boundary.html#aa4f5c6cfe4e7637c4ec43435b6a71422',1,'SlowBoundary']]],
   ['_7esor',['~SOR',['../class_s_o_r.html#aa3db8b4840076358adc037034dd566bf',1,'SOR']]],
   ['_7etable',['~Table',['../class_table.html#a9a559f2e7beb37b511ee9f88873164f8',1,'Table']]]

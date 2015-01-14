@@ -7,6 +7,7 @@ var searchData=
   ['check_5fdata',['check_data',['../namespaceread__data.html#a0ab9aa1fd6b3de9b65feb92ed8d73270',1,'read_data']]],
   ['coeff',['coeff',['../class_elliptic_solver.html#af0636405b7a5c07c6afdb3aa2c20d365',1,'EllipticSolver::coeff()'],['../class_gauss_seidel.html#aeedf15634532045f9213e9ce0498145f',1,'GaussSeidel::coeff()'],['../class_s_o_r.html#a3acbcece672550e6dc512a2696d3b42a',1,'SOR::coeff()']]],
   ['coil_5fdata_5fexample_2ecc',['coil_data_example.cc',['../coil__data__example_8cc.html',1,'']]],
+  ['coil_5fdata_5fformat_2edox',['coil_data_format.dox',['../coil__data__format_8dox.html',1,'']]],
   ['coildata',['CoilData',['../class_coil_data.html',1,'CoilData'],['../class_coil_data.html#aa373bc93bd3dac7cd1fde4b5c0016d10',1,'CoilData::CoilData()']]],
   ['create_5foptions_2ecc',['create_options.cc',['../create__options_8cc.html',1,'']]],
   ['create_5foptions_2eh',['create_options.h',['../create__options_8h.html',1,'']]],

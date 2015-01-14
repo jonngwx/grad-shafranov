@@ -2,6 +2,8 @@ var NAVTREE =
 [
   [ "COUGAR", "index.html", [
     [ "Welcome to COUGAR!", "index.html", null ],
+    [ "Input of magnetic coil data", "_coil-_data-_format.html", null ],
+    [ "Input of physical limiter data", "_limiter-_data-_format.html", null ],
     [ "COUGAR README", "md__r_e_a_d_m_e.html", null ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
@@ -37,8 +39,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"slow__boundary_8cc.html"
+"_coil-_data-_format.html",
+"read__data_8py.html#ac701a348258747a4e01d811b60e232f7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

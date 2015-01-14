@@ -4,6 +4,6 @@ var searchData=
   ['data',['data',['../class_table.html#ad6e317db4eaff12cdf7788d804855e34',1,'Table::data()'],['../namespaceread__data.html#ae7be253b8142c3697cc7b076e45c50a7',1,'read_data.DATA()']]],
   ['data_5f',['data_',['../class_table.html#a34e0cf3f9044d84ca34313282e1114b1',1,'Table']]],
   ['determinegradoutput',['DetermineGradOutput',['../gs__solver_8cc.html#ad94a78d776e7a1c0661b990d146b8d64',1,'gs_solver.cc']]],
-  ['dr_5f',['dr_',['../class_grid.html#a34e0121c449db998cde2c74553820de6',1,'Grid::dr_()'],['../class_j___solver.html#a4541b2cfc0168bc9ffbf3d5a2019264e',1,'J_Solver::dr_()']]],
-  ['dz_5f',['dz_',['../class_grid.html#a88975e0c193ba200d3bb20d1b7f5aa08',1,'Grid::dz_()'],['../class_j___solver.html#a490b1cb4246efa1ae7cc289eac107b66',1,'J_Solver::dz_()']]]
+  ['dr_5f',['dr_',['../class_grid.html#a34e0121c449db998cde2c74553820de6',1,'Grid::dr_()'],['../class_j_solver.html#a570883e600f666e802d850c8ed5e2287',1,'JSolver::dr_()']]],
+  ['dz_5f',['dz_',['../class_grid.html#a88975e0c193ba200d3bb20d1b7f5aa08',1,'Grid::dz_()'],['../class_j_solver.html#a2e8fe3b38f025508a9a75707b6158368',1,'JSolver::dz_()']]]
 ];
