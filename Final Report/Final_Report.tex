@@ -60,7 +60,7 @@
 \normalfont \normalsize 
 %\textsc{APC 524} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction), \\ \Large An MHD Equilibrium Reconstruction Code: Final Report\\ % The assignment title
+\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction 1.0), \\ \Large An MHD Equilibrium Reconstruction Code: Final Report\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -76,7 +76,15 @@
 %	Section 1
 %----------------------------------------------------------------------------------------
 
-\section{Overview}
+\section{Project Objective / Summary}
+
+Our goal was to write a program which solves the Grad-Shafranov equation (GSE) for axisymmetric plasmas in a user friendly manner.  The result is COUGAR, which stands for \textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, some assumptions about the internal structure of the plasma must be made.  Future versions of the code will incorporate experimental measurements into the calculation.  For information on running COUGAR, see the README at \href{http://jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}}.
+
+%----------------------------------------------------------------------------------------
+%	Section 1
+%----------------------------------------------------------------------------------------
+
+\section{Theroetical Background}
 
 \subsection{MHD equilibrium}
 
