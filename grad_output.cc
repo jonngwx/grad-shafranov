@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
-void Grad_Output::parse_outputs(const char *out){
+void GradOutput::parse_outputs(const char *out){
     int len = strlen(out);
     if (len < 1){
         return;

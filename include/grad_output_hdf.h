@@ -16,7 +16,7 @@
 /*!
  * @brief Implementation of Grad_Output which writes data to a hdf5 file.
  */
-class Grad_Output_Hdf : public Grad_Output {
+class GradOutputHdf : public GradOutput {
  public:
   /**
    * Constructor for output class
@@ -26,9 +26,9 @@ class Grad_Output_Hdf : public Grad_Output {
    * @param g pointer to field containing g function
    * @param outputs string of comma separated output options
    * */
-  Grad_Output_Hdf(Field* f, Field* jphi, Grid* grid, Field* p, Field* g,
+  GradOutputHdf(Field* f, Field* jphi, Grid* grid, Field* p, Field* g,
                   const char* outputs);
-  ~Grad_Output_Hdf();
+  ~GradOutputHdf();
 
   /**
    * Writes output to file.

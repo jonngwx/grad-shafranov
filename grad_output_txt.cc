@@ -4,20 +4,20 @@
 #include <stdio.h>
 #include "util.h"
 
-Grad_Output_Txt::Grad_Output_Txt(Field* f0, Field* jphi0, Grid* grid0, Field* p0, Field* g0, const char* outputs) {
+GradOutputTxt::GradOutputTxt(Field* f0, Field* jphi0, Grid* grid0, Field* p0, Field* g0, const char* outputs) {
     f = f0;
     jphi = jphi0;
     p = p0;
     g = g0;
     grid = grid0;
-    Grad_Output::parse_outputs(outputs);
+    GradOutput::parse_outputs(outputs);
 
 }
 
-Grad_Output_Txt::~Grad_Output_Txt(){
+GradOutputTxt::~GradOutputTxt(){
 }
 
-void Grad_Output_Txt::write_output(const char* filename){
+void GradOutputTxt::write_output(const char* filename){
 	FILE * file;
 	file = fopen(filename, "w");
 	const int nr = grid->nr_;

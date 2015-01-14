@@ -12,7 +12,7 @@
 /*! 
  * @brief Implementation of Grad_Output which writes to a text file.
  */
-class Grad_Output_Txt : public Grad_Output{
+class GradOutputTxt : public GradOutput{
 public:
   /**
    * Constructor for output class
@@ -23,8 +23,8 @@ public:
    * @param g pointer to RHSfunc for evaluation of g
    * @param outputs string of comma separated output options
    * */
-    Grad_Output_Txt(Field* f, Field* jphi, Grid* grid, Field* p, Field* g, const char* outputs);
-  ~Grad_Output_Txt();
+    GradOutputTxt(Field* f, Field* jphi, Grid* grid, Field* p, Field* g, const char* outputs);
+  ~GradOutputTxt();
 
   /**
    * Writes output to file.
