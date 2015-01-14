@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
   double P0 = vm["pgta-p0"].as<double>();
   double g0 = vm["pgta-g0"].as<double>();
   JSolver *js;
-  std::string jname = vm["J-solver-name"].as<string>();
+  std::string jname = vm["J-solver-type"].as<string>();
   if (jname == "nstx"){
     double n2 = vm["pgta-n2"].as<double>();
     js= new JSolverNSTX(P0,g0,Ip,n2,grid);
@@ -191,10 +191,10 @@ int main(int argc, char *argv[])
     crit = new Critical(*grid, *psi, vm["max-iter-crit"].as<int>(),
                                      vm["error-tol-crit"].as<double>(), 
                                      limiters,
-                                     vm["R_stag_up"].as<double>(),
-                                     vm["z_stag_up"].as<double>(),
-                                     vm["R_stag_down"].as<double>(),
-                                     vm["z_stag_down"].as<double>(),
+                                     vm["R-stag-up"].as<double>(),
+                                     vm["z-stag-up"].as<double>(),
+                                     vm["R-stag-down"].as<double>(),
+                                     vm["z-stag-down"].as<double>(),
                                      R0, z0);
   } catch (int i) {
     printf("Failed to setup critical! Abort!\n");
