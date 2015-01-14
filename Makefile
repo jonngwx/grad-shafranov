@@ -22,6 +22,9 @@ gs_solver_hdf: gs_solver_hdf.o grad_output_hdf.o $(OBJECTS)
 gs_solver_hdf.o: gs_solver.cc
 	$(CXX) $(CXXFLAGS) $(HDF) $^ -o $@
 
+$(TESTDIR)/all_test: $(TESTDIR)/test.o $(OBJECTS) $(TESTOBJECTS) 
+	$(CXX) -o $@ $^ $(LIBS)
+
 $(TESTDIR)/elliptic_test: $(TESTDIR)/test.o elliptic/elliptic_solver.o test/elliptic_test.o elliptic/sor.o grid.o field.o elliptic/gauss_seidel.o boundary.o 
 	$(CXX) -o $@ $^ $(LIBS)
 
@@ -55,9 +58,6 @@ $(EXDIR)/tsv_reader_example: $(EXDIR)/tsv_reader_example.o tsv_reader.o
 $(EXDIR)/coil_data_example: $(EXDIR)/coil_data_example.o tsv_reader.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/all_test: $(TESTDIR)/test.o $(OBJECTS) $(TESTOBJECTS) 
-	$(CXX) -o $@ $^ $(LIBS)
-
 .PHONY: runtests
 runtests:
 	# Running tests!
@@ -65,7 +65,6 @@ runtests:
 
 .PHONY: clean
 clean:
-	# delete .o files in subdirectories. rm -r *.o does not do this.
 	find . -name '*.o' -delete
 	$(RM) .depend
 
