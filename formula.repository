@@ -11,3 +11,4 @@
 \form#10:$ a_{m,n}$\f for the bicubic polynomial where m and n are indicies ranging from 0 to 3. The bicubic polynomial is $
 \form#11:$ a_{m,n}$
 \form#12:$ \Sigma a_{m,n} x^m y^n$
+\form#13:$ \Sigma_{m=0}^3 \Sigma_{n=0}^3 a_{m,n} x^m y^n$

@@ -8,5 +8,5 @@ var searchData=
   ['j_5fsolver_5fnstx',['J_Solver_NSTX',['../class_j___solver___n_s_t_x.html',1,'J_Solver_NSTX'],['../class_j___solver___n_s_t_x.html#aacea4e68f901991e1ccd3cbf2260d4d9',1,'J_Solver_NSTX::J_Solver_NSTX()']]],
   ['j_5fsolver_5fnstx_2ecc',['j_solver_nstx.cc',['../j__solver__nstx_8cc.html',1,'']]],
   ['j_5fsolver_5fnstx_2eh',['j_solver_nstx.h',['../j__solver__nstx_8h.html',1,'']]],
-  ['jphi',['jphi',['../class_grad___output.html#ae2dc342d62b7014ccfaaf8e3e647cbbe',1,'Grad_Output']]]
+  ['jphi',['jphi',['../class_grad_output.html#ac3bf85beac7db3f8cd1b49046430bba4',1,'GradOutput']]]
 ];

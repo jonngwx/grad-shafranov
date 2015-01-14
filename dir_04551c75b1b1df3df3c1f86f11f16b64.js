@@ -17,13 +17,13 @@ var dir_04551c75b1b1df3df3c1f86f11f16b64 =
       [ "GaussSeidel", "class_gauss_seidel.html", "class_gauss_seidel" ]
     ] ],
     [ "grad_output.h", "grad__output_8h.html", [
-      [ "Grad_Output", "class_grad___output.html", "class_grad___output" ]
+      [ "GradOutput", "class_grad_output.html", "class_grad_output" ]
     ] ],
     [ "grad_output_hdf.h", "grad__output__hdf_8h.html", [
-      [ "Grad_Output_Hdf", "class_grad___output___hdf.html", "class_grad___output___hdf" ]
+      [ "GradOutputHdf", "class_grad_output_hdf.html", "class_grad_output_hdf" ]
     ] ],
     [ "grad_output_txt.h", "grad__output__txt_8h.html", [
-      [ "Grad_Output_Txt", "class_grad___output___txt.html", "class_grad___output___txt" ]
+      [ "GradOutputTxt", "class_grad_output_txt.html", "class_grad_output_txt" ]
     ] ],
     [ "green_fcn.h", "green__fcn_8h.html", "green__fcn_8h" ],
     [ "grid.h", "grid_8h.html", [

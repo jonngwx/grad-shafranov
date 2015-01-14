@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['p',['p',['../class_grad___output.html#a55d0e1f76ad585ffdeed6b1f8b608652',1,'Grad_Output']]],
+  ['p',['p',['../class_grad_output.html#a610050b3c98403939947780b0c3ac090',1,'GradOutput']]],
   ['p0_5f',['P0_',['../class_j___solver.html#a4129e9cc4ec41a3f49ab3f2ffccd81f8',1,'J_Solver']]],
   ['perim_5f',['perim_',['../class_boundary.html#ae1ebccb5fbc08583f930f19c506f03cb',1,'Boundary']]],
   ['prog',['prog',['../namespaceviz.html#a3da7a6bab2793b7f33abb9342eda9ffc',1,'viz']]],

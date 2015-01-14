@@ -1,13 +1,14 @@
 var searchData=
 [
-  ['p',['p',['../class_grad___output.html#a55d0e1f76ad585ffdeed6b1f8b608652',1,'Grad_Output']]],
+  ['p',['p',['../class_grad_output.html#a610050b3c98403939947780b0c3ac090',1,'GradOutput']]],
   ['p0_5f',['P0_',['../class_j___solver.html#a4129e9cc4ec41a3f49ab3f2ffccd81f8',1,'J_Solver']]],
-  ['parse_5foutputs',['parse_outputs',['../class_grad___output.html#a359304ac08d46f45f6b462e7eb8eb8eb',1,'Grad_Output']]],
+  ['parse_5foutputs',['parse_outputs',['../class_grad_output.html#a8e6749808ee6620d4e74ed76a3365a82',1,'GradOutput']]],
   ['perim_5f',['perim_',['../class_boundary.html#ae1ebccb5fbc08583f930f19c506f03cb',1,'Boundary']]],
   ['pgdata',['PGData',['../class_p_g_data.html',1,'']]],
   ['plot',['plot',['../namespaceviz.html#a71e46247c7a30a1c30a179a86bbaa3f1',1,'viz']]],
   ['print1d',['print1d',['../util_8h.html#a7c0c0ae1f9954aba5436f46251e699bb',1,'util.h']]],
   ['print2d',['print2d',['../util_8h.html#a6ea94a39aada539ca87fd10afcb31ad0',1,'util.h']]],
+  ['printamncoefficients',['PrintAmnCoefficients',['../class_interpolate.html#ab7584fa24af73fd21cfe8760d66f9164',1,'Interpolate']]],
   ['prog',['prog',['../namespaceviz.html#a3da7a6bab2793b7f33abb9342eda9ffc',1,'viz']]],
   ['psi',['psi',['../class_p_g_data.html#a47c35a80fc4eb366f7619d55a3ae751d',1,'PGData']]],
   ['psi_5f',['psi_',['../class_boundary.html#a1f729a4bab20524f0b677f981c5fc1f4',1,'Boundary::psi_()'],['../class_elliptic_solver.html#af6db7ea29804907c1f89bddb6237f8ba',1,'EllipticSolver::Psi_()']]],

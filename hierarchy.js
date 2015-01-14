@@ -9,9 +9,9 @@ var hierarchy =
       [ "SOR", "class_s_o_r.html", null ]
     ] ],
     [ "Field", "class_field.html", null ],
-    [ "Grad_Output", "class_grad___output.html", [
-      [ "Grad_Output_Hdf", "class_grad___output___hdf.html", null ],
-      [ "Grad_Output_Txt", "class_grad___output___txt.html", null ]
+    [ "GradOutput", "class_grad_output.html", [
+      [ "GradOutputHdf", "class_grad_output_hdf.html", null ],
+      [ "GradOutputTxt", "class_grad_output_txt.html", null ]
     ] ],
     [ "Grid", "class_grid.html", null ],
     [ "Interpolate", "class_interpolate.html", null ],

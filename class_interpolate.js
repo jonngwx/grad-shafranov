@@ -8,5 +8,6 @@ var class_interpolate =
     [ "F_rz", "class_interpolate.html#a8a85ade93736d91412f2d288a071f27b", null ],
     [ "F_z", "class_interpolate.html#aff15da17fef9cbd28f1b2c5fc72975c5", null ],
     [ "F_zz", "class_interpolate.html#ad2dc81e4669be6856a79a66383ed5068", null ],
+    [ "PrintAmnCoefficients", "class_interpolate.html#ab7584fa24af73fd21cfe8760d66f9164", null ],
     [ "updateInterpolation", "class_interpolate.html#aff7e58d0f132aeda7300de89a003bdfd", null ]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['f',['F',['../class_interpolate.html#a29100813b4782a5e65dcb5fd6cbc53c0',1,'Interpolate::F()'],['../class_grad___output.html#a220bb5a5f5cf810a4990c29bb5d8d40c',1,'Grad_Output::f()']]],
+  ['f',['F',['../class_interpolate.html#a29100813b4782a5e65dcb5fd6cbc53c0',1,'Interpolate::F()'],['../class_grad_output.html#a4fd77f924a33151c2ad891bbad0a0345',1,'GradOutput::f()']]],
   ['f_5f',['f_',['../class_field.html#a5e266eb8451a7ccbd360e3f0fd61508d',1,'Field']]],
   ['f_5f0',['f_0',['../class_field.html#a52dda055c89d62758dd0b7362dfbc24b',1,'Field']]],
   ['f_5fl',['f_l',['../class_field.html#ab85afa0cb04b8346c97706331c1046b7',1,'Field']]],
@@ -13,7 +13,7 @@ var searchData=
   ['field_2ecc',['field.cc',['../field_8cc.html',1,'']]],
   ['field_2eh',['field.h',['../field_8h.html',1,'']]],
   ['file',['FILE',['../namespaceviz.html#aee89f5626ecd7b8bb421426c98a58593',1,'viz']]],
-  ['find',['find',['../class_grad___output.html#aac4baaf3bcc96a439da4cd40f36a3811',1,'Grad_Output']]],
+  ['find',['find',['../class_grad_output.html#ad0c48527430a232be7c6a52af0d52387',1,'GradOutput']]],
   ['find_5fsaddle',['find_saddle',['../class_critical.html#a395d22919c8b2a2ec2f63231ef63c802',1,'Critical']]],
   ['float',['FLOAT',['../namespaceread__data.html#a8f985b40003517df0c58b692217e53b7',1,'read_data']]]
 ];
