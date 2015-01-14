@@ -151,3 +151,11 @@ void Interpolate::updateInterpolation(double r, double z){
   updateP(r,z);
   updateCoefficients();
 }
+
+void Interpolate::PrintAmnCoefficients(){
+  printf("\n%f    + %fz    + %fz^2    + %fz^3\n", a00, a01, a02, a03);
+  printf(  "%fr   + %frz   + %frz^2   + %frz^3\n", a10, a11, a12, a13);
+  printf(  "%fr^2 + %fr^2z + %fr^2z^2 + %fr^2z^3\n", a20, a21, a22, a23);
+  printf(  "%fr^3 + %fr^3z + %fr^3z^2 + %fr^3z^3\n\n", a30, a31, a32, a33);
+
+}
