@@ -75,6 +75,8 @@ public:
      * @param[in] z a vertical location inside the cell for which the bicubic polynomial will be generated. 
      */
     void updateInterpolation(double r, double z);
+
+    void PrintAmnCoefficients();
 private:
 
     /*!

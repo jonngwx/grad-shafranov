@@ -40,11 +40,11 @@ double Interpolate::F(double r, double z) const {
   double rc = (r - r_curr_)/dr_; //radial location relative to the cell that the target point is in: goes from 0 to 1.
   double r2 = rc*rc;
   double r3 = r2*rc;
-  double z_ = (z - z_curr_)/dz_; //vertical location relative to the cell that the target point is in: goes from 0 to 1.
-  double z2 = z_*z_;
-  double z3 = z2*z_;
+  double zc = (z - z_curr_)/dz_; //vertical location relative to the cell that the target point is in: goes from 0 to 1.
+  double z2 = zc*zc;
+  double z3 = z2*zc;
   return (a00 + a10*rc + a20*r2 + a30*r3) +
-         (a01 + a11*rc + a21*r2 + a31*r3)*z_ +
+         (a01 + a11*rc + a21*r2 + a31*r3)*zc +
          (a02 + a12*rc + a22*r2 + a32*r3)*z2 +
          (a03 + a13*rc + a23*r2 + a33*r3)*z3;
 }
@@ -53,11 +53,11 @@ double Interpolate::F_r(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double rc = (r - r_curr_)/dr_;
   double r2 = rc*rc;
-  double z_ = (z - z_curr_)/dz_;
-  double z2 = z_*z_;
-  double z3 = z2*z_;
+  double zc = (z - z_curr_)/dz_;
+  double z2 = zc*zc;
+  double z3 = z2*zc;
   return ((a10 + 2*a20*rc + 3*a30*r2) +
-          (a11 + 2*a21*rc + 3*a31*r2)*z_ +
+          (a11 + 2*a21*rc + 3*a31*r2)*zc +
           (a12 + 2*a22*rc + 3*a32*r2)*z2 +
           (a13 + 2*a23*rc + 3*a33*r2)*z3)/dr_;
 }
@@ -65,11 +65,11 @@ double Interpolate::F_r(double r, double z) const {
 double Interpolate::F_rr(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double rc = (r - r_curr_)/dr_;
-  double z_ = (z - z_curr_)/dz_;
-  double z2 = z_*z_;
-  double z3 = z2*z_;
+  double zc = (z - z_curr_)/dz_;
+  double z2 = zc*zc;
+  double z3 = z2*zc;
   return ((2*a20 + 6*a30*rc) +
-          (2*a21 + 6*a31*rc)*z_ +
+          (2*a21 + 6*a31*rc)*zc +
           (2*a22 + 6*a32*rc)*z2 +
           (2*a23 + 6*a33*rc)*z3)/(dr_*dr_);
 }
@@ -78,10 +78,10 @@ double Interpolate::F_rz(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double rc = (r - r_curr_)/dr_;
   double r2 = rc*rc;
-  double z_ = (z - z_curr_)/dz_;
-  double z2 = z_*z_;
+  double zc = (z - z_curr_)/dz_;
+  double z2 = zc*zc;
   return ((a11 + 2*a21*rc + 3*a31*r2) +
-        2*(a12 + 2*a22*rc + 3*a32*r2)*z_ +
+        2*(a12 + 2*a22*rc + 3*a32*r2)*zc +
         3*(a13 + 2*a23*rc + 3*a33*r2)*z2)/(dr_*dz_);
 }
 
@@ -90,10 +90,10 @@ double Interpolate::F_z(double r, double z) const {
   double rc = (r - r_curr_)/dr_;
   double r2 = rc*rc;
   double r3 = r2*rc;
-  double z_ = (z - z_curr_)/dz_;
-  double z2 = z_*z_;
+  double zc = (z - z_curr_)/dz_;
+  double z2 = zc*zc;
   return ((a01 + a11*rc + a21*r2 + a31*r3) +
-        2*(a02 + a12*rc + a22*r2 + a32*r3)*z_ +
+        2*(a02 + a12*rc + a22*r2 + a32*r3)*zc +
         3*(a03 + a13*rc + a23*r2 + a33*r3)*z2)/dz_;
 }
 
@@ -102,9 +102,9 @@ double Interpolate::F_zz(double r, double z) const {
   double rc = (r - r_curr_)/dr_;
   double r2 = rc*rc;
   double r3 = r2*rc;
-  double z_ = (z - z_curr_)/dz_;
+  double zc = (z - z_curr_)/dz_;
   return (2*(a02 + a12*rc + a22*r2 + a32*r3) +
-          6*(a03 + a13*rc + a23*r2 + a33*r3)*z_)/(dz_*dz_);
+          6*(a03 + a13*rc + a23*r2 + a33*r3)*zc)/(dz_*dz_);
 }
 
 //These coefficients come from www.paulinternet.nl/?page=bicubic.
@@ -150,4 +150,11 @@ void Interpolate::updateP(double r, double z) {
 void Interpolate::updateInterpolation(double r, double z){
   updateP(r,z);
   updateCoefficients();
+}
+
+void Interpolate::PrintAmnCoefficients(){
+  printf("\n%f    + %fz    + %fz^2    + %fz^3\n", a00, a01, a02, a03);
+  printf(  "%fr   + %frz   + %frz^2   + %frz^3\n", a10, a11, a12, a13);
+  printf(  "%fr^2 + %fr^2z + %fr^2z^2 + %fr^2z^3\n", a20, a21, a22, a23);
+  printf(  "%fr^3 + %fr^3z + %fr^3z^2 + %fr^3z^3\n\n", a30, a31, a32, a33);
 }
