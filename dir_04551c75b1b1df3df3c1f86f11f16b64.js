@@ -49,8 +49,7 @@ var dir_04551c75b1b1df3df3c1f86f11f16b64 =
     ] ],
     [ "tsv_reader.h", "tsv__reader_8h.html", [
       [ "Table", "class_table.html", "class_table" ],
-      [ "CoilData", "class_coil_data.html", "class_coil_data" ],
-      [ "PGData", "class_p_g_data.html", "class_p_g_data" ]
+      [ "CoilData", "class_coil_data.html", "class_coil_data" ]
     ] ],
     [ "util.h", "util_8h.html", "util_8h" ]
 ];

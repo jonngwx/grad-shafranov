@@ -14,7 +14,6 @@ var annotated =
     [ "JSolver", "class_j_solver.html", "class_j_solver" ],
     [ "JSolverAlpha", "class_j_solver_alpha.html", "class_j_solver_alpha" ],
     [ "JSolverNSTX", "class_j_solver_n_s_t_x.html", "class_j_solver_n_s_t_x" ],
-    [ "PGData", "class_p_g_data.html", "class_p_g_data" ],
     [ "SlowBoundary", "class_slow_boundary.html", "class_slow_boundary" ],
     [ "SOR", "class_s_o_r.html", "class_s_o_r" ],
     [ "Table", "class_table.html", "class_table" ]

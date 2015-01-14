@@ -1,9 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"read__data_8py.html#ac701a348258747a4e01d811b60e232f7":[6,0,3,0,3],
-"read__data_8py.html#ae7be253b8142c3697cc7b076e45c50a7":[6,0,3,0,4],
-"slow__boundary_8cc.html":[6,0,15],
-"slow__boundary_8h.html":[6,0,2,15],
 "slow__boundary_8h_source.html":[6,0,2,15],
 "sor_8cc.html":[6,0,0,5],
 "sor_8h.html":[6,0,2,16],

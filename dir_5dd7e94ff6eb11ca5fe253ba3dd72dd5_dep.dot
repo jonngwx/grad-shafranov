@@ -1,9 +1,0 @@
-digraph "elliptic/PeterTest" {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  subgraph clusterdir_ad73226ebe385775b3c066159a7d62ce {
-    graph [ bgcolor="#ddddee", pencolor="black", label="elliptic" fontname="Helvetica", fontsize="10", URL="dir_ad73226ebe385775b3c066159a7d62ce.html"]
-  dir_5dd7e94ff6eb11ca5fe253ba3dd72dd5 [shape=box, label="PeterTest", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_5dd7e94ff6eb11ca5fe253ba3dd72dd5.html"];
-  }
-}

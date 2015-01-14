@@ -152,8 +152,9 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interpolates to find the values and derivatives of a 2D data set between grid points. </p>
-<p>Uses bicubic interpolation as described on <a href="http://paulinternet.nl/?page=bicubic">http://paulinternet.nl/?page=bicubic</a>. Given a <a class="el" href="class_field.html" title="Container for 2d data and grid used in the solver. ">Field</a> (with its associated <a class="el" href="class_grid.html" title="Stores information about the solution grid. ">Grid</a>) and then given a point within[1] that field, even not on one of the grid nodes but in a 'cell' between four nodes, we can use the values of the <a class="el" href="class_field.html" title="Container for 2d data and grid used in the solver. ">Field</a> on the surrounding 16 = 4x4 nodes to construct a polynomial <img class="formulaInl" alt="$ \Sigma_{m=0}^3 \Sigma_{n=0}^3 a_{m,n} x^m y^n$" src="form_13.png"/> that represents the function over the whole grid cell.</p>
-<p>We can then calculate approximations to the function and to its first and second derivatives over the whole cell. </p>
+<p>Uses bicubic interpolation as described on <a href="http://paulinternet.nl/?page=bicubic">http://paulinternet.nl/?page=bicubic</a>. Given a <a class="el" href="class_field.html" title="Container for 2d data and grid used in the solver. ">Field</a> (with its associated <a class="el" href="class_grid.html" title="Stores information about the solution grid. ">Grid</a>) and then given a point within[1] that field, even not on one of the grid nodes but in a 'cell' between four nodes, we can use the values of the <a class="el" href="class_field.html" title="Container for 2d data and grid used in the solver. ">Field</a> on the surrounding 16 = 4x4 nodes to construct a polynomial <img class="formulaInl" alt="$ \Sigma_{m=0}^3 \Sigma_{n=0}^3 a_{m,n} x^m y^n$" src="form_7.png"/> that represents the function over the whole grid cell.</p>
+<p>We can then calculate approximations to the function and to its first and second derivatives over the whole cell.</p>
+<p>Note that while the interpolated function's values and first derivatives are continuous over the grid, this algorithm cannot correctly reproduce a bicubic function given points from it as inputs. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="af8e9e4e16c9a115149d48a52f0e478ee"></a>
 <div class="memitem">
@@ -473,7 +474,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_interpolate.html">Interpolate</a></li>
-    <li class="footer">Generated on Wed Jan 14 2015 17:36:59 for COUGAR by
+    <li class="footer">Generated on Wed Jan 14 2015 18:26:13 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

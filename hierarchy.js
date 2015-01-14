@@ -20,7 +20,6 @@ var hierarchy =
       [ "JSolverNSTX", "class_j_solver_n_s_t_x.html", null ]
     ] ],
     [ "Table", "class_table.html", [
-      [ "CoilData", "class_coil_data.html", null ],
-      [ "PGData", "class_p_g_data.html", null ]
+      [ "CoilData", "class_coil_data.html", null ]
     ] ]
 ];
