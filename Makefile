@@ -4,7 +4,7 @@ LIBS = -lboost_program_options -lboost_unit_test_framework -lboost_math_tr1
 HDF = -lhdf5_hl -lhdf5 -DHDF_MODE
 PROGS = gs_solver
 TESTDIR = test
-TESTPROGS = $(TESTDIR)/test_output $(TESTDIR)/util_test $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test $(TESTDIR)/slow_boundary_test $(TESTDIR)/interpolate_test
+TESTPROGS = $(TESTDIR)/output_test $(TESTDIR)/util_test $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test $(TESTDIR)/slow_boundary_test $(TESTDIR)/interpolate_test
 EXDIR = exampleClassUsage
 EXAMPLEPROGS = $(EXDIR)/tsv_reader_example $(EXDIR)/coil_data_example
 OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o elliptic/interpolate.o j_solver_nstx.o
@@ -34,7 +34,7 @@ $(TESTDIR)/interpolate_test: $(TESTDIR)/test.o grid.o field.o elliptic/interpola
 $(TESTDIR)/tsv_reader_test: $(TESTDIR)/test.o tsv_reader.o $(TESTDIR)/tsv_reader_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/test_output: $(TESTDIR)/test.o $(TESTDIR)/test_output.o grad_output.o grad_output_txt.o field.o grid.o
+$(TESTDIR)/output_test: $(TESTDIR)/test.o $(TESTDIR)/output_test.o grad_output.o grad_output_txt.o field.o grid.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(TESTDIR)/util_test: $(TESTDIR)/test.o $(TESTDIR)/util_test.o

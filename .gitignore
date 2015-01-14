@@ -11,7 +11,6 @@ pg_data_example
 cougar.out*
 gs_solver
 gs_solver_hdf
-elliptic_test
 .DS_Store
 */.DS_Store
 Docs/html
@@ -19,13 +18,6 @@ Docs/html
 PeterTest/boost_test
 
 *.swp
+test/*_test
 test/simple_test_output.tsv
-test/all_test
-test/tsv_reader_test
-test/test_output
-test/grid_test
-test/boundary_test
-test/slow_boundary_test
-test/interpolate_test
-test/util_test
 exampleClassUsage/boostEllipticIntegralExample/ellint_ex
