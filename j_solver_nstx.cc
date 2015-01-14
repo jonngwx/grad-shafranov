@@ -72,6 +72,8 @@ void JSolverNSTX::update(Field *jphi, Field *psi, Field *p, Field *g) {
     }
   }
 
+  /*
+  // check that the sum of jphi is specified Ip (temporary)
   double jtot = 0;
   for (int i = 0; i < nr_; ++i) {
     for (int j = 0; j < nz_; ++j) {
@@ -79,9 +81,10 @@ void JSolverNSTX::update(Field *jphi, Field *psi, Field *p, Field *g) {
     }
   }
   jtot *= (dr_ * dz_);
-  // if (abs(Ip_ - jtot) >1) {
-  //   printf("Ip = %f . summed jphi = %f\n, a_g = %f, dpsi = %f, psil = %f, psi0
-  //     = %f, temp1 = %f\n", Ip_, jtot, alpha_g, delta_psi, psi->f_l, psi->f_0,
-  //     temp1);
-  // }
+  if (abs(Ip_ - jtot) >1) {
+    printf("Ip = %f . summed jphi = %f\n, a_g = %f, dpsi = %f, psil = %f, psi0
+    = %f, temp1 = %f\n", Ip_, jtot, alpha_g, delta_psi, psi->f_l, psi->f_0,
+    temp1);
+  }
+  */
 }
