@@ -89,6 +89,8 @@ GradOutput * DetermineGradOutput(Field * psi, Field * jphi, Grid * grid, Field *
   return grad_output;
 }
 
+/************************************************************************/
+
 int main(int argc, char *argv[])
 {
   clock_t time0 = clock();
@@ -97,9 +99,9 @@ int main(int argc, char *argv[])
    ********************************************************/
   po::options_description visible_options("Allowed options");
   po::variables_map vm;
-  int return_value = CreateOptions(argc, argv, visible_options, vm);
-  if( return_value != 0 ) {
-      exit(return_value);
+  int error_code = CreateOptions(argc, argv, visible_options, vm);
+  if( error_code!= 0 ) {
+      exit(error_code);
   }
 
   /************************************************
@@ -139,38 +141,36 @@ int main(int argc, char *argv[])
   Field *g = new Field(*grid);
 
   /****************************************************************
-   * Initialize the plasma current (jphi) and psi.
+   * Initialize the plasma current jphi.
    * The initialization for current looks the same as Johnson 1979 Step A.
-   * I'm not sure where this psi initialization comes from. -JAS
    ***************************************************************/
+  // Set up the magnetic axis location.
   double R0;
   if (vm.count("j-phi-R0")) {
     R0 = vm["j-phi-R0"].as<double>();
   } else {
-    // not necessarily true. Just for now...
+    // Guess that the magnetic axis is at the middle of the grid. 
     R0 = (Rmax + Rmin)/2.0;
   }
   double z0;
   if (vm.count("j-phi-z0")) {
     z0 = vm["j-phi-z0"].as<double>();
   } else {
-    // not necessarily true. Just for now...
     z0 = (zmax + zmin)/2.0; 
   }
 
   double Ip = vm["j-phi-Ip"].as<double>();
-  //See above subroutine.
   InitializeCurrentDensity(Ip,                          // Total plasma current
                            R0,                          // Plasma current r-center
                            z0,                          // Plasma current z-center
                            vm["j-phi-D"].as<double>(),  //The plasma current half-diameter
                            jphi);
 
-  // set up J_Solver class
+  // Set up J_Solver class
   double P0 = vm["pgta-p0"].as<double>();
   double g0 = vm["pgta-g0"].as<double>();
   JSolver *js;
-  std::string jname = vm["J-solver-name"].as<string>();
+  std::string jname = vm["J-solver-type"].as<string>();
   if (jname == "nstx"){
     double n2 = vm["pgta-n2"].as<double>();
     js= new JSolverNSTX(P0,g0,Ip,n2,grid);
@@ -180,28 +180,28 @@ int main(int argc, char *argv[])
     js = new JSolverAlpha(P0,g0,n1,n2,Ip,grid);
   }
   
-  // Elliptic solver for inner loop
+  // Set up Elliptic solver for inner loop
   double error_ES = vm["error-tol-ES"].as<double>();
   EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
   Boundary *psib = new SlowBoundary(psi, grid, &cd);
 
-  // set up Critical
+  // Set up Critical
   Critical *crit;
   try{
     crit = new Critical(*grid, *psi, vm["max-iter-crit"].as<int>(),
                                      vm["error-tol-crit"].as<double>(), 
                                      limiters,
-                                     vm["R_stag_up"].as<double>(),
-                                     vm["z_stag_up"].as<double>(),
-                                     vm["R_stag_down"].as<double>(),
-                                     vm["z_stag_down"].as<double>(),
+                                     vm["R-stag-up"].as<double>(),
+                                     vm["z-stag-up"].as<double>(),
+                                     vm["R-stag-down"].as<double>(),
+                                     vm["z-stag-down"].as<double>(),
                                      R0, z0);
   } catch (int i) {
     printf("Failed to setup critical! Abort!\n");
     return 1;
   }
 
-  /** determine which output type: tsv or hdf5 */
+  /** Determine which output type: tsv or hdf5 */
   std::string output_type = vm["output-type"].as<string>();
   std::string output_list = vm["output-fields"].as<string>();
   GradOutput *grad_output = DetermineGradOutput(psi, jphi, grid, p, g, output_type, output_list);
@@ -262,9 +262,6 @@ int main(int argc, char *argv[])
   std::string full_output_name = output_filename_base + "." + output_type;
   grad_output->write_output(full_output_name.c_str());
   
-  float t1 = ((float)(time1-time0))/CLOCKS_PER_SEC;
-  float t2 = ((float)(time2-time1))/CLOCKS_PER_SEC;
-  printf("init time = %f, solver time = %f\n",t1,t2);
   delete grad_output;
   delete crit;
   delete psi;
@@ -275,5 +272,9 @@ int main(int argc, char *argv[])
   delete g;
   delete js;
   delete grid;
+
+  float t1 = ((float)(time1-time0))/CLOCKS_PER_SEC;
+  float t2 = ((float)(time2-time1))/CLOCKS_PER_SEC;
+  printf("init time = %f, solver time = %f\n",t1,t2);
 }
 

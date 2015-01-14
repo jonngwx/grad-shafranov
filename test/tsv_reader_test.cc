@@ -91,8 +91,8 @@ BOOST_AUTO_TEST_CASE(good_example_get_data_simple){
   BOOST_CHECK_EQUAL(cd.current(1), 1);
 }
 
-BOOST_AUTO_TEST_CASE(coil_regions_good_test){
-  int success = cd.load_from_tsv("test/tsvReaderExamples/coil_regions_test.tsv",1);
+BOOST_AUTO_TEST_CASE(good_coil_regions_test){
+  int success = cd.load_from_tsv("test/tsvReaderExamples/good_coil_regions.tsv",1);
   BOOST_REQUIRE_EQUAL(success, 0);
   BOOST_CHECK_EQUAL(cd.current(0), 1e3);
   BOOST_CHECK_EQUAL(cd.current(3), 1e1);

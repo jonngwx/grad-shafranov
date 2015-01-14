@@ -20,6 +20,8 @@
  *
  * We can then calculate approximations to the function and to its first and second
  * derivatives over the whole cell.
+ *
+ * Note that while the interpolated function's values and first derivatives are continuous over the grid, this algorithm cannot correctly reproduce a bicubic function given points from it as inputs.
  */
 class Interpolate {
 public:

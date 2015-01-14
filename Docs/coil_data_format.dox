@@ -1,0 +1,58 @@
+/*!
+@file coil_data_format.dox
+@author Jacob Schwartz
+@brief Explanation of coil_data.tsv format.
+*/
+/*!
+\page Coil-Data-Format Input of magnetic coil data
+
+In order to describe the fields of the poloidal-field and shaping coils we need information on their geometry and on the currents flowing through them.
+
+Coil data input files are ascii, whitespace-separated tables of floating-point numbers with fixed numbers of columns but unlimited numbers of rows.
+Acceptable types of numbers are:
+\verbatim
+1
+2.34
+-5.6789e10
+\endverbatim
+
+A line with # as the first character is a comment line. Comments elsewhere in the line are not permitted.
+
+There are two possible formats for the coil data input file:
+
+# Simple format:
+Three columns.
+
+1. Radius from the center axis in meters
+2. Height above the midplane in meters
+3. Current through the coil in amps.
+
+# 'Coil Regions' format:
+Physical coils are usually made of several turns and it is not adequate to assume that all the turns are at the same r and z location.
+Each line in the file describes a 'coil region': a rectangular grid of one or many adjacent 'coil subregions' (like turns) each with the same amount of current flowing through them but slightly different locations. 
+
+There are fourteen columns, not all of which are used. The format is based on what, to the best of our knowledge, the research code EFIT uses. Unused columns represent possible areas for future improvement and increase compatibility with EFIT. They can be filled with 0 or any other valid float: they will not be used.
+
+-# [unused] 
+-# R = the major radial location of the region (meters)
+-# Z = the vertical location of the region (meters)
+-# W = full width of the region (meters)
+-# H = full height of the region (meters)
+-# [unused]
+-# [unused]
+-# [unused]
+-# NR = number of radial   rectangular subdivisions in the region
+-# NZ = number of vertical rectangular subdivisions in the region
+-# [unused]
+-# [unused]
+-# [unused]
+-# Current = The current in each of the subregions for this region. (It is assumed that all the subregions are in series).
+
+As an example, a coil region with R=10, Z=2, W=1, H=0.2, NR=2, NZ=1, Current=10 is the same as in the 'Simple' format:
+
+\verbatim
+# R      Z   Curent
+9.75    2.0  10
+10.25   2.0  10
+\endverbatim
+*/

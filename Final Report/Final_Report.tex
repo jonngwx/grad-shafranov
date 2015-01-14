@@ -317,15 +317,25 @@ The following C++ interfaces will be required and should be self-contained
 
 For the visualization in Python, the numpy and matplotlib libraries will be used. Functions to extract the data, subsets of the data and calculation of common plasma parameters will be provided. Only basic visualization such as plotting contours and 1-D cuts will be built in, since users will likely wish to evaluate the data using their own methods based on what they are studying. \\
 
-The current research reconstruction code EFIT solves for approximately 250 equilibria in 20 seconds for the DIII-D tokamak. This should be a performance goal to aim for. \\
-
-External libraries
+The following external libraries are used:
 \begin{itemize}
-\item HDF5 will be required for I/O. This can be downloaded for free. The Python version h5py will be used for visualization.
-\item Eigen or one of the many free BLAS variants can be used for matrix operations.
-\item MPI will be used for any parallelization we add to the code. 
-\item Matplotlib and numpy will be used for visualization.
+\item HDF5 (version 1.8 or newer) is used for I/O. The libraries can be downloaded and installed from \texttt{www.hdfgroup.org}. Should the libraries be unavailable the programme can be compiled and run with output written to a tsv file. 
+\item Boost is used for the program options, math and testing libraries. 
+\item The python numpy, h5py and matplotlib packages are used in our visualisation programme. 
 \end{itemize}
+
+\subsection{Implementation and Design decisions}
+
+\subsubsection{Output}
+All the output is done throught the \texttt{GradOutput} interface, with options to write to hdf or tsv files. As only $\Psi$, $P$ and $g$ are necessary for the solution of the equation, the default output writes only these three quantities and the dimensions of the grid. The value of the flux function $\Psi$ at the limiter and magnetic axis are also written to identify the plasma position. In the tsv case, this is an additional quantity while in the hdf version, this is an attribute of the \texttt{psi} dataset. These formats were chosen as ASCII can be read and written easily and should work on most systems, while HDF5 is a standard data structure for scientific work. Output can be written every $n$ iterations of the inner and outer loops. 
+
+Additional quantities are added to the output by passing a comma separated string to the constructor, which is parsed. Currently, options for the toroidal current density and toroidal magnetic field are available, though additional output fields can be added by modifying the parsing function and adding the appropriate quantity to the writing function. Additional output formats can be added by implementing the \texttt{GradOutput} interface.
+
+\subsubsection{Visualisation}
+
+The python visualiser can be run from command line or interactively. The data are read using the \texttt{read\_data} module, which passes a dictionary of the available fields to the plotting function in the \texttt{viz} module. Tsv data are read using regular expressions while HDF data are read using functions provided by \texttt{h5py}. In the command line version, contour and colour plots of $\Psi$, $P$ and $g$ are shown in a single figure and the matplotlib \texttt{format\_coord} function is overridden so the values of the data can be read off the figure. An additional function is provided to produce a radial plot of the values of a field along the midplane of the tokamak. 
+
+The use of a dictionary to hold the data was chosen in order to make reading the output files more convenient; we can simply iterate over the lines of the tsv output or datastructs of the HDF file. Also, with the option to add custom outputs, checking for the existence of each field would have to be performed while reading. The disadvantage of this approach is that referring to the data is unwieldy (\texttt{F['R']} vs \texttt{F.R} for example). 
 
 %----------------------------------------------------------------------------------------
 %	Section 3
@@ -373,8 +383,12 @@ testing
 
 profiling
 
+The code scales like O($N^3$). 
+
 \section{Lessons Learned}
 
-lessons learned
+The pppl cluster has a strange selection of default libraries.
+HDF5 on windows is painful.
+
 
 \end{document}
