@@ -35,7 +35,13 @@
 \allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
 
 \usepackage{hyperref}
-
+\usepackage{listings}
+\lstset{ language=C++,
+            keywordstyle=\color{red},
+            basicstyle=\footnotesize,
+            columns=fullflexible}
+\usepackage{xcolor}
+\usepackage{array}
 
 %\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
 %\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
@@ -166,37 +172,138 @@ Thus, the algorithm described in Section 1.4 is identical to that described in S
 
 \section{Code Organization / Class Structure}
 
-The program is written in C++ with the visualization carried out separately using Python. The solver is called from the command line.  Options/parameters can be set on the command line or in a configuration file.  The location of external magnetic coils will also be contained in text files. Output will be written to text files or hdf5 files, which will require installation of the hdf5 library.  By default, the output consists of the flux function $\psi$, the pressure, and $g = R\,B_{\phi}$.  Other quantities, such as the toroidal current density, can be selected in the input file.
+The program is written in C++ with the visualization carried out separately using Python. The solver is called from the command line.  Options/parameters can be set on the command line or in a configuration file.  The location of external magnetic coils will also be contained in text files. Output will be written to text files or hdf5 files. 
 
 The class structure of our code is explained below.  For more information, see the documentation website at \href{http://jonngwx.github.io/grad-shafranov/index.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/index.html}}.
-\begin{center}
-    \begin{tabular}{ | l | l | p{5cm} |}
+\\ \\
+%%%%%%%%%%%%%%%% BIG CLASS TABLE%%%%%%%%%%%%%%%%%
+\begin{centering}
+\small
+\centering
+\begin{tabular}{ | m{2.6cm} | p{9.0cm} | p{6cm}|}
+    \hline Class Name & Methods (inherited methods only listed in parent class) & Brief Description \\
+    \hline Grid & 
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+double celli(double r)
+double cellj(double z) 
+\end{lstlisting} 
+   & Stores information about the computational grid. \\
+   \hline Field & none & Container for 2d data and the grid \\ 
+   \hline EllipticSolver & 
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+double norm_max (const Field &Psi, const Field &Psi_prev)
+void iter(double omega)
+void boundary (Field &Psi, const Field &Psi_prev) 
+double norm()
+virtual void step_1(const Field &jphi)=0
+virtual void step(const Field &jphi)=0
+virtual void coeff()=0
+double residuals(const Field &Psi, const Field &Psi_prev) 
+\end{lstlisting}
+    & description of EllipticSolver \\ 
+    \hline GaussSeidel &
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+void step_1(const Field &jphi)
+void step(const Field &jphi)
+void coeff()
+\end{lstlisting} 
+    & Implementation of EllipticSolver. Solves finite difference equation using Gauss-Seidel algorithm.\\
+    \hline SOR & 
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+void step_1(const Field &jphi)
+void step(const Field &jphi)
+void coeff()
+double omega()
+\end{lstlisting}
+    &Implementation of EllipticSolver.  Solves finite difference equation using Successive over-relaxation algorithm. \\ 
+    \hline JSolver &
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+virtual void update(Field *jphi, Field *psi, Field *p, Field *g)=0
+\end{lstlisting}
+    & hello \\ 
+    \hline JSolverAlpha &
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+void update(Field *jphi, Field *psi, Field *p, Field *g)
+\end{lstlisting}
+    & hello \\ 
+    \hline JSolverNSTX & 
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+void update(Field *jphi, Field *psi, Field *p, Field *g)
+\end{lstlisting}
+    & ertertert \\ 
+    \hline Boundary & 
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+virtual int CalcB(Field *jphi)
+int LtoI(int l)
+int LtoJ(int l)
+double norm()
+\end{lstlisting}
+    & dffghfgh \\ 
+    \hline SlowBoundary &
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+int CalcB(Field *jphi)
+\end{lstlisting}
+    & dfasdasd \\ 
+    \hline Table &
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+virtual int load_from_tsv(const string filename, int header_lines=0)
+int num_columns() const
+int num_rows() const
+double data(int row, int column) const
+\end{lstlisting}
+    & dfgdfgdfg \\ 
+    \hline CoilData &
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+int load_from_tsv(const string filename, int header_lines=0) override
+double r(int i) const
+double z(int i) const
+double current(int i) const
+int num_coil_subregions() const
+\end{lstlisting}
+    & dfgdfgdfg \\ 
+    \hline Critical &
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+void Psi_search(double r, double z, double *dr, double *dz)
+void Psi_magnetic(double r, double z, double *rcrit, 
+	double *zcrit, double *Psi_min)
+double Psi_limiter ()
+void update ()
+bool find_saddle (double &r, double &z)
+\end{lstlisting}
+    & dfgdfgdg \\ 
+    \hline Interpolate & 
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+double F (double r, double z) const
+double F_r (double r, double z) const
+double F_rr (double r, double z) const
+double F_rz (double r, double z) const
+double F_zz (double r, double z) const
+double F_z (double r, double z) const
+void updateInterpolation(double r, double z)
+void PrintAmnCoefficients()
+\end{lstlisting}
+    & fsdfsdfsdf \\ 
+    \hline GradOutput & 
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+virtual void write_output(const char *filename)=0
+void parse_outputs(const char *outputs)
+bool find(Output out)
+\end{lstlisting}
+    & dfgdfgd \\ 
+   \hline GradOutputHdf & 
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+void write_output(const char *filename)
+\end{lstlisting}
+     & dfgfdfgdf \\ 
+    \hline GradOutputTxt &
+\begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
+void write_output(const char *filename)
+\end{lstlisting}
+    & dfgdfgdf \\ 
     \hline
-    Class Name & Methods & Brief Description \\ \hline
-    Grid & 11C & Stores information about the computational grid. \\ \hline
-    Field & 9C & Cloudy with rain, across many northern regions. Clear spells
-    across most of Scotland and Northern Ireland,
-    but rain reaching the far northwest. \\ \hline
-    EllipticSolver &  21C & Rain will still linger for the morning.
-    Conditions will improve by early afternoon and continue
-    throughout the evening. \\ \hline
-    GaussSeidel & 345 & 345345345345345345345 \\ \hline
-    SOR & hello & hello \\ \hline
-    JSolver & hello & hello \\ \hline
-    JSolverAlpha & hello & hello \\ \hline
-    JSolverNSTX & ertertetr & ertertert \\ \hline
-    Boundary & rtfhgfgh & dffghfgh \\ \hline
-    SlowBoundary & gdfg dfg & dfgdgf \\ \hline
-    Table & dfgdfgdg & dfgdfgdfg \\ \hline
-    CoilData & dfgdfgdfg & dfgdfgdfg \\ \hline
-    Critical & dfgdfgdfgdfg & dfgdfgdg \\ \hline
-    Interpolate & sdfsdfsdfsdf & fsdfsdfsdf \\ \hline
-    GradOutput & dfgdfgdfg & dfgdfgd \\ \hline
-    GradOutputHdf & fsdfsdfsdf & dfgfdfgdf \\ \hline
-    GradOutputTxt & dfgdfgdfg & dfgdfgdf \\ 
-    \hline
-    \end{tabular}
-\end{center}
+\end{tabular}
+\end{centering}
+%%%%%%%%%%%%%%% END BIG CLASS TABLE %%%%%%%%%%%%%%%
 
 
 The following C++ interfaces will be required and should be self-contained
