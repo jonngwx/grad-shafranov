@@ -4,7 +4,6 @@
  * @brief Some tests for the Table and CoilData classes using the boost_test library.
  */
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE tsv_reader_test
 #include <boost/test/unit_test.hpp>
 
 #include <string>

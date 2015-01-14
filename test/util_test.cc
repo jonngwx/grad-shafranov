@@ -4,7 +4,6 @@
  * @brief Test that util's linspace function works as advertised.
  */
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE util_test
 #include <boost/test/unit_test.hpp>
 #include <stdlib.h>
 #include "util.h"

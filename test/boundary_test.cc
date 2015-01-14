@@ -4,7 +4,6 @@
  * @brief Some tests for the Boundary class using the boost_test library.
  */
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE boundary_test
 #include <boost/test/unit_test.hpp>
 
 #include <string>

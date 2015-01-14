@@ -19,8 +19,8 @@ Docs/html
 PeterTest/boost_test
 
 *.swp
-
 test/simple_test_output.tsv
+test/all_test
 test/tsv_reader_test
 test/test_output
 test/grid_test
