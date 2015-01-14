@@ -57,38 +57,14 @@ $(EXDIR)/coil_data_example: $(EXDIR)/coil_data_example.o tsv_reader.o
 .PHONY: runtests
 runtests:
 	# Running tests!
-	#
-	# tsv_reader_test
-	#
 	test/tsv_reader_test
-	#
-	# test_output
-	#
 	test/test_output
-	#
-	# test_util (linspace)
-	#
 	test/util_test
-	#
-	# elliptic_test
-	#
 	test/elliptic_test
-	#
-	# grid_test
-	#
 	test/grid_test
-	#
-	# boundary_test
-	#
 	test/boundary_test
-	#
-	# interpolate_test
-	#
 	test/interpolate_test
-	#
-	# slow_boundary_test
-	#
-#	test/slow_boundary_test
+	test/slow_boundary_test
 
 .PHONY: clean
 clean:
