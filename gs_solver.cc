@@ -169,15 +169,15 @@ int main(int argc, char *argv[])
   // set up J_Solver class
   double P0 = vm["pgta-p0"].as<double>();
   double g0 = vm["pgta-g0"].as<double>();
-  J_Solver *js;
+  JSolver *js;
   std::string jname = vm["J-solver-name"].as<string>();
   if (jname == "nstx"){
     double n2 = vm["pgta-n2"].as<double>();
-    js= new J_Solver_NSTX(P0,g0,Ip,n2,grid);
+    js= new JSolverNSTX(P0,g0,Ip,n2,grid);
   } else {
     double n1 = vm["pgta-n1"].as<double>();
     double n2 = vm["pgta-n2"].as<double>();
-    js = new J_Solver_Alpha(P0,g0,n1,n2,Ip,grid);
+    js = new JSolverAlpha(P0,g0,n1,n2,Ip,grid);
   }
   
   // Elliptic solver for inner loop

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
-J_Solver_Alpha::J_Solver_Alpha(double P0, double g0, double n1, double n2, double Ip, Grid *grid)
+JSolverAlpha::JSolverAlpha(double P0, double g0, double n1, double n2, double Ip, Grid *grid)
     : n1_(n1),
       n2_(n2)
 {   
@@ -17,9 +17,9 @@ J_Solver_Alpha::J_Solver_Alpha(double P0, double g0, double n1, double n2, doubl
     nz_ = grid->nz_;
 }
 
-J_Solver_Alpha::~J_Solver_Alpha() {}
+JSolverAlpha::~JSolverAlpha() {}
 
-void J_Solver_Alpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
+void JSolverAlpha::update(Field *jphi, Field *psi, Field *p, Field *g) {
   const double mu0 = 4 * M_PI * 1e-7; // the permeability of free space
   double temp1 = 0;
   double temp2 = 0;
