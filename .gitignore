@@ -10,6 +10,9 @@ grad.workspace
 .DS_Store
 */.DS_Store
 
+# latex output
+Final\ Report/*.out
+
 #For hiding the gh-pages git branch of doxygen output.
 Docs/html
 
