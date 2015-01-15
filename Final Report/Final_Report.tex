@@ -219,7 +219,9 @@ virtual void step(const Field &jphi)=0
 virtual void coeff()=0
 double residuals(const Field &Psi, const Field &Psi_prev) 
 \end{lstlisting}
-    & description of EllipticSolver \\ 
+    &
+    Base class implementation for GaussSeidel and SOR. Solves finite difference equation for inverting elliptic operator. 
+     \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[blue!25]{0.35cm}{0.35cm} \, GaussSeidel &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void step_1(const Field &jphi)
@@ -257,12 +259,16 @@ int LtoI(int l)
 int LtoJ(int l)
 double norm()
 \end{lstlisting}
-    & dffghfgh \\ 
+    & 
+    Contains methods to update the boundary values of Psi.
+     \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[green!25]{0.35cm}{0.35cm} \, SlowBoundary &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 int CalcB(Field *jphi)
 \end{lstlisting}
-    & dfasdasd \\ 
+    & 
+    Implementation of Boundary class that iterates over the field of $J_{\phi}$ and over the set of external coils) using Green's functions.
+    \\ 
      \specialrule{.05em}{0.0em}{.07em} \colorbox{yellow!50}{Table} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual int load_from_tsv(const string filename, int header_lines=0)
@@ -289,7 +295,9 @@ double Psi_limiter ()
 void update ()
 bool find_saddle (double &r, double &z)
 \end{lstlisting}
-    & dfgdfgdg \\ 
+    & 
+    Implementation of Critical. Finds 'critical points' like the magnetic axis, limiter points, and X points. These points are minima, maximima, and saddle points of $\Psi$.
+     \\ 
     \hline Interpolate & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 double F (double r, double z) const
@@ -301,24 +309,26 @@ double F_z (double r, double z) const
 void updateInterpolation(double r, double z)
 void PrintAmnCoefficients()
 \end{lstlisting}
-    & fsdfsdfsdf \\ 
+    & 
+    Implementation of Interpoolate. Interpolates to find the values and derivatives of a 2D data set between grid points using fitting to a bicubic polynomial. 
+     \\ 
     \specialrule{.05em}{0.0em}{.07em} \colorbox{magenta!25}{GradOutput} & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual void write_output(const char *filename)=0
 void parse_outputs(const char *outputs)
 bool find(Output out)
 \end{lstlisting}
-    & dfgdfgd \\ 
+    & Interface for writing the output of the solver to file. \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[magenta!25]{0.35cm}{0.35cm} GradOutputHdf & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void write_output(const char *filename)
 \end{lstlisting}
-     & dfgfdfgdf \\ 
+     & Implementation of Grad\_Output which writes data to a hdf5 file. \\ 
      \specialrule{.05em}{0.0em}{.07em} \crule[magenta!25]{0.35cm}{0.35cm} GradOutputTxt &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void write_output(const char *filename)
 \end{lstlisting}
-    & dfgdfgdf \\ 
+    & Implementation of Grad\_Output which writes to a text file. \\ 
     \hline
 \end{tabular}
 \end{table}
