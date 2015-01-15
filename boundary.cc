@@ -11,9 +11,10 @@
 
 Boundary::Boundary(Field *psi, Grid* grid) : psi_(psi), nr_(grid->nr_), nz_(grid->nz_) {
   perim_ = 2*(nr_ + nz_ - 2);
+  psib_old = new double[perim_];
 }
 
-Boundary::~Boundary() {}
+Boundary::~Boundary() { delete [] psib_old;}
 
 int Boundary::CalcB(Field* jphi) { return 0; }
 
