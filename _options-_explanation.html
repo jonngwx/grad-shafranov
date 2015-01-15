@@ -116,14 +116,31 @@ $(document).ready(function(){initNavTree('_options-_explanation.html','');});
 </ul>
 <h2>Stagnation point initial geometry</h2>
 <ul>
-<li>&ndash;R-stag-down, &ndash;z-stag-down, &ndash;R-stag-up, &ndash;z-stag-up: Corresponds to the location of the lower and upper X - points, respectively. </li>
+<li>&ndash;R-stag-down, &ndash;z-stag-down, &ndash;R-stag-up, &ndash;z-stag-up: Corresponds to the location of the lower and upper X - points, respectively. These are used by '<a class="el" href="class_critical.html" title="Contains methods to search for the critical points of Psi and update the limiters and magnetic axis...">Critical</a>' to find the last closed flux surface and can change when a new critical point is found.</li>
+</ul>
+<h2>The form and magnitude of the pressure and current</h2>
+<ul>
+<li>&ndash;pgta-n1 : An exponent for the form of the pressure distribution: <img class="formulaInl" alt="$ p(\Psi) = p_0 \tilde{\Psi}^{n_1} $" src="form_10.png"/> where <img class="formulaInl" alt="$\tilde\Psi$" src="form_11.png"/> is the normalized to 1 on the axis and 0 at the plasma-vacuum boundary.</li>
+<li>&ndash;pgta-n2 : An exponent for the form of the current distribution: <img class="formulaInl" alt="$ g^2(\Psi) = g_0^2\left[1+ \alpha_g \tilde\Psi^{n_2} \right]$" src="form_14.png"/></li>
+<li>&ndash;pgta-p0 : Pressure on axis, measured in Pascals. This is fixed throughout the run of the code.</li>
+<li>&ndash;pgta-g0 : R0*B0 (initial radius of mag axis times field at that point). This is fixed through the run of the code.</li>
+</ul>
+<h2>The initial current distribution</h2>
+<ul>
+<li>&ndash;j-phi-Ip : Total plasma current in amps.</li>
+<li>&ndash;j-phi-D : Radius of initial current distribution. The initial current distribution is assumed to be a circular near-paraboloid (with an additional 1/R term)</li>
+<li>&ndash;j-phi-R0, &ndash;j-phi-z0 : Initial locations of the magnetic axis. If these are unspecified, the initial magnetic axis is assumed to be the center of the computational grid. The magnetic axis point is updated every inner (N) iteration.</li>
+</ul>
+<h2>Output format and frequency</h2>
+<ul>
+<li>&ndash;output-fields : Which additional Fields from the calculation to output. This option takes the form of a comma-separated list with no spaces. Acceptable values are J for the current and Bt for the toroidal magnetic field. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 15 2015 16:02:19 for COUGAR by
+    <li class="footer">Generated on Thu Jan 15 2015 16:20:48 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

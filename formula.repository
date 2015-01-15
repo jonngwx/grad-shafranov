@@ -7,3 +7,9 @@
 \form#6:$\partial/\partial\phi = 0$
 \form#7:$ \Sigma_{m=0}^3 \Sigma_{n=0}^3 a_{m,n} x^m y^n$
 \form#8:$ a_{m,n}$
+\form#9:$ p(\psi) = \tilde{\psi}^{n_1} $
+\form#10:$ p(\Psi) = p_0 \tilde{\Psi}^{n_1} $
+\form#11:$\tilde\Psi$
+\form#12:$ g^2(\Psi) = g_0^2\left[1+ \alpha_g \tilde\psi^{n_2} $
+\form#13:$ g^2(\Psi) = g_0^2\left[1+ \alpha_g \tilde\psi^{n_2} \right]$
+\form#14:$ g^2(\Psi) = g_0^2\left[1+ \alpha_g \tilde\Psi^{n_2} \right]$
