@@ -28,7 +28,6 @@ class JSolver {
     virtual void update(Field *jphi, Field *psi, Field *p, Field *g)=0;
     
  protected:
-  /*! What the heck are all these variables???? -JAS */
   double P0_; //!< Pressure at the magnetic axis
   double g0_; //!< Toroidal magnetic field * R at magnetic axis
   double Ip_; //!< Total plasma current (A)
