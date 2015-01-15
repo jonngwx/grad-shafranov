@@ -106,14 +106,13 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="textblock"><p>COUGAR: COde Usually Generates Axisymmetric Reconstruction</p>
 <p>A program for magnetic reconstruction of axisymmetric tokamak plasmas, written for APC523, Princeton U, Fall 2014.</p>
 <p>Authors: P. Bolgert, J. Ng, E. Paul, &amp; J. Schwartz</p>
-<p>In magnetohydrodynamic (MHD) theory, a plasma equlibrium is described by the equation <img class="formulaInl" alt="$ \nabla p = J \times B $" src="form_1.png"/> where <img class="formulaInl" alt="$p$" src="form_2.png"/> is the scalar plasma pressure, <img class="formulaInl" alt="$J$" src="form_3.png"/> is the current density, and <img class="formulaInl" alt="$B$" src="form_4.png"/> is the magnetic field. We work in cylindrical coordinates <img class="formulaInl" alt="$(R,\phi,Z)$" src="form_5.png"/>, and the plasma is assumed to be axisymmetric, i.e., <img class="formulaInl" alt="$\partial/\partial\phi = 0$" src="form_6.png"/></p>
-<p>Given some experimental parameters and measurements of a tokamak plasma we aim to reconstruct its structure: the distribution of currents, pressure, and magnetic field. </p>
+<p>COUGAR is a user friendly code which solves the Grad-Shafranov equation for axisymmetric plasmas. The main body of the code is written in C++, with a separate Python program for visualization. The user can set code options either via the command line or text-based configuration file. In the current version, some assumptions about the internal structure of the plasma must be made. Future versions of the code will incorporate experimental measurements into the calculation. For information on running COUGAR, see the README on this website. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jan 14 2015 20:22:48 for COUGAR by
+    <li class="footer">Generated on Wed Jan 14 2015 21:11:27 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
