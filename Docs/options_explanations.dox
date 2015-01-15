@@ -1,0 +1,45 @@
+/*!
+@file options_explanations.dox
+@author Jacob Schwartz
+@brief Explanation of program options 
+*/
+/*!
+\page Options-Explanation Explanation of program options 
+
+To see all the options, run the program with the \c --help flag. 
+This document gives further explanation to selected options.
+
+## Main program and solver configuration
+
+- -N [ --max-iter-N ] : The maximum number of iterations for the inner loop. Typically less than 20 are needed for a 50x50 grid. If the loop converges before the maximum number it will not do additional iterations. If the maximum is reached the program will continue with another outer iteration.
+
+- -M [ --max-iter-M ] : The maximum number of iterations for the outer loop. If the loop converges before the maximum number it will not do additional iterations. If the maximum is reached the calculations will end.
+
+## %Grid and geometry
+
+- --grid-elems-r, --grid-elems-z: Number of grid nodes in the radial direction. If set to 10, there are 10 'nodes' with 9 'cells' between them.
+
+- --r-min, --r-max, --z-min, --z-max: The outer nodes of the grid will be located at these points. (i.e. the outermost 'cells' are inward of these points; though values are stored on 'nodes' and not on 'cells'.)
+
+## Stagnation point initial geometry
+
+- --R-stag-down, --z-stag-down, --R-stag-up, --z-stag-up: Corresponds to the location of the lower and upper X - points, respectively. These are used by 'Critical' to find the last closed flux surface and can change when a new critical point is found.
+
+## The form and magnitude of the pressure and current
+
+- --pgta-n1 : An exponent for the form of the pressure distribution: \f$ p(\Psi) = p_0 \tilde{\Psi}^{n_1} \f$ where \f$\tilde\Psi\f$ is the normalized to 1 on the axis and 0 at the plasma-vacuum boundary.
+- --pgta-n2 : An exponent for the form of the current distribution: \f$ g^2(\Psi) = g_0^2\left[1+ \alpha_g \tilde\Psi^{n_2} \right]\f$
+- --pgta-p0 : Pressure on axis, measured in Pascals. This is fixed throughout the run of the code.
+- --pgta-g0 : R0*B0 (initial radius of mag axis times field at that point). This is fixed through the run of the code.
+
+## The initial current distribution
+
+- --j-phi-Ip :  Total plasma current in amps.
+- --j-phi-D  :  Radius of initial current distribution. The initial current distribution is assumed to be a circular near-paraboloid (with an additional 1/R term)
+- --j-phi-R0, --j-phi-z0 :  Initial locations of the magnetic axis. If these are unspecified, the initial magnetic axis is assumed to be the center of the computational grid. The magnetic axis point is updated every inner (N) iteration.
+
+## Output format and frequency
+
+- --output-fields : Which additional Fields from the calculation to output. This option takes the form of a comma-separated list with no spaces. Acceptable values are J for the current and Bt for the toroidal magnetic field, so J,Bt is one valid combination. These can later be viewed (but not automatically) with the viewer.
+
+*/
