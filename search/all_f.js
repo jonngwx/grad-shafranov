@@ -8,5 +8,7 @@ var searchData=
   ['read_5ftext',['read_text',['../namespaceread__data.html#ac701a348258747a4e01d811b60e232f7',1,'read_data']]],
   ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
   ['residuals',['residuals',['../class_elliptic_solver.html#a128fbbbfb2c761a3939ee56b63f825b4',1,'EllipticSolver']]],
-  ['result',['result',['../namespaceviz.html#aa5e3a6ec485be426971514163be97faf',1,'viz']]]
+  ['result',['result',['../namespaceviz.html#aa5e3a6ec485be426971514163be97faf',1,'viz']]],
+  ['runtimetester',['runTimeTester',['../namespacerun_time_tester.html',1,'']]],
+  ['runtimetester_2epy',['runTimeTester.py',['../run_time_tester_8py.html',1,'']]]
 ];

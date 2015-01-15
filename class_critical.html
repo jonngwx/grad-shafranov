@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('class_critical.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('class_critical.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Finds 'critical points' like the magnetic axis, limiter points, and X points.  
+<p>Contains methods to search for the critical points of Psi and update the limiters and magnetic axis.  
  <a href="class_critical.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="critical_8h_source.html">critical.h</a>&gt;</code></p>
@@ -133,17 +133,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac563838d656ee8e76c6dec699070992e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform search for critical points of limiter beginning with initial guess r, z.  <a href="#ac563838d656ee8e76c6dec699070992e">More...</a><br /></td></tr>
 <tr class="separator:ac563838d656ee8e76c6dec699070992e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e14cfe2341aa27bfe08542bbbd10b07"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_critical.html#a8e14cfe2341aa27bfe08542bbbd10b07">Psi_limiter</a> ()</td></tr>
-<tr class="memdesc:a8e14cfe2341aa27bfe08542bbbd10b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">MEANS SOMETHING.  <a href="#a8e14cfe2341aa27bfe08542bbbd10b07">More...</a><br /></td></tr>
+<tr class="memdesc:a8e14cfe2341aa27bfe08542bbbd10b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs search for limitet point using critical point search and comparison with physical limiter points.  <a href="#a8e14cfe2341aa27bfe08542bbbd10b07">More...</a><br /></td></tr>
 <tr class="separator:a8e14cfe2341aa27bfe08542bbbd10b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb733fa08ffbd1f6b6c00e0980e19067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_critical.html#abb733fa08ffbd1f6b6c00e0980e19067">update</a> ()</td></tr>
 <tr class="memdesc:abb733fa08ffbd1f6b6c00e0980e19067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs critical point search; updates Psi_i and Psi_o.  <a href="#abb733fa08ffbd1f6b6c00e0980e19067">More...</a><br /></td></tr>
 <tr class="separator:abb733fa08ffbd1f6b6c00e0980e19067"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a395d22919c8b2a2ec2f63231ef63c802"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_critical.html#a395d22919c8b2a2ec2f63231ef63c802">find_saddle</a> (double &amp;r, double &amp;z)</td></tr>
-<tr class="memdesc:a395d22919c8b2a2ec2f63231ef63c802"><td class="mdescLeft">&#160;</td><td class="mdescRight">MEANS SOMETHING (why are these &amp;references and *pointers above in Psi_magnetic? ... sloppy)  <a href="#a395d22919c8b2a2ec2f63231ef63c802">More...</a><br /></td></tr>
+<tr class="memdesc:a395d22919c8b2a2ec2f63231ef63c802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds saddle point using critical point search starting with r and z.  <a href="#a395d22919c8b2a2ec2f63231ef63c802">More...</a><br /></td></tr>
 <tr class="separator:a395d22919c8b2a2ec2f63231ef63c802"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Finds 'critical points' like the magnetic axis, limiter points, and X points. </p>
+<div class="textblock"><p>Contains methods to search for the critical points of Psi and update the limiters and magnetic axis. </p>
+<p>Finds 'critical points' like the magnetic axis, limiter points, and X points.</p>
 <p>These points are minima, maximima, and saddle points of <img class="formulaInl" alt="$\psi$" src="form_0.png"/>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a781274a3ef04c019a260fd9bd415974a"></a>
@@ -266,15 +267,17 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>MEANS SOMETHING (why are these &amp;references and *pointers above in Psi_magnetic? ... sloppy) </p>
+<p>Finds saddle point using critical point search starting with r and z. </p>
+<p>Returns false if search lands outside of horizontal limiters or grid boundaries.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">r</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramname">z</td><td>MEANS SOMETHING </td></tr>
+    <tr><td class="paramname">r</td><td>Current r coordinate. </td></tr>
+    <tr><td class="paramname">z</td><td>Current z coordinate. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>MEANS SOMETHING </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if search critical point corresponds to saddle point, False otherwise or if outside boundaries</dd></dl>
+<p>Returns false if search lands outside of horizontal limiters or grid boundaries. </p>
 
 </div>
 </div>
@@ -291,9 +294,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>MEANS SOMETHING. </p>
-<p>Perform search for critical points beginning with initial guess r, z.</p>
-<dl class="section return"><dt>Returns</dt><dd>MEANS SOMETHING </dd></dl>
+<p>Performs search for limitet point using critical point search and comparison with physical limiter points. </p>
+<p>Perform search for limiter points.</p>
+<dl class="section return"><dt>Returns</dt><dd>Value of Psi at innermost limiter point, either a critical point or value at physical limiter. </dd></dl>
 
 </div>
 </div>
@@ -343,11 +346,11 @@ Public Member Functions</h2></td></tr>
 <p>Perform search for critical points beginning with initial guess r, z.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">rcrit</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">zcrit</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">Psi_min</td><td>MEANS SOMETHING </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>Initial guess for magnetic axis r coordinate. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>Initial guess for magnetic axis z coordinate. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">rcrit</td><td>R coordinate of determined magnetic axis point. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">zcrit</td><td>Z coordinate of determined magnetic axis point. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">Psi_min</td><td>Value of Psi at rcrit, zcrit. </td></tr>
   </table>
   </dd>
 </dl>
@@ -394,11 +397,10 @@ Public Member Functions</h2></td></tr>
 <p>returns dr, dz to progress toward critical point in Psi</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">dr</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">dz</td><td>MEANS SOMETHING </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname"></td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>Current r coordinate in critical point search </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>Current z coordinate in critical point search </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">dr</td><td>Update in r direction to progress toward critical point </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">dz</td><td>Update in z direction to progress toward critical point </td></tr>
   </table>
   </dd>
 </dl>
@@ -433,7 +435,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_critical.html">Critical</a></li>
-    <li class="footer">Generated on Wed Jan 14 2015 21:14:22 for COUGAR by
+    <li class="footer">Generated on Thu Jan 15 2015 14:59:06 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

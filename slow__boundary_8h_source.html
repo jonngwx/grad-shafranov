@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('slow__boundary_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -118,31 +118,35 @@ $(document).ready(function(){initNavTree('slow__boundary_8h_source.html','');});
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="tsv__reader_8h.html">tsv_reader.h</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="boundary_8h.html">boundary.h</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_slow_boundary.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_slow_boundary.html">SlowBoundary</a> : <span class="keyword">public</span> <a class="code" href="class_boundary.html">Boundary</a> {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="class_slow_boundary.html#aa5dd3165507e99bdaddebb4f7c44aa0d">SlowBoundary</a>(<a class="code" href="class_field.html">Field</a>* psi, <a class="code" href="class_grid.html">Grid</a>* grid);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="class_slow_boundary.html#aa5dd3165507e99bdaddebb4f7c44aa0d">SlowBoundary</a>(<a class="code" href="class_field.html">Field</a>* psi, <a class="code" href="class_grid.html">Grid</a>* grid, <a class="code" href="class_coil_data.html">CoilData</a>* cond_data);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="class_slow_boundary.html#aa4f5c6cfe4e7637c4ec43435b6a71422">~SlowBoundary</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="class_slow_boundary.html#a1b59989435593195a78c013ce4aeabc7">CalcB</a>(<a class="code" href="class_field.html">Field</a>* jphi);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">double</span>* R_;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">double</span>* z_;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">double</span> dr_;            <span class="comment">// Size of a grid cell in the r direction</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">double</span> dz_;            <span class="comment">// Size of a grid cell in the z direction</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="class_coil_data.html">CoilData</a>* cond_data_;  <span class="comment">// Contains data on the external coil currents</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">double</span>*** g_plasma_;   <span class="comment">/*  A three dimensional array.</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">   * The value g_plasma[i][j][l]</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">   * represents how much psi is at a given boundary point l</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">   * due to a unit current at point [i][j] in the plasma.</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">   * Note that for cells on the boundary,</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">   * g_plasma[ce,ll][corresponding cell] = 0. */</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">double</span>** g_coils_;  </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif  // SLOWBOUNDARY_H_</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_slow_boundary.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_slow_boundary.html">SlowBoundary</a> : <span class="keyword">public</span> <a class="code" href="class_boundary.html">Boundary</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="class_slow_boundary.html#aa5dd3165507e99bdaddebb4f7c44aa0d">SlowBoundary</a>(<a class="code" href="class_field.html">Field</a>* psi, <a class="code" href="class_grid.html">Grid</a>* grid);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="class_slow_boundary.html#aa5dd3165507e99bdaddebb4f7c44aa0d">SlowBoundary</a>(<a class="code" href="class_field.html">Field</a>* psi, <a class="code" href="class_grid.html">Grid</a>* grid, <a class="code" href="class_coil_data.html">CoilData</a>* cond_data);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="class_slow_boundary.html#aa4f5c6cfe4e7637c4ec43435b6a71422">~SlowBoundary</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="class_slow_boundary.html#a1b59989435593195a78c013ce4aeabc7">CalcB</a>(<a class="code" href="class_field.html">Field</a>* jphi);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">double</span>* R_;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">double</span>* z_;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">double</span> dr_;            <span class="comment">// Size of a grid cell in the r direction</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">double</span> dz_;            <span class="comment">// Size of a grid cell in the z direction</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="class_coil_data.html">CoilData</a>* cond_data_;  <span class="comment">// Contains data on the external coil currents</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordtype">double</span>*** g_plasma_;   <span class="comment">/*  A three dimensional array.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">   * The value g_plasma_[i][j][l]</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">   * represents the reponse at a given boundary point l</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">   * due to a unit current at point [i][j] in the plasma.</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">   * Note that for cells on the boundary,</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">   * g_plasma[ce,ll][corresponding cell] = 0. */</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">double</span>** g_coils_;    <span class="comment">/* A two dimensional array.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">   * The value g_coils_[c][l]</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">   * represents the response at a given boundary point l</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">   * due to a unit current at the location of coil &quot;c&quot;. */</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif  // SLOWBOUNDARY_H_</span></div>
 <div class="ttc" id="boundary_8h_html"><div class="ttname"><a href="boundary_8h.html">boundary.h</a></div><div class="ttdoc">Header file for the Boundary class. </div></div>
-<div class="ttc" id="class_slow_boundary_html"><div class="ttname"><a href="class_slow_boundary.html">SlowBoundary</a></div><div class="ttdoc">This boundary-value calculating class iterates over the field of j_phi and (should do ...</div><div class="ttdef"><b>Definition:</b> slow_boundary.h:20</div></div>
+<div class="ttc" id="class_slow_boundary_html"><div class="ttname"><a href="class_slow_boundary.html">SlowBoundary</a></div><div class="ttdoc">This class iterates uses a slow (relative to Von Hagenow&#39;s method) Green&#39;s function-based algorithm t...</div><div class="ttdef"><b>Definition:</b> slow_boundary.h:19</div></div>
 <div class="ttc" id="class_coil_data_html"><div class="ttname"><a href="class_coil_data.html">CoilData</a></div><div class="ttdoc">A container for the r and z location (m) and currents (A) of external coils. </div><div class="ttdef"><b>Definition:</b> tsv_reader.h:104</div></div>
 <div class="ttc" id="class_boundary_html"><div class="ttname"><a href="class_boundary.html">Boundary</a></div><div class="ttdoc">Contains a method to update the boundary values of Psi. </div><div class="ttdef"><b>Definition:</b> boundary.h:16</div></div>
 <div class="ttc" id="class_field_html"><div class="ttname"><a href="class_field.html">Field</a></div><div class="ttdoc">Container for 2d data and grid used in the solver. </div><div class="ttdef"><b>Definition:</b> field.h:15</div></div>
@@ -159,7 +163,7 @@ $(document).ready(function(){initNavTree('slow__boundary_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_04551c75b1b1df3df3c1f86f11f16b64.html">include</a></li><li class="navelem"><a class="el" href="slow__boundary_8h.html">slow_boundary.h</a></li>
-    <li class="footer">Generated on Wed Jan 14 2015 21:14:22 for COUGAR by
+    <li class="footer">Generated on Thu Jan 15 2015 14:59:06 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

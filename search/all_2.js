@@ -15,7 +15,6 @@ var searchData=
   ['critical',['Critical',['../class_critical.html',1,'Critical'],['../class_critical.html#a781274a3ef04c019a260fd9bd415974a',1,'Critical::Critical()']]],
   ['critical_2ecc',['critical.cc',['../critical_8cc.html',1,'']]],
   ['critical_2eh',['critical.h',['../critical_8h.html',1,'']]],
-  ['critical_5ftest_2ecc',['critical_test.cc',['../critical__test_8cc.html',1,'']]],
   ['current',['CURRENT',['../class_grad_output.html#a307bbf1716a7a7c8f17e29a90ff4d213a83b74b544b4d990e30a25071dc4a7258',1,'GradOutput::CURRENT()'],['../class_coil_data.html#af79bedb38b95e5f563190266988a6494',1,'CoilData::current()']]],
   ['cougar_20readme',['COUGAR README',['../md__r_e_a_d_m_e.html',1,'']]]
 ];

@@ -15,8 +15,7 @@ var indexSectionsWithContent =
   5: "abcdfgijknoprz",
   6: "o",
   7: "ct",
-  8: "b",
-  9: "ciw"
+  8: "ciw"
 };
 
 var indexSectionNames =
@@ -29,8 +28,7 @@ var indexSectionNames =
   5: "variables",
   6: "enums",
   7: "enumvalues",
-  8: "defines",
-  9: "pages"
+  8: "pages"
 };
 
 function convertToId(search)

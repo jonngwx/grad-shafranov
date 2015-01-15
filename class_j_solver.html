@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('class_j_solver.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -136,26 +136,34 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a87d205916426438ae8fdc2c7ef8842eb"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a87d205916426438ae8fdc2c7ef8842eb">~JSolver</a> ()</td></tr>
 <tr class="separator:a87d205916426438ae8fdc2c7ef8842eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f6377929733232b5d4bf84b6c260782"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a7f6377929733232b5d4bf84b6c260782">update</a> (<a class="el" href="class_field.html">Field</a> *jphi, <a class="el" href="class_field.html">Field</a> *psi, <a class="el" href="class_field.html">Field</a> *p, <a class="el" href="class_field.html">Field</a> *g)=0</td></tr>
+<tr class="memdesc:a7f6377929733232b5d4bf84b6c260782"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the current density, pressure and toroidal field given the magnetic flux.  <a href="#a7f6377929733232b5d4bf84b6c260782">More...</a><br /></td></tr>
 <tr class="separator:a7f6377929733232b5d4bf84b6c260782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a6b84e64312f6b20b71b4a12c664a84a0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a6b84e64312f6b20b71b4a12c664a84a0">P0_</a></td></tr>
+<tr class="memdesc:a6b84e64312f6b20b71b4a12c664a84a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pressure at the magnetic axis.  <a href="#a6b84e64312f6b20b71b4a12c664a84a0">More...</a><br /></td></tr>
 <tr class="separator:a6b84e64312f6b20b71b4a12c664a84a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af55fb543cac41029e454cea08a82881d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#af55fb543cac41029e454cea08a82881d">g0_</a></td></tr>
+<tr class="memdesc:af55fb543cac41029e454cea08a82881d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toroidal magnetic field * R at magnetic axis.  <a href="#af55fb543cac41029e454cea08a82881d">More...</a><br /></td></tr>
 <tr class="separator:af55fb543cac41029e454cea08a82881d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d738ae0cd040a94b669fcfbed99c9f5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a1d738ae0cd040a94b669fcfbed99c9f5">Ip_</a></td></tr>
 <tr class="memdesc:a1d738ae0cd040a94b669fcfbed99c9f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total plasma current (A)  <a href="#a1d738ae0cd040a94b669fcfbed99c9f5">More...</a><br /></td></tr>
 <tr class="separator:a1d738ae0cd040a94b669fcfbed99c9f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08ce6200cdfe6a83daf017493c6951e6"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a08ce6200cdfe6a83daf017493c6951e6">R_</a></td></tr>
+<tr class="memdesc:a08ce6200cdfe6a83daf017493c6951e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of radial grid points.  <a href="#a08ce6200cdfe6a83daf017493c6951e6">More...</a><br /></td></tr>
 <tr class="separator:a08ce6200cdfe6a83daf017493c6951e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a570883e600f666e802d850c8ed5e2287"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a570883e600f666e802d850c8ed5e2287">dr_</a></td></tr>
+<tr class="memdesc:a570883e600f666e802d850c8ed5e2287"><td class="mdescLeft">&#160;</td><td class="mdescRight">grid spacing in R  <a href="#a570883e600f666e802d850c8ed5e2287">More...</a><br /></td></tr>
 <tr class="separator:a570883e600f666e802d850c8ed5e2287"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e8fe3b38f025508a9a75707b6158368"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a2e8fe3b38f025508a9a75707b6158368">dz_</a></td></tr>
+<tr class="memdesc:a2e8fe3b38f025508a9a75707b6158368"><td class="mdescLeft">&#160;</td><td class="mdescRight">grid spacing in z  <a href="#a2e8fe3b38f025508a9a75707b6158368">More...</a><br /></td></tr>
 <tr class="separator:a2e8fe3b38f025508a9a75707b6158368"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67e6a2afec2ec06511702b393b9e379c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a67e6a2afec2ec06511702b393b9e379c">nr_</a></td></tr>
+<tr class="memdesc:a67e6a2afec2ec06511702b393b9e379c"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of nodes in R  <a href="#a67e6a2afec2ec06511702b393b9e379c">More...</a><br /></td></tr>
 <tr class="separator:a67e6a2afec2ec06511702b393b9e379c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf7186a964fe5c251ab818522c855dbd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#abf7186a964fe5c251ab818522c855dbd">nz_</a></td></tr>
+<tr class="memdesc:abf7186a964fe5c251ab818522c855dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of nodes in z  <a href="#abf7186a964fe5c251ab818522c855dbd">More...</a><br /></td></tr>
 <tr class="separator:abf7186a964fe5c251ab818522c855dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -228,7 +236,17 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>which variables are 'in' and which are 'out' ? </p>
+
+<p>Updates the current density, pressure and toroidal field given the magnetic flux. </p>
+<p>which variables are 'in' and which are 'out' ? </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jphi</td><td>pointer to field containing current density </td></tr>
+    <tr><td class="paramname">psi</td><td>pointer to field containing flux </td></tr>
+    <tr><td class="paramname">p</td><td>pointer to field containing pressure </td></tr>
+    <tr><td class="paramname">g</td><td>pointer to field containing toroidal field function </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implemented in <a class="el" href="class_j_solver_alpha.html#a80c4a06620002bb22a532ec8a7867144">JSolverAlpha</a>, and <a class="el" href="class_j_solver_n_s_t_x.html#a8bcdd6a2cd9d60677e46e6bc77038bbf">JSolverNSTX</a>.</p>
 
@@ -253,6 +271,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>grid spacing in R </p>
+
 </div>
 </div>
 <a class="anchor" id="a2e8fe3b38f025508a9a75707b6158368"></a>
@@ -273,6 +293,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>grid spacing in z </p>
+
 </div>
 </div>
 <a class="anchor" id="af55fb543cac41029e454cea08a82881d"></a>
@@ -292,6 +314,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Toroidal magnetic field * R at magnetic axis. </p>
 
 </div>
 </div>
@@ -335,6 +359,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>number of nodes in R </p>
+
 </div>
 </div>
 <a class="anchor" id="abf7186a964fe5c251ab818522c855dbd"></a>
@@ -355,6 +381,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>number of nodes in z </p>
+
 </div>
 </div>
 <a class="anchor" id="a6b84e64312f6b20b71b4a12c664a84a0"></a>
@@ -374,7 +402,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>What the heck are all these variables???? -JAS </p>
+
+<p>Pressure at the magnetic axis. </p>
 
 </div>
 </div>
@@ -396,6 +425,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Array of radial grid points. </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
@@ -407,7 +438,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_j_solver.html">JSolver</a></li>
-    <li class="footer">Generated on Wed Jan 14 2015 21:14:22 for COUGAR by
+    <li class="footer">Generated on Thu Jan 15 2015 14:59:06 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

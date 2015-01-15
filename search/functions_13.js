@@ -16,5 +16,5 @@ var searchData=
   ['_7ejsolvernstx',['~JSolverNSTX',['../class_j_solver_n_s_t_x.html#a0931ee555005a308a85a48fee9e91d79',1,'JSolverNSTX']]],
   ['_7eslowboundary',['~SlowBoundary',['../class_slow_boundary.html#aa4f5c6cfe4e7637c4ec43435b6a71422',1,'SlowBoundary']]],
   ['_7esor',['~SOR',['../class_s_o_r.html#aa3db8b4840076358adc037034dd566bf',1,'SOR']]],
-  ['_7etable',['~Table',['../class_table.html#a9a559f2e7beb37b511ee9f88873164f8',1,'Table']]]
+  ['_7etable',['~Table',['../class_table.html#ac7541d139723d710fb7c39b1898d6e87',1,'Table']]]
 ];
