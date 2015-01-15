@@ -122,10 +122,10 @@ Of course, in a real tokamak experiment, the functional forms of $g(\Psi)$ and $
 
 \subsection{Algorithm when $p(\Psi)$ and $g(\Psi)$ are specified (current version of COUGAR)}
 
-\textbf{Summary}: The problem is solving using a two-tiered iterative process.  The outer iteration (index $m$) determines the boundary values.  The inner iteration (index $n$) solves the GSE subject to those boundary conditions.
+\textbf{Summary}: The problem is solved using a two-tiered iterative process.  The outer iteration (index $m$) determines the boundary values.  The inner iteration (index $n$) solves the GSE subject to those boundary conditions.
 \\ \\
 %%%%%% INNER ITERATION %%%%%%%%%%
-\textbf{Detailed Steps}: First rewrite the Grad-Shafranov equation as
+\textbf{Detailed Steps}: First, rewrite the Grad-Shafranov equation as
 \begin{equation}
 \Delta^{*}\Psi = \mu_0 R J_{\phi} (R, \Psi),
 \end{equation}
@@ -135,7 +135,7 @@ where $\mu_0 R J_{\phi} (R,\Psi) = - \big(\mu_0 R^2 \frac{d p}{d\Psi} + g \frac{
 \begin{equation}
 \Delta^{*}\Psi^{n} = \mu_0 R J_\phi (R, \Psi^{n-1}),
 \end{equation}
-where $n$ denotes the iteration level. The solution of $\Psi^n$ is plugged into the right-hand side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods, handled by base class \texttt{EllipticSolver}.  We currently have implemented two child classes to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive Over-Relaxation (SOR), which are explained in Section 3.  
+where $n$ denotes the iteration level. The solution of $\Psi^n$ is plugged into the right-hand side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods, handled by base class \texttt{EllipticSolver}.  We currently have implemented two derived classes to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive over-relaxation (SOR), which are explained in Section 3.  
 
 At the very beginning of the calculation we must supply an initial guess of $J_{\phi}$.  We use a quadratic form of $J_{\phi}$ taken from a paper by Johnson et al.~(J.~Comp.~Phys.~32 (1979), 212-234).  It has several parameters which must be set, such as the total azimuthal current $I_p$ (commonly called the plasma current).  See \texttt{gs\_solver.cc} for more information.
 
@@ -402,7 +402,7 @@ All the output is done throught the \texttt{GradOutput} interface, with options 
 
 Additional quantities are added to the output by passing a comma separated string to the constructor, which is parsed. Currently, options for the toroidal current density and toroidal magnetic field are available, though additional output fields can be added by modifying the parsing function and adding the appropriate quantity to the writing function. Additional output formats can be added by implementing the \texttt{GradOutput} interface.
 
-\subsubsection{Visualisation}
+\subsubsection{Visualization}
 
 The python visualiser can be run from command line or interactively. The data are read using the \texttt{read\_data} module, which passes a dictionary of the available fields to the plotting function in the \texttt{viz} module. Tsv data are read using regular expressions while HDF data are read using functions provided by \texttt{h5py}. In the command line version, contour and colour plots of $\Psi$, $P$ and $g$ are shown in a single figure and the matplotlib \texttt{format\_coord} function is overridden so the values of the data can be read off the figure. An additional function is provided to produce a radial plot of the values of a field along the midplane of the tokamak. 
 
@@ -420,38 +420,6 @@ The use of a dictionary to hold the data was chosen in order to make reading the
 %	Section 4
 %----------------------------------------------------------------------------------------
 
-\section{User Interface}
-
-The program will be called from the command line and take as an argument an input (text) file. 
-
-The text file will contain key-value pairs including
-\begin{itemize}
-\item Switch controlling initial conditions of solver - either $\Psi_B$, $p(\Psi)$ and $g(\Psi)$, or external coil data are specified. 
-\item Path to a file describing external currents (from coils outside the plasma) and experimental measurements of $\Psi$ at various points outside the plasma.
-\item Path to a file with the $p(\Psi)$ and $g(\Psi)$ functions, when they are specified.
-\item Path to a file with a specified boundary $\Psi$: this will be useful in testing the inner loop.
-\item Initial guess for $J_\phi$. 
-\item Maximum iterations and convergence requirements for inner and outer loops. 
-\item Whether to output for every $n$ or $m$ (these will be useful in debugging / so a user can watch the solution converge)
-\item Whether to output $\mathbf{B}$, $\mathbf{J}$, $p$ and $q$ as well as $\Psi$ for each cell in the final output.
-\end{itemize}
-
-For some of these key-value pairs, there may be default values if none is specified, while for others, the program will terminate with an error message if no key/value is specified.
-
-The input file of external currents will be a tab-separated table of radial location R (meters), vertical coordinate Z (meters) and I (amps) for each poloidal field coil.
-
-The input file of experimental magnetic field measurements will be similar: a tab-separated table of R, Z, and measured $\Psi$.
-
-Our output will be in the hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $\mathbf{B}$, $\mathbf{J}$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
-
-In order to read the hdf5 files, a Python visualizer using matplotlib will be written. It will show contour plots for the tables in the output file and also be able to take slices through the tables at the machine midplane.
-
-
-
-%----------------------------------------------------------------------------------------
-%	Section 5
-%----------------------------------------------------------------------------------------
-
 \section{Testing}
 
 We have used the Boost Unit Test framework for testing of all major classes. The \texttt{EllipticSolver} class has been tested by comparison to the multipole expansion of the vacuum solution, $\nabla^* = 0$. As $J_{\phi} = 0$, only the inner loop needs to be iterated over. The \texttt{Elliptic} class is also tested by comparison to the analytic Shafranov-Solovev solution. The \texttt{Interpolate} class is tested by comparison to interpolated flat, quadratic, and cubic functions. The \texttt{SlowBoundary} class by checking for consistency of green\_fcn.cc, \texttt{SlowBoundary}, and \texttt{GaussSeidel} using the Shafranov-Solovev solution. Test suites have also be written for \texttt{Boundary}, \texttt{Grid}, the TSV reader, and other utility functions.
@@ -459,12 +427,12 @@ We have used the Boost Unit Test framework for testing of all major classes. The
 Throughout the project, we tested for memory leaks using Valgrind.
 
 %----------------------------------------------------------------------------------------
-%	Section 6
+%	Section 5
 %----------------------------------------------------------------------------------------
 
 \section{Profiling}
 
-In order to determine the runtime scaling we ran gs\_solver using the default configuration file, only changing the grid size. We ran from 32x32 through 80x80 every 5 (we would have done 30x30 but a geometrical error occurred for sizes smaller than 32x32). Only for the 32x32 case were there no errors (from Interpolate, about a wrong grid cell, from the main solver, about the $m$ iterations maximum limit reached, or from Critical not finding a critical point properly). Most of the other runs hit the maximum $m$ limit and when plotted showed the plasma had drifted unphysically upwards. Every run required different numbers of inner $n$-iterations to converge (this explains some of the scatter in the main-solve timing data).
+In order to determine the runtime scaling we ran gs\_solver using the default configuration file, only changing the grid size. We ran from 32x32 through 80x80 every 5 (we would have done 30x30 but an error occurred for sizes smaller than 32x32). Only for the 32x32 case were there no errors (from Interpolate, about a wrong grid cell, from the main solver, about the $m$ iterations maximum limit reached, or from Critical not finding a critical point properly). Most of the other runs hit the maximum $m$ limit and when plotted showed the plasma had drifted unphysically upwards. Every run required different numbers of inner $n$-iterations to converge (this explains some of the scatter in the main-solve timing data).
 
 In order to time the run we used <time.h> and clock(): first to time the setup (calculating the array of Green's function values) and then to time the main solver loop (iterations over $m$ and $n$). In the figure, setup time is the blue dots and the solver time is the black dots. In dashed lines are simple polynomial fits to these data: $t = a N^b$ where $t$ is time, $N$ is grid size, and $a$ and $b$ are the coefficients to be fitted to the data. For the setup $b \approx 2.4$ with fairly small scatter, and for the main loop $b \approx 3.7$.
 
@@ -477,13 +445,15 @@ In order to time the run we used <time.h> and clock(): first to time the setup (
 We also used kcachegrind. When we ran with a 50x50 grid it appeared that more time was spend in the solver (GaussSeidel) than the setup (SlowBoundary): about 60\%/40\% vs the opposite ratio for that size from the bare timing with clock(). 
 
 %----------------------------------------------------------------------------------------
-%	Section 7
+%	Section 6
 %----------------------------------------------------------------------------------------
 
 \section{Lessons Learned/ Miscellaneous}
-\subsection{Lessons Learned}::
-The pppl cluster has a strange selection of default libraries.
-HDF5 on windows is painful.
+\subsection{Lessons Learned}
+
+We all greatly improved in our C++ skillls during this project.  Most of us came into this class more familiar with scripting languages like Matlab or Python.  As the project progressed, we also grew more comfortable with Git.  I can't imagine doing a project like this without it.  We ended up making over 600 commits!  We also learned that solving the Grad-Shafranov equation is a highly nonlinear and nontrivial problem.  Depending on the parameters you choose, our iterations often go unstable or converge to very strange solutions.  
+
+For future generations of APC524, we advise that you fully understand your algorithms before writing code.  Otherwise, you'll have to rewrite most of it later!  
 
 \subsection{Miscellaneous}
 Breakdown of labor:
