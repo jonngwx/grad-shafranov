@@ -369,7 +369,7 @@ Because the radial derivatives are $R$-dependent, the finite difference coeffici
 The Gauss-Seidel iteration method updates $\Psi^{n+1}_{i,j}$ using neighboring values of $\Psi^{n}$ and $\Psi^{n+1}$, 
 
 \begin{multline} \label{eq:gaussseidel}
-\Psi^{n+1}_{i,j} = -\frac{dr^2 dz^2}{2dz^2 + 2dr^2} \left[ \mu_o R J^n_{\phi \, i, j} + \left(2 R dr - \frac{1}{dr^2}\right)^{-1} \Psi^{n}_{i+1,j} - \left(2 R dr - \frac{1}{dr^2}\right)^{-1} \Psi^{n+1}_{i-1,j} - \frac{1}{dz^2} \right] \Psi^{n+1}_{i,j-1} \\ - \frac{1}{dz^2}\Psi^n_{i, j+1}. 
+\Psi^{n+1}_{i,j} = -\frac{dR^2 dz^2}{2dz^2 + 2dR^2} \left[ \mu_0 R J^n_{\phi \, i, j} + \left(2 R dR - \frac{1}{dR^2}\right)^{-1} \Psi^{n}_{i+1,j} - \left(2 R dR - \frac{1}{dR^2}\right)^{-1} \Psi^{n+1}_{i-1,j} - \frac{1}{dz^2} \right] \Psi^{n+1}_{i,j-1} \\ - \frac{1}{dz^2}\Psi^n_{i, j+1}. 
 \end{multline}
 
 To aid with convergence we implement the Gauss Seidel algorithm with Picard iteration with $\alpha = 0.5$, 
@@ -378,10 +378,10 @@ To aid with convergence we implement the Gauss Seidel algorithm with Picard iter
 \Psi^{n+1} = \alpha_B \widetilde{\Psi^{n+1}} + (1 - \alpha_{B}) \Psi^n. 
 \end{equation}
 
-The successive over relaxation method is based on the Gauss-Seidel method but has better convergence properties due to use of a strategically chosen blending parameter $\omega$, 
+The successive over relaxation method is based on the Gauss-Seidel method but has better convergence properties due to use of a strategically chosen blending parameter $\omega$: 
 
 \begin{multline} \label{eq:SOR}
-\Psi^{n+1}_{i,j} = (1-\omega)\Psi^n_{i,j} -\frac{\omega dr^2 dz^2}{2dz^2 + 2dr^2} \left[ \mu_o R J^n_{\phi \, i, j} + \left(2 R dr - \frac{1}{dr^2}\right)^{-1} \Psi^{n}_{i+1,j} - \left(2 R dr - \frac{1}{dr^2}\right)^{-1} \Psi^{n+1}_{i-1,j} - \frac{1}{dz^2} \right] \Psi^{n+1}_{i,j-1} \\ - \frac{1}{dz^2}\Psi^n_{i, j+1}
+\Psi^{n+1}_{i,j} = (1-\omega)\Psi^n_{i,j} -\frac{\omega dR^2 dz^2}{2dz^2 + 2dR^2} \left[ \mu_0 R J^n_{\phi \, i, j} + \left(2 R dR - \frac{1}{dR^2}\right)^{-1} \Psi^{n}_{i+1,j} - \left(2 R dR - \frac{1}{dR^2}\right)^{-1} \Psi^{n+1}_{i-1,j} - \frac{1}{dz^2} \right] \Psi^{n+1}_{i,j-1} \\ - \frac{1}{dz^2}\Psi^n_{i, j+1}
 \end{multline}
 
 where
@@ -454,7 +454,7 @@ In order to read the hdf5 files, a Python visualizer using matplotlib will be wr
 
 \section{Testing}
 
-We have used the Boost Unit Test framework for testing of all major classes. The \texttt{Elliptic} class has been tested by comparison to the multipole expansion of the vacuum solution, $\nabla^* = 0$. As $J_{\phi} = 0$, only the inner loop needs to be iterated over. The \texttt{Elliptic} class is also tested by comparison to the analytic Shafranov-Solovev solution. The \texttt{Interpolate} class is tested by comparison to interpolated flat, quadratic, and cubic functions. The \texttt{SlowBoundary} class by checking for consistency of green\_fcn.cc, \texttt{SlowBoundary}, and \texttt{GaussSeidel} using the Shafranov-Solovev solution. Test suites have also be written for \texttt{Boundary}, \texttt{Grid}, the TSV reader, and other utility functions.
+We have used the Boost Unit Test framework for testing of all major classes. The \texttt{EllipticSolver} class has been tested by comparison to the multipole expansion of the vacuum solution, $\nabla^* = 0$. As $J_{\phi} = 0$, only the inner loop needs to be iterated over. The \texttt{Elliptic} class is also tested by comparison to the analytic Shafranov-Solovev solution. The \texttt{Interpolate} class is tested by comparison to interpolated flat, quadratic, and cubic functions. The \texttt{SlowBoundary} class by checking for consistency of green\_fcn.cc, \texttt{SlowBoundary}, and \texttt{GaussSeidel} using the Shafranov-Solovev solution. Test suites have also be written for \texttt{Boundary}, \texttt{Grid}, the TSV reader, and other utility functions.
 
 Throughout the project, we tested for memory leaks using Valgrind.
 
@@ -481,7 +481,7 @@ We also used kcachegrind. When we ran with a 50x50 grid it appeared that more ti
 %----------------------------------------------------------------------------------------
 
 \section{Lessons Learned/ Miscellaneous}
-\subsection{Lessons Learned}
+\subsection{Lessons Learned}::
 The pppl cluster has a strange selection of default libraries.
 HDF5 on windows is painful.
 
@@ -489,10 +489,10 @@ HDF5 on windows is painful.
 Breakdown of labor:
 
 \begin{itemize}
-\item Peter: Boundary classes, JSolver classes
+\item Peter: Boundary classes, JSolver classes, Green's Functions
 \item Jonathan: Output, Visualization 
 \item Elizabeth: EllipticSolver classes, Interpolate, Critical (with Jonathan)
-\item Jacob: Input, CoilData
+\item Jacob: Input, CoilData, Doxygen (helped by all)
 \end{itemize}
 
 \end{document}
