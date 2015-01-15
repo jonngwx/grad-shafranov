@@ -12,12 +12,6 @@ written for APC523, Princeton U, Fall 2014.
 
 Authors: P. Bolgert, J. Ng, E. Paul, & J. Schwartz
 
-In magnetohydrodynamic (MHD) theory, a plasma equlibrium is described by the equation 
-\f$ \nabla p = J \times B \f$
-where \f$p\f$ is the scalar plasma pressure, \f$J\f$ is the current density, and \f$B\f$ is the magnetic field. We work in cylindrical coordinates 
-\f$(R,\phi,Z)\f$, and the plasma is assumed to be axisymmetric, i.e.,
-\f$\partial/\partial\phi = 0\f$ 
-
-Given some experimental parameters and measurements of a tokamak plasma we aim to reconstruct its structure: the distribution of currents, pressure, and magnetic field.
+COUGAR is a user friendly code which solves the Grad-Shafranov equation for axisymmetric plasmas.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, some assumptions about the internal structure of the plasma must be made.  Future versions of the code will incorporate experimental measurements into the calculation.  For information on running COUGAR, see the README on this website.  
 
 */
