@@ -23,7 +23,7 @@ int CreateOptions(int ac, char * av[], po::options_description &visible, po::var
   // allowed only on command line
   po::options_description generic("Generic options");
   generic.add_options()
-      ("version,v", "print version std::string")
+      ("version,v", "print version number")
       ("help", "produce help message")
       ("config,c", po::value<std::string>()->default_value("grad-shafranov.cfg"),
             "Main configuration file name")
