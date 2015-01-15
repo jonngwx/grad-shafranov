@@ -37,16 +37,32 @@ To run the code, type
 
 with the appropriate command line options. If you specify an illegal value for an option, or a file which does not exist or is not the right format, the program may terminate with an Error message, or with a crash.
 
-To plot the output, type
 
-    python python/viz.py cougar.out.tsv 
+Data analysis
+-------------------------
+
+There are analysis functions provided in python, though the data can be read using any text editor/HDF5 library. The format of each line of the output `tsv` files is
     
-if the default output filename is used.  More generally, type
+    [field name]: [data] [data] ... 
+    
+in column-major order. The regular expressions for the data can be found in `read_data.py`. In the `tsv` file, there is a special field `psilo` which gives the value of the flux function at the limiter and magnetic axis. These values are listed as attributes of the `psi` field in the HDF5 output. The plasma boundary is the red line shown in the figure while the magnetic axis is the '+'. 
+
+The default plotting option shows Psi, P and g and can be called using 
 
     python python/viz.py <filename> 
     
-To access the data in python, import viz, then use
+There is also a `plot` script in the main directory which plots the output of `cougar.out.tsv` automatically. 
+
+### Interactive analysis
+
+We recommend using ipython with pylab to analyse the data interactively. The scripts for reading the data are found in the `read_data` package while the plotting scripts are found in the `viz` package. 
+    
+To access the data in python, import viz, then use one of 
 
     F = viz.plot(filename, format)
+    F = read_data.read_text(filename)
+    F = read_data.read_hdf5(filename)
 
-F will be a dictionary of the grid and data arrays.
+F will be a dictionary of the grid and data arrays. The value of a field along the midplane can be plotted using 
+
+    viz.midplane_plot(F, field_name)
