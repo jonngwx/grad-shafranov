@@ -68,7 +68,7 @@ SlowBoundary::~SlowBoundary() {
     delete[] g_coils_[c];
   }
   delete[] g_coils_;
-
+  delete cond_data_;
 }
 
 int SlowBoundary::CalcB(Field* jphi) {
@@ -95,6 +95,6 @@ int SlowBoundary::CalcB(Field* jphi) {
       psi_->f_[LtoI(l)][LtoJ(l)] += mu0 * g_coils_[c][l] * cond_data_->current(c);
     }
   }
-
+  delete [] psib_old;
   return 0;
 }
