@@ -88,7 +88,7 @@ Our goal was to write a program which solves the Grad-Shafranov equation (GSE) f
 %	Section 2
 %----------------------------------------------------------------------------------------
 
-\section{Theroetical Background}
+\section{Theoretical Background}
 
 \textbf{Notes}: The following material primarily follows Chapter 4 of \textit{Computational Methods in Plasma Physics}, by Stephen Jardin.  When there are discrepancies between that book and this document, the latter should be trusted as the former has misprints.  Also, SI units are used throughout.
 
@@ -137,9 +137,9 @@ where $\mu_0 R J_{\phi} (R,\Psi) = - \big(\mu_0 R^2 \frac{d p}{d\Psi} + g \frac{
 \end{equation}
 where $n$ denotes the iteration level. The solution of $\Psi^n$ is plugged into the right-hand side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods, handled by base class \texttt{EllipticSolver}.  We currently have implemented two derived classes to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive over-relaxation (SOR), which are explained in Section 3.  
 
-At the very beginning of the calculation we must supply an initial guess of $J_{\phi}$.  We use a quadratic form of $J_{\phi}$ taken from a paper by Johnson et al.~(J.~Comp.~Phys.~32 (1979), 212-234).  It has several parameters which must be set, such as the total toroidall current $I_p$ (commonly called the plasma current).  See \texttt{gs\_solver.cc} for more information.
+At the very beginning of the calculation we must supply an initial guess of $J_{\phi}$.  We use a quadratic form of $J_{\phi}$ taken from a paper by Johnson et al.~(J.~Comp.~Phys.~32 (1979), 212-234).  It has several parameters which must be set, such as the total toroidal current $I_p$ (commonly called the plasma current).  See \texttt{gs\_solver.cc} for more information.
 
-Next, we use the updated $\Psi^n$ to calculate the value of $\Psi$ at the plasma-vacuum boundary (this defines where we must set pressure and current to zero).  This calculation is handled by the \texttt{Critical} class, which is so named because the plasma boundary either exists at a saddle point of $\Psi$ (a critical point) or where the plasma touches a solid object, like the vessel wall. We use the terms ``plasma edge" and ``limiter" interchangably in this document.  \texttt{Critical} also finds the magnetic axis, which is the point of minimum $\Psi$ (the center of the contours in Figure 1).  
+Next, we use the updated $\Psi^n$ to calculate the value of $\Psi$ at the plasma-vacuum boundary (this defines where we must set pressure and current to zero).  This calculation is handled by the \texttt{Critical} class, which is so named because the plasma boundary either exists at a saddle point of $\Psi$ (a critical point) or where the plasma touches a solid object, like the vessel wall. We use the terms ``plasma edge" and ``limiter" interchangeably in this document.  \texttt{Critical} also finds the magnetic axis, which is the point of minimum $\Psi$ (the center of the contours in Figure 1).  
 
 Lastly in the inner iteration, we must update the current density $J_{\phi}$, handled by the base class \texttt{JSolver}.  As previously stated, the $\phi$-directed current density is given by $J_{\phi} = -R \frac{d p}{d \Psi} - \frac{1}{\mu_0 R} g \frac{d g}{d \Psi}$. Our most successful child class of \texttt{JSolver}, called \texttt{JSolverAlpha}, uses the following forms for $p$ and $g$:
 \begin{subequations}
@@ -207,9 +207,9 @@ The class structure of our code is explained in Table 1.  For more information, 
 
 The following external libraries are used:
 \begin{itemize}
-\item HDF5 (version 1.8 or newer) is used for I/O. The libraries can be downloaded and installed from \texttt{www.hdfgroup.org}. Should the libraries be unavailable the programme can be compiled and run with output written to a tsv file. 
+\item HDF5 (version 1.8 or newer) is used for I/O. The libraries can be downloaded and installed from \texttt{www.hdfgroup.org}. Should the libraries be unavailable the program can be compiled and run with output written to a tsv file. 
 \item Boost is used for the program options, math and testing libraries. 
-\item The python numpy, h5py and matplotlib packages are used in our visualisation programme. 
+\item The python numpy, h5py and matplotlib packages are used in our visualization program. 
 \end{itemize}
 
 %%%%%%%%%%%%%%%% BIG CLASS TABLE%%%%%%%%%%%%%%%%%
@@ -359,11 +359,9 @@ void write_output(const char *filename)
 \subsection{Implementation and Design decisions}
 
 \subsubsection{User Interface}
-The is run from the Unix command line.  Options may be selected as command line options or specified in a configuration file.  We've provided a default configuration file (\texttt{grad-shafranov.cfg}) for your enlightenment.  The locations of external currents are specified in a specially formatted text file.  The default, called \texttt{coil\_data.tsv}, contains coil information from a particular NSTX shot.  
+COUGAR is run from the Unix command line.  Options may be selected as command line options or specified in a configuration file.  We've provided a default configuration file (\texttt{grad-shafranov.cfg}) for your enlightenment.  The locations of external currents are specified in a specially formatted text file.  The default, called \texttt{coil\_data.tsv}, contains coil information from a particular NSTX shot.  
 
-Once the code has run, the output may be viewed using a separate Python program.
-
-For much more on running COUGAR, please see the user manual on the documentation website.
+Once the code has run, the output may be viewed using a separate Python program. For much more on running COUGAR, please see the user manual on the documentation website.
 
 \subsubsection{Elliptic solver}
 The \texttt{EllipticSolver} interface defines functions for inverting the $\nabla^*$ operator iteratively using central finite differences, as shown in equation~\ref{eq:finitediff}.
@@ -401,20 +399,20 @@ where
 \end{equation}
 
 \subsubsection{Current density calculations}
-The calculation of $P$, $gg'$ and $J_\phi$ is performed by the implementation of the \texttt{JSolver} interface. $P$ and $g$ are assumed to be functions of $\Psi$ from which the current density $J_\phi$ is calculated. The default \texttt{JSolverAlpha} uses a constant $P'$ and a linear $gg'$, with the coefficients of the functional forms determined by the peak pressure and the total current in the plasma. The exact exponent on $\phi$ can be modified by changing $n_1$ and $n_2$ in the input or configuration file. \texttt{JSolverNSTX} attempts to use similar functional forms to the actual NSTX data uses a quadratic $P'$ and $gg' = \sum_n A_n\Psi^n$, but there are numerical issues with maintaining the zero gradient condition at the plasma edge. As such, its use is not recommended in the current version. 
+The calculation of $P$, $gg'$ and $J_\phi$ is performed by the implementation of the \texttt{JSolver} interface. $P$ and $g$ are assumed to be functions of $\Psi$ from which the current density $J_\phi$ is calculated. The default \texttt{JSolverAlpha} uses a constant $P'$ and a linear $gg'$, with the coefficients of the functional forms determined by the peak pressure and the total current in the plasma. The exact exponent on $\Psi$ can be modified by changing $n_1$ and $n_2$ in the input or configuration file. \texttt{JSolverNSTX} attempts to use similar functional forms to the actual NSTX data.  It uses a quadratic $P'$ and $gg' = \sum_n A_n\Psi^n$, but there are numerical issues with maintaining the zero gradient condition at the plasma edge. As such, its use is not recommended in the current version. 
 
 If experimental measurements of $\Psi$ were added to the code, the functional dependence on $\Psi$ of $P$ and $g$ would be determined by performing a least-squares fit to the data. 
 
 \subsubsection{Output}
-All the output is done throught the \texttt{GradOutput} interface, with options to write to hdf or tsv files. As only $\Psi$, $P$ and $g$ are necessary for the solution of the equation, the default output writes only these three quantities and the dimensions of the grid. The value of the flux function $\Psi$ at the limiter and magnetic axis are also written to identify the plasma position. In the tsv case, this is an additional quantity while in the hdf version, this is an attribute of the \texttt{psi} dataset. These formats were chosen as ASCII can be read and written easily and should work on most systems, while HDF5 is a standard data structure for scientific work. Output can be written every $n$ iterations of the inner and outer loops. 
+All the output is done through the \texttt{GradOutput} interface, with options to write to hdf or tsv files. As only $\Psi$, $P$ and $g$ are necessary for the solution of the equation, the default output writes only these three quantities and the dimensions of the grid. The value of the flux function $\Psi$ at the limiter and magnetic axis are also written to identify the plasma position. In the tsv case, this is an additional quantity while in the hdf version, this is an attribute of the \texttt{psi} dataset. These formats were chosen because ASCII can be read and written easily and should work on most systems, while HDF5 is a standard data structure for scientific work. Output can be written during the calculation if desired.
 
 Additional quantities are added to the output by passing a comma separated string to the constructor, which is parsed. Currently, options for the toroidal current density and toroidal magnetic field are available, though additional output fields can be added by modifying the parsing function and adding the appropriate quantity to the writing function. Additional output formats can be added by implementing the \texttt{GradOutput} interface.
 
 \subsubsection{Visualization}
 
-The python visualiser can be run from command line or interactively. The data are read using the \texttt{read\_data} module, which passes a dictionary of the available fields to the plotting function in the \texttt{viz} module. Tsv data are read using regular expressions while HDF data are read using functions provided by \texttt{h5py}. In the command line version, contour and colour plots of $\Psi$, $P$ and $g$ are shown in a single figure and the matplotlib \texttt{format\_coord} function is overridden so the values of the data can be read off the figure. An additional function is provided to produce a radial plot of the values of a field along the midplane of the tokamak. 
+The python visualizer can be run from command line or interactively. The data are read using the \texttt{read\_data} module, which passes a dictionary of the available fields to the plotting function in the \texttt{viz} module. Tsv data are read using regular expressions while HDF data are read using functions provided by \texttt{h5py}. In the command line version, contour and color plots of $\Psi$, $P$ and $g$ are shown in a single figure and the matplotlib \texttt{format\_coord} function is overridden so the values of the data can be read off the figure. An additional function is provided to produce a radial plot of the values of a field along the midplane of the tokamak. 
 
-The use of a dictionary to hold the data was chosen in order to make reading the output files more convenient; we can simply iterate over the lines of the tsv output or datastructs of the HDF file. Also, with the option to add custom outputs, checking for the existence of each field would have to be performed while reading. The disadvantage of this approach is that referring to the data is unwieldy (\texttt{F['R']} vs \texttt{F.R} for example). An example of the output, which looks similar to the NSTX plasma, is shown in Fig.~\ref{fig:eqm}
+The use of a dictionary to hold the data was chosen in order to make reading the output files more convenient; we can simply iterate over the lines of the tsv output or datastructs of the HDF file. Also, with the option to add custom outputs, checking for the existence of each field would have to be performed while reading. The disadvantage of this approach is that referring to the data is unwieldy (\texttt{F['R']} vs \texttt{F.R} for example). An example of the output, which looks similar to an NSTX plasma, is shown in Fig.~\ref{fig:eqm}
 
 \begin{figure}
 	\centering
@@ -430,7 +428,7 @@ The use of a dictionary to hold the data was chosen in order to make reading the
 
 \section{Testing}
 
-We have used the Boost Unit Test framework for testing of all major classes. The \texttt{EllipticSolver} class has been tested by comparison to the multipole expansion of the vacuum solution, $\nabla^* \Psi = 0$. As $J_{\phi} = 0$, only the inner loop needs to be iterated over. The \texttt{Elliptic} class is also tested by comparison to the analytic Shafranov-Solovev solution. The \texttt{Interpolate} class is tested by comparison to interpolated flat, quadratic, and cubic functions. The \texttt{SlowBoundary} class by checking for consistency of green\_fcn.cc, \texttt{SlowBoundary}, and \texttt{GaussSeidel} using the Shafranov-Solovev solution. Test suites have also be written for \texttt{Boundary}, \texttt{Grid}, the TSV reader, and other utility functions.
+We have used the Boost Unit Test framework for testing of all major classes. The \texttt{EllipticSolver} class has been tested by comparison to the multipole expansion of the vacuum solution, $\nabla^* \Psi = 0$. As $J_{\phi} = 0$, only the inner loop needs to be iterated over. The \texttt{Elliptic} class is also tested by comparison to the analytic Shafranov-Solov\'ev solution. The \texttt{Interpolate} class is tested by comparison to interpolated linear and quadratic functions. The \texttt{SlowBoundary} class is tested by checking for the consistency of green\_fcn.cc, \texttt{SlowBoundary}, and \texttt{GaussSeidel} using the Shafranov-Solov\'ev solution. Test suites have also be written for \texttt{Boundary}, \texttt{Grid}, the tsv reader, and other utility functions.
 
 Throughout the project, we tested for memory leaks using Valgrind.
 
@@ -459,7 +457,7 @@ We also used kcachegrind. When we ran with a 50x50 grid it appeared that more ti
 \section{Lessons Learned/ Miscellaneous}
 \subsection{Lessons Learned}
 
-We all greatly improved in our C++ skillls during this project.  Most of us came into this class more familiar with scripting languages like Matlab or Python.  As the project progressed, we also grew more comfortable with Git.  I can't imagine doing a project like this without it.  We ended up making over 600 commits!  We also learned that solving the Grad-Shafranov equation is a highly nonlinear and nontrivial problem.  Depending on the parameters you choose, our iterations often go unstable or converge to very strange solutions.  
+We all greatly improved in our C++ skills during this project.  Most of us came into this class more familiar with scripting languages like Matlab or Python.  As the project progressed, we also grew more comfortable with Git.  I can't imagine doing a project like this without it.  We ended up making over 600 commits!  We also learned that solving the Grad-Shafranov equation is a highly nonlinear and nontrivial problem.  Depending on the parameters you choose, our iterations often go unstable or converge to very strange solutions.  
 
 For future generations of APC524, we advise that you fully understand your algorithms before writing code.  Otherwise, you'll have to rewrite most of it later!  
 
