@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('class_j_solver_alpha.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>found in most American habitat types.  
+<p>Calculates current according to simple formulas. It conserves total current and the pressure at the magnetic axis.  
  <a href="class_j_solver_alpha.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="j__solver__alpha_8h_source.html">j_solver_alpha.h</a>&gt;</code></p>
@@ -125,18 +125,19 @@ Inheritance diagram for JSolverAlpha:</div>
  <div class="center">
   <img src="class_j_solver_alpha.png" usemap="#JSolverAlpha_map" alt=""/>
   <map id="JSolverAlpha_map" name="JSolverAlpha_map">
-<area href="class_j_solver.html" title="Interface for JSolver. " alt="JSolver" shape="rect" coords="0,0,89,24"/>
+<area href="class_j_solver.html" title="Base class for methods which calculate jphi as a function of phi. " alt="JSolver" shape="rect" coords="0,0,89,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a286b1bc3af7e1017a3baa879b3edbc09"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver_alpha.html#a286b1bc3af7e1017a3baa879b3edbc09">JSolverAlpha</a> (double P0, double g0, double n1, double n2, double Ip, <a class="el" href="class_grid.html">Grid</a> *grid)</td></tr>
-<tr class="memdesc:a286b1bc3af7e1017a3baa879b3edbc09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="class_j_solver_alpha.html" title="found in most American habitat types. ">JSolverAlpha</a>.  <a href="#a286b1bc3af7e1017a3baa879b3edbc09">More...</a><br /></td></tr>
+<tr class="memdesc:a286b1bc3af7e1017a3baa879b3edbc09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="class_j_solver_alpha.html" title="Calculates current according to simple formulas. It conserves total current and the pressure at the m...">JSolverAlpha</a>.  <a href="#a286b1bc3af7e1017a3baa879b3edbc09">More...</a><br /></td></tr>
 <tr class="separator:a286b1bc3af7e1017a3baa879b3edbc09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63d8403c3729b9797d8aeb65785692b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver_alpha.html#a63d8403c3729b9797d8aeb65785692b8">~JSolverAlpha</a> ()</td></tr>
 <tr class="separator:a63d8403c3729b9797d8aeb65785692b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80c4a06620002bb22a532ec8a7867144"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver_alpha.html#a80c4a06620002bb22a532ec8a7867144">update</a> (<a class="el" href="class_field.html">Field</a> *jphi, <a class="el" href="class_field.html">Field</a> *psi, <a class="el" href="class_field.html">Field</a> *p, <a class="el" href="class_field.html">Field</a> *g)</td></tr>
+<tr class="memdesc:a80c4a06620002bb22a532ec8a7867144"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the current density, pressure and toroidal field given the magnetic flux.  <a href="#a80c4a06620002bb22a532ec8a7867144">More...</a><br /></td></tr>
 <tr class="separator:a80c4a06620002bb22a532ec8a7867144"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_j_solver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_j_solver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_j_solver.html">JSolver</a></td></tr>
 <tr class="memitem:a87d205916426438ae8fdc2c7ef8842eb inherit pub_methods_class_j_solver"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_solver.html#a87d205916426438ae8fdc2c7ef8842eb">~JSolver</a> ()</td></tr>
@@ -171,7 +172,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abf7186a964fe5c251ab818522c855dbd inherit pro_attribs_class_j_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>found in most American habitat types. </p>
+<div class="textblock"><p>Calculates current according to simple formulas. It conserves total current and the pressure at the magnetic axis. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a286b1bc3af7e1017a3baa879b3edbc09"></a>
 <div class="memitem">
@@ -221,7 +222,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor for <a class="el" href="class_j_solver_alpha.html" title="found in most American habitat types. ">JSolverAlpha</a>. </p>
+<p>Constructor for <a class="el" href="class_j_solver_alpha.html" title="Calculates current according to simple formulas. It conserves total current and the pressure at the m...">JSolverAlpha</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">P0</td><td>Pressure on axis </td></tr>
@@ -295,7 +296,17 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>which variables are 'in' and which are 'out' ? </p>
+
+<p>Updates the current density, pressure and toroidal field given the magnetic flux. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jphi</td><td>pointer to field containing current density </td></tr>
+    <tr><td class="paramname">psi</td><td>pointer to field containing flux </td></tr>
+    <tr><td class="paramname">p</td><td>pointer to field containing pressure </td></tr>
+    <tr><td class="paramname">g</td><td>pointer to field containing toroidal field function </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="class_j_solver.html#a7f6377929733232b5d4bf84b6c260782">JSolver</a>.</p>
 
@@ -311,7 +322,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_j_solver_alpha.html">JSolverAlpha</a></li>
-    <li class="footer">Generated on Thu Jan 15 2015 16:20:49 for COUGAR by
+    <li class="footer">Generated on Thu Jan 15 2015 16:24:15 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

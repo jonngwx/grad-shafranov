@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('class_j_solver.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Interface for <a class="el" href="class_j_solver.html" title="Interface for JSolver. ">JSolver</a>.  
+<p>Base class for methods which calculate jphi as a function of phi.  
  <a href="class_j_solver.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="j__solver_8h_source.html">j_solver.h</a>&gt;</code></p>
@@ -126,7 +126,7 @@ Inheritance diagram for JSolver:</div>
  <div class="center">
   <img src="class_j_solver.png" usemap="#JSolver_map" alt=""/>
   <map id="JSolver_map" name="JSolver_map">
-<area href="class_j_solver_alpha.html" title="found in most American habitat types. " alt="JSolverAlpha" shape="rect" coords="0,56,89,80"/>
+<area href="class_j_solver_alpha.html" title="Calculates current according to simple formulas. It conserves total current and the pressure at the m..." alt="JSolverAlpha" shape="rect" coords="0,56,89,80"/>
 <area href="class_j_solver_n_s_t_x.html" title="Calculates current in NSTX. Assumes p&#39; = Ax(1-x), gg&#39; = c x. " alt="JSolverNSTX" shape="rect" coords="99,56,188,80"/>
 </map>
  </div></div>
@@ -167,7 +167,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:abf7186a964fe5c251ab818522c855dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Interface for <a class="el" href="class_j_solver.html" title="Interface for JSolver. ">JSolver</a>. </p>
+<div class="textblock"><p>Base class for methods which calculate jphi as a function of phi. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a87d205916426438ae8fdc2c7ef8842eb"></a>
 <div class="memitem">
@@ -238,7 +238,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Updates the current density, pressure and toroidal field given the magnetic flux. </p>
-<p>which variables are 'in' and which are 'out' ? </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">jphi</td><td>pointer to field containing current density </td></tr>
     <tr><td class="paramname">psi</td><td>pointer to field containing flux </td></tr>
@@ -438,7 +438,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_j_solver.html">JSolver</a></li>
-    <li class="footer">Generated on Thu Jan 15 2015 16:20:49 for COUGAR by
+    <li class="footer">Generated on Thu Jan 15 2015 16:24:15 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
