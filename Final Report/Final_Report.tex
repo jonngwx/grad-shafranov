@@ -63,7 +63,7 @@
 \normalfont \normalsize 
 %\textsc{APC 524} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction 1.0), \\ \Large An MHD Equilibrium Reconstruction Code: Final Report\\ % The assignment title
+\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction), \\ \Large An MHD Equilibrium Reconstruction Code: Final Report\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -81,7 +81,7 @@
 
 \section{Project Objective / Summary}
 
-Our goal was to write a program which solves the Grad-Shafranov equation (GSE) for axisymmetric plasmas in a user friendly manner.  The result is COUGAR, which stands for \textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, some assumptions about the internal structure of the plasma must be made.  Future versions of the code will incorporate experimental measurements into the calculation.  For information on running COUGAR, see the README at \href{http://jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}}.
+Our goal was to write a program which solves the Grad-Shafranov equation (GSE) for axisymmetric plasmas in a user friendly manner.  The result is COUGAR, which stands for \textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, simply analytic forms for pressure and azimuthal magnetic field must be assumed.  Future versions of the code will deduce these quantities from experimental measurements.  For information on running COUGAR, see the README at \href{http://jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}}.
 
 %----------------------------------------------------------------------------------------
 %	Section 2
@@ -99,7 +99,7 @@ By introducing new functions $\Psi(R,z) \equiv -R A_{\phi}$ (called the flux fun
 \begin{equation}
 \Delta^{*} \Psi + \mu_0 R^2 \frac{dp}{d\Psi} + g \frac{dg}{d\Psi} = 0,
 \end{equation}
-where $\Delta^{*} \equiv R^2 \mathbf{\nabla} \cdot \frac{1}{R^2} \mathbf{\nabla}$ is called the toroidal elliptic operator. $p(\Psi)$ and $g(\Psi)$ are functions of $\Psi(R,z)$, the quantity that we are trying to solve for.  Thus $p(\Psi)$ and $g(\Psi)$ must be given (along with boundary conditions) for the problem to be fully specified.  Once the equation is solved, any other quantity of interest ($\mathbf{J}$, $\mathbf{B}$, etc.) can be calculated.  
+where $\Delta^{*} \equiv R^2 \mathbf{\nabla} \cdot \frac{1}{R^2} \mathbf{\nabla}$ is called the toroidal elliptic operator. Here, $p(\Psi)$ and $g(\Psi)$ are functions of $\Psi(R,z)$, the quantity that we are trying to solve for.  Thus $p(\Psi)$ and $g(\Psi)$ must be given (along with boundary conditions) for the problem to be fully specified.  Once the equation is solved, any other quantity of interest ($\mathbf{J}$, $\mathbf{B}$, etc.) can be calculated.  
 
 \begin{figure}
 \centering
@@ -121,29 +121,42 @@ Of course, in a real tokamak experiment, the functional forms of $g(\Psi)$ and $
 
 \subsection{Algorithm when $p(\Psi)$ and $g(\Psi)$ are specified (current version of COUGAR)}
 
-\textbf{Summary}: The problem is solving using a two-tiered iteration process.  The outer iteration (index $m$) determines the boundary values.  The inner iteration (index $n$) solves the GSE subject to those boundary conditions.
+\textbf{Summary}: The problem is solving using a two-tiered iterative process.  The outer iteration (index $m$) determines the boundary values.  The inner iteration (index $n$) solves the GSE subject to those boundary conditions.
 \\ \\
+%%%%%% INNER ITERATION %%%%%%%%%%
 \textbf{Detailed Steps}: First rewrite the Grad-Shafranov equation as
 \begin{equation}
 \Delta^{*}\Psi = \mu_0 R J_{\phi} (R, \Psi),
 \end{equation}
 where $\mu_0 R J_{\phi} (R,\Psi) = - \big(\mu_0 R^2 \frac{d p}{d\Psi} + g \frac{d g}{d\Psi}\big)$, and $J_{\phi}$ is the current density in the $\phi$-direction.
 
-\textbf{Inner Iteration}: Since the problem is non-linear (the right-hand-side of Eq.~(2) depends on $\Psi$), we use an iterative approach.  At each level of the inner iteration, we solve a finite difference version of 
+\textbf{Inner Iteration}: Since the problem is nonlinear (the right-hand side of Eq.~(2) depends on $\Psi$), we use an iterative approach.  At each level of the inner iteration, we solve a finite difference version of 
 \begin{equation}
 \Delta^{*}\Psi^{n} = \mu_0 R J_\phi (R, \Psi^{n-1}),
 \end{equation}
-where $n$ denotes the iteration level. The solution of $\Psi$ is plugged into the right-hand-side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods, handles by base class \texttt{EllipticSolver}.  We currently have implemented child classes to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive Over-Relaxation (SOR), which are explained in the next section.  
+where $n$ denotes the iteration level. The solution of $\Psi^n$ is plugged into the right-hand-side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods, handled by base class \texttt{EllipticSolver}.  We currently have implemented two child classes to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive Over-Relaxation (SOR), which are explained in the next section.  
 
-Next, we must use the updated $\Psi^n$ to calculate the value of $\Psi$ at the plasma-vacuum boundary (this defines where we must set pressure and current to zero).  This calculation is handled by the \texttt{Critical} class, which is so named because the plasma boundary either exists at a saddle point of $\Psi$ (a critical point) or where the plasma touches a solid object, like the vessel wall (collectively known as limiters).  \texttt{Critical} also finds the magnetic axis, which is the minimum of $\Psi$ (the center of the contours in Figure 1).  
+At the very beginning of the calculation we must supply an initial guess of $J_{\phi}$.  We use a quadratic form of $J_{\phi}$, taken from the paper by Johnson et al.~(J.~Comp.~Phys.~32 (1979), 212-234).  It has several parameters which must be set, such as the total azimuthal current $I_p$ (commonly called the plasma current) .  See \texttt{gs\_solver.cc} for more information.
 
-Lastly in the inner iteration, we must update the current density $J_{\phi}$, handled by the base class \texttt{JSolver}.  As previously stated, the phi-directed current density is given by 
+Next, we use the updated $\Psi^n$ to calculate the value of $\Psi$ at the plasma-vacuum boundary (this defines where we must set pressure and current to zero).  This calculation is handled by the \texttt{Critical} class, which is so named because the plasma boundary either exists at a saddle point of $\Psi$ (a critical point) or where the plasma touches a solid object, like the vessel wall. We use the terms ``plasma edge" and ``limiter" interchangably in this document.  \texttt{Critical} also finds the magnetic axis, which is the minimum of $\Psi$ (the center of the contours in Figure 1).  
+
+Lastly in the inner iteration, we must update the current density $J_{\phi}$, handled by the base class \texttt{JSolver}.  As previously stated, the $\phi$-directed current density is given by $J_{\phi} = -R \frac{d p}{d \Psi} - \frac{1}{\mu_0 R} g \frac{d g}{d \Psi}$. Our most successful child class of \texttt{JSolver}, called \texttt{JSolverJardin}, uses the following forms for $p$ and $g$:
+\begin{subequations}
+\begin{align}
+	p(\Psi) &= p_0 \widetilde{\Psi}^{n_1},\\
+          g^2(\Psi) &= g_0^2  \left[1 + \alpha_g \widetilde{\Psi}^{n_2} \right],
+\end{align}
+\end{subequations}
+where $\widetilde{\Psi}$ is a normalized flux function defined by $\widetilde{\Psi} \equiv (\Psi_l - \Psi)/(\Psi_l - \Psi_0)$.  Here,  $\Psi_l$ and $\Psi_0$ are the $\Psi$-values at the plasma edge (limiter) and magnetic boundary, as determined by \texttt{Critical}.  In Eq.~(4), $p_0$ (the pressure at the magnetic axis), $g_0$ (related to the vacuum azimuthal B-field), and the exponents $n_1,n_2$ must be specified on the command line or in a config file.  The parameter $\alpha_g$ is computed at during each inner iteration so that the total azimuthal current $I_p$ is conserved.   For the sake of self-containedness, here's the formula: $\alpha_g = \mu_0 \left[-p_0 \sum_{i,j} R_i n_1 \widetilde{\Psi}_{ij}^{(n_1-1)} + I_p (\Psi_l - \Psi_0)/dR\, dz \right] \bigg/ \left[\frac{1}{2} g_0^2 \sum_{i,j} n_2 \widetilde{\Psi}_{ij}^{(n_2-1)} / R_i\right]$, where $dR, dz$ are spaces between grid points.
+
+
+%%% OUTER ITERATION %%%%%
 
 \textbf{Outer Iteration}: The outer iteration deals with the nonlinearity due to boundary conditions.  Suppose that there are $N_c$ external coils outside of the computational boundary.  The flux function evaluated on the computational boundary $\Psi_b$ is then due to the plasma itself and the external coils:
 \begin{equation}
 \Psi^m_b (R',z') = \mu_0 \int_{plasma} G(R,z; R',z') J_{\phi}^{m-1} \mathop{dR} \mathop{dz} + \mu_0 \sum_{i=1}^{N_c} G(R_i^c,z_i^c; R',z') I_i,
 \end{equation}
-where $G$ is the Green's function for the elliptic operator $\Delta^{*}$, $(R_i^c,Z_i^c)$ is the location of the $i$th coil with current $I_i$, and $(R',z')$ refers to a point on the plasma boundary. Here, $J_{\phi}^{m-1}$ is the converged current density from the previous inner iteration.  The Green's function, which is defined by $\Delta^{*}G(\mathbf{R};\mathbf{R'}) = R \delta(R-R')\delta(z-z')$, is given by
+where $G$ is the Green's function for the elliptic operator $\Delta^{*}$, $(R_i^c,Z_i^c)$ is the location of the $i$th coil with current $I_i$, and $(R',z')$ refers to a point on the computational boundary. Here, $J_{\phi}^{m-1}$ is the converged current density from the previous inner iteration.  The Green's function, which is defined by $\Delta^{*}G(\mathbf{R};\mathbf{R'}) = R \delta(R-R')\delta(z-z')$, is given by
 \begin{equation}
 G(\mathbf{R};\mathbf{R'}) = -\frac{1}{2\pi} \frac{\sqrt{RR'}}{k} [(2-k^2) K(k) - 2 E(k)], 
 \end{equation} 
@@ -184,19 +197,25 @@ Thus, the algorithm described in Section 1.4 is identical to that described in S
 %----------------------------------------------------------------------------------------
 %	Section 3
 %----------------------------------------------------------------------------------------
-\qedsymbol
+
 \section{Code Organization / Class Structure}
 
 The program is written in C++ with the visualization carried out separately using Python. The solver is called from the command line.  Options/parameters can be set on the command line or in a configuration file.  The location of external magnetic coils will also be contained in text files. Output will be written to text files or hdf5 files. 
 
 The class structure of our code is explained in Table 1.  For more information, see the documentation website at \href{http://jonngwx.github.io/grad-shafranov/index.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/index.html}}.
-\\ \\
+
+The following external libraries are used:
+\begin{itemize}
+\item HDF5 (version 1.8 or newer) is used for I/O. The libraries can be downloaded and installed from \texttt{www.hdfgroup.org}. Should the libraries be unavailable the programme can be compiled and run with output written to a tsv file. 
+\item Boost is used for the program options, math and testing libraries. 
+\item The python numpy, h5py and matplotlib packages are used in our visualisation programme. 
+\end{itemize}
 
 %%%%%%%%%%%%%%%% BIG CLASS TABLE%%%%%%%%%%%%%%%%%
 \newgeometry{left=0.45cm, right=0.5cm, top=0.5cm, bottom=0.5cm}
 \begin{table}
 \small
-\caption{Summary of COUGAR Classes (colors show class heirarchy}
+\caption{Summary of COUGAR Classes (colors show class hierarchy)}
 \centering
 \begin{tabular}{ | m{2.8cm} | p{8.9cm} | p{6cm}|}
     \hline Class Name & Methods (inherited methods only listed in parent class) & Brief Description \\
@@ -262,7 +281,7 @@ double norm()
 int CalcB(Field *jphi)
 \end{lstlisting}
     & dfasdasd \\ 
-     \specialrule{.05em}{0.0em}{.07em} \colorbox{yellow!50}{Table} &
+     \specialrule{.05em}{0.0em}{.07em} \colorbox{orange!50}{Table} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual int load_from_tsv(const string filename, int header_lines=0)
 int num_columns() const
@@ -270,7 +289,7 @@ int num_rows() const
 double data(int row, int column) const
 \end{lstlisting}
     & dfgdfgdfg \\ 
-    \specialrule{.05em}{0.0em}{.07em} \crule[yellow!50]{0.35cm}{0.35cm} \, CoilData &
+    \specialrule{.05em}{0.0em}{.07em} \crule[orange!50]{0.35cm}{0.35cm} \, CoilData &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 int load_from_tsv(const string filename, int header_lines=0) override
 double r(int i) const
@@ -324,23 +343,6 @@ void write_output(const char *filename)
 %%%%%%%%%%%%%%% END BIG CLASS TABLE %%%%%%%%%%%%%%%
 
 \restoregeometry
-The following C++ interfaces will be required and should be self-contained
-\begin{itemize}
-\item Elliptic solver - This is used to invert the elliptic operator $\Delta^*$ and solve for $\Psi$, given the source functional in the Grad-Shafranov equation [Eq.~(2)]. This should allow the swapping in of external matrix solvers and the implementation of a multi-grid method if time permits. There should be potential for parallelization here. If there is matching to experimental data, the least-squared calculation of the parameters $\alpha_j$ and $\beta_j$ from Eq.~(8) will be performed here. 
-\item Boundary condition solver - Used to determine $\Psi$ on the computational boundary given external currents [Equation (4)]. Again this should allow different algorithms to be implemented. There should be potential for parallelization here. 
-\item Grad-Shafranov solver - Given input currents and equations, this will perform the call to the elliptic and boundary solvers and perform the iterations until it converges.
-\item Input parsing - To read the source currents and parameters from an input file.
-\item Output - To write the output to an hdf5 file. Support for other formats could be added eventually.
-\end{itemize}
-
-For the visualization in Python, the numpy and matplotlib libraries will be used. Functions to extract the data, subsets of the data and calculation of common plasma parameters will be provided. Only basic visualization such as plotting contours and 1-D cuts will be built in, since users will likely wish to evaluate the data using their own methods based on what they are studying. \\
-
-The following external libraries are used:
-\begin{itemize}
-\item HDF5 (version 1.8 or newer) is used for I/O. The libraries can be downloaded and installed from \texttt{www.hdfgroup.org}. Should the libraries be unavailable the programme can be compiled and run with output written to a tsv file. 
-\item Boost is used for the program options, math and testing libraries. 
-\item The python numpy, h5py and matplotlib packages are used in our visualisation programme. 
-\end{itemize}
 
 \subsection{Implementation and Design decisions}
 
@@ -399,7 +401,9 @@ In order to read the hdf5 files, a Python visualizer using matplotlib will be wr
 
 \section{Testing}
 
-testing
+unit testing
+
+valgrind
 
 %----------------------------------------------------------------------------------------
 %	Section 6
@@ -407,9 +411,17 @@ testing
 
 \section{Profiling}
 
-profiling
+In order to determine the runtime scaling we ran gs\_solver using the default configuration file, only changing the grid size. We ran from 32x32 through 80x80 every 5 (we would have done 30x30 but a geometrical error occurred for sizes smaller than 32x32). Only for the 32x32 case were there no errors (from Interpolate, about a wrong grid cell, from the main solver, about the $m$ iterations maximum limit reached, or from Critical not finding a critical point properly). Most of the other runs hit the maximum $m$ limit and when plotted showed the plasma had drifted unphysically upwards. Every run required different numbers of inner $n$-iterations to converge (this explains some of the scatter in the main-solve timing data).
 
-The code scales like O($N^3$). 
+In order to time the run we used <time.h> and clock(): first to time the setup (calculating the array of Green's function values) and then to time the main solver loop (iterations over $m$ and $n$). In the figure, setup time is the blue dots and the solver time is the black dots. In dashed lines are simple polynomial fits to these data: $t = a N^b$ where $t$ is time, $N$ is grid size, and $a$ and $b$ are the coefficients to be fitted to the data. For the setup $b \approx 2.4$ with fairly small scatter, and for the main loop $b \approx 3.7$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{run_times.pdf}
+	\caption{Plot of wall time vs grid size for the \textcolor{blue}{\textbf{setup}} stage of the calculation (blue dots) and the \textbf{solver} stage (black dots).  The setup goes like $\approx \mathcal{O}(N^{2.4})$ and the solver goes like $\approx \mathcal{O}(N^{3.7})$.}
+\end{figure}
+
+We also used kcachegrind. When we ran with a 50x50 grid it appeared that more time was spend in the solver (GaussSeidel) than the setup (SlowBoundary): about 60\%/40\% vs the opposite ratio for that size from the bare timing with clock(). 
 
 %----------------------------------------------------------------------------------------
 %	Section 7
