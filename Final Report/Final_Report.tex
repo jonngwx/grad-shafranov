@@ -25,7 +25,7 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 
-\usepackage[cm]{fullpage}
+\usepackage[margin=1.0in]{geometry}
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{caption}
@@ -60,7 +60,7 @@
 \normalfont \normalsize 
 %\textsc{APC 524} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction), \\ \Large An MHD Equilibrium Reconstruction Code: Final Report\\ % The assignment title
+\LARGE COUGAR (\textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction 1.0), \\ \Large An MHD Equilibrium Reconstruction Code: Final Report\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -76,40 +76,47 @@
 %	Section 1
 %----------------------------------------------------------------------------------------
 
-\section{Overview}
+\section{Project Objective / Summary}
+
+Our goal was to write a program which solves the Grad-Shafranov equation (GSE) for axisymmetric plasmas in a user friendly manner.  The result is COUGAR, which stands for \textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, some assumptions about the internal structure of the plasma must be made.  Future versions of the code will incorporate experimental measurements into the calculation.  For information on running COUGAR, see the README at \href{http://jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}}.
+
+%----------------------------------------------------------------------------------------
+%	Section 2
+%----------------------------------------------------------------------------------------
+
+\section{Theroetical Background}
+
+\textbf{Notes}: The following material primarily follows Chapter 4 of \textit{Computational Methods in Plasma Physics}, by Stephen Jardin.  When there are discrepancies between that book and this document, the latter should be trusted as the former has misprints.  Also, SI units are used throughout.
 
 \subsection{MHD equilibrium}
 
-In magnetohydrodynamic (MHD) theory, a plasma equilibrium is described by the equation $\mathbf{\nabla} p = \mathbf{J} \times \mathbf{B}$, where $p$ is the scalar plasma pressure, $\mathbf{J}$ is the current density, $\mathbf{B} = \mathbf{\nabla} \times \mathbf{A}$ is the magnetic field, and $\mathbf{A}$ is the vector potential for the magnetic field.  We work in cylindrical coordinates $(R, \phi, Z)$, and the plasma is assumed to be axisymmetric, i.e., $\partial / \partial \phi = 0$.
+In magnetohydrodynamic (MHD) theory, a plasma equilibrium is described by the equation $\mathbf{\nabla} p = \mathbf{J} \times \mathbf{B}$, where $p$ is the scalar plasma pressure, $\mathbf{J}$ is the current density, $\mathbf{B} = \mathbf{\nabla} \times \mathbf{A}$ is the magnetic field, and $\mathbf{A}$ is the vector potential for the magnetic field.  We work in cylindrical coordinates $(R, \phi, z)$, and the plasma is assumed to be axisymmetric, i.e., $\partial / \partial \phi = 0$.
 
-By introducing new functions $\Psi(R,Z) \equiv -R A_{\phi}$ (called the flux function) and $g(R,Z) \equiv R B_{\phi}$, we can rewrite the equilibrium equation in the following form, known as the Grad-Shafranov equation:
+By introducing new functions $\Psi(R,z) \equiv -R A_{\phi}$ (called the flux function) and $g(R,z) \equiv R B_{\phi}$, we can rewrite the equilibrium equation in the following form, known as the Grad-Shafranov equation:
 \begin{equation}
 \Delta^{*} \Psi + \mu_0 R^2 \frac{dp}{d\Psi} + g \frac{dg}{d\Psi} = 0,
 \end{equation}
-where $\Delta^{*} \equiv R^2 \mathbf{\nabla} \cdot \frac{1}{R^2} \mathbf{\nabla}$ is called the toroidal elliptic operator. $p(\Psi)$ and $g(\Psi)$ are functions of $\Psi(R,Z)$, the quantity that we are trying to solve for.  Thus $p(\Psi)$ and $g(\Psi)$ must be given (along with boundary conditions) for the problem to be fully specified.  Once the equation is solved, any other quantity of interest ($\mathbf{J}$, $\mathbf{B}$, etc.) can be calculated.  
+where $\Delta^{*} \equiv R^2 \mathbf{\nabla} \cdot \frac{1}{R^2} \mathbf{\nabla}$ is called the toroidal elliptic operator. $p(\Psi)$ and $g(\Psi)$ are functions of $\Psi(R,z)$, the quantity that we are trying to solve for.  Thus $p(\Psi)$ and $g(\Psi)$ must be given (along with boundary conditions) for the problem to be fully specified.  Once the equation is solved, any other quantity of interest ($\mathbf{J}$, $\mathbf{B}$, etc.) can be calculated.  
 
 \begin{figure}
 \centering
 \captionsetup{justification=centering,margin=3cm}
-\caption[caption]{Cylindrical coordinates $(R,\phi,Z)$.  Taken from "Computational Methods in Plasma Physics," Stephen Jardin.}
+\caption[caption]{Cylindrical coordinates $(R,\phi,z)$.  Taken from "Computational Methods in Plasma Physics," Stephen Jardin.}
 
 \includegraphics[width=0.35\textwidth]{coordinates}
 
 \end{figure}
 
-Without going into too much detail, it should be stated that the best MHD equilibria for confining plasmas are those which contain nested surfaces of constant $\Psi$ (known as flux surfaces), as in Figure 1.  It can be shown that a magnetic field line will always point tangentially to a given flux surface.  Since charged particles in the plasma follow field lines, the particles will stay on constant flux surfaces, resulting in good confinement.    --
+Without going into too much detail, it should be stated that the best MHD equilibria for confining plasmas are those which contain nested surfaces of constant $\Psi$ (known as flux surfaces), as in Figure 1.  It can be shown that a magnetic field line will always point tangentially to a given flux surface.  Since charged particles in the plasma follow field lines, the particles will stay on constant flux surfaces, resulting in good confinement. 
 
 
 
-\subsection{Equilibrium Reconstruction}
+\subsection{Analytic Profiles vs Equilibrium Reconstruction}
+As previously stated, the functions $p(\Psi)$ and $g(\Psi)$ must be supplied for a full specification of the problem.  In our code, we assumed simple analytic forms for these functions which roughly approximate real life experiments.  
 
-In a tokamak experiment, one of the researchers' primary goals is to calculate the flux function $\Psi(R,Z)$ at various times throughout the discharge.  However, in this case, the functional forms of $g(\Psi)$ and $p(\Psi)$ are unknown.  Instead we must rely on a finite number of experimental measurements of $\Psi$ taken near the plasma boundary.  The approximate calculation of the flux function from these experimental measurements is known as Equilibrium Reconstruction.  
+Of course, in a real tokamak experiment, the functional forms of $g(\Psi)$ and $p(\Psi)$ are unknown.  Instead we must rely on a finite number of experimental measurements of $\Psi$ taken near the plasma boundary to deduce $p$ and $g$ as well as possible.  The approximate calculation of the flux function from these experimental measurements is known as Equilibrium Reconstruction, and will be implemented in a future version of COUGAR.  
 
-Equilibrium reconstruction is crucial for interpreting the results of experiments. In addition, the reconstructed equilibria are often used as inputs to other codes, such as stability codes or transport codes.  
-
-
-
-\subsection{Algorithm when $p(\Psi)$ and $g(\Psi)$ are specified}
+\subsection{Algorithm when $p(\Psi)$ and $g(\Psi)$ are specified (current version of COUGAR)}
 
 
 
@@ -117,15 +124,23 @@ First rewrite the Grad-Shafranov equation as
 \begin{equation}
 \Delta^{*}\Psi = \mu_0 R J_{\phi} (R, \Psi),
 \end{equation}
-where $\mu_0 R J_{\phi} (R,\Psi) = - \big(\mu_0 R^2 \frac{d p}{d\Psi} + g \frac{d g}{d\Psi}\big)$.
+where $\mu_0 R J_{\phi} (R,\Psi) = - \big(\mu_0 R^2 \frac{d p}{d\Psi} + g \frac{d g}{d\Psi}\big)$, and $J_{\phi}$ is the current density in the $\phi$-direction.
 
 Since the problem is non-linear (the right-hand-side of Eq.~(2) depends on $\Psi$), we use an iterative approach.  At each level of iteration, we solve a finite difference version of 
 \begin{equation}
 \Delta^{*}\Psi^{n} = \mu_0 R J_\phi (R, \Psi^{n-1}),
 \end{equation}
-where $n$ denotes the iteration level. At each level, the previous iteration's result for $\Psi$ is plugged into the right-hand-side of Eq.~(3).  This continues until the solution converges.  The linearized finite difference equation can be solved via transform methods or multi-grid methods.
+where $n$ denotes the iteration level. The solution of $\Psi$ is plugged into the right-hand-side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods. We currently have implemented two methods to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive Over-Relaxation (SOR), which are explained in the next section.  
 
 There is an additional nonlinearity relating to the boundary conditions.  Suppose that there are $N_c$ external coils outside of the computational boundary.  The flux function evaluated on the computational boundary $\Psi_b$ is then due to the plasma itself and the external coils:
+\begin{equation}
+\Psi^m_b (R',z') = \mu_0 \int_{plasma} G(R,z; R',z') J_{\phi} \mathop{dR} \mathop{dz} + \sum_{i=1}^{N_c} G(R_i^c,z_i^c; R',z') I_i,
+\end{equation}
+
+
+
+
+
 \begin{equation}
 \Psi^m_b (R',Z') = \int_{b} \frac{dl}{R} G(R,Z; R',Z') \frac{\partial U^m}{\partial n} + \sum_{i=1}^{N_c} G(R_i^c,Z_i^c; R',Z') I_i,
 \end{equation}
@@ -167,7 +182,7 @@ Thus, the algorithm described in Section 1.4 is identical to that described in S
 
 
 %----------------------------------------------------------------------------------------
-%	Section 2
+%	Section 3
 %----------------------------------------------------------------------------------------
 
 \section{Code Organization / Class Structure}
@@ -176,11 +191,14 @@ The program is written in C++ with the visualization carried out separately usin
 
 The class structure of our code is explained below.  For more information, see the documentation website at \href{http://jonngwx.github.io/grad-shafranov/index.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/index.html}}.
 \\ \\
+
 %%%%%%%%%%%%%%%% BIG CLASS TABLE%%%%%%%%%%%%%%%%%
-\begin{centering}
+\newgeometry{left=0.5cm, right=0.5cm, top=0.5cm, bottom=0.5cm}
+\begin{table}
 \small
+\caption{Summary of COUGAR Classes}
 \centering
-\begin{tabular}{ | m{2.6cm} | p{9.0cm} | p{6cm}|}
+\begin{tabular}{ | m{2.3cm} | p{8.9cm} | p{6cm}|}
     \hline Class Name & Methods (inherited methods only listed in parent class) & Brief Description \\
     \hline Grid & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
@@ -302,10 +320,10 @@ void write_output(const char *filename)
     & dfgdfgdf \\ 
     \hline
 \end{tabular}
-\end{centering}
+\end{table}
 %%%%%%%%%%%%%%% END BIG CLASS TABLE %%%%%%%%%%%%%%%
 
-
+\restoregeometry
 The following C++ interfaces will be required and should be self-contained
 \begin{itemize}
 \item Elliptic solver - This is used to invert the elliptic operator $\Delta^*$ and solve for $\Psi$, given the source functional in the Grad-Shafranov equation [Eq.~(2)]. This should allow the swapping in of external matrix solvers and the implementation of a multi-grid method if time permits. There should be potential for parallelization here. If there is matching to experimental data, the least-squared calculation of the parameters $\alpha_j$ and $\beta_j$ from Eq.~(8) will be performed here. 
@@ -326,6 +344,14 @@ The following external libraries are used:
 
 \subsection{Implementation and Design decisions}
 
+\subsubsection{Elliptic solver}
+The \texttt{EllipticSolver} interface defines functions for inverting the $\nabla^*$ operator iteratively using finite differences. Because the radial derivatives are $R$ dependent, the finite difference coefficients are stored as vectors. The successive-over-relaxation (SOR) and Gauss-seidel methods have been implemented, with Gauss-seidel used in the current version of the code. While these algorithms are slow, they have been chosen as SOR can be parallelised, while Gauss-seidel can be used as a starting point for multigrid methods. 
+
+\subsubsection{Current density calculations}
+The calculation of $P$, $gg'$ and $J_\phi$ is performed by the implementation of the \texttt{JSolver} interface. $P$ and $g$ are assumed to be functions of $\Psi$ from which the current density $J_\phi$ is calculated. The default \texttt{JSolverAlpha} uses a constant $P'$ and a linear $gg'$, with the coefficients of the functional forms determined by the peak pressure and the total current in the plasma. The exact exponent on $\phi$ can be modified by changing $n_1$ and $n_2$ in the input or configuration file. \texttt{JSolverNSTX} attempts to use similar functional forms to the actual NSTX data uses a quadratic $P'$ and $gg' = A\Psi^n$, but there are numerical issues. As such, its use is not recommended in the current version. 
+
+If experimental measurements of $\Psi$ were added to the code, the functional dependence on $\Psi$ of $P$ and $g$ would be determined by performing a least-squares fit to the data. 
+
 \subsubsection{Output}
 All the output is done throught the \texttt{GradOutput} interface, with options to write to hdf or tsv files. As only $\Psi$, $P$ and $g$ are necessary for the solution of the equation, the default output writes only these three quantities and the dimensions of the grid. The value of the flux function $\Psi$ at the limiter and magnetic axis are also written to identify the plasma position. In the tsv case, this is an additional quantity while in the hdf version, this is an attribute of the \texttt{psi} dataset. These formats were chosen as ASCII can be read and written easily and should work on most systems, while HDF5 is a standard data structure for scientific work. Output can be written every $n$ iterations of the inner and outer loops. 
 
@@ -338,7 +364,7 @@ The python visualiser can be run from command line or interactively. The data ar
 The use of a dictionary to hold the data was chosen in order to make reading the output files more convenient; we can simply iterate over the lines of the tsv output or datastructs of the HDF file. Also, with the option to add custom outputs, checking for the existence of each field would have to be performed while reading. The disadvantage of this approach is that referring to the data is unwieldy (\texttt{F['R']} vs \texttt{F.R} for example). 
 
 %----------------------------------------------------------------------------------------
-%	Section 3
+%	Section 4
 %----------------------------------------------------------------------------------------
 
 \section{User Interface}
@@ -368,7 +394,7 @@ Our output will be in the hdf5 format. The file will include the calculated solu
 In order to read the hdf5 files, a Python visualizer using matplotlib will be written. It will show contour plots for the tables in the output file and also be able to take slices through the tables at the machine midplane.
 
 %----------------------------------------------------------------------------------------
-%	Section 4
+%	Section 5
 %----------------------------------------------------------------------------------------
 
 \section{Testing}
@@ -376,7 +402,7 @@ In order to read the hdf5 files, a Python visualizer using matplotlib will be wr
 testing
 
 %----------------------------------------------------------------------------------------
-%	Section 5
+%	Section 6
 %----------------------------------------------------------------------------------------
 
 \section{Profiling}
@@ -384,6 +410,10 @@ testing
 profiling
 
 The code scales like O($N^3$). 
+
+%----------------------------------------------------------------------------------------
+%	Section 7
+%----------------------------------------------------------------------------------------
 
 \section{Lessons Learned}
 
