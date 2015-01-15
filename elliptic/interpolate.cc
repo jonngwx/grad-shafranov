@@ -34,6 +34,10 @@ void Interpolate::CorrectCellBoundsCheck(double r, double z) const {
   }
 }
 
+void Interpolate::OnGridCheck(double r, double z) {
+    if (
+}
+
 double Interpolate::Psi_interp(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double r_ = (r - r_curr)/dr_;
