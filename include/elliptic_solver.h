@@ -6,7 +6,7 @@
 #include <vector>
 
 /*! 
- * @brief mountain lion, puma, or catamount, is a large
+ * @brief Base class of solvers for the discretized GSE
  */
 class EllipticSolver {
 public:

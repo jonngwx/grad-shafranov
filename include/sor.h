@@ -1,3 +1,9 @@
+/*!
+ * @file sor.h
+ * @author Elizabeth J. Paul
+ * @brief Header file for SOR class
+ */
+
 #ifndef SOR_H
 #define SOR_H
 
@@ -5,6 +11,12 @@
 #include "field.h"
 #include "grid.h"
 #include <vector>
+
+/*!
+ * @brief Solves the discretized GSE using
+ * the method of successive over-relaxation
+ * (SOR).
+ */
 
 class SOR : public EllipticSolver {
 public:

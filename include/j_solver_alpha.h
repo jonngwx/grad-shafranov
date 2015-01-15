@@ -1,6 +1,6 @@
 /*!
  * @file j_solver_alpha.h
- * @author Phillin LeBlanc
+ * @author Peter J. Bolgert
  * @brief Header declarations for JSolverAlpha.
  */
 
@@ -12,7 +12,9 @@
 #include "field.h"
 #include "j_solver.h"
 /*! 
- * @brief found in most American habitat types.
+ * @brief Calculates current according to simple
+ * formulas. It conserves total current and the 
+ * pressure at the magnetic axis.
  */
 class JSolverAlpha : public JSolver{
  public:
@@ -28,11 +30,9 @@ class JSolverAlpha : public JSolver{
   JSolverAlpha(double P0, double g0, double n1, double n2, double Ip,
                Grid *grid);
   ~JSolverAlpha();
-  /*! which variables are 'in' and which are 'out' ? */
   void update(Field *jphi, Field *psi, Field *p, Field *g);
 
  private:
-  /*! What the heck are all these variables???? -JAS */
   double n1_;
   double n2_;
 };

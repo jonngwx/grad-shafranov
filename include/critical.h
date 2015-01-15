@@ -15,9 +15,6 @@
 /*! 
  * @brief Contains methods to search for the critical points of Psi and update the
  * limiters and magnetic axis.
- * @brief Finds 'critical points' like the magnetic axis, limiter points, and X points.
- *
- * These points are minima, maximima, and saddle points of \f$\psi\f$.
  */
 class Critical {
 public:
