@@ -1,6 +1,6 @@
 /*!
  * @file grad_output.h
- * @author Puma concolor
+ * @author Jonathan Ng
  * @brief Declarations for class Grad_Output
  */
 

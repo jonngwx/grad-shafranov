@@ -1,6 +1,6 @@
 /*!
  * @file j_solver.h
- * @author Phillin LeBlanc
+ * @author Jonathan Ng
  * @brief Header declarations for JSolver.
  */
 
@@ -12,12 +12,11 @@
 #include "field.h"
 
 /*! 
- * @brief Interface for JSolver
+ * @brief Base class for methods which calculate jphi as a function of phi
  */
 class JSolver {
  public:
     virtual ~JSolver(){};
-    /*! which variables are 'in' and which are 'out' ? */
     /**
      * @brief Updates the current density, pressure and toroidal field given the magnetic flux
      * @param jphi pointer to field containing current density

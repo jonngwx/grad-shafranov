@@ -1,6 +1,6 @@
 /*!
  * @file grad_output_hdf.h
- * @author Catamount
+ * @author Jonathan Ng
  * @brief Header file for grad_output_hdf.
  */
 
