@@ -61,7 +61,7 @@ class SlowBoundary : public Boundary {
   double** g_coils_;    /* A two dimensional array.
    * The value g_coils_[c][l]
    * represents the response at a given boundary point l
-   * due to a unit current at the location of coil "c".
+   * due to a unit current at the location of coil "c". */
 
 };
 
