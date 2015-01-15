@@ -1,7 +1,7 @@
 /*!
  * @file slow_boundary.h
  * @author Peter J. Bolgert 
- * @brief Header declarations the SlowBoundary class.
+ * @brief Header declarations for the SlowBoundary class.
  */
 
 #ifndef SLOWBOUNDARY_H_
@@ -13,9 +13,8 @@
 #include "boundary.h"
 
 /*!
- * @brief This boundary-value calculating class iterates over the field of j_phi
- * and (should do ... not implemented yet) over the set of external coils) using
- * Green's functions.
+ * @brief This class iterates uses a slow (relative to Von Hagenow's method)
+ *  Green's function-based algorithm to calculate psi-boundary. 
  */
 class SlowBoundary : public Boundary {
  public:
@@ -54,12 +53,16 @@ class SlowBoundary : public Boundary {
   double dz_;            // Size of a grid cell in the z direction
   CoilData* cond_data_;  // Contains data on the external coil currents
   double*** g_plasma_;   /*  A three dimensional array.
-   * The value g_plasma[i][j][l]
-   * represents how much psi is at a given boundary point l
+   * The value g_plasma_[i][j][l]
+   * represents the reponse at a given boundary point l
    * due to a unit current at point [i][j] in the plasma.
    * Note that for cells on the boundary,
    * g_plasma[ce,ll][corresponding cell] = 0. */
-  double** g_coils_;  
+  double** g_coils_;    /* A two dimensional array.
+   * The value g_coils_[c][l]
+   * represents the response at a given boundary point l
+   * due to a unit current at the location of coil "c".
+
 };
 
 #endif  // SLOWBOUNDARY_H_

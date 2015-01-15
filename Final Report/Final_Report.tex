@@ -409,7 +409,7 @@ The use of a dictionary to hold the data was chosen in order to make reading the
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.6\textwidth]{eqm}
+	\includegraphics[width=0.8\textwidth]{eqm}
 	\caption{Output of the Grad-shafranov solver. From left to right, $\Psi$, pressure and $g$. }
 	\label{fig:eqm}
 \end{figure}
@@ -479,10 +479,19 @@ We also used kcachegrind. When we ran with a 50x50 grid it appeared that more ti
 %	Section 7
 %----------------------------------------------------------------------------------------
 
-\section{Lessons Learned}
-
+\section{Lessons Learned/ Miscellaneous}
+\subsection{Lessons Learned}
 The pppl cluster has a strange selection of default libraries.
 HDF5 on windows is painful.
 
+\subsection{Miscellaneous}
+Breakdown of labor:
+
+\begin{itemize}
+\item Peter: Boundary classes, JSolver classes
+\item Jonathan: Output, Visualization 
+\item Elizabeth: EllipticSolver classes, Interpolate, Critical (with Jonathan)
+\item Jacob: Input, CoilData
+\end{itemize}
 
 \end{document}
