@@ -405,7 +405,15 @@ Additional quantities are added to the output by passing a comma separated strin
 
 The python visualiser can be run from command line or interactively. The data are read using the \texttt{read\_data} module, which passes a dictionary of the available fields to the plotting function in the \texttt{viz} module. Tsv data are read using regular expressions while HDF data are read using functions provided by \texttt{h5py}. In the command line version, contour and colour plots of $\Psi$, $P$ and $g$ are shown in a single figure and the matplotlib \texttt{format\_coord} function is overridden so the values of the data can be read off the figure. An additional function is provided to produce a radial plot of the values of a field along the midplane of the tokamak. 
 
-The use of a dictionary to hold the data was chosen in order to make reading the output files more convenient; we can simply iterate over the lines of the tsv output or datastructs of the HDF file. Also, with the option to add custom outputs, checking for the existence of each field would have to be performed while reading. The disadvantage of this approach is that referring to the data is unwieldy (\texttt{F['R']} vs \texttt{F.R} for example). 
+The use of a dictionary to hold the data was chosen in order to make reading the output files more convenient; we can simply iterate over the lines of the tsv output or datastructs of the HDF file. Also, with the option to add custom outputs, checking for the existence of each field would have to be performed while reading. The disadvantage of this approach is that referring to the data is unwieldy (\texttt{F['R']} vs \texttt{F.R} for example). An example of the output is shown in Fig.~\ref{fig:eqm}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{eqm}
+	\caption{Output of the Grad-shafranov solver. From left to right, $\Psi$, pressure and $g$. }
+	\label{fig:eqm}
+\end{figure}
+
 
 %----------------------------------------------------------------------------------------
 %	Section 4
@@ -436,6 +444,8 @@ The input file of experimental magnetic field measurements will be similar: a ta
 Our output will be in the hdf5 format. The file will include the calculated solution for $\Psi$ and also (if the user specifies) tables for $\mathbf{B}$, $\mathbf{J}$, $p$, and/or $q$. If the user so specifies, each inner and /or outer loop's result for $\Psi$ will also be output to this file.
 
 In order to read the hdf5 files, a Python visualizer using matplotlib will be written. It will show contour plots for the tables in the output file and also be able to take slices through the tables at the machine midplane.
+
+
 
 %----------------------------------------------------------------------------------------
 %	Section 5
