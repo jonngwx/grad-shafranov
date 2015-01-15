@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -c -g -Wall
-LIBS = -lboost_math_tr1
+CXXFLAGS = -c -g -I/usr/pppl/boost/1.52.0/include -Wall
+LIBS = -L/usr/pppl/boost/1.52.0/lib -lboost_math_tr1
 PROGS = ellint_ex
 
 .PHONY: all

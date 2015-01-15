@@ -1,6 +1,5 @@
 /*!
  * @file grid.h
- * @author Felis concolor
  * @brief Header declarations for Grid.
  */
 

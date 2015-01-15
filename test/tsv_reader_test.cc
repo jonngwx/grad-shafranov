@@ -4,7 +4,6 @@
  * @brief Some tests for the Table and CoilData classes using the boost_test library.
  */
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE tsv_reader_test
 #include <boost/test/unit_test.hpp>
 
 #include <string>
@@ -24,7 +23,7 @@ struct cdtest {
   CoilData cd;  
 };
 
-BOOST_FIXTURE_TEST_SUITE( suite1, tbtest)
+BOOST_FIXTURE_TEST_SUITE( tb_suite, tbtest)
 
 BOOST_AUTO_TEST_CASE(two_good_cols) {
   int success = td.load_from_tsv("test/tsvReaderExamples/good_example_2_cols.tsv",1);
@@ -72,10 +71,11 @@ BOOST_AUTO_TEST_CASE(example_no_loading){
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+
 /***************
  * Test CoilData
  **************/
-BOOST_FIXTURE_TEST_SUITE( suite2, cdtest)
+BOOST_FIXTURE_TEST_SUITE( cd_suite, cdtest)
 
 BOOST_AUTO_TEST_CASE(bad_example_not_three_columns){
   std::cout << "\nNext line should show an error:\n";
@@ -91,12 +91,12 @@ BOOST_AUTO_TEST_CASE(good_example_get_data_simple){
   BOOST_CHECK_EQUAL(cd.current(1), 1);
 }
 
-BOOST_AUTO_TEST_CASE(coil_regions_good_test){
-  int success = cd.load_from_tsv("test/tsvReaderExamples/coil_regions_test.tsv",1);
+BOOST_AUTO_TEST_CASE(good_coil_regions_test){
+  int success = cd.load_from_tsv("test/tsvReaderExamples/good_coil_regions.tsv",1);
   BOOST_REQUIRE_EQUAL(success, 0);
-  BOOST_CHECK_EQUAL(cd.r(1), 3.4);
-  BOOST_CHECK_EQUAL(cd.z(1), 5);
-  BOOST_CHECK_EQUAL(cd.current(1), 1);
+  BOOST_CHECK_EQUAL(cd.current(0), 1e3);
+  BOOST_CHECK_EQUAL(cd.current(3), 1e1);
+  BOOST_CHECK_EQUAL(cd.num_coil_subregions(), 16);
 }
 
 /* Check that num_columns_ and num_coil_subregions_ are set to zero when a CoilData is created. */

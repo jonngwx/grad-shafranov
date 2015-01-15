@@ -4,13 +4,14 @@ LIBS = -lboost_program_options -lboost_unit_test_framework -lboost_math_tr1
 HDF = -lhdf5_hl -lhdf5 -DHDF_MODE
 PROGS = gs_solver
 TESTDIR = test
-TESTPROGS = $(TESTDIR)/test_output $(TESTDIR)/util_test $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test $(TESTDIR)/slow_boundary_test $(TESTDIR)/interpolate_test
+TESTPROGS = $(TESTDIR)/output_test $(TESTDIR)/util_test $(TESTDIR)/elliptic_test $(TESTDIR)/tsv_reader_test $(TESTDIR)/grid_test $(TESTDIR)/boundary_test $(TESTDIR)/slow_boundary_test $(TESTDIR)/interpolate_test
 EXDIR = exampleClassUsage
 EXAMPLEPROGS = $(EXDIR)/tsv_reader_example $(EXDIR)/coil_data_example
-OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o elliptic/interpolate.o
+OBJECTS = tsv_reader.o j_solver_alpha.o grid.o field.o boundary.o slow_boundary.o grad_output.o grad_output_txt.o create_options.o elliptic/sor.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o elliptic/critical.o green_fcn.o elliptic/interpolate.o j_solver_nstx.o
+TESTOBJECTS = $(addsuffix .o,$(TESTPROGS)) 
 
 .PHONY: all
-all: $(PROGS) $(EXAMPLEPROGS) $(TESTPROGS)
+all: $(PROGS) $(EXAMPLEPROGS) $(TESTPROGS) $(TESTDIR)/all_test
 
 gs_solver: gs_solver.o $(OBJECTS)
 	$(CXX) -o $@ $^ $(LIBS) 
@@ -21,31 +22,34 @@ gs_solver_hdf: gs_solver_hdf.o grad_output_hdf.o $(OBJECTS)
 gs_solver_hdf.o: gs_solver.cc
 	$(CXX) $(CXXFLAGS) $(HDF) $^ -o $@
 
-$(TESTDIR)/elliptic_test: elliptic/elliptic_solver.o test/elliptic_test.o elliptic/sor.o grid.o field.o elliptic/gauss_seidel.o boundary.o 
+$(TESTDIR)/all_test: $(TESTDIR)/test.o $(OBJECTS) $(TESTOBJECTS) 
 	$(CXX) -o $@ $^ $(LIBS)
 
-critical_test: elliptic/critical.o elliptic/critical_test.o grid.o field.o elliptic/interpolate.o
+$(TESTDIR)/elliptic_test: $(TESTDIR)/test.o elliptic/elliptic_solver.o test/elliptic_test.o elliptic/sor.o grid.o field.o elliptic/gauss_seidel.o boundary.o 
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/interpolate_test: grid.o field.o elliptic/interpolate.o $(TESTDIR)/interpolate_test.o
+$(TESTDIR)/critical_test: $(TESTDIR)/test.o elliptic/critical.o elliptic/critical_test.o grid.o field.o elliptic/interpolate.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/tsv_reader_test: tsv_reader.o $(TESTDIR)/tsv_reader_test.o
+$(TESTDIR)/interpolate_test: $(TESTDIR)/test.o grid.o field.o elliptic/interpolate.o $(TESTDIR)/interpolate_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/test_output: $(TESTDIR)/test_output.o grad_output.o grad_output_txt.o field.o grid.o
+$(TESTDIR)/tsv_reader_test: $(TESTDIR)/test.o tsv_reader.o $(TESTDIR)/tsv_reader_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/util_test: $(TESTDIR)/util_test.o
+$(TESTDIR)/output_test: $(TESTDIR)/test.o $(TESTDIR)/output_test.o grad_output.o grad_output_txt.o field.o grid.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/grid_test: $(TESTDIR)/grid_test.o grid.o
+$(TESTDIR)/util_test: $(TESTDIR)/test.o $(TESTDIR)/util_test.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/boundary_test: $(TESTDIR)/boundary_test.o boundary.o grid.o
+$(TESTDIR)/grid_test: $(TESTDIR)/test.o $(TESTDIR)/grid_test.o grid.o
 	$(CXX) -o $@ $^ $(LIBS)
 
-$(TESTDIR)/slow_boundary_test: $(TESTDIR)/slow_boundary_test.o slow_boundary.o boundary.o grid.o field.o tsv_reader.o green_fcn.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o
+$(TESTDIR)/boundary_test: $(TESTDIR)/test.o $(TESTDIR)/boundary_test.o boundary.o grid.o field.o
+	$(CXX) -o $@ $^ $(LIBS)
+
+$(TESTDIR)/slow_boundary_test: $(TESTDIR)/test.o $(TESTDIR)/slow_boundary_test.o slow_boundary.o boundary.o grid.o field.o tsv_reader.o green_fcn.o elliptic/elliptic_solver.o elliptic/gauss_seidel.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 $(EXDIR)/tsv_reader_example: $(EXDIR)/tsv_reader_example.o tsv_reader.o 
@@ -57,42 +61,10 @@ $(EXDIR)/coil_data_example: $(EXDIR)/coil_data_example.o tsv_reader.o
 .PHONY: runtests
 runtests:
 	# Running tests!
-	#
-	# tsv_reader_test
-	#
-	test/tsv_reader_test
-	#
-	# test_output
-	#
-	test/test_output
-	#
-	# test_util (linspace)
-	#
-	test/util_test
-	#
-	# elliptic_test
-	#
-	test/elliptic_test
-	#
-	# grid_test
-	#
-	test/grid_test
-	#
-	# boundary_test
-	#
-	test/boundary_test
-	#
-	# interpolate_test
-	#
-	test/interpolate_test
-	#
-	# slow_boundary_test
-	#
-#	test/slow_boundary_test
+	./test/all_test
 
 .PHONY: clean
 clean:
-	# delete .o files in subdirectories. rm -r *.o does not do this.
 	find . -name '*.o' -delete
 	$(RM) .depend
 

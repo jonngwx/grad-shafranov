@@ -1,0 +1,11 @@
+--Testing--
+
+In order to determine the runtime scaling we ran gs_solver using the default configuration file, only changing the grid size. We ran from 32x32 through 80x80 every 5 (we would have done 30x30 but a geometrical error occurred for sizes smaller than 32x32). Only for the 32x32 case were there no errors (from Interpolate, about a wrong grid cell, from the main solver, about the M iterations maximum limit reached, or from Critical not finding a critical point properly). Most of the other runs hit the maximum M limit and when plotted showed the plasma had drifted unphysically upwards. Every run required different numbers of inner N-iterations to converge (this explains some of the scatter in the main-solve timing data).
+
+In order to time the run we used <time.h> and clock(): first to time the setup (of the array of Green's function values) and then to time the main solver loop (iterations over M and N). In the figure, setup time is the blue dots and the solver time is the black dots. In dashed lines are simple polynomial fits to these data: $t = a n^b$ where $t$ is time, $n$ is grid size, and $a$ and $b$ are the coefficients to be optimized. For the setup $b=\approx 2.4$ with fairly small scatter, and for the main loop $b=\approx 3.7$.
+
+We also used kcachegrind. When we ran with a 50x50 grid it appeared that more time was spend in the solver (GaussSeidel) than the setup (SlowBoundary): about 60%/40% vs the opposite ratio for that size from the bare timing with clock(). I (JAS) don't know why or how this could be.
+
+
+
+

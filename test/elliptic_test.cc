@@ -1,5 +1,4 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE Elliptic
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
 #include "../include/grid.h"
@@ -16,7 +15,7 @@ struct elliptictester {
   double R0;
 };
 
-BOOST_FIXTURE_TEST_SUITE(suite1 , elliptictester)
+BOOST_FIXTURE_TEST_SUITE(ell_suite, elliptictester)
 /*!
  * Tests SOR elliptic solver by comparison to vacuum
  * solution constrained to be even about the Z = 0
@@ -34,7 +33,7 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
     Grid *grid = new Grid(R0, Rend, Z0, Zend, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
-    Boundary *psib = new Boundary(grid);
+    Boundary *psib = new Boundary(psi,grid);
     
     // Initialize psi and jphi
     for (int i = 0; i < nr; ++i) {
@@ -55,11 +54,6 @@ BOOST_AUTO_TEST_CASE (SOR_vacuum) {
             psi_sol->f_[i][j] += 1/(8*Rc*Rc)*((R*R-Rc*Rc)*(R*R-Rc*Rc) - 4*R*R*Z*Z);
             psi_sol->f_[i][j] += 1/(24*pow(Rc,4))*(pow((R*R-Rc*Rc),3) - 12*R*R*Z*Z*(R*R - Rc*Rc) + 8*R*R*pow(Z,4));
         }
-    }
-    
-    // Initialize psi boundary using exact solution
-    for (int l = 0; l < perim; ++l) {
-        psi->f_[psib->LtoI(l)][psib->LtoJ(l)] = psi_sol->f_[psib->LtoI(l)][psib->LtoJ(l)];
     }
     
     // Initialize psi boundary using exact solution
@@ -111,11 +105,12 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
     double nz = 10;
     double max_iter = 100;
     double epsilon = 0.1;
+    double error_ES = 0.1;
     double perim = 2.0*(nr + nz -2.0);
     Grid *grid = new Grid(R0, Rend, Z0, Zend, nr, nz);
     Field *psi = new Field(*grid);
     Field *jphi = new Field(*grid);
-    Boundary *psib = new Boundary(grid);
+    Boundary *psib = new Boundary(psi, grid);
     
     // Initialize psi and jphi
     for (int i = 0; i < nr; ++i) {
@@ -159,7 +154,7 @@ BOOST_AUTO_TEST_CASE (GS_vacuum) {
     */
     
     // Solve for psi given the proper boundary conditions
-    EllipticSolver *solver = new GaussSeidel(*grid, *psi);
+    EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
     solver->coeff();
     for (int n = 0; n < max_iter; ++n) {
         if (n==0) solver->step_1(*jphi);
@@ -190,12 +185,13 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
   
     double max_iter = 1000;
     double epsilon = 1e-8;
+    double error_ES = 0.01;
     double perim = 2.0*(nr + nz -2.0);
     Grid *grid = new Grid(Rmin, Rmax, zmin, zmax, nr, nz);
     Field *psi = new Field(*grid);
     Field *psi_old = new Field(*grid);
     Field *jphi = new Field(*grid);
-    Boundary *psib = new Boundary(grid);
+    Boundary *psib = new Boundary(psi, grid);
     /*********************************
      * Specify parameters for SS model
      *********************************/
@@ -222,13 +218,6 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
 	} 
       }
     }
-
-    /*********************************
-     * Calculate new boundary for psi
-     *********************************/
-    //    psib->CalcB(psi, jphi); // updates the boundary grid points of psi
-
-    
      
     // Initialize psi boundary using exact solution
     for (int l = 0; l < perim; ++l) {
@@ -246,7 +235,7 @@ BOOST_AUTO_TEST_CASE (GS_shaf_solo) {
     */
     
     // Solve for psi given the proper boundary conditions
-    EllipticSolver *solver = new GaussSeidel(*grid, *psi);
+    EllipticSolver *solver = new GaussSeidel(*grid, *psi, error_ES);
     solver->coeff();
     for (int n = 0; n < max_iter; ++n) {
         if (n==0) solver->step_1(*jphi);

@@ -1,0 +1,28 @@
+/*!
+@file limiter_data_format.dox
+@author Jacob Schwartz
+@brief Explanation of limiter.tsv format.
+*/
+/*!
+\page Limiter-Data-Format Input of physical limiter data 
+
+The program requries a way to ensure that the plasma-vacuum boundary is not outside the physical structure of the machine's inner walls.
+
+The \f$\psi\f$ contour corresponding to the plasma-vacuum boundary is set either by a physical limiter (for a \e limited plasma) or by one of the x-points (for a \e diverted plasma). The value of \f$\psi\f$ at each of these points is determined, and the innermost point (that with \f$\psi\f$ closest to that of the magnetic axis) determines the \f$\psi\f$ of the plasma-vacuum boundary.
+
+In a more sophisticated treatment, there would be limiter lines (surfaces) corresponding to the tokamak inner wall, but solving for the intersection of the \f$\psi\f$ contours with a given line is beyond the scope of this project so instead we use only discrete points.
+
+Limiter points are input with a two-column tsv file:
+Limiter data input files are ascii, whitespace-separated tables of floating-point numbers with two columns but unlimited numbers of rows.
+Acceptable types of numbers are:
+\verbatim
+1
+2.34
+-5.6789e10
+\endverbatim
+
+The two columns are:
+-# Radial location of a limiter point (m)
+-# Z location of a limiter point (m)
+
+*/

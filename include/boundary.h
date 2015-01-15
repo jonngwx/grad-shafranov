@@ -15,13 +15,13 @@
  */
 class Boundary {
   public:
-    Boundary(Grid *grid);
+    Boundary(Field *psi, Grid *grid);
     virtual ~Boundary();
 
     /*!
      * @brief Updates boundary cells of psi based on the plasma current jphi.
      */
-    virtual int CalcB(Field *psi, Field* jphi);
+    virtual int CalcB(Field* jphi);
 
     /*!
      * @brief Gets the horizontal index of the l'th boundary cell
@@ -52,9 +52,18 @@ class Boundary {
        \endverbatim
      */
     int LtoJ(int l) const;
+     
+    /*!
+     * @brief Takes two fields in memory and calculates the error
+     * @return The element-wise RMS difference between the two fields
+     */
+    double norm();
   protected:
+    Field *psi_;
     const int nr_; //!< Number of grid cells in the r direction.
     const int nz_; //!< Number of grid cells in the z direction.
+    int perim_; //!< Number of vertices in outer layer of grid
+    double *psib_old; //!< Array to hold bdy data from m-1 loop
 };
 
 #endif // BOUNDARY_H_

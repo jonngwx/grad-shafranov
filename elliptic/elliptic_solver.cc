@@ -15,10 +15,13 @@ EllipticSolver::EllipticSolver(const Grid &Grid, Field &Psi) :
   Grid_(Grid),
   Psi_(Psi),
   Psi_prev_(Grid),
+  Psi_temp_(Grid),
   A(Grid.nr_),
   C(Grid.nr_){}
 
-EllipticSolver::~EllipticSolver(){}
+EllipticSolver::~EllipticSolver(){
+
+}
 
 /*!
  * @brief Calculate maximum of |Psi - Psi_prev| over grid

@@ -11,6 +11,7 @@ def plot(filename,format):
     This is a function which plots things. It takes two strings, one of which is the filename, followed by the format.
     @return F a dict containing all the data in the file.
     """
+    #check if format is supported
     try:
         if format == "txt" or format == "tsv":
             F = read_data.read_text(filename)
@@ -22,6 +23,7 @@ def plot(filename,format):
     except IOError:
         print "Invalid filename\n"
         return None
+    # check validity
     if F is None:
         print "Error reading file " + filename
         return None
@@ -29,6 +31,7 @@ def plot(filename,format):
         if np.isnan(np.sum(F[i])):
             print "Warning: nan in data, exiting."
             return F
+    # preliminaries for custom cursor
     R0 = F['R'][0]
     Rend = F['R'][-1]
     z0 = F['z'][0]
@@ -37,6 +40,8 @@ def plot(filename,format):
     nz = F['z'].shape[0]
     dr = (Rend-R0)/(nR-1)
     dz = (zend-z0)/(nz-1)
+
+
     fig = plt.figure(1,figsize=(16,9),dpi = 80)
     cfig = plt.subplot(1,3,1)
     clist = np.linspace(np.min(F['psilo']),np.max(F['psilo']),10)
@@ -44,6 +49,8 @@ def plot(filename,format):
     plt.contour(F['R'],F['z'],F['psi'],clist,colors='k')
     plt.contour(F['R'],F['z'],F['psi'],[F['psilo'][0],F['psilo'][0]],colors='r')
     plt.pcolormesh(F['R'],F['z'],F['psi'])
+    
+    # override format_coord
     def format_coord_psi(x,y):
         col = int((x-R0)/dr)
         row = int((y-z0)/dz)
@@ -62,13 +69,17 @@ def plot(filename,format):
     cfig.set_aspect('equal')
     a = np.amin(np.abs(F['psi'] - F['psilo'][1]))
     ind = np.where(abs(F['psi'] - F['psilo'][1]) - a == 0)
+    # find and plot the plasma
     if ind is not None:
         try:
             plt.plot(F['R'][ind[1]], F['z'][ind[0]],'+',markersize=10,mew=5.0,color='k')
         except:
             print "Cannot find magnetic axis"
+
+
     pfig = plt.subplot(1,3,2)
     plt.pcolormesh(F['R'],F['z'],F['p'])#,shading='gouraud')
+    # override format_coord
     def format_coord_p(x,y):
         col = int((x-R0)/dr)
         row = int((y-z0)/dz)
@@ -89,6 +100,7 @@ def plot(filename,format):
     gfig = plt.subplot(1,3,3)
     plt.pcolormesh(F['R'],F['z'],F['g'])#,shading='gouraud')
     plt.title('g')
+    # override format_coord
     def format_coord_g(x,y):
         col = int((x-R0)/dr)
         row = int((y-z0)/dz)

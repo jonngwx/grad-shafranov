@@ -1,31 +1,32 @@
-Design\ Document/Design_Document.pdf
 grad.project
 grad.workspace
 .codelite
 *~
 *.o
-tsv_reader_example
-coil_data_example
-pg_data_example
+*.pdf
+*.swp
 *.pyc
-cougar.out*
-gs_solver
-gs_solver_hdf
-elliptic_test
+*.dSYM
 .DS_Store
 */.DS_Store
+
+# latex output
+Final\ Report/*.out
+
+#For hiding the gh-pages git branch of doxygen output.
 Docs/html
-*.dSYM
-PeterTest/boost_test
 
-*.swp
+#COUGAR output files
+cougar.out*
 
+#Test program binaries
+test/*_test
 test/simple_test_output.tsv
-test/tsv_reader_test
-test/test_output
-test/grid_test
-test/boundary_test
-test/slow_boundary_test
-test/interpolate_test
-test/util_test
+
+#Example program binaries
+exampleClassUsage/*_example
 exampleClassUsage/boostEllipticIntegralExample/ellint_ex
+
+#Main program binaries
+gs_solver
+gs_solver_hdf

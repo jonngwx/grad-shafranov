@@ -1,7 +1,6 @@
 /*!
  * @file field.h
- * @author Cabrerae
- * @brief Header file for Field class
+ * @brief Header file for class Field
  */
 
 #ifndef FIELD_H

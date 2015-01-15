@@ -5,7 +5,7 @@
 #include <hdf5.h>
 #include <hdf5_hl.h>
 
-Grad_Output_Hdf::Grad_Output_Hdf(Field* f0, Field* jphi0, Grid* grid0, Field* p0, Field* g0, const char* outputs) {
+GradOutputHdf::GradOutputHdf(Field* f0, Field* jphi0, Grid* grid0, Field* p0, Field* g0, const char* outputs) {
     f = f0;
     jphi = jphi0;
     p = p0;
@@ -14,10 +14,10 @@ Grad_Output_Hdf::Grad_Output_Hdf(Field* f0, Field* jphi0, Grid* grid0, Field* p0
     Grad_Output::parse_outputs(outputs);
 }
 
-Grad_Output_Hdf::~Grad_Output_Hdf(){
+GradOutputHdf::~GradOutputHdf(){
 }
 
-void Grad_Output_Hdf::write_output(const char* filename){
+void GradOutputHdf::write_output(const char* filename){
     hid_t       file_id;
     hsize_t     dims[2],dimr[1],dimz[1];
     herr_t      status;
@@ -88,7 +88,7 @@ void Grad_Output_Hdf::write_output(const char* filename){
 
 }
 
-void Grad_Output_Hdf::twod_to_oned(const double * const *f, double *x, int nx, int ny){
+void GradOutputHdf::twod_to_oned(const double * const *f, double *x, int nx, int ny){
     for (int i = 0; i < nx; ++i){
         for (int j = 0; j < ny; ++j){
             x[i*ny + j] = f[i][j];

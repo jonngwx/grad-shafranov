@@ -3,23 +3,23 @@
  * @author Peter J. Bolgert
  * @brief Implementation for the SlowBoundary class.
  */
-#include "include/slow_boundary.h"
+#include <stdio.h>
+#include <math.h>
+
 #include "include/boundary.h"
 #include "include/tsv_reader.h"
 #include "include/grid.h"
 #include "include/field.h"
-#include <stdio.h>
-#include <math.h>
 #include "include/green_fcn.h"
+#include "include/slow_boundary.h"
 
-SlowBoundary::SlowBoundary(Grid* grid)
-    : Boundary(grid),
+SlowBoundary::SlowBoundary(Field* psi, Grid* grid)
+    : Boundary(psi, grid),
       R_(grid->R_),
       z_(grid->z_),
       dr_(grid->dr_),
       dz_(grid->dz_) {
 
-  perim_ = 2 * (nr_ + nz_ - 2);
   cond_data_ = new CoilData();
 //  printf("num rows = %i \n", cond_data_->num_coil_subregions());
 
@@ -36,8 +36,8 @@ SlowBoundary::SlowBoundary(Grid* grid)
   }
 }
 
-SlowBoundary::SlowBoundary(Grid* grid, CoilData* cond_data)
-    : SlowBoundary(grid) {
+SlowBoundary::SlowBoundary(Field* psi, Grid* grid, CoilData* cond_data)
+    : SlowBoundary(psi, grid) {
 
   *cond_data_ = *cond_data;
 
@@ -68,30 +68,31 @@ SlowBoundary::~SlowBoundary() {
     delete[] g_coils_[c];
   }
   delete[] g_coils_;
-
+  delete cond_data_;
 }
 
-int SlowBoundary::CalcB(Field* psi, Field* jphi) {
+int SlowBoundary::CalcB(Field* jphi) {
   double mu0 = 4 * M_PI * 1e-7; /* magnetic permeability of free space */
   // printf("perim_ is %d.\n",perim_);
   int n_rows_ = cond_data_->num_coil_subregions();
+
   for (int l = 0; l < perim_; ++l) {
     // printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));
-    psi->f_[LtoI(l)][LtoJ(l)] = 0;
+    psib_old[l] = psi_->f_[LtoI(l)][LtoJ(l)];
+    psi_->f_[LtoI(l)][LtoJ(l)] = 0;
     for (int i = 0; i < nr_; ++i) {
       for (int j = 0; j < nz_; ++j) {
-        psi->f_[LtoI(l)][LtoJ(l)] +=
+        psi_->f_[LtoI(l)][LtoJ(l)] +=
             mu0 * g_plasma_[i][j][l] * (jphi->f_[i][j]);
       }
     }
-    psi->f_[LtoI(l)][LtoJ(l)] *= (dr_ * dz_);
+    psi_->f_[LtoI(l)][LtoJ(l)] *= (dr_ * dz_);
     
     // add psi at bdy due to coils
     for (int c = 0; c < n_rows_; ++c) {
       //printf("l = %i, c = %i \n", l, c);
-      psi->f_[LtoI(l)][LtoJ(l)] += mu0 * g_coils_[c][l] * cond_data_->current(c);
+      psi_->f_[LtoI(l)][LtoJ(l)] += mu0 * g_coils_[c][l] * cond_data_->current(c);
     }
   }
-
   return 0;
 }

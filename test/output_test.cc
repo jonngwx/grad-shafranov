@@ -1,5 +1,4 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE Output
 #define protected public
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
@@ -26,19 +25,19 @@ BOOST_AUTO_TEST_CASE (test_parse_output) {
     Field * p =  new Field(*grid);
     Field * g = new Field(*grid);
 
-    Grad_Output_Txt grad_output(psi,jphi,grid,p,g,"j");
+    GradOutputTxt grad_output(psi,jphi,grid,p,g,"j");
     BOOST_CHECK_EQUAL(grad_output.output_list.size(),1);
 
-    Grad_Output_Txt grad_output1(psi,jphi,grid,p,g,"gibberish");
+    GradOutputTxt grad_output1(psi,jphi,grid,p,g,"gibberish");
     BOOST_CHECK_EQUAL(grad_output1.output_list.size(),0);
 
-    Grad_Output_Txt grad_output2(psi,jphi,grid,p,g,"j,j,j,j,j");
+    GradOutputTxt grad_output2(psi,jphi,grid,p,g,"j,j,j,j,j");
     BOOST_CHECK_EQUAL(grad_output2.output_list.size(),1);
 
-    Grad_Output_Txt grad_output3(psi,jphi,grid,p,g,"j,bt");
+    GradOutputTxt grad_output3(psi,jphi,grid,p,g,"j,bt");
     BOOST_CHECK_EQUAL(grad_output3.output_list.size(),2);
-    BOOST_CHECK_EQUAL(grad_output3.output_list[1],Grad_Output::TOROIDAL_FIELD);
-    BOOST_CHECK_EQUAL(grad_output3.output_list[0],Grad_Output::CURRENT);
+    BOOST_CHECK_EQUAL(grad_output3.output_list[1],GradOutput::TOROIDAL_FIELD);
+    BOOST_CHECK_EQUAL(grad_output3.output_list[0],GradOutput::CURRENT);
     delete p;
     delete g;
     delete psi;

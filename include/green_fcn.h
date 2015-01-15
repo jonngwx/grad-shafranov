@@ -1,6 +1,6 @@
 /*! 
  * @file green_fcn.h
- * @author ???
+ * @author Peter J. Bolgert
  * @brief delcaration for green_fcn()
  */
 

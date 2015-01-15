@@ -1,6 +1,6 @@
 /*!
  * @file tsv_reader.cc
- * @brief implementation for Table and CoilData and PGData classes.
+ * @brief implementation for Table and CoilData classes.
  * @author Jacob Schwartz
  */
 #include <stdlib.h>
@@ -85,10 +85,10 @@ int CoilData::load_from_tsv(const std::string tsv_file_name, int header_lines) {
     if (num_columns_ == 3) { //simple coil_data.tsv format
       coil_data_ = data_;
       return 0;
-    } else if (num_columns_ == 14) { //compressed coil_data.tsv format
+    } else if (num_columns_ == 14) { //'coil regions' coil_data.tsv format
       return GenerateCoilData();
     } else {
-      std::cout << "Error: CoilData must have three columns for the simple format or fourteen columns for the 'compressed' format.\n";
+      std::cout << "Error: CoilData must have three columns for the simple format or fourteen columns for the 'coil regions' format.\n";
       return kNotCorrectNumColumnsError;
     }
   }
@@ -115,18 +115,4 @@ int CoilData::GenerateCoilData(){
     }
   }
   return 0; // May have nonzero returns in the future (to indicate an error) in case of bad input. 
-}
-
-int PGData::load_from_tsv(const std::string tsv_file_name, int header_lines) {
-  int status = Table::load_from_tsv(tsv_file_name, header_lines);
-  if (status != 0) {
-    return status;
-  } else {
-    if (num_columns_ != 2) {
-      std::cout << "Error: PGData must have three columns.\n";
-      return kNotTwoColumnsError;
-    } else {
-      return 0;
-    }
-  }
 }
