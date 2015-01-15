@@ -1,17 +1,17 @@
-#include "sor.h"
-#include "elliptic_solver.h"
-#include "grid.h"
-#include "field.h"
+/*!
+ * @file sor.cc
+ * @brief Base class implementation of Successive Over-Relaxation implementation of EllipticSolver
+ */
+
 #include <math.h>
 #include <stdio.h>
 #include <vector>
 #include <assert.h>
 
-/*!
- * @file sor.cc
- * @brief Base class implementation of Successive Over-Reduction implementation of EllipticSolver
- * @section DESCRIPTION
- */
+#include "sor.h"
+#include "grid.h"
+#include "field.h"
+#include "elliptic_solver.h"
 
 SOR::SOR(const Grid &GridS, Field &Psi, double omega_init):
   EllipticSolver(GridS, Psi),

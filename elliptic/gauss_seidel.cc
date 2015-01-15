@@ -1,26 +1,22 @@
-#include "gauss_seidel.h"
-#include "field.h"
-#include "grid.h"
-#include <assert.h>
-#include <vector>
-#include "elliptic_solver.h"
-#include <stdio.h>
-#include <math.h>
-
 /*!
  * @file gauss_seidel.cc
- * @brief Base class implementation of GaussSeidel
- * @section DESCRIPTION
+ * @brief Implementation of class GaussSeidel
  */
+#include <assert.h>
+#include <vector>
+#include <stdio.h>
+#include <math.h>
+#include "field.h"
+#include "grid.h"
+#include "elliptic_solver.h"
+#include "gauss_seidel.h"
+
 GaussSeidel::GaussSeidel(const Grid &GridS, Field &Psi, double error_ES) :
   EllipticSolver(GridS, Psi),
   error_(error_ES) { }
 
 GaussSeidel::~GaussSeidel(){}
 
-/*!
- * @brief Calculates coefficients for iteration
- */
 void GaussSeidel::coeff() {
     double dr = Grid_.dr_;
     double dz = Grid_.dz_;
@@ -36,12 +32,8 @@ void GaussSeidel::step_1(const Field &jphi){
   step(jphi);
 }
 
-/*!
- * @brief For first iteration - use Gauss Seidel with blending
- * @param jphi current evaluated at current Psi
- */
 void GaussSeidel::step(const Field &jphi){
-  const double mu0 = 0.0000012566370614; // in SI units
+  const double mu0 = 4 * M_PI * 1e-7; // in SI units
   double nr = Grid_.nr_;
   double nz = Grid_.nz_;
   
@@ -78,6 +70,5 @@ void GaussSeidel::step(const Field &jphi){
     if (k == 999) {printf("Gauss-Seidel algorithm reached end without converging\n");}  
   }  // end Gauss seidel algorithm
   //iter(0.5);
- 
 }
 
