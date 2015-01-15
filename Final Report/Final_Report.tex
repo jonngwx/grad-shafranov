@@ -82,7 +82,7 @@
 
 \section{Project Objective / Summary}
 
-Our goal was to write a program which solves the Grad-Shafranov equation (GSE) for axisymmetric plasmas in a user friendly manner.  The result is COUGAR, which stands for \textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, simply analytic forms for pressure and azimuthal magnetic field must be assumed.  Future versions of the code will deduce these quantities from experimental measurements.  For information on running COUGAR, see the README at \href{http://jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}}.
+Our goal was to write a program which solves the Grad-Shafranov equation (GSE) for axisymmetric plasmas in a user friendly manner.  The result is COUGAR, which stands for \textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, simple analytic forms for pressure and azimuthal magnetic field must be assumed.  Future versions of the code will deduce these quantities from experimental measurements.  For information on running COUGAR, see the README at \href{http://jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}}.
 
 %----------------------------------------------------------------------------------------
 %	Section 2
@@ -135,38 +135,38 @@ where $\mu_0 R J_{\phi} (R,\Psi) = - \big(\mu_0 R^2 \frac{d p}{d\Psi} + g \frac{
 \begin{equation}
 \Delta^{*}\Psi^{n} = \mu_0 R J_\phi (R, \Psi^{n-1}),
 \end{equation}
-where $n$ denotes the iteration level. The solution of $\Psi^n$ is plugged into the right-hand-side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods, handled by base class \texttt{EllipticSolver}.  We currently have implemented two child classes to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive Over-Relaxation (SOR), which are explained in the next section.  
+where $n$ denotes the iteration level. The solution of $\Psi^n$ is plugged into the right-hand side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods, handled by base class \texttt{EllipticSolver}.  We currently have implemented two child classes to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive Over-Relaxation (SOR), which are explained in Section 3.  
 
-At the very beginning of the calculation we must supply an initial guess of $J_{\phi}$.  We use a quadratic form of $J_{\phi}$, taken from the paper by Johnson et al.~(J.~Comp.~Phys.~32 (1979), 212-234).  It has several parameters which must be set, such as the total azimuthal current $I_p$ (commonly called the plasma current) .  See \texttt{gs\_solver.cc} for more information.
+At the very beginning of the calculation we must supply an initial guess of $J_{\phi}$.  We use a quadratic form of $J_{\phi}$ taken from a paper by Johnson et al.~(J.~Comp.~Phys.~32 (1979), 212-234).  It has several parameters which must be set, such as the total azimuthal current $I_p$ (commonly called the plasma current).  See \texttt{gs\_solver.cc} for more information.
 
-Next, we use the updated $\Psi^n$ to calculate the value of $\Psi$ at the plasma-vacuum boundary (this defines where we must set pressure and current to zero).  This calculation is handled by the \texttt{Critical} class, which is so named because the plasma boundary either exists at a saddle point of $\Psi$ (a critical point) or where the plasma touches a solid object, like the vessel wall. We use the terms ``plasma edge" and ``limiter" interchangably in this document.  \texttt{Critical} also finds the magnetic axis, which is the minimum of $\Psi$ (the center of the contours in Figure 1).  
+Next, we use the updated $\Psi^n$ to calculate the value of $\Psi$ at the plasma-vacuum boundary (this defines where we must set pressure and current to zero).  This calculation is handled by the \texttt{Critical} class, which is so named because the plasma boundary either exists at a saddle point of $\Psi$ (a critical point) or where the plasma touches a solid object, like the vessel wall. We use the terms ``plasma edge" and ``limiter" interchangably in this document.  \texttt{Critical} also finds the magnetic axis, which is the point of minimum $\Psi$ (the center of the contours in Figure 1).  
 
-Lastly in the inner iteration, we must update the current density $J_{\phi}$, handled by the base class \texttt{JSolver}.  As previously stated, the $\phi$-directed current density is given by $J_{\phi} = -R \frac{d p}{d \Psi} - \frac{1}{\mu_0 R} g \frac{d g}{d \Psi}$. Our most successful child class of \texttt{JSolver}, called \texttt{JSolverJardin}, uses the following forms for $p$ and $g$:
+Lastly in the inner iteration, we must update the current density $J_{\phi}$, handled by the base class \texttt{JSolver}.  As previously stated, the $\phi$-directed current density is given by $J_{\phi} = -R \frac{d p}{d \Psi} - \frac{1}{\mu_0 R} g \frac{d g}{d \Psi}$. Our most successful child class of \texttt{JSolver}, called \texttt{JSolverAlpha}, uses the following forms for $p$ and $g$:
 \begin{subequations}
 \begin{align}
 	p(\Psi) &= p_0 \widetilde{\Psi}^{n_1},\\
           g^2(\Psi) &= g_0^2  \left[1 + \alpha_g \widetilde{\Psi}^{n_2} \right],
 \end{align}
 \end{subequations}
-where $\widetilde{\Psi}$ is a normalized flux function defined by $\widetilde{\Psi} \equiv (\Psi_l - \Psi)/(\Psi_l - \Psi_0)$.  Here,  $\Psi_l$ and $\Psi_0$ are the $\Psi$-values at the plasma edge (limiter) and magnetic boundary, as determined by \texttt{Critical}.  In Eq.~(4), $p_0$ (the pressure at the magnetic axis), $g_0$ (related to the vacuum azimuthal B-field), and the exponents $n_1,n_2$ must be specified on the command line or in a config file.  The parameter $\alpha_g$ is computed at during each inner iteration so that the total azimuthal current $I_p$ is conserved.   For the sake of self-containedness, here's the formula: $\alpha_g = \mu_0 \left[-p_0 \sum_{i,j} R_i n_1 \widetilde{\Psi}_{ij}^{(n_1-1)} + I_p (\Psi_l - \Psi_0)/dR\, dz \right] \bigg/ \left[\frac{1}{2} g_0^2 \sum_{i,j} n_2 \widetilde{\Psi}_{ij}^{(n_2-1)} / R_i\right]$, where $dR, dz$ are spaces between grid points.
+where $\widetilde{\Psi}$ is a normalized flux function defined by $\widetilde{\Psi} \equiv (\Psi_l - \Psi)/(\Psi_l - \Psi_0)$.  Here,  $\Psi_l$ and $\Psi_0$ are the $\Psi$-values at the plasma edge (limiter) and magnetic boundary, as determined by \texttt{Critical}.  In Eq.~(4), $p_0$ (the pressure at the magnetic axis), $g_0$ (related to the vacuum azimuthal B-field), and the exponents $n_1,n_2$ must be specified on the command line or in a config file.  The parameter $\alpha_g$ is computed during each inner iteration so that the plasma current $I_p$ is conserved.   For the sake of self-containedness, here's the formula: $\alpha_g = \mu_0 \left[-p_0 \sum_{i,j} R_i n_1 \widetilde{\Psi}_{ij}^{(n_1-1)} + I_p (\Psi_l - \Psi_0)/dR\, dz \right] \bigg/ \left[\frac{1}{2} g_0^2 \sum_{i,j} n_2 \widetilde{\Psi}_{ij}^{(n_2-1)} / R_i\right]$, where $dR, dz$ are spaces between grid points.
 
 
 %%% OUTER ITERATION %%%%%
 
-\textbf{Outer Iteration}: The outer iteration deals with the nonlinearity due to boundary conditions.  Suppose that there are $N_c$ external coils outside of the computational boundary.  The flux function evaluated on the computational boundary $\Psi_b$ is then due to the plasma itself and the external coils:
+\textbf{Outer Iteration}: The outer iteration deals with the nonlinearity due to boundary conditions.  Suppose that there are $N_{coils}$ external coils outside of the plasmal boundary (they can be inside or outside the computational grid).  The flux function evaluated on the computational boundary $\Psi(R',z')$ is then due to the plasma itself and the external coils:
 \begin{equation}
-\Psi^m_b (R',z') = \mu_0 \int_{plasma} G(R,z; R',z') J_{\phi}^{m-1} \mathop{dR} \mathop{dz} + \mu_0 \sum_{i=1}^{N_c} G(R_i^c,z_i^c; R',z') I_i,
+\Psi^m (R',z') = \mu_0 \int_{plasma} G(R,z; R',z') J_{\phi}^{m-1} \mathop{dR} \mathop{dz} + \mu_0 \sum_{k=1}^{N_{coils}} G(R_k,z_k; R',z') I_k,
 \end{equation}
-where $G$ is the Green's function for the elliptic operator $\Delta^{*}$, $(R_i^c,Z_i^c)$ is the location of the $i$th coil with current $I_i$, and $(R',z')$ refers to a point on the computational boundary. Here, $J_{\phi}^{m-1}$ is the converged current density from the previous inner iteration.  The Green's function, which is defined by $\Delta^{*}G(\mathbf{R};\mathbf{R'}) = R \delta(R-R')\delta(z-z')$, is given by
+where $G$ is the Green's function for the elliptic operator $\Delta^{*}$, $(R_k,z_k)$ is the location of the $k$th coil with current $I_k$, and $(R',z')$ refers to a point on the computational boundary. Here, $J_{\phi}^{m-1}$ is the converged current density from the previous  iteration.  The Green's function, which is defined by $\Delta^{*}G(\mathbf{R};\mathbf{R'}) = R \delta(R-R')\delta(z-z')$, is given by
 \begin{equation}
 G(\mathbf{R};\mathbf{R'}) = -\frac{1}{2\pi} \frac{\sqrt{RR'}}{k} [(2-k^2) K(k) - 2 E(k)], 
 \end{equation} 
 where $k^2 = 4RR'/[(R+R')^2+(z-z')^2]$, and where $K(k)$ and $E(k)$ are complete elliptic integrals as defined by the Boost special functions website (Arfken's book and Mathematica use slightly different definitions). The Green's function can be computed before the main calculation and stored in an array.
 
 
-There is a faster method of calculating the boundary ($\mathcal{O}(N^2)$ vs $\mathcal{O}(N^3)$) known Von Hagenow's method. It is described in Lackner, Comp.~Phys. Comm.~12 (1976) 33-44.  As the size of the grid increases, the time it takes to populate the Green's function array for Eq.~(4) can dominate the rest of the calculation.  The faster method needs a factor of N fewer Green's function values, making the calculation much faster.    
+There is a faster method of calculating the boundary ($\mathcal{O}(N^2)$ vs $\mathcal{O}(N^3)$) known as Von Hagenow's method. It is described in Lackner, Comp.~Phys. Comm.~12 (1976) 33-44.  As the size of the grid increases, the time it takes to populate the Green's function array for Eq.~(5) can dominate the rest of the calculation.  The faster method needs a factor of $\approx N$ fewer Green's function values, making the calculation much quicker.    
 
-Thus, given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.  This $\Psi$ is then used to calculate a new set of boundary conditions using Eq.~(4), and the process begins anew.  Ultimately, the process is a two-tiered iteration which runs until the outer loop converges.  The process is depicted in Figure 2.
+Thus, given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.  This $\Psi$ is then used to calculate a new set of boundary conditions using Eq.~(5), and the process begins anew.  Ultimately, the process is a two-tiered iteration which runs until the outer loop converges.  The process is depicted in Figure 2.
 
 \begin{figure}
 \centering
@@ -175,23 +175,23 @@ Thus, given a set of boundary conditions, we can solve Eq.~(3) iteratively for $
 \includegraphics[width=0.45\textwidth]{algorithm}
 \end{figure}
 
-In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the source function, the location of external coils $(R_i^c,z_i^c)$ and their currents $I_i$, and the functional forms of $p(\Psi)$ and $g(\Psi)$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-z$ plane.  From there, any derived quantity can be calculated.  
+In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the current density, the location of external coils $(R_k,z_k)$ and their currents $I_k$, and the functional forms of $p(\Psi)$ and $g(\Psi)$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-z$ plane.  From there, any derived quantity can be calculated.  
 
 \subsection{Algorithm using Experimental Measurements (for the future)}
 
-In an experiment, $p(\Psi)$ and $g(\Psi)$ are unknown, but suppose we have $N_l$ measurements of the flux function $\Psi_l^{meas}$ near the plasma boundary (but within the computational boundary).  
+In an experiment, $p(\Psi)$ and $g(\Psi)$ are unknown, but suppose we have $N_{meas}$ measurements of the flux function $\Psi_l^{meas}$ near the plasma boundary (but within the computational boundary).  
 
-First we expand our unknown functions in terms of basis functions (which our group must still determine):
+First we expand our unknown functions in terms of basis functions (e.g. Legendre polynomials):
 \begin{equation}
-p'(\Psi) = \sum_j \alpha_j y_j(\Psi), \quad gg'(\Psi) = \sum_j \beta_j y_j(\Psi).
+p'(\Psi) = \sum_s \alpha_s y_s(\Psi), \quad gg'(\Psi) = \sum_s \beta_s y_s(\Psi).
 \end{equation}
-We can then write a formula for the computed value of $\Psi$ at the location $(R_l, Z_l)$ of each experimental measurement: 
+We can then write a formula for the computed value of $\Psi$ at the location $(R_l, z_l)$ of each experimental measurement: 
 \begin{equation}
-\Psi_l^{comp}(R_l, Z_l) = \mu_0 \int_{plasma} G(R,Z; R_l,Z_l) J_\phi(R,\Psi,\alpha_j,\beta_j) dR dZ + \mu_0 \sum_{i=1}^{N_c} G(R_i^c,Z_i^c; R_l,Z_l) I_i.
+\Psi_l^{comp}(R_l, z_l) = \mu_0 \int_{plasma} G(R,z; R_l,z_l) J_\phi(R,\Psi,\alpha_s,\beta_s) dR dz + \mu_0 \sum_{k=1}^{N_{coils}} G(R_k ,z_k; R_l,z_l) I_k.
 \end{equation}
 The computed values are compared to the measured values, and the minimization of an error function determines the values of $\alpha_j, \beta_j$ at that stage in the algorithm.   
 
-Thus, the algorithm described in Section 1.4 is identical to that described in Section 1.3 (and depicted in Fig.~2), except that each time $\Psi$ is updated in the inner ($n$) loop, we also update the values of $\alpha_j, \beta_j$.  In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the source function, the location of external coils $(R_i^c,Z_i^c)$ and their currents $I_i$, and the location of the experimental measurements $(R_l,Z_l)$ and their values $\Psi_l^{meas}$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-Z$ plane.  
+Thus, the algorithm described in Section 1.4 is identical to that described in Section 1.3 (and depicted in Fig.~2), except that each time $\Psi$ is updated in the inner ($n$) loop, we also update the values of $\alpha_s, \beta_s$.  In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the source function, the location of external coils $(R_k,z_k)$ and their currents $I_k$, and the location of the experimental measurements $(R_l,z_l)$ and their values $\Psi_l^{meas}$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-z$ plane.  
 
 
 
