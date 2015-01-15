@@ -37,7 +37,15 @@ To run the code, type
 
 with the appropriate command line options. If you specify an illegal value for an option, or a file which does not exist or is not the right format, the program may terminate with an Error message, or with a crash.
 
-To plot the output, type
+
+Data analysis
+-------------------------
+
+There are analysis functions provided in python, though the data can be read using any text editor/HDF5 library. The format of each line of the output `tsv` files is
+    
+    [field name]: [data] [data] ... 
+    
+in column-major order. 
 
     python python/viz.py cougar.out.tsv 
     
