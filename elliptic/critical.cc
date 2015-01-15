@@ -35,44 +35,39 @@ z_stag_down_orig(z_stag_down),
 R_stag_down(R_stag_down),
 z_stag_down(z_stag_down),
 limiters_(limiters) {
-    // interpolate at stag point
-    assert(limiters.num_rows()>0);
-    assert(limiters.num_columns() == 2);
-    for (int i = 0; i < limiters.num_rows();++i){
-      try {
-	Inter_.updateInterpolation(limiters_.data(i,0), limiters_.data(i,1));
-      } catch (int i){
-	if (i == OutsideGrid) printf("Error: physical limiter outside/too close to computational boundary\n");
-	if (i == OutsideInterp) printf("Error: outside Interp\n");
-	throw i;
-      }
-        Psi_phys_lim.push_back(0);
+  // interpolate at stag point
+  assert(limiters.num_rows()>0);
+  assert(limiters.num_columns() == 2);
+  for (int i = 0; i < limiters.num_rows();++i){
+    try {
+      Inter_.updateInterpolation(limiters_.data(i,0), limiters_.data(i,1));
+    } catch (int i){
+      if (i == OutsideGrid) { printf("Error: physical limiter outside/too close to computational boundary\n"); }
+      if (i == OutsideInterp) { printf("Error: outside Interp\n"); }
+      throw i;
     }
+    Psi_phys_lim.push_back(0);
+  }
   try {
-      Inter_.updateInterpolation(R_stag_up, z_stag_up);
-      Psi_stag_up = Inter_.F(R_stag_up, z_stag_up);
+    Inter_.updateInterpolation(R_stag_up, z_stag_up);
+    Psi_stag_up = Inter_.F(R_stag_up, z_stag_up);
   }
   catch(int i) {
-      if (i == OutsideGrid) printf("Error: upper saddle point outside grid\n");
-      if (i == OutsideInterp) printf("Error: outside Interp\n");
-      throw i;
+    if (i == OutsideGrid) { printf("Error: physical limiter outside/too close to computational boundary\n"); }
+    if (i == OutsideInterp) { printf("Error: outside Interp\n"); }
+    throw i;
   }
 
   // Interpolate Psi_ at (R0, z_limiter2)
   try {
-      Inter_.updateInterpolation(R_stag_down, z_stag_down);
-      Psi_stag_down = Inter_.F(R_stag_down, z_stag_down);
+    Inter_.updateInterpolation(R_stag_down, z_stag_down);
+    Psi_stag_down = Inter_.F(R_stag_down, z_stag_down);
   }
   catch(int i) {
-      if (i == OutsideGrid) printf("Error: lower saddle point outside grid\n");
-      if (i == OutsideInterp) printf("Error: outside Interp\n");
-      throw i;
+    if (i == OutsideGrid) printf("Error: lower saddle point outside grid\n");
+    if (i == OutsideInterp) printf("Error: outside Interp\n");
+    throw i;
   }
-
-//  printf("Rl = %f\n", Rl);
-//  printf("zl = %f\n", zl);
-//  printf("R0 = %f\n", R0);
-//  printf("z0 = %f\n", z0);
 }
 
 Critical::~Critical() {}
@@ -84,9 +79,7 @@ void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   double D;
   double Psi_rr, Psi_rz, Psi_zz, Psi_z, Psi_r;
   Psi_rr = Inter_.F_rr(r, z);
-
   Psi_rz = Inter_.F_rz(r, z);
-  
   Psi_zz = Inter_.F_zz(r, z);
   Psi_z = Inter_.F_z(r, z);
   Psi_r = Inter_.F_r(r, z);
@@ -94,7 +87,6 @@ void Critical::Psi_search(double r, double z, double *dr, double *dz) {
   assert(D != 0);
   *dr = (-Psi_zz*Psi_r + Psi_rz*Psi_z)*(1.0/D);
   *dz = (Psi_rz*Psi_r - Psi_rr*Psi_z)*(1.0/D);
-  //  printf("Psi_rr = %15.8f, Psi_rz = %15.8f, D = %15.8f, Psi_zz = %15.8f, Psi_z = %15.8f, Psi_r = %15.8f, dr = %15.8f, dz = %15.8f\n", Psi_rr, Psi_rz, D, Psi_zz, Psi_z, Psi_r ,*dr, *dz);
 }
 
 /*!
@@ -107,24 +99,23 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
   double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D;
   for (int i = 0; i < max_iter; ++i) {
     try {
-        Inter_.updateInterpolation(r,z);
-        Psi_r = Inter_.F_r(r,z);
-        Psi_z = Inter_.F_z(r,z);
-        Psi_rz = Inter_.F_rz(r,z);
-        Psi_zz = Inter_.F_zz(r,z);
-        Psi_rr = Inter_.F_rr(r,z);
-
+      Inter_.updateInterpolation(r,z);
+      Psi_r = Inter_.F_r(r,z);
+      Psi_z = Inter_.F_z(r,z);
+      Psi_rz = Inter_.F_rz(r,z);
+      Psi_zz = Inter_.F_zz(r,z);
+      Psi_rr = Inter_.F_rr(r,z);
     }
     catch(int i) {
     // If r or z outside grid, use original coordinates
 
       if (i == OutsideGrid) {
-          printf("Interpolation outside grid\n");
-          break;
+        printf("Interpolation outside grid\n");
+        break;
       }
       if (i == OutsideInterp) {
-          printf("Interpolation failed\n");
-          break;
+        printf("Interpolation failed\n");
+        break;
       }
     }
     // Calculate |del Psi(r,z)| - if within tolerence
@@ -133,19 +124,17 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
       D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
       // If critical point corresponds to a minimum
       if (D > 0 && Psi_rr > 0) {
-	Psi_min_ = Inter_.F(r,z);
+        Psi_min_ = Inter_.F(r,z);
         *Psi_min = Psi_min_;
         *rcrit = r;
         *zcrit = z;
         return;
       }
-      //      printf("not a minimum at R = %f, z = %f, D = %f, Psirr = %f, Psizz = %f, Psi = %f\n", r, z, D, Psi_rr, Psi_zz, Inter_.F(r,z));
+      // printf("not a minimum at R = %f, z = %f, D = %f, Psirr = %f, Psizz = %f, Psi = %f\n", r, z, D, Psi_rr, Psi_zz, Inter_.F(r,z));
       // if this fails, we are at a stationary point, but it's not a minimum so searching will keep bringing us back here and we break.
       break;
     }
     Psi_search(r, z, &dr, &dz);
-    //    printf("dr = %f\n", dr);
-    //    printf("dz = %f\n", dz);
     r += dr;
     z += dz;
     // Check if outside boundaries
@@ -163,13 +152,13 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
   // If search fails, brute force it.
   Psi_min_ = Psi_.f_[0][0];
   for (int i = 0; i < Grid_.nr_; ++i){
-      for (int j = 0; j < Grid_.nz_; ++j){
-          if (Psi_.f_[i][j] < Psi_min_){
-              Psi_min_ = Psi_.f_[i][j];
-              R0 = Grid_.R_[i]; 
-              z0 = Grid_.z_[j];
-          }
+    for (int j = 0; j < Grid_.nz_; ++j){
+      if (Psi_.f_[i][j] < Psi_min_){
+        Psi_min_ = Psi_.f_[i][j];
+        R0 = Grid_.R_[i]; 
+        z0 = Grid_.z_[j];
       }
+    }
   }
   //  Psi_min_ = Inter_.F(R0, z0);
   printf("o point critical search failed, new min at %f, %f, psi = %f\n",R0,z0, Psi_min_);
@@ -250,7 +239,6 @@ void Critical::update() {
  * Returns false if search lands outside of horizontal limiters or grid 
  * boundaries.
  */
-
 bool Critical::find_saddle(double &r, double &z){
     double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D;
     double dr =0;
@@ -267,30 +255,30 @@ bool Critical::find_saddle(double &r, double &z){
     }
     // Calculate |del Psi(r,z)|
     // Update Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz
-      Psi_r = Inter_.F_r(r,z);
-      Psi_z = Inter_.F_z(r,z);
-      Psi_rz = Inter_.F_rz(r,z);
+    Psi_r = Inter_.F_r(r,z);
+    Psi_z = Inter_.F_z(r,z);
+    Psi_rz = Inter_.F_rz(r,z);
 
-      Psi_zz = Inter_.F_zz(r,z);
-      Psi_rr = Inter_.F_rr(r,z);
-      // If within tolerence
-      if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
-          D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
-          // If critical point corresponds to a saddle point
-          if (D < 0) {
-              return true;
-          }
-          break;
+    Psi_zz = Inter_.F_zz(r,z);
+    Psi_rr = Inter_.F_rr(r,z);
+    // If within tolerence
+    if (sqrt(Psi_r*Psi_r + Psi_z*Psi_z) < epsilon){
+      D = Psi_rr*Psi_zz - Psi_rz*Psi_rz;
+      // If critical point corresponds to a saddle point
+      if (D < 0) {
+        return true;
       }
-      Psi_search(r, z, &dr, &dz);
-      assert(!isnan(dr));
-      assert(!isnan(dz));
-      r += dr;
-      z += dz;
-      // Check if outside limiters
-      if (z >= Grid_.z_[Grid_.nz_-1] || z <= Grid_.z_[0]) break;
-      // Check if outside grid boundaries
-      if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) break;
+      break;
+    }
+    Psi_search(r, z, &dr, &dz);
+    assert(!isnan(dr));
+    assert(!isnan(dz));
+    r += dr;
+    z += dz;
+    // Check if outside limiters
+    if (z >= Grid_.z_[Grid_.nz_-1] || z <= Grid_.z_[0]) { break; }
+    // Check if outside grid boundaries
+    if (r <= Grid_.R_[0] || r >= Grid_.R_[Grid_.nr_-1]) { break; }
   }
   return false;
 }
