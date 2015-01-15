@@ -24,7 +24,7 @@ Operation
 
 In order to run COUGAR, a number of physical parameters must be provided. These are listed here and can also be found by calling the solver with the `--help` command line option. The parameters can be provided using the command line or a configuration file using the `-c` flag (the default file is `grad-shafranov.cfg`). The exact format of the command line options and configuration file is provided in the documentation.
 
-* Main program and solver configuration: The positions and values of the external currents must be provided in a `.tsv` file, as must be the positions of the physical limiters.
+* Main program and solver configuration: The positions and values of the external currents must be provided in a `.tsv` file, as must be the positions of the physical limiters. Currents must be outside the computational boundary, while limiters must be at least two cells from the edge of the boundary.
 * Grid and geometry: The computational domain should be specified.
 * Saddle point initial geometry: The positions of initial guesses for two saddle points of the flux function should be specified. These guesses should be within the computational grid. The saddle points are used to calculate the plasma boundary.
 * The form and magnitude of the pressure and current: The magnetic field on-axis, pressure on-axis and the exponents for the forms of the pressure and toroidal field distributions should be given. 
