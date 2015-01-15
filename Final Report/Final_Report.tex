@@ -213,7 +213,7 @@ The following external libraries are used:
 \end{itemize}
 
 %%%%%%%%%%%%%%%% BIG CLASS TABLE%%%%%%%%%%%%%%%%%
-\newgeometry{left=0.1cm, right=0.1cm, top=0.1cm, bottom=0.1cm}
+\newgeometry{left=0.1cm, right=0.1cm, top=0.1cm, bottom=0.35cm}
 \begin{table}
 \small
 \tiny{\caption{Summary of COUGAR Classes (colors show class hierarchy)}}
@@ -240,7 +240,7 @@ virtual void coeff()=0
 double residuals(const Field &Psi, const Field &Psi_prev) 
 \end{lstlisting}
     &
-    Base class implementation for GaussSeidel and SOR. Solves finite difference equation for inverting elliptic operator. 
+    Base class for elliptic solvers like GaussSeidel and SOR which solve the finite difference GSE. 
      \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[blue!25]{0.35cm}{0.35cm} \, GaussSeidel &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
@@ -261,7 +261,7 @@ double omega()
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual void update(Field *jphi, Field *psi, Field *p, Field *g)=0
 \end{lstlisting}
-    & Base class of methods which calculate $J_{\phi}$ as a function of $\Psi$. \\ 
+    & Base class of methods which calculate $J_{\phi}$ \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[cyan!25]{0.35cm}{0.35cm} \,JSolverAlpha &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void update(Field *jphi, Field *psi, Field *p, Field *g)
@@ -287,7 +287,7 @@ double norm()
 int CalcB(Field *jphi)
 \end{lstlisting}
     & 
-    Calculates the boundary by integrating over the field of $J_{\phi}$ and over the set of external coils using Green's functions.
+    Calculates bdy by integrating over $J_{\phi}$ and over the external coils.
     \\ 
      \specialrule{.05em}{0.0em}{.07em} \colorbox{yellow!50}{Table} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
@@ -316,7 +316,7 @@ void update ()
 bool find_saddle (double &r, double &z)
 \end{lstlisting}
     & 
-    Finds 'critical points' like the magnetic axis, limiter points, and X points. These points are minima, maximima, and saddle points of $\Psi$.
+    Finds `critical points' like the magnetic axis, limiter points, and X points.
      \\ 
     \hline Interpolate & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
@@ -330,7 +330,7 @@ void updateInterpolation(double r, double z)
 void PrintAmnCoefficients()
 \end{lstlisting}
     & 
-    Interpolates to find the values and derivatives of a 2D data set between grid points using fitting to a bicubic polynomial. 
+    Interpolates to find the values and derivatives of a 2D data set between grid points by fitting to a bicubic polynomial. 
      \\ 
     \specialrule{.05em}{0.0em}{.07em} \colorbox{magenta!25}{GradOutput} & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
