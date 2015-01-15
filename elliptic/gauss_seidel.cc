@@ -44,8 +44,9 @@ void GaussSeidel::step(const Field &jphi){
     }
   }
 
+  int max_iters = 10000;
   // Gauss seidel algorithm
-  for (int k = 0; k < 1000; ++k) {
+  for (int k = 0; k < max_iters; ++k) {
     // Save Psi_ to Psi_temp
     for (int i = 0; i < nr; ++i) {
       for(int j = 0; j < nz; ++j) {
@@ -67,7 +68,7 @@ void GaussSeidel::step(const Field &jphi){
       }
     }
     if (sqrt(sum) < error_) {break;}
-    if (k == 999) {printf("Gauss-Seidel algorithm reached end without converging\n");}  
+    if (k == max_iters - 1) {printf("Gauss-Seidel algorithm reached end without converging\n");}  
   }  // end Gauss seidel algorithm
   //iter(0.5);
 }
