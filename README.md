@@ -1,17 +1,26 @@
 COUGAR README
 =============
 
-Nonstandard Requirements:
+
+Installation:
 -------------------------
+To install COUGAR, download the source and ensure the following prerequisites are met
+
 * c++11 compiler like a recent version of g++
+* HDF5 (1.8.0) or newer
 * boost_program_options
-* python 2.7 (with library numpy, matplotlib and h5py)
+* boost_math_tr1
+* boost_unit_test_framework
+* python 2.7 (with packages numpy, matplotlib and h5py)
 
-to compile, type `make`
+If HDF5 is unavailable, the code can be compiled without it. 
 
-to run tests, type `make runtests` 
+To compile without HDF5, type `make`. To compile with HDF5, type 'make gs_solver_hdf'. 
 
-to run type
+Testing is performed by typing `make runtests` 
+
+Operation
+-----------
 
     ./gs_solver
 
