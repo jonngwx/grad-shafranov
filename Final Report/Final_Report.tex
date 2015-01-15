@@ -118,9 +118,9 @@ Of course, in a real tokamak experiment, the functional forms of $g(\Psi)$ and $
 
 \subsection{Algorithm when $p(\Psi)$ and $g(\Psi)$ are specified (current version of COUGAR)}
 
-
-
-First rewrite the Grad-Shafranov equation as
+\textbf{Summary}: The problem is solving using a two-tiered iteration process.  The outer iteration (index $m$) determines the boundary values.  The inner iteration (index $n$) solves the GSE subject to those boundary conditions.
+\\ \\
+\textbf{Detailed Steps}: First rewrite the Grad-Shafranov equation as
 \begin{equation}
 \Delta^{*}\Psi = \mu_0 R J_{\phi} (R, \Psi),
 \end{equation}
@@ -136,20 +136,15 @@ There is an additional nonlinearity relating to the boundary conditions.  Suppos
 \begin{equation}
 \Psi^m_b (R',z') = \mu_0 \int_{plasma} G(R,z; R',z') J_{\phi} \mathop{dR} \mathop{dz} + \sum_{i=1}^{N_c} G(R_i^c,z_i^c; R',z') I_i,
 \end{equation}
-
-
-
-
-
+where $G$ is the Green's function for the elliptic operator $\Delta^{*}$, $(R_i^c,Z_i^c)$ is the location of the $i$th coil with current $I_i$, and $(R',z')$ refers to a point on the plasma boundary.  The Green's function, which is defined by $\Delta^{*}G(\mathbf{R};\mathbf{R'}) = R \delta(R-R')\delta(z-z')$, is given by
 \begin{equation}
-\Psi^m_b (R',Z') = \int_{b} \frac{dl}{R} G(R,Z; R',Z') \frac{\partial U^m}{\partial n} + \sum_{i=1}^{N_c} G(R_i^c,Z_i^c; R',Z') I_i,
-\end{equation}
-where $G$ is the Green's Function for the elliptic operator $\Delta^{*}$ (known analytically and stored in a look up table), $(R_i^c,Z_i^c)$ is the location of the $i$th coil with current $I_i$, and $U^m(R,Z)$ is a function which satisfies
-\begin{align}
-\Delta^{*} U^m &= \mu_0 R J_\phi (R, \Psi^{m-1}) \quad \mbox{inside the comp.~boundary} \\
-U^m &= 0 \quad \mbox{on the boundary}.
-\end{align}
-The calculation of the boundary values using Eq.~4 is known as Von Hagenow's method (Lackner, Comp.~Phys. Comm.~12 (1976) 33-44).
+G(\mathbf{R};\mathbf{R'}) = -\frac{1}{2\pi} \frac{\sqrt{RR'}}{k} [(2-k^2) K(k) - 2 E(k)], 
+\end{equation} 
+where $k^2 = 4RR'/[(R+R')^2+(z-z')^2]$, and where $K(k)$ and $E(k)$ are complete elliptic integrals as defined by the Boost special functions website (Arfken's book and Mathematica use slightly different definitions). The Green's function can be computed before the main calculation and stored in an array.
+
+
+There is a faster method of calculating the boundary ($\mathcal{O}(N^2)$ vs $\mathcal{O}(N^3)$) known Von Hagenow's method. It is described in Lackner, Comp.~Phys. Comm.~12 (1976) 33-44.  As the size of the grid increases, the time it takes to populate the Green's function array for Eq.~(4) can dominate the rest of the calculation.  The faster method needs a factor of N fewer Green's function values, making the calculation much faster.    
+
 The index $m$ in Eq.~(4) shows that the determination of the boundary condition is also an iterative process.  The $(m-1)$th value of $J_\phi$ is used to calculate $\Psi_b^m$.  
 
 Given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.  This $\Psi$ is then used to calculate a new set of boundary conditions using Eq.~(4), and the process begins anew.  Ultimately, the process is a double-nested iteration which runs until the outer loop converges.  The process is depicted in Figure 2.
