@@ -76,7 +76,6 @@ int SlowBoundary::CalcB(Field* jphi) {
   // printf("perim_ is %d.\n",perim_);
   int n_rows_ = cond_data_->num_coil_subregions();
 
-  psib_old = new double[perim_]();
   for (int l = 0; l < perim_; ++l) {
     // printf("For l = %d, i = %d, j = %d \n", l, LtoI(l),LtoJ(l));
     psib_old[l] = psi_->f_[LtoI(l)][LtoJ(l)];
@@ -95,6 +94,5 @@ int SlowBoundary::CalcB(Field* jphi) {
       psi_->f_[LtoI(l)][LtoJ(l)] += mu0 * g_coils_[c][l] * cond_data_->current(c);
     }
   }
-  delete [] psib_old;
   return 0;
 }

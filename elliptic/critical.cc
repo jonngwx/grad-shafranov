@@ -1,3 +1,8 @@
+/*!
+ * @file critical.cc
+ * @author Elizabeth J. Paul
+ * @brief Implementation for the Critical class.
+ */
 #include "critical.h"
 #include "interpolate.h"
 #include "field.h"
@@ -168,8 +173,7 @@ void Critical::Psi_magnetic(double r, double z, double *rcrit, double *zcrit, do
 }
 
 /*!
- * @brief Perform search for critical points beginning with initial
- * guess r, z
+ * @brief Perform search for limiter points
  */
 double Critical::Psi_limiter() {
   double Psi_phys;
@@ -232,6 +236,13 @@ void Critical::update() {
   R0 = rcrit;
   z0 = zcrit;
 }
+
+/*!
+ * @brief Finds saddle point using critical point search starting with r and z. 
+ *
+ * Returns false if search lands outside of horizontal limiters or grid 
+ * boundaries.
+ */
 
 bool Critical::find_saddle(double &r, double &z){
     double Psi_r, Psi_z, Psi_rr, Psi_zz, Psi_rz, D;

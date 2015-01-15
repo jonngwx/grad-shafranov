@@ -1,3 +1,4 @@
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Short Sectioned Assignment
 % LaTeX Template
@@ -29,8 +30,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{caption}
-
-
+\usepackage{amsmath}
 \usepackage{sectsty} % Allows customizing section commands
 \allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
 
@@ -111,8 +111,6 @@ where $\Delta^{*} \equiv R^2 \mathbf{\nabla} \cdot \frac{1}{R^2} \mathbf{\nabla}
 \end{figure}
 
 Without going into too much detail, it should be stated that the best MHD equilibria for confining plasmas are those which contain nested surfaces of constant $\Psi$ (known as flux surfaces), as in Figure 1.  It can be shown that a magnetic field line will always point tangentially to a given flux surface.  Since charged particles in the plasma follow field lines, the particles will stay on constant flux surfaces, resulting in good confinement. 
-
-
 
 \subsection{Analytic Profiles vs Equilibrium Reconstruction}
 As previously stated, the functions $p(\Psi)$ and $g(\Psi)$ must be supplied for a full specification of the problem.  In our code, we assumed simple analytic forms for these functions which roughly approximate real life experiments.  
@@ -218,7 +216,9 @@ virtual void step(const Field &jphi)=0
 virtual void coeff()=0
 double residuals(const Field &Psi, const Field &Psi_prev) 
 \end{lstlisting}
-    & description of EllipticSolver \\ 
+    &
+    Base class implementation for GaussSeidel and SOR. Solves finite difference equation for inverting elliptic operator. 
+     \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[blue!25]{0.35cm}{0.35cm} \, GaussSeidel &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void step_1(const Field &jphi)
@@ -256,12 +256,16 @@ int LtoI(int l)
 int LtoJ(int l)
 double norm()
 \end{lstlisting}
-    & dffghfgh \\ 
+    & 
+    Contains methods to update the boundary values of Psi.
+     \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[green!25]{0.35cm}{0.35cm} \, SlowBoundary &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 int CalcB(Field *jphi)
 \end{lstlisting}
-    & dfasdasd \\ 
+    & 
+    Implementation of Boundary class that iterates over the field of $J_{\phi}$ and over the set of external coils) using Green's functions.
+    \\ 
      \specialrule{.05em}{0.0em}{.07em} \colorbox{yellow!50}{Table} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual int load_from_tsv(const string filename, int header_lines=0)
@@ -288,7 +292,9 @@ double Psi_limiter ()
 void update ()
 bool find_saddle (double &r, double &z)
 \end{lstlisting}
-    & dfgdfgdg \\ 
+    & 
+    Implementation of Critical. Finds 'critical points' like the magnetic axis, limiter points, and X points. These points are minima, maximima, and saddle points of $\Psi$.
+     \\ 
     \hline Interpolate & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 double F (double r, double z) const
@@ -300,24 +306,26 @@ double F_z (double r, double z) const
 void updateInterpolation(double r, double z)
 void PrintAmnCoefficients()
 \end{lstlisting}
-    & fsdfsdfsdf \\ 
+    & 
+    Implementation of Interpoolate. Interpolates to find the values and derivatives of a 2D data set between grid points using fitting to a bicubic polynomial. 
+     \\ 
     \specialrule{.05em}{0.0em}{.07em} \colorbox{magenta!25}{GradOutput} & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual void write_output(const char *filename)=0
 void parse_outputs(const char *outputs)
 bool find(Output out)
 \end{lstlisting}
-    & dfgdfgd \\ 
+    & Interface for writing the output of the solver to file. \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[magenta!25]{0.35cm}{0.35cm} GradOutputHdf & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void write_output(const char *filename)
 \end{lstlisting}
-     & dfgfdfgdf \\ 
+     & Implementation of Grad\_Output which writes data to a hdf5 file. \\ 
      \specialrule{.05em}{0.0em}{.07em} \crule[magenta!25]{0.35cm}{0.35cm} GradOutputTxt &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void write_output(const char *filename)
 \end{lstlisting}
-    & dfgdfgdf \\ 
+    & Implementation of Grad\_Output which writes to a text file. \\ 
     \hline
 \end{tabular}
 \end{table}
@@ -345,10 +353,42 @@ The following external libraries are used:
 \subsection{Implementation and Design decisions}
 
 \subsubsection{Elliptic solver}
-The \texttt{EllipticSolver} interface defines functions for inverting the $\nabla^*$ operator iteratively using finite differences. Because the radial derivatives are $R$ dependent, the finite difference coefficients are stored as vectors. The successive-over-relaxation (SOR) and Gauss-seidel methods have been implemented, with Gauss-seidel used in the current version of the code. While these algorithms are slow, they have been chosen as SOR can be parallelised, while Gauss-seidel can be used as a starting point for multigrid methods. 
+The \texttt{EllipticSolver} interface defines functions for inverting the $\nabla^*$ operator iteratively using central finite differences, as shown in equation~\ref{eq:finitediff}.
+
+\begin{multline} \label{eq:finitediff}
+\frac{1}{R} \left(\frac{\Psi(R + dR, Z) - \Psi(R - dR, Z)}{2dR} \right) + \left( \frac{\Psi (R + dR, Z) - 2\Psi(R,Z) + \Psi(R-dR, Z)}{dR^2} \right) \\ + \left(\frac{\Psi(R, Z + dZ) - 2\Psi(R,Z)  + \Psi(R, Z-dZ)}{dZ^2}\right) = \mu_o R J_{\phi}(R,Z). 
+\end{multline}
+
+Because the radial derivatives are $R$ dependent, the finite difference coefficients are stored as vectors. The successive-over-relaxation (SOR) and Gauss-seidel methods have been implemented, with Gauss-seidel used in the current version of the code. While these algorithms are slow, they have been chosen as SOR can be parallelised, while Gauss-seidel can be used as a starting point for multigrid methods. 
+
+The Gauss Seidel iteration method updates $\Psi^{n+1}_{i,j}$ using neighboring values of $\Psi^{n}$ and $\Psi^{n+1}$, 
+
+\begin{multline} \label{eq:gaussseidel}
+\Psi^{n+1}_{i,j} = -\frac{dr^2 dz^2}{2dz^2 + 2dr^2} \left( \mu_o R J^n_{\phi \, i, j} + (2 R dr - \frac{1}{dr^2})^{-1} \Psi^{n}_{i+1,j} - (2 R dr - \frac{1}{dr^2})^{-1} \Psi^{n+1}_{i-1,j} - \frac{1}{dz^2} \right) \Psi^{n+1}_{i,j-1} \\ - \frac{1}{dz^2}\Psi^n_{i, j+1}. 
+\end{multline}
+
+To aid with convergence we implement the Gauss Seidel algorithm with Picard iteration with $\alpha = 0.5$, 
+
+\begin{equation} \label{eq:picard}
+\Psi^{n+1} = \alpha_B \widetilde{\Psi^{n+1}} + (1 - \alpha_{B}) \Psi^n. 
+\end{equation}
+
+The successive over relaxation method is based on the Gauss-Seidel method but has better convergence properties due to use of a strategically chosen blending parameter $\omega$, 
+
+\begin{multline} \label{eq:SOR}
+\Psi^{n+1}_{i,j} = (1-\omega)\Psi^n_{i,j} -\frac{\omega dr^2 dz^2}{2dz^2 + 2dr^2} \left( \mu_o R J^n_{\phi \, i, j} + (2 R dr - \frac{1}{dr^2})^{-1} \Psi^{n}_{i+1,j} - (2 R dr - \frac{1}{dr^2})^{-1} \Psi^{n+1}_{i-1,j} - \frac{1}{dz^2} \right) \Psi^{n+1}_{i,j-1} \\ - \frac{1}{dz^2}\Psi^n_{i, j+1}
+\end{multline}
+
+where
+\begin{equation}
+\omega = \frac{2}{1 + \sqrt{1 - \delta}}
+\end{equation}
+\begin{equation}
+\delta = \frac{\text{max} (\left| \Psi^n - \Psi^{n-1} \right| )}{\text{max} (\left| \Psi^{n+1} - \Psi^{n} \right| )}.
+\end{equation}
 
 \subsubsection{Current density calculations}
-The calculation of $P$, $gg'$ and $J_\phi$ is performed by the implementation of the \texttt{JSolver} interface. $P$ and $g$ are assumed to be functions of $\Psi$ from which the current density $J_\phi$ is calculated. The default \texttt{JSolverAlpha} uses a constant $P'$ and a linear $gg'$, with the coefficients of the functional forms determined by the peak pressure and the total current in the plasma. The exact exponent on $\phi$ can be modified by changing $n_1$ and $n_2$ in the input or configuration file. \texttt{JSolverNSTX} attempts to use similar functional forms to the actual NSTX data uses a quadratic $P'$ and $gg' = A\Psi^n$, but there are numerical issues. As such, its use is not recommended in the current version. 
+The calculation of $P$, $gg'$ and $J_\phi$ is performed by the implementation of the \texttt{JSolver} interface. $P$ and $g$ are assumed to be functions of $\Psi$ from which the current density $J_\phi$ is calculated. The default \texttt{JSolverAlpha} uses a constant $P'$ and a linear $gg'$, with the coefficients of the functional forms determined by the peak pressure and the total current in the plasma. The exact exponent on $\phi$ can be modified by changing $n_1$ and $n_2$ in the input or configuration file. \texttt{JSolverNSTX} attempts to use similar functional forms to the actual NSTX data uses a quadratic $P'$ and $gg' = \sum_n A_n\Psi^n$, but there are numerical issues. As such, its use is not recommended in the current version. 
 
 If experimental measurements of $\Psi$ were added to the code, the functional dependence on $\Psi$ of $P$ and $g$ would be determined by performing a least-squares fit to the data. 
 
@@ -399,7 +439,7 @@ In order to read the hdf5 files, a Python visualizer using matplotlib will be wr
 
 \section{Testing}
 
-testing
+We have used the Boost Unit Test framework for testing of all major classes. The \texttt{Elliptic} class has been tested by comparison to the multipole expansion of the vacuum solution, $\nabla^* = 0$. As $J_{\phi} = 0$, only the inner loop needs to be iterated over. The \texttt{Elliptic} class is also tested by comparison to the analytic Shafranov-Solovev solution. The \texttt{Interpolate} class is tested by comparison to interpolated flat, quadratic, and cubic functions. The \texttt{SlowBoundary} class by checking for consistency of green\_fcn.cc, \texttt{SlowBoundary}, and \texttt{GaussSeidel} using the Shafranov-Solovev solution. Test suites have also be written for \texttt{Boundary}, \texttt{Grid}, the TSV reader, and other utility functions.
 
 %----------------------------------------------------------------------------------------
 %	Section 6

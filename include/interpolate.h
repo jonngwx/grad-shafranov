@@ -1,6 +1,7 @@
 /*!
  * @file interpolate.h
- * @brief Declaration for class Interpolate.
+ * @author Elizabeth J. Paul
+ * @brief Header file for the Interpolate class.
  */
 #ifndef INTERPOLATE_H
 #define INTERPOLATE_H

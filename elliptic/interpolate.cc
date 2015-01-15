@@ -1,5 +1,6 @@
 /*
  * @file interpolate.cc
+ * @author Elizabeth J. paul
  * @brief Implementation for class Interpolate.
  */
 #include "interpolate.h"

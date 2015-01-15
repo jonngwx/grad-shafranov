@@ -32,7 +32,7 @@ class Table {
    * @brief Constructor for Table.
    */
   Table() : num_rows_(0), num_columns_(0) {};
-  ~Table() {};
+  virtual ~Table() {};
   /*!
    * @brief Reads in a tsv file and populates a Table.
    *

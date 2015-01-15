@@ -1,12 +1,12 @@
 .PHONY: all
 
-all: Design_Document
+all: Final_Report
 
-Design_Document: Design_Document.tex
+Final_Report: Final_Report.tex
 	pdflatex $^
 	rm $@.log $@.aux
 
 .PHONY: clean
 
 clean: 
-	$(RM) Design_Document.pdf
+	$(RM) Final_Report.pdf

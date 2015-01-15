@@ -23,8 +23,9 @@ class GradOutputHdf : public GradOutput {
    * @param f pointer to field containing flux function
    * @param jphi pointer to field containing current
    * @param p pointer to field containing pressure function
+   * @param grid pointer to grid containing axis data
    * @param g pointer to field containing g function
-   * @param outputs string of comma separated output options
+   * @param outputs c string of comma separated output options
    * */
   GradOutputHdf(Field* f, Field* jphi, Grid* grid, Field* p, Field* g,
                   const char* outputs);
