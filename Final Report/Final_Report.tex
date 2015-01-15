@@ -40,8 +40,11 @@
             keywordstyle=\color{red},
             basicstyle=\footnotesize,
             columns=fullflexible}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{array}
+
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+\usepackage{ctable}
 
 %\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
 %\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
@@ -126,17 +129,21 @@ Of course, in a real tokamak experiment, the functional forms of $g(\Psi)$ and $
 \end{equation}
 where $\mu_0 R J_{\phi} (R,\Psi) = - \big(\mu_0 R^2 \frac{d p}{d\Psi} + g \frac{d g}{d\Psi}\big)$, and $J_{\phi}$ is the current density in the $\phi$-direction.
 
-Since the problem is non-linear (the right-hand-side of Eq.~(2) depends on $\Psi$), we use an iterative approach.  At each level of iteration, we solve a finite difference version of 
+\textbf{Inner Iteration}: Since the problem is non-linear (the right-hand-side of Eq.~(2) depends on $\Psi$), we use an iterative approach.  At each level of the inner iteration, we solve a finite difference version of 
 \begin{equation}
 \Delta^{*}\Psi^{n} = \mu_0 R J_\phi (R, \Psi^{n-1}),
 \end{equation}
-where $n$ denotes the iteration level. The solution of $\Psi$ is plugged into the right-hand-side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods. We currently have implemented two methods to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive Over-Relaxation (SOR), which are explained in the next section.  
+where $n$ denotes the iteration level. The solution of $\Psi$ is plugged into the right-hand-side of Eq.~(3) for the next iteration.  This continues until the solution converges.  The linearized finite difference equation can be solved via a variety of methods, handles by base class \texttt{EllipticSolver}.  We currently have implemented child classes to solve Eq.~(3): the Gauss-Seidel method, and the method of Successive Over-Relaxation (SOR), which are explained in the next section.  
 
-There is an additional nonlinearity relating to the boundary conditions.  Suppose that there are $N_c$ external coils outside of the computational boundary.  The flux function evaluated on the computational boundary $\Psi_b$ is then due to the plasma itself and the external coils:
+Next, we must use the updated $\Psi^n$ to calculate the value of $\Psi$ at the plasma-vacuum boundary (this defines where we must set pressure and current to zero).  This calculation is handled by the \texttt{Critical} class, which is so named because the plasma boundary either exists at a saddle point of $\Psi$ (a critical point) or where the plasma touches a solid object, like the vessel wall (collectively known as limiters).  \texttt{Critical} also finds the magnetic axis, which is the minimum of $\Psi$ (the center of the contours in Figure 1).  
+
+Lastly in the inner iteration, we must update the current density $J_{\phi}$, handled by the base class \texttt{JSolver}.  As previously stated, the phi-directed current density is given by 
+
+\textbf{Outer Iteration}: The outer iteration deals with the nonlinearity due to boundary conditions.  Suppose that there are $N_c$ external coils outside of the computational boundary.  The flux function evaluated on the computational boundary $\Psi_b$ is then due to the plasma itself and the external coils:
 \begin{equation}
-\Psi^m_b (R',z') = \mu_0 \int_{plasma} G(R,z; R',z') J_{\phi} \mathop{dR} \mathop{dz} + \sum_{i=1}^{N_c} G(R_i^c,z_i^c; R',z') I_i,
+\Psi^m_b (R',z') = \mu_0 \int_{plasma} G(R,z; R',z') J_{\phi}^{m-1} \mathop{dR} \mathop{dz} + \mu_0 \sum_{i=1}^{N_c} G(R_i^c,z_i^c; R',z') I_i,
 \end{equation}
-where $G$ is the Green's function for the elliptic operator $\Delta^{*}$, $(R_i^c,Z_i^c)$ is the location of the $i$th coil with current $I_i$, and $(R',z')$ refers to a point on the plasma boundary.  The Green's function, which is defined by $\Delta^{*}G(\mathbf{R};\mathbf{R'}) = R \delta(R-R')\delta(z-z')$, is given by
+where $G$ is the Green's function for the elliptic operator $\Delta^{*}$, $(R_i^c,Z_i^c)$ is the location of the $i$th coil with current $I_i$, and $(R',z')$ refers to a point on the plasma boundary. Here, $J_{\phi}^{m-1}$ is the converged current density from the previous inner iteration.  The Green's function, which is defined by $\Delta^{*}G(\mathbf{R};\mathbf{R'}) = R \delta(R-R')\delta(z-z')$, is given by
 \begin{equation}
 G(\mathbf{R};\mathbf{R'}) = -\frac{1}{2\pi} \frac{\sqrt{RR'}}{k} [(2-k^2) K(k) - 2 E(k)], 
 \end{equation} 
@@ -145,9 +152,7 @@ where $k^2 = 4RR'/[(R+R')^2+(z-z')^2]$, and where $K(k)$ and $E(k)$ are complete
 
 There is a faster method of calculating the boundary ($\mathcal{O}(N^2)$ vs $\mathcal{O}(N^3)$) known Von Hagenow's method. It is described in Lackner, Comp.~Phys. Comm.~12 (1976) 33-44.  As the size of the grid increases, the time it takes to populate the Green's function array for Eq.~(4) can dominate the rest of the calculation.  The faster method needs a factor of N fewer Green's function values, making the calculation much faster.    
 
-The index $m$ in Eq.~(4) shows that the determination of the boundary condition is also an iterative process.  The $(m-1)$th value of $J_\phi$ is used to calculate $\Psi_b^m$.  
-
-Given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.  This $\Psi$ is then used to calculate a new set of boundary conditions using Eq.~(4), and the process begins anew.  Ultimately, the process is a double-nested iteration which runs until the outer loop converges.  The process is depicted in Figure 2.
+Thus, given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.  This $\Psi$ is then used to calculate a new set of boundary conditions using Eq.~(4), and the process begins anew.  Ultimately, the process is a two-tiered iteration which runs until the outer loop converges.  The process is depicted in Figure 2.
 
 \begin{figure}
 \centering
@@ -156,7 +161,7 @@ Given a set of boundary conditions, we can solve Eq.~(3) iteratively for $\Psi$.
 \includegraphics[width=0.45\textwidth]{algorithm}
 \end{figure}
 
-In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the source function, the location of external coils $(R_i^c,Z_i^c)$ and their currents $I_i$, and the functional forms of $p(\Psi)$ and $g(\Psi)$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-Z$ plane.  
+In summary, the \textbf{inputs} to the algorithm are an initial guess $J_\phi^0$ for the source function, the location of external coils $(R_i^c,z_i^c)$ and their currents $I_i$, and the functional forms of $p(\Psi)$ and $g(\Psi)$.  The \textbf{output} is the value of $\Psi$ at each grid point in the $R-z$ plane.  From there, any derived quantity can be calculated.  
 
 \subsection{Algorithm using Experimental Measurements (for the future)}
 
@@ -168,7 +173,7 @@ p'(\Psi) = \sum_j \alpha_j y_j(\Psi), \quad gg'(\Psi) = \sum_j \beta_j y_j(\Psi)
 \end{equation}
 We can then write a formula for the computed value of $\Psi$ at the location $(R_l, Z_l)$ of each experimental measurement: 
 \begin{equation}
-\Psi_l^{comp}(R_l, Z_l) = \int_{plasma} G(R,Z; R_l,Z_l) J_\phi(R,\Psi,\alpha_j,\beta_j) dR dZ + \sum_{i=1}^{N_c} G(R_i^c,Z_i^c; R_l,Z_l) I_i.
+\Psi_l^{comp}(R_l, Z_l) = \mu_0 \int_{plasma} G(R,Z; R_l,Z_l) J_\phi(R,\Psi,\alpha_j,\beta_j) dR dZ + \mu_0 \sum_{i=1}^{N_c} G(R_i^c,Z_i^c; R_l,Z_l) I_i.
 \end{equation}
 The computed values are compared to the measured values, and the minimization of an error function determines the values of $\alpha_j, \beta_j$ at that stage in the algorithm.   
 
@@ -179,21 +184,21 @@ Thus, the algorithm described in Section 1.4 is identical to that described in S
 %----------------------------------------------------------------------------------------
 %	Section 3
 %----------------------------------------------------------------------------------------
-
+\qedsymbol
 \section{Code Organization / Class Structure}
 
 The program is written in C++ with the visualization carried out separately using Python. The solver is called from the command line.  Options/parameters can be set on the command line or in a configuration file.  The location of external magnetic coils will also be contained in text files. Output will be written to text files or hdf5 files. 
 
-The class structure of our code is explained below.  For more information, see the documentation website at \href{http://jonngwx.github.io/grad-shafranov/index.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/index.html}}.
+The class structure of our code is explained in Table 1.  For more information, see the documentation website at \href{http://jonngwx.github.io/grad-shafranov/index.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/index.html}}.
 \\ \\
 
 %%%%%%%%%%%%%%%% BIG CLASS TABLE%%%%%%%%%%%%%%%%%
-\newgeometry{left=0.5cm, right=0.5cm, top=0.5cm, bottom=0.5cm}
+\newgeometry{left=0.45cm, right=0.5cm, top=0.5cm, bottom=0.5cm}
 \begin{table}
 \small
-\caption{Summary of COUGAR Classes}
+\caption{Summary of COUGAR Classes (colors show class heirarchy}
 \centering
-\begin{tabular}{ | m{2.3cm} | p{8.9cm} | p{6cm}|}
+\begin{tabular}{ | m{2.8cm} | p{8.9cm} | p{6cm}|}
     \hline Class Name & Methods (inherited methods only listed in parent class) & Brief Description \\
     \hline Grid & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
@@ -202,7 +207,7 @@ double cellj(double z)
 \end{lstlisting} 
    & Stores information about the computational grid. \\
    \hline Field & none & Container for 2d data and the grid \\ 
-   \hline EllipticSolver & 
+   \specialrule{.05em}{0.0em}{.07em} \colorbox{blue!25}{EllipticSolver} & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 double norm_max (const Field &Psi, const Field &Psi_prev)
 void iter(double omega)
@@ -214,14 +219,14 @@ virtual void coeff()=0
 double residuals(const Field &Psi, const Field &Psi_prev) 
 \end{lstlisting}
     & description of EllipticSolver \\ 
-    \hline GaussSeidel &
+    \specialrule{.05em}{0.0em}{.07em} \crule[blue!25]{0.35cm}{0.35cm} \, GaussSeidel &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void step_1(const Field &jphi)
 void step(const Field &jphi)
 void coeff()
 \end{lstlisting} 
     & Implementation of EllipticSolver. Solves finite difference equation using Gauss-Seidel algorithm.\\
-    \hline SOR & 
+    \specialrule{.05em}{0.0em}{.07em}  \crule[blue!25]{0.35cm}{0.35cm} \, SOR & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void step_1(const Field &jphi)
 void step(const Field &jphi)
@@ -229,22 +234,22 @@ void coeff()
 double omega()
 \end{lstlisting}
     &Implementation of EllipticSolver.  Solves finite difference equation using Successive over-relaxation algorithm. \\ 
-    \hline JSolver &
+    \specialrule{.05em}{0.0em}{.07em} \colorbox{cyan!25}{JSolver} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual void update(Field *jphi, Field *psi, Field *p, Field *g)=0
 \end{lstlisting}
     & hello \\ 
-    \hline JSolverAlpha &
+    \specialrule{.05em}{0.0em}{.07em} \crule[cyan!25]{0.35cm}{0.35cm} \,JSolverAlpha &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void update(Field *jphi, Field *psi, Field *p, Field *g)
 \end{lstlisting}
     & hello \\ 
-    \hline JSolverNSTX & 
+    \specialrule{.05em}{0.0em}{.07em} \crule[cyan!25]{0.35cm}{0.35cm} \,JSolverNSTX & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void update(Field *jphi, Field *psi, Field *p, Field *g)
 \end{lstlisting}
     & ertertert \\ 
-    \hline Boundary & 
+    \specialrule{.05em}{0.0em}{.07em} \colorbox{green!25}{Boundary} & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual int CalcB(Field *jphi)
 int LtoI(int l)
@@ -252,12 +257,12 @@ int LtoJ(int l)
 double norm()
 \end{lstlisting}
     & dffghfgh \\ 
-    \hline SlowBoundary &
+    \specialrule{.05em}{0.0em}{.07em} \crule[green!25]{0.35cm}{0.35cm} \, SlowBoundary &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 int CalcB(Field *jphi)
 \end{lstlisting}
     & dfasdasd \\ 
-    \hline Table &
+     \specialrule{.05em}{0.0em}{.07em} \colorbox{yellow!50}{Table} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual int load_from_tsv(const string filename, int header_lines=0)
 int num_columns() const
@@ -265,7 +270,7 @@ int num_rows() const
 double data(int row, int column) const
 \end{lstlisting}
     & dfgdfgdfg \\ 
-    \hline CoilData &
+    \specialrule{.05em}{0.0em}{.07em} \crule[yellow!50]{0.35cm}{0.35cm} \, CoilData &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 int load_from_tsv(const string filename, int header_lines=0) override
 double r(int i) const
@@ -296,19 +301,19 @@ void updateInterpolation(double r, double z)
 void PrintAmnCoefficients()
 \end{lstlisting}
     & fsdfsdfsdf \\ 
-    \hline GradOutput & 
+    \specialrule{.05em}{0.0em}{.07em} \colorbox{magenta!25}{GradOutput} & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual void write_output(const char *filename)=0
 void parse_outputs(const char *outputs)
 bool find(Output out)
 \end{lstlisting}
     & dfgdfgd \\ 
-   \hline GradOutputHdf & 
+    \specialrule{.05em}{0.0em}{.07em} \crule[magenta!25]{0.35cm}{0.35cm} GradOutputHdf & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void write_output(const char *filename)
 \end{lstlisting}
      & dfgfdfgdf \\ 
-    \hline GradOutputTxt &
+     \specialrule{.05em}{0.0em}{.07em} \crule[magenta!25]{0.35cm}{0.35cm} GradOutputTxt &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void write_output(const char *filename)
 \end{lstlisting}
