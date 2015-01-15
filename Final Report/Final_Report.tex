@@ -358,7 +358,38 @@ void write_output(const char *filename)
 \subsection{Implementation and Design decisions}
 
 \subsubsection{Elliptic solver}
-The \texttt{EllipticSolver} interface defines functions for inverting the $\nabla^*$ operator iteratively using finite differences. Because the radial derivatives are $R$ dependent, the finite difference coefficients are stored as vectors. The successive-over-relaxation (SOR) and Gauss-seidel methods have been implemented, with Gauss-seidel used in the current version of the code. While these algorithms are slow, they have been chosen as SOR can be parallelised, while Gauss-seidel can be used as a starting point for multigrid methods. 
+The \texttt{EllipticSolver} interface defines functions for inverting the $\nabla^*$ operator iteratively using central finite differences, as shown in equation~\ref{eq:finitediff}.
+\begin{multline} \label{eq:finitediff}
+\frac{1}{R} \left(\frac{\Psi(R + dR, z) - \Psi(R - dR, z)}{2dR} \right) + \left( \frac{\Psi (R + dR, z) - 2\Psi(R,z) + \Psi(R-dR, z)}{dR^2} \right) \\ + \left(\frac{\Psi(R, z + dz) - 2\Psi(R,z)  + \Psi(R, z-dz)}{dz^2}\right) = \mu_0 R J_{\phi}(R,z). 
+\end{multline}
+
+Because the radial derivatives are $R$-dependent, the finite difference coefficients are stored as vectors. The successive-over-relaxation (SOR) and Gauss-Seidel methods have been implemented, with Gauss-Seidel used in the current version of the code. While these algorithms are slow, they have been chosen as SOR can be parallelized, while Gauss-Seidel can be used as a starting point for multigrid methods. 
+
+The Gauss-Seidel iteration method updates $\Psi^{n+1}_{i,j}$ using neighboring values of $\Psi^{n}$ and $\Psi^{n+1}$, 
+
+\begin{multline} \label{eq:gaussseidel}
+\Psi^{n+1}_{i,j} = -\frac{dr^2 dz^2}{2dz^2 + 2dr^2} \left[ \mu_o R J^n_{\phi \, i, j} + \left(2 R dr - \frac{1}{dr^2}\right)^{-1} \Psi^{n}_{i+1,j} - \left(2 R dr - \frac{1}{dr^2}\right)^{-1} \Psi^{n+1}_{i-1,j} - \frac{1}{dz^2} \right] \Psi^{n+1}_{i,j-1} \\ - \frac{1}{dz^2}\Psi^n_{i, j+1}. 
+\end{multline}
+
+To aid with convergence we implement the Gauss Seidel algorithm with Picard iteration with $\alpha = 0.5$, 
+
+\begin{equation} \label{eq:picard}
+\Psi^{n+1} = \alpha_B \widetilde{\Psi^{n+1}} + (1 - \alpha_{B}) \Psi^n. 
+\end{equation}
+
+The successive over relaxation method is based on the Gauss-Seidel method but has better convergence properties due to use of a strategically chosen blending parameter $\omega$, 
+
+\begin{multline} \label{eq:SOR}
+\Psi^{n+1}_{i,j} = (1-\omega)\Psi^n_{i,j} -\frac{\omega dr^2 dz^2}{2dz^2 + 2dr^2} \left( \mu_o R J^n_{\phi \, i, j} + (2 R dr - \frac{1}{dr^2})^{-1} \Psi^{n}_{i+1,j} - (2 R dr - \frac{1}{dr^2})^{-1} \Psi^{n+1}_{i-1,j} - \frac{1}{dz^2} \right) \Psi^{n+1}_{i,j-1} \\ - \frac{1}{dz^2}\Psi^n_{i, j+1}
+\end{multline}
+
+where
+\begin{equation}
+\omega = \frac{2}{1 + \sqrt{1 - \delta}}
+\end{equation}
+\begin{equation}
+\delta = \frac{\text{max} (\left| \Psi^n - \Psi^{n-1} \right| )}{\text{max} (\left| \Psi^{n+1} - \Psi^{n} \right| )}.
+\end{equation}
 
 \subsubsection{Current density calculations}
 The calculation of $P$, $gg'$ and $J_\phi$ is performed by the implementation of the \texttt{JSolver} interface. $P$ and $g$ are assumed to be functions of $\Psi$ from which the current density $J_\phi$ is calculated. The default \texttt{JSolverAlpha} uses a constant $P'$ and a linear $gg'$, with the coefficients of the functional forms determined by the peak pressure and the total current in the plasma. The exact exponent on $\phi$ can be modified by changing $n_1$ and $n_2$ in the input or configuration file. \texttt{JSolverNSTX} attempts to use similar functional forms to the actual NSTX data uses a quadratic $P'$ and $gg' = \sum_n A_n\Psi^n$, but there are numerical issues. As such, its use is not recommended in the current version. 
