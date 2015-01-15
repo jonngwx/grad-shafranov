@@ -36,7 +36,6 @@ void Interpolate::CorrectCellBoundsCheck(double r, double z) const {
   }
 }
 
-
 double Interpolate::F(double r, double z) const {
   CorrectCellBoundsCheck(r,z);
   double rc = (r - r_curr_)/dr_; //radial location relative to the cell that the target point is in: goes from 0 to 1.

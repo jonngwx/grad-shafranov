@@ -1,3 +1,4 @@
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Short Sectioned Assignment
 % LaTeX Template
@@ -401,7 +402,7 @@ In order to read the hdf5 files, a Python visualizer using matplotlib will be wr
 
 \section{Testing}
 
-unit testing
+We have used the Boost Unit Test framework for testing of all major classes. The \texttt{Elliptic} class has been tested by comparison to the multipole expansion of the vacuum solution, $\nabla^* = 0$. As $J_{\phi} = 0$, only the inner loop needs to be iterated over. The \texttt{Elliptic} class is also tested by comparison to the analytic Shafranov-Solovev solution. The \texttt{Interpolate} class is tested by comparison to interpolated flat, quadratic, and cubic functions. The \texttt{SlowBoundary} class by checking for consistency of green\_fcn.cc, \texttt{SlowBoundary}, and \texttt{GaussSeidel} using the Shafranov-Solovev solution. Test suites have also be written for \texttt{Boundary}, \texttt{Grid}, the TSV reader, and other utility functions.
 
 valgrind
 
