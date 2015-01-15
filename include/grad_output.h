@@ -22,11 +22,11 @@ class GradOutput{
   virtual void write_output(const char* filename)=0;
   
 protected:
-  Field *f;
-  Field *jphi;
-  Field *p;
-  Field *g;
-  Grid *grid;
+  Field *f; //!< pointer to field containing flux function
+  Field *jphi; //!< pointer to field containing current density
+  Field *p; //!< pointer to field containing pressure function
+  Field *g; //!< pointer to field containing g function
+  Grid *grid; //!< pointer to grid containing axis data
   /**
   * @brief Parses the string of field names to write to file.
   * Puts them in the member vector output_list.

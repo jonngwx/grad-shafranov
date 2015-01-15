@@ -19,8 +19,8 @@ public:
    * @param f pointer to field containing flux function
    * @param jphi pointer to field containing current
    * @param grid pointer to grid containing axis data
-   * @param p pointer to RHSfunc for evaluation of p
-   * @param g pointer to RHSfunc for evaluation of g
+   * @param p pointer to field containing p
+   * @param g pointer to field containing g
    * @param outputs string of comma separated output options
    * */
     GradOutputTxt(Field* f, Field* jphi, Grid* grid, Field* p, Field* g, const char* outputs);
