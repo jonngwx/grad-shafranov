@@ -16,6 +16,15 @@
  */
 class JSolverAlpha : public JSolver{
  public:
+  /**
+   * @brief Constructor for JSolverAlpha
+   * @param P0 Pressure on axis
+   * @param g0 B_T*R on axis
+   * @param n1 exponent of pressure function
+   * @param n2 exponent of toroidal field function
+   * @param Ip Total plasma current
+   * @param grid pointer to grid with axis data
+   */
   JSolverAlpha(double P0, double g0, double n1, double n2, double Ip,
                Grid *grid);
   ~JSolverAlpha();

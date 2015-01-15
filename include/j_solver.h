@@ -18,6 +18,13 @@ class JSolver {
  public:
     virtual ~JSolver(){};
     /*! which variables are 'in' and which are 'out' ? */
+    /**
+     * @brief Updates the current density, pressure and toroidal field given the magnetic flux
+     * @param jphi pointer to field containing current density
+     * @param psi pointer to field containing flux
+     * @param p pointer to field containing pressure
+     * @param g pointer to field containing toroidal field function
+     */
     virtual void update(Field *jphi, Field *psi, Field *p, Field *g)=0;
     
  protected:
