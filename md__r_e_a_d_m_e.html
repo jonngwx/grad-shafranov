@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>COUGAR: COUGAR README</title>
+<title>COUGAR: COUGAR User manual</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">COUGAR README </div>  </div>
+<div class="title">COUGAR User manual </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h2>Installation: </h2>
@@ -117,22 +117,33 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html','');});
 <p>To compile without HDF5, type <code>make</code>. To compile with HDF5, type 'make gs_solver_hdf'.</p>
 <p>Testing is performed by typing <code>make runtests</code></p>
 <h2>Operation </h2>
-<pre class="fragment">./gs_solver
-</pre><p>Try out the command line options! </p><pre class="fragment">--version
-</pre><p> and </p><pre class="fragment">--help
-</pre><p>The options listed in help can be specified on the command line or in grad-shafranov.cfg (the default config file).</p>
-<p>Not all the options are implemented yet.</p>
-<p>Of course, if you specify an illegal value for an option, or a file which does not exist or is not the right format, the program may terminate with an Error message, or with a crash.</p>
-<p>To plot the output, type </p><pre class="fragment">python python/viz.py cougar.out.tsv 
-</pre><p>if the default output filename is used. More generally, type </p><pre class="fragment">python python/viz.py &lt;filename&gt; 
-</pre><p>To access the data in python, import viz, then use </p><pre class="fragment">F = viz.plot(filename, format)
-</pre><p>F will be a dictionary of the grid and data arrays. </p>
-</div></div><!-- contents -->
+<p>In order to run COUGAR, a number of physical parameters must be provided. These are listed here and can also be found by calling the solver with the <code>--help</code> command line option. The parameters can be provided using the command line or a configuration file using the <code>-c</code> flag (the default file is <code>grad-shafranov.cfg</code>). The exact format of the command line options and configuration file is provided in the documentation.</p>
+<ul>
+<li>Main program and solver configuration: The positions and values of the external currents must be provided in a <code>.tsv</code> file, as must be the positions of the physical limiters. Currents must be outside the computational boundary, while limiters must be at least two cells from the edge of the boundary.</li>
+<li><a class="el" href="class_grid.html" title="Stores information about the solution grid. ">Grid</a> and geometry: The computational domain should be specified.</li>
+<li>Saddle point initial geometry: The positions of initial guesses for two saddle points of the flux function should be specified. These guesses should be within the computational grid. The saddle points are used to calculate the plasma boundary.</li>
+<li>The form and magnitude of the pressure and current: The magnetic field on-axis, pressure on-axis and the exponents for the forms of the pressure and toroidal field distributions should be given.</li>
+<li>The initial current distribution: The total current, radius of the initial distribution and location of the centre of current density should be provided.</li>
+<li>Output format and frequency: The format of the output, non-standard fields to write and the file name of the output file should be provided. There are also options to write output during the iterative process.</li>
+</ul>
+<p>To run the code, type </p><pre class="fragment">./gs_solver
+</pre><p>with the appropriate command line options. If you specify an illegal value for an option, or a file which does not exist or is not the right format, the program may terminate with an Error message, or with a crash.</p>
+<h2>Data analysis </h2>
+<p>There are analysis functions provided in python, though the data can be read using any text editor/HDF5 library. The format of each line of the output <code>tsv</code> files is </p><pre class="fragment">[field name]: [data] [data] ... 
+</pre><p>in column-major order. The regular expressions for the data can be found in <code><a class="el" href="read__data_8py.html">read_data.py</a></code>. In the <code>tsv</code> file, there is a special field <code>psilo</code> which gives the value of the flux function at the limiter and magnetic axis. These values are listed as attributes of the <code>psi</code> field in the HDF5 output. The plasma boundary is the red line shown in the figure while the magnetic axis is the '+'.</p>
+<p>The default plotting option shows Psi, P and g and can be called using </p><pre class="fragment">python python/viz.py &lt;filename&gt; 
+</pre><p>There is also a <code>plot</code> script in the main directory which plots the output of <code>cougar.out.tsv</code> automatically.</p>
+<h3>Interactive analysis</h3>
+<p>We recommend using ipython with pylab to analyse the data interactively. The scripts for reading the data are found in the <code><a class="el" href="namespaceread__data.html">read_data</a></code> package while the plotting scripts are found in the <code>viz</code> package.</p>
+<p>To access the data in python, import viz, then use one of </p><pre class="fragment">F = viz.plot(filename, format)
+F = read_data.read_text(filename)
+F = read_data.read_hdf5(filename)
+</pre><p>F will be a dictionary of the grid and data arrays. The value of a field along the midplane can be plotted using </p><pre class="fragment">viz.midplane_plot(F, field_name)</pre> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 15 2015 14:59:06 for COUGAR by
+    <li class="footer">Generated on Thu Jan 15 2015 16:02:19 for COUGAR by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

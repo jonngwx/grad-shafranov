@@ -4,7 +4,8 @@ var NAVTREE =
     [ "Welcome to COUGAR!", "index.html", null ],
     [ "Input of magnetic coil data", "_coil-_data-_format.html", null ],
     [ "Input of physical limiter data", "_limiter-_data-_format.html", null ],
-    [ "COUGAR README", "md__r_e_a_d_m_e.html", null ],
+    [ "Explanation of program options", "_options-_explanation.html", null ],
+    [ "COUGAR User manual", "md__r_e_a_d_m_e.html", null ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -39,7 +40,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_coil-_data-_format.html",
-"sor_8h_source.html"
+"sor_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
