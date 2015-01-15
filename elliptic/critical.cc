@@ -39,6 +39,13 @@ limiters_(limiters) {
     assert(limiters.num_rows()>0);
     assert(limiters.num_columns() == 2);
     for (int i = 0; i < limiters.num_rows();++i){
+      try {
+	Inter_.updateInterpolation(limiters_.data(i,0), limiters_.data(i,1));
+      } catch (int i){
+	if (i == OutsideGrid) printf("Error: physical limiter outside/too close to computational boundary\n");
+	if (i == OutsideInterp) printf("Error: outside Interp\n");
+	throw i;
+      }
         Psi_phys_lim.push_back(0);
     }
   try {
@@ -46,7 +53,7 @@ limiters_(limiters) {
       Psi_stag_up = Inter_.F(R_stag_up, z_stag_up);
   }
   catch(int i) {
-      if (i == OutsideGrid) printf("Error: limiter1 outside grid\n");
+      if (i == OutsideGrid) printf("Error: upper saddle point outside grid\n");
       if (i == OutsideInterp) printf("Error: outside Interp\n");
       throw i;
   }
@@ -57,7 +64,7 @@ limiters_(limiters) {
       Psi_stag_down = Inter_.F(R_stag_down, z_stag_down);
   }
   catch(int i) {
-      if (i == OutsideGrid) printf("Error: limiter2 outside grid\n");
+      if (i == OutsideGrid) printf("Error: lower saddle point outside grid\n");
       if (i == OutsideInterp) printf("Error: outside Interp\n");
       throw i;
   }
