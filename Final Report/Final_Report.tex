@@ -82,7 +82,7 @@
 
 \section{Project Objective / Summary}
 
-Our goal was to write a program which solves the Grad-Shafranov equation (GSE) for axisymmetric plasmas in a user friendly manner.  The result is COUGAR, which stands for \textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, simple analytic forms for pressure and toroidal magnetic field must be assumed.  Future versions of the code will deduce these quantities from experimental measurements.  For information on running COUGAR, see the README at \href{http://jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}}.
+Our goal was to write a program which solves the Grad-Shafranov equation (GSE) for axisymmetric plasmas in a user friendly manner.  The result is COUGAR, which stands for \textbf{CO}de \textbf{U}sually \textbf{G}enerates \textbf{A}xisymmetric \textbf{R}econstruction.  The main body of the code is written in C++, with a separate Python program for visualization.  The user can set code options either via the command line or text-based configuration file.  In the current version, simple analytic forms for pressure and toroidal magnetic field must be assumed.  Future versions of the code will deduce these quantities from experimental measurements.  For information on running COUGAR, see the user manual at \href{http://jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}{\nolinkurl{jonngwx.github.io/grad-shafranov/md__r_e_a_d_m_e.html}}.
 
 %----------------------------------------------------------------------------------------
 %	Section 2
@@ -289,7 +289,7 @@ int CalcB(Field *jphi)
     & 
     Calculates bdy by integrating over $J_{\phi}$ and over the external coils.
     \\ 
-     \specialrule{.05em}{0.0em}{.07em} \colorbox{yellow!50}{Table} &
+     \specialrule{.05em}{0.0em}{.07em} \colorbox{orange!50}{Table} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual int load_from_tsv(const string filename, int header_lines=0)
 int num_columns() const
@@ -357,6 +357,13 @@ void write_output(const char *filename)
 \restoregeometry
 
 \subsection{Implementation and Design decisions}
+
+\subsubsection{User Interface}
+The is run from the Unix command line.  Options may be selected as command line options or specified in a configuration file.  We've provided a default configuration file (\texttt{grad-shafranov.cfg}) for your enlightenment.  The locations of external currents are specified in a specially formatted text file.  The default, called \texttt{coil\_data.tsv}, contains coil information from a particular NSTX shot.  
+
+Once the code has run, the output may be viewed using a separate Python program.
+
+For much more on running COUGAR, please see the user manual on the documentation website.
 
 \subsubsection{Elliptic solver}
 The \texttt{EllipticSolver} interface defines functions for inverting the $\nabla^*$ operator iteratively using central finite differences, as shown in equation~\ref{eq:finitediff}.
