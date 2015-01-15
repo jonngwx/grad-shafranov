@@ -22,14 +22,14 @@ class JSolver {
     
  protected:
   /*! What the heck are all these variables???? -JAS */
-  double P0_;
-  double g0_;
+  double P0_; //!< Pressure at the magnetic axis
+  double g0_; //!< Toroidal magnetic field * R at magnetic axis
   double Ip_; //!< Total plasma current (A)
-  double *R_;
-  double dr_;
-  double dz_;
-  double nr_;
-  double nz_;
+  double *R_; //!< Array of radial grid points
+  double dr_; //!< grid spacing in R
+  double dz_; //!< grid spacing in z
+  double nr_; //!< number of nodes in R
+  double nz_; //!< number of nodes in z
 };
 
 #endif  // J_SOLVER_H_
