@@ -213,10 +213,11 @@ The following external libraries are used:
 \end{itemize}
 
 %%%%%%%%%%%%%%%% BIG CLASS TABLE%%%%%%%%%%%%%%%%%
-\newgeometry{left=0.45cm, right=0.5cm, top=0.5cm, bottom=0.5cm}
+\newgeometry{left=0.1cm, right=0.1cm, top=0.1cm, bottom=0.1cm}
 \begin{table}
 \small
-\caption{Summary of COUGAR Classes (colors show class hierarchy)}
+\tiny{\caption{Summary of COUGAR Classes (colors show class hierarchy)}}
+\small
 \centering
 \begin{tabular}{ | m{2.8cm} | p{8.9cm} | p{6cm}|}
     \hline Class Name & Methods (inherited methods only listed in parent class) & Brief Description \\
@@ -247,7 +248,7 @@ void step_1(const Field &jphi)
 void step(const Field &jphi)
 void coeff()
 \end{lstlisting} 
-    & Implementation of EllipticSolver. Solves finite difference equation using Gauss-Seidel algorithm.\\
+    & Derived class of EllipticSolver. Solves finite difference equation using Gauss-Seidel algorithm.\\
     \specialrule{.05em}{0.0em}{.07em}  \crule[blue!25]{0.35cm}{0.35cm} \, SOR & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void step_1(const Field &jphi)
@@ -255,22 +256,22 @@ void step(const Field &jphi)
 void coeff()
 double omega()
 \end{lstlisting}
-    &Implementation of EllipticSolver.  Solves finite difference equation using Successive over-relaxation algorithm. \\ 
+    &Derived class of EllipticSolver.  Solves finite difference equation using Successive over-relaxation algorithm. \\ 
     \specialrule{.05em}{0.0em}{.07em} \colorbox{cyan!25}{JSolver} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual void update(Field *jphi, Field *psi, Field *p, Field *g)=0
 \end{lstlisting}
-    & hello \\ 
+    & Base class of methods which calculate $J_{\phi}$ as a function of $\Psi$. \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[cyan!25]{0.35cm}{0.35cm} \,JSolverAlpha &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void update(Field *jphi, Field *psi, Field *p, Field *g)
 \end{lstlisting}
-    & hello \\ 
+    &  Uses very simple forms of $p,g$ to calculate $J_{\phi}$. \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[cyan!25]{0.35cm}{0.35cm} \,JSolverNSTX & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void update(Field *jphi, Field *psi, Field *p, Field *g)
 \end{lstlisting}
-    & ertertert \\ 
+    & Uses analytic forms of $p,g$ which resemble NSTX \\ 
     \specialrule{.05em}{0.0em}{.07em} \colorbox{green!25}{Boundary} & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 virtual int CalcB(Field *jphi)
@@ -279,14 +280,14 @@ int LtoJ(int l)
 double norm()
 \end{lstlisting}
     & 
-    Contains methods to update the boundary values of Psi.
+    Base class of methods which calculate the boundary of $\Psi$.
      \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[green!25]{0.35cm}{0.35cm} \, SlowBoundary &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 int CalcB(Field *jphi)
 \end{lstlisting}
     & 
-    Implementation of Boundary class that iterates over the field of $J_{\phi}$ and over the set of external coils) using Green's functions.
+    Calculates the boundary by integrating over the field of $J_{\phi}$ and over the set of external coils using Green's functions.
     \\ 
      \specialrule{.05em}{0.0em}{.07em} \colorbox{yellow!50}{Table} &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
@@ -295,7 +296,7 @@ int num_columns() const
 int num_rows() const
 double data(int row, int column) const
 \end{lstlisting}
-    & dfgdfgdfg \\ 
+    & Data format for 2d arrays of doubles and their metadata \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[orange!50]{0.35cm}{0.35cm} \, CoilData &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 int load_from_tsv(const string filename, int header_lines=0) override
@@ -304,7 +305,7 @@ double z(int i) const
 double current(int i) const
 int num_coil_subregions() const
 \end{lstlisting}
-    & dfgdfgdfg \\ 
+    & Container for the R and z location (m) and currents (A) of external coils. \\ 
     \hline Critical &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void Psi_search(double r, double z, double *dr, double *dz)
@@ -315,7 +316,7 @@ void update ()
 bool find_saddle (double &r, double &z)
 \end{lstlisting}
     & 
-    Implementation of Critical. Finds 'critical points' like the magnetic axis, limiter points, and X points. These points are minima, maximima, and saddle points of $\Psi$.
+    Finds 'critical points' like the magnetic axis, limiter points, and X points. These points are minima, maximima, and saddle points of $\Psi$.
      \\ 
     \hline Interpolate & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
@@ -329,7 +330,7 @@ void updateInterpolation(double r, double z)
 void PrintAmnCoefficients()
 \end{lstlisting}
     & 
-    Implementation of Interpoolate. Interpolates to find the values and derivatives of a 2D data set between grid points using fitting to a bicubic polynomial. 
+    Interpolates to find the values and derivatives of a 2D data set between grid points using fitting to a bicubic polynomial. 
      \\ 
     \specialrule{.05em}{0.0em}{.07em} \colorbox{magenta!25}{GradOutput} & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
@@ -337,17 +338,17 @@ virtual void write_output(const char *filename)=0
 void parse_outputs(const char *outputs)
 bool find(Output out)
 \end{lstlisting}
-    & Interface for writing the output of the solver to file. \\ 
+    & Base class for writing the output of the solver to file. \\ 
     \specialrule{.05em}{0.0em}{.07em} \crule[magenta!25]{0.35cm}{0.35cm} GradOutputHdf & 
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void write_output(const char *filename)
 \end{lstlisting}
-     & Implementation of Grad\_Output which writes data to a hdf5 file. \\ 
+     & Writes data to a hdf5 file. \\ 
      \specialrule{.05em}{0.0em}{.07em} \crule[magenta!25]{0.35cm}{0.35cm} GradOutputTxt &
 \begin{lstlisting}[belowskip=-\baselineskip, aboveskip=-0.5\baselineskip]
 void write_output(const char *filename)
 \end{lstlisting}
-    & Implementation of Grad\_Output which writes to a text file. \\ 
+    & Writes data to a text file. \\ 
     \hline
 \end{tabular}
 \end{table}
