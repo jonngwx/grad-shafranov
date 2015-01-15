@@ -57,9 +57,11 @@ There is also a `plot` script in the main directory which plots the output of `c
 
 We recommend using ipython with pylab to analyse the data interactively. The scripts for reading the data are found in the `read_data` package while the plotting scripts are found in the `viz` package. 
     
-To access the data in python, import viz, then use
+To access the data in python, import viz, then use one of 
 
     F = viz.plot(filename, format)
+    F = read_data.read_text(filename)
+    F = read_data.read_hdf5(filename)
 
 F will be a dictionary of the grid and data arrays. The value of a field along the midplane can be plotted using 
 
