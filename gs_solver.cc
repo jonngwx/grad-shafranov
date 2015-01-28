@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
   }
 
   if (vm.count("version")) {
-      std::cout << "Grad Shafranov solver, version alpha\n";
+      std::cout << "Grad Shafranov solver, version 0.9\n";
       return 0;
   }
 
